@@ -8,6 +8,7 @@
           <element id="module-output" name="control" />
           <element id="module-output" name="rayact_core" />
           <element id="module-output" name="runtime" />
+          <element id="module-output" name="rayact" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.7" />
@@ -153,6 +154,7 @@
           <element id="library" level="project" name="Maven: bitwalker:UserAgentUtils:1.13" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="rayact/web/Web" />
     </root>
   </artifact>
 </component>
