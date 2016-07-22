@@ -267,5 +267,17 @@
         "authorityList": []
       }
     ]
+  },
+  {
+    "code": "birthdayNotify",
+    "name": "生日提醒",
+    "authorityList": [
+      {
+        "code": "birthdayNotify",
+        "name": "生日提醒",
+        "href":"/oa/oaNotify/list",
+        "authorityList": []
+      }
+    ]
   }
 ]

@@ -126,7 +126,7 @@
 		</c:if>
 		<div class="form-actions">
 			<c:if test="${oaNotify.status ne '1'}">
-				<shiro:hasPermission name="oa:oaNotify:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
+				<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;
 			</c:if>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
