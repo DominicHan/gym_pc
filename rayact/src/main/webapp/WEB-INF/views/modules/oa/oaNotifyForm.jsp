@@ -27,7 +27,7 @@
 						<sys:select cssClass="input-xlarge" name="type"
 									cssStyle="width:100%"
 									items="${notifyTypeList}"
-									value="${value}"
+									value="${oaNotify.type}"
 									defaultLabel="请选择类型"
 									defaultValue=""
 									itemLabel="label"

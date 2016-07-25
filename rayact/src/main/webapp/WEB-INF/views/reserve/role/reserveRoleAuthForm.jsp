@@ -116,7 +116,10 @@
                                                                                        class="icheck childAuthCheck"> ${a.name}
                                                                             <input
                                                                                     type="hidden"
-                                                                                    name="frontAuthorityList[${astatus.index}].authorityList[${s.index}].code"
+                                                                                    name="frontAuthorityList[${astatus.index}].authorityList[${s.index}].code" value="${a.code}">
+                                                                            <input
+                                                                                    type="hidden"
+                                                                                    name="frontAuthorityList[${astatus.index}].authorityList[${s.index}].href" value="${a.href}"
                                                                             >
                                                                         </label>
                                                                     </div>

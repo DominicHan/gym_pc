@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta name="decorator" content="main"/>
-	<title>通知列表</title>
+	<title>生日提醒列表</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
@@ -14,7 +14,7 @@
 		<div class="col-md-12">
 			<div class="block-flat">
 				<div class="header">
-					<h3>通知列表</h3>
+					<h3>生日提醒列表</h3>
 				</div>
 				<form:form id="searchForm" modelAttribute="oaNotify" action="${ctx}/oa/oaNotify/list"
 						   method="post">
@@ -60,7 +60,9 @@
 								<c:forEach items="${page.list}" var="oaNotify">
 									<tr>
 										<td>
+											<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">
 												${fns:abbr(oaNotify.title,50)}
+											</a>
 										</td>
 										<td>
 											${fns:getDictLabel(oaNotify.type, 'oa_notify_type', '')}

@@ -269,8 +269,8 @@
     ]
   },
   {
-    "code": "birthdayNotify",
-    "name": "生日提醒",
+    "code": "oaNotify",
+    "name": "站内消息",
     "authorityList": [
       {
         "code": "birthdayNotify",
