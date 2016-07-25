@@ -8,6 +8,8 @@ import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.modules.oa.service.OaNotifyService;
 import com.bra.modules.reserve.entity.OaNotify;
+import com.bra.modules.sys.entity.Dict;
+import com.bra.modules.sys.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 通知通告Controller
@@ -56,6 +59,8 @@ public class OaNotifyController extends BaseController {
 		if (StringUtils.isNotBlank(oaNotify.getId())){
 			oaNotify = oaNotifyService.getRecordList(oaNotify);
 		}
+		List<Dict> notifyTypeList=DictUtils.getDictList("oa_notify_type");
+		model.addAttribute("notifyTypeList", notifyTypeList);
 		model.addAttribute("oaNotify", oaNotify);
 		return "modules/oa/oaNotifyForm";
 	}

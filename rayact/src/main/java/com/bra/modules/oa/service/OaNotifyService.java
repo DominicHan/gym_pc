@@ -5,15 +5,20 @@ package com.bra.modules.oa.service;
 
 import com.bra.common.persistence.Page;
 import com.bra.common.service.CrudService;
+import com.bra.common.utils.IdGen;
 import com.bra.modules.oa.dao.OaNotifyDao;
 import com.bra.modules.oa.dao.OaNotifyRecordDao;
 import com.bra.modules.reserve.entity.OaNotify;
 import com.bra.modules.reserve.entity.OaNotifyRecord;
+import com.bra.modules.reserve.service.ReserveUserService;
+import com.bra.modules.sys.entity.User;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 通知通告Service
@@ -26,6 +31,9 @@ public class OaNotifyService extends CrudService<OaNotifyDao, OaNotify> {
 
 	@Autowired
 	private OaNotifyRecordDao oaNotifyRecordDao;
+
+	@Autowired
+	private ReserveUserService reserveUserService;
 
 	public OaNotify get(String id) {
 		OaNotify entity = dao.get(id);
@@ -63,8 +71,19 @@ public class OaNotifyService extends CrudService<OaNotifyDao, OaNotify> {
 		
 		// 更新发送接受人记录
 		oaNotifyRecordDao.deleteByOaNotifyId(oaNotify.getId());
-		if (oaNotify.getOaNotifyRecordList().size() > 0){
-			oaNotifyRecordDao.insertAll(oaNotify.getOaNotifyRecordList());
+
+		List<OaNotifyRecord> oaNotifyRecordList = Lists.newArrayList();
+		List<User> reserveUserList = reserveUserService.findList(new User());
+		for(User user:reserveUserList){
+			OaNotifyRecord entity = new OaNotifyRecord();
+			entity.setId(IdGen.uuid());
+			entity.setOaNotify(oaNotify);
+			entity.setUser(user);
+			entity.setReadFlag("0");
+			oaNotifyRecordList.add(entity);
+		}
+		if (oaNotifyRecordList.size() > 0){
+			oaNotifyRecordDao.insertAll(oaNotifyRecordList);
 		}
 	}
 	

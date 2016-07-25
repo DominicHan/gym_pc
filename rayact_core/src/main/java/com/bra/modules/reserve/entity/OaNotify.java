@@ -5,9 +5,6 @@ package com.bra.modules.reserve.entity;
 
 import com.bra.common.persistence.SaasEntity;
 import com.bra.common.utils.Collections3;
-import com.bra.common.utils.IdGen;
-import com.bra.common.utils.StringUtils;
-import com.bra.modules.sys.entity.User;
 import com.google.common.collect.Lists;
 import org.hibernate.validator.constraints.Length;
 
@@ -123,7 +120,7 @@ public class OaNotify extends SaasEntity<OaNotify> {
 	/**
 	 * 设置通知发送记录用户ID
 	 * @return
-	 */
+	 *//*
 	public void setOaNotifyRecordIds(String oaNotifyRecord) {
 		this.oaNotifyRecordList = Lists.newArrayList();
 		for (String id : StringUtils.split(oaNotifyRecord, ",")){
@@ -135,7 +132,7 @@ public class OaNotify extends SaasEntity<OaNotify> {
 			this.oaNotifyRecordList.add(entity);
 		}
 	}
-
+*/
 	/**
 	 * 获取通知发送记录用户Name
 	 * @return
