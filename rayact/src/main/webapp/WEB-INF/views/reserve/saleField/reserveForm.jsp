@@ -10,7 +10,7 @@
             <div class="col-lg-6  reserve_mid_line">
                 <div class="row">
                     <div class="form-group">
-                        <label for="reserveFieldName" class="col-sm-2 control-label"> 场地:</label>
+                        <label for="reserveFieldName" class="col-sm-2 control-label"> 教练:</label>
                         <div class="col-lg-10">
                             <input readonly="readonly" id="reserveFieldName" class="form-control"
                                    value="${reserveField.name}"/>
@@ -72,27 +72,6 @@
                                 <input readonly="readonly" id="isHalfCourt" class="form-control"
                                        value="全场"/>
                             </j:if>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <label for="tutorId" class="col-sm-2 control-label">教练:</label>
-                        <div class="col-sm-4">
-                            <select id="tutorId" name="tutor.id" class="form-control input-sm">
-                                <option value="">请选择</option>
-                                <c:forEach items="${tutors}" var="t">
-                                    <option data-price="${t.price}" value="${t.id}" onclick="">${t.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="tutor_price" class="control-label">价格:</label>
-                        </div>
-                        <div class="col-lg-4">
-                            <input readonly="readonly" id="tutor_price" class="form-control"
-                                   value="0元/小时"/>
-                            </span>
                         </div>
                     </div>
                 </div>

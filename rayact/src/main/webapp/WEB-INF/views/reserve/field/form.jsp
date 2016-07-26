@@ -78,7 +78,8 @@
                                             </div>
                                         </div>
                                     </j:if>
-                                    <div class="form-group">
+                                    <input type="hidden" name="isTimeInterval" value="0"/>
+                                   <%-- <div class="form-group">
                                         <label class="col-sm-3 control-label">是否分时令</label>
                                         <div class="col-sm-6">
                                             <form:radiobuttons path="isTimeInterval"
@@ -87,7 +88,7 @@
                                                                itemValue="value"
                                                                htmlEscape="false" class="icheck required"/>
                                         </div>
-                                    </div>
+                                    </div>--%>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">备注</label>
                                         <div class="col-sm-6">

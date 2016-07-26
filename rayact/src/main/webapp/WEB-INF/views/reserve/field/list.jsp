@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场地管理</title>
+    <title>教练管理</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>场地列表</h3>
+                    <h3>教练列表</h3>
                 </div>
 
 
@@ -34,7 +34,7 @@
                                                      items="${venues}" itemLabel="name" itemValue="id"
                                                      defaultLabel="----请选择-----"
                                                      defaultValue=""></sys:select></td>
-                                    <td>场地：</td>
+                                    <td>教练：</td>
                                     <td><form:input path="name" htmlEscape="false" cssstyle="width:70px;" maxlength="30"
                                                     class="form-control"/></td>
                                     <td><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></td>
@@ -57,7 +57,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>场地名称</th>
+                                <th>教练名称</th>
                                 <th>所属项目</th>
                                 <th>所属场馆</th>
                                 <th>是否分时令</th>

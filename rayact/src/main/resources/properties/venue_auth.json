@@ -10,15 +10,15 @@
         "authorityList": []
       },
       {
-        "code": "field",
-        "name": "场地管理",
-        "href":"/reserve/reserveField/list",
+        "code": "project",
+        "name": "项目管理",
+        "href":"/reserve/reserveProject/list",
         "authorityList": []
       },
       {
-        "code": "fieldRelation",
-        "name": "场地关系管理",
-        "href":"/reserve/reserveFieldRelation/list",
+        "code": "field",
+        "name": "教练管理",
+        "href":"/reserve/reserveField/list",
         "authorityList": []
       },
       {
@@ -31,18 +31,6 @@
         "code": "roleAuth",
         "name": "角色权限管理",
         "href":"/reserve/reserveRoleAuth/list",
-        "authorityList": []
-      },
-      {
-        "code": "timeInterval",
-        "name": "时令管理",
-        "href":"/reserve/reserveTimeInterval/list",
-        "authorityList": []
-      },
-      {
-        "code": "menu",
-        "name": "菜单管理",
-        "href":"/reserve/reserveMenu/list",
         "authorityList": []
       }
     ]
@@ -85,11 +73,11 @@
   },
   {
     "code": "fieldSet",
-    "name": "场地售卖",
+    "name": "教练预约",
     "authorityList": [
       {
         "code": "reserveField",
-        "name": "场地售卖",
+        "name": "教练预约",
         "href":"/reserve/field/main",
         "authorityList": []
       },
