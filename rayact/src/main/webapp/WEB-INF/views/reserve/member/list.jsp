@@ -50,11 +50,6 @@
                                                            itemLabel="label"
                                                            itemValue="value" htmlEscape="false"/>
                                     </td>
-                                    <td>
-                                        <form:radiobuttons class="icheck"  path="cartType" items="${fns:getDictList('cart_type')}"
-                                                           itemLabel="label"
-                                                           itemValue="value" htmlEscape="false"/>
-                                    </td>
                                     <td><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
                                         <j:if test="${userType==1 || userType==5}">
                                             <input id="btnExport" class="btn btn-primary" type="button" value="导出"/>
@@ -74,11 +69,14 @@
                             <tr>
                                 <th>场馆</th>
                                 <th>姓名</th>
+                                <th>卡号</th>
                                 <th>手机号</th>
                                 <th>性别</th>
-                                <th>卡号</th>
                                 <th>卡号类型</th>
                                 <th>余额</th>
+                                <th>剩余次数</th>
+                                <th>开始时间</th>
+                                <th>到期时间</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
@@ -93,20 +91,31 @@
                                             ${reserveMember.name}
                                     </a></td>
                                     <td>
+                                            ${reserveMember.cartno}
+                                    </td>
+                                    <td>
                                             ${fns:hidePhone(reserveMember.mobile)}
 
                                     </td>
                                     <td>
                                             ${fns:getDictLabel(reserveMember.sex, 'sex', '')}
                                     </td>
-                                    <td>
-                                            ${reserveMember.cartno}
-                                    </td>
+
                                     <td>
                                             ${fns:getDictLabel(reserveMember.cartType, 'cart_type', '')}
                                     </td>
                                     <td>
                                             ${reserveMember.remainder}
+                                    </td>
+                                    <td>
+                                            ${reserveMember.residue}
+                                    </td>
+                                    <td>
+                                        <fmt:formatDate value="${reserveMember.validitystart}" type="date"/>
+                                    </td>
+
+                                    <td>
+                                        <fmt:formatDate value="${reserveMember.validityend}" type="date"/>
                                     </td>
                                     <td>
                                             ${reserveMember.remarks}

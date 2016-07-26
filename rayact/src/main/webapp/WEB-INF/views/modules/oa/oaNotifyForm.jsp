@@ -71,7 +71,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">状态：</label>
 						<div class="col-sm-4">
-							<form:radiobuttons path="status" items="${fns:getDictList('oa_notify_status')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
+							<form:radiobuttons path="status" cssClass="icheck" items="${fns:getDictList('oa_notify_status')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
 							<span class="help-inline"><font color="red">*</font> 发布后不能进行操作。</span>
 						</div>
 					</div>
@@ -89,4 +89,12 @@
 	</div>
 </div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.icheck').iCheck({
+			checkboxClass: 'icheckbox_square-blue checkbox',
+			radioClass: 'iradio_square-blue'
+		});
+	});
+</script>
 </html>
