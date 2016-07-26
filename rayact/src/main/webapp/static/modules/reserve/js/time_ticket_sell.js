@@ -31,6 +31,31 @@ $(document).ready(function () {
         $("#consMobile").attr("value", mobile);
     });
 
+    $("#startTime").on('change', function () {
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        var start = startTime.split(':')[0];
+        var end = endTime.split(':')[0];
+        var cnt=end-start;
+        $("#collectCount").val(cnt);
+        var orderTotal = $("#ticketPrice").val() * cnt;
+        var collectPrice = $("#ticketPrice").val() * cnt;
+        $("#orderTotal").attr("value", orderTotal);
+        $("#collectPrice").attr("value", collectPrice);
+    });
+    $("#endTime").on('change', function () {
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        var start = startTime.split(':')[0];
+        var end = endTime.split(':')[0];
+        var cnt=end-start;
+        $("#collectCount").val(cnt);
+        var orderTotal = $("#ticketPrice").val() * cnt;
+        var collectPrice = $("#ticketPrice").val() * cnt;
+        $("#orderTotal").attr("value", orderTotal);
+        $("#collectPrice").attr("value", collectPrice);
+    });
+
     $("#saveBtn").on('click', function () {
         var fieldId = $("#fieldId").val();
         var memberType = $("#memberType input:radio:checked").val();
@@ -112,14 +137,6 @@ $(document).ready(function () {
         $("#orderTotal").text(orderTotal);
         $("#collectPrice").attr("value", orderTotal);
     };
-
-    //教练
-    $("#tutorId").on('change', function () {
-        var price = $(this).find("option:selected").attr("data-price");
-        var orderPrice = $("#orderPrice").val();
-        var count = $("#collectCount").val();
-        $.addPrice(price, orderPrice, count);
-    });
 
     //数量改变事件
     $("#collectCount").on('keyup', function () {

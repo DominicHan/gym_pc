@@ -63,9 +63,6 @@
                                                           class="form-control"/></div>
                         </div>
                     </div>
-                    <input type="hidden" class="form-control number" name="collectCount"
-                           id="collectCount"
-                           value="1"/>
                 </div>
                 <div class="col-lg-6">
                     <!--应收金额-->
@@ -74,7 +71,7 @@
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">票价：</label>
                                 <div class="col-lg-10">
-                                    <input type="text" id="orderPrice" readonly="readonly"
+                                    <input type="text" id="ticketPrice" readonly="readonly"
                                            value="${visitorsSet.price}"
                                            class="form-control" name="orderPrice"/>
                                 </div>
@@ -82,16 +79,6 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-lg-2 control-label">教练：</label>
-                                <div class="col-lg-4">
-                                    <select id="tutorId" name="tutor.id" class="select2">
-                                        <option value="">请选择</option>
-                                        <c:forEach items="${tutors}" var="t">
-                                            <option data-price="${t.price}"
-                                                    value="${t.id}">${t.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
                                 <label for="orderDate" class="control-label col-lg-2">日期：</label>
                                 <div class="col-lg-4">
                                     <input id="orderDate" name="orderDate" type="text"
@@ -99,20 +86,11 @@
                                            value="<fmt:formatDate value="${orderDate}" type="date" pattern="yyyy-MM-dd"/>"
                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="orderTotal" class="col-lg-2 control-label">应付：</label>
+                                <label class="col-lg-2 control-label">小时：</label>
                                 <div class="col-lg-4">
-                                    <input type="text" id="orderTotal" readonly="readonly"
-                                           value="${visitorsSet.price}"
-                                           class="form-control" name="orderPrice"/>
-                                </div>
-                                <label class="col-lg-2 control-label">实付：</label>
-                                <div class="col-lg-4">
-                                    <input type="text" id="collectPrice" class="form-control" readonly="readonly"
-                                           value="${visitorsSet.price}" name="collectPrice"/>
+                                    <input type="text" class="form-control number" name="collectCount" readonly="readonly"
+                                           id="collectCount"
+                                           value=""/>
                                 </div>
                             </div>
                         </div>
@@ -137,6 +115,22 @@
                                                     value="${t}">${t}</option>
                                         </c:forEach>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="orderTotal" class="col-lg-2 control-label">应付：</label>
+                                <div class="col-lg-4">
+                                    <input type="text" id="orderTotal" readonly="readonly"
+                                           value="${visitorsSet.price}"
+                                           class="form-control" name="orderPrice"/>
+                                </div>
+                                <label class="col-lg-2 control-label">实付：</label>
+                                <div class="col-lg-4">
+                                    <input type="text" id="collectPrice" class="form-control" readonly="readonly"
+                                           value="${visitorsSet.price}" name="collectPrice"/>
                                 </div>
                             </div>
                         </div>

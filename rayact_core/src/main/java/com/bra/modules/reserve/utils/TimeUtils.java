@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class TimeUtils {
 
-    public static final int BENCHMARK = 30;
+    public static final int BENCHMARK = 60;
     /*
         时间格式化：将凌晨时间小时+24，如01:00转化为25:00
      */
