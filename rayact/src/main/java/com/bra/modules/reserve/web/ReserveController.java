@@ -127,13 +127,13 @@ public class ReserveController extends BaseController {
             ReserveField reserveField = new ReserveField();
             reserveField.setReserveVenue(reserveVenue);
             //上午场地价格
-            List<String> timesAM = TimeUtils.getTimeSpacListValue("06:00:00", "12:30:00", 30);
+            List<String> timesAM = TimeUtils.getTimeSpacListValue("06:00:00", "12:00:00", 60);
             List<FieldPrice> venueFieldPriceListAM = reserveFieldPriceService.findByDate(reserveVenue.getId(), "1", consDate, timesAM);
             //下午场地价格
-            List<String> timesPM = TimeUtils.getTimeSpacListValue("12:30:00", "18:30:00", 30);
+            List<String> timesPM = TimeUtils.getTimeSpacListValue("12:00:00", "18:00:00", 60);
             List<FieldPrice> venueFieldPriceListPM = reserveFieldPriceService.findByDate(reserveVenue.getId(), "1", consDate, timesPM);
             //晚上场地价格
-            List<String> timesEvening = TimeUtils.getTimeSpacListValue("18:30:00", "00:30:00", 30);
+            List<String> timesEvening = TimeUtils.getTimeSpacListValue("18:00:00", "00:00:00", 60);
             List<FieldPrice> venueFieldPriceListEvening = reserveFieldPriceService.findByDate(reserveVenue.getId(), "1", consDate, timesEvening);
 
             List list=new ArrayList<>();
