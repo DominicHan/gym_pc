@@ -51,8 +51,6 @@ public class ReserveController extends BaseController {
     @Autowired
     private ReserveMobileFieldPriceService reserveMobileFieldPriceService;
     @Autowired
-    private ReserveFieldStatusService reserveFieldStatusService;
-    @Autowired
     private ReserveVenueConsService reserveVenueConsService;
     @Autowired
     private ReserveVenueConsItemService reserveVenueConsItemService;
@@ -157,71 +155,6 @@ public class ReserveController extends BaseController {
         return "reserve/saleField/reserveField";
     }
 
-    @RequestMapping(value = "status")
-    public String status(Long t, Date consDate, String venueId, Model model) throws ParseException {
-        Calendar ago = Calendar.getInstance();
-        //如果是通过超链接 点击选择的时间
-        if (t != null) {
-            consDate = new Date(t);
-        }
-        //如果请求参数没有日期
-        if (t == null && consDate == null) {
-            consDate = DateUtils.parseDate(DateFormatUtils.format(Calendar.getInstance().getTime(), "yyyy-MM-dd"), "yyyy-MM-dd");//获得今天的日期
-        }
-        ago.setTime(consDate);
-        ago.add(Calendar.DAY_OF_MONTH, -3);//获得预订日期的上一天
-        Date defaultDate = DateUtils.parseDate(DateFormatUtils.format(ago.getTime(), "yyyy-MM-dd"), "yyyy-MM-dd");//获得前3天的日期
-        //获取可预定时间段:一周
-        Map<String, Long> timeSlot = TimeUtils.getNextDaysMap(defaultDate, 7);
-        model.addAttribute("timeSlot", timeSlot);
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String consDateFormat = format.format(consDate);//预订日期的格式化
-        model.addAttribute("consDateFormat", consDateFormat);
-        model.addAttribute("consDate", consDate);//预订日期回传
-
-        //获得所有场馆信息
-        List<ReserveVenue> reserveVenueList = reserveVenueService.findList(new ReserveVenue());
-        model.addAttribute("reserveVenueList", reserveVenueList);
-        //默认场馆的场地
-        if (!Collections3.isEmpty(reserveVenueList)) {
-            ReserveVenue reserveVenue;
-            if (StringUtils.isNoneBlank(venueId)) {
-                reserveVenue = reserveVenueService.get(venueId);
-            } else {
-                reserveVenue = reserveVenueList.get(0);
-            }
-            //默认场馆
-            model.addAttribute("reserveVenue", reserveVenue);
-            ReserveField reserveField = new ReserveField();
-            reserveField.setReserveVenue(reserveVenue);
-            //上午场地价格
-            List<String> timesAM = TimeUtils.getTimeSpacListValue("06:00:00", "12:30:00", 30);
-            List<FieldPrice> venueFieldPriceListAM = reserveFieldStatusService.emptyCheck(reserveVenue.getId(), consDate, timesAM);
-            //下午场地价格
-            List<String> timesPM = TimeUtils.getTimeSpacListValue("12:30:00", "18:30:00", 30);
-            List<FieldPrice> venueFieldPriceListPM = reserveFieldStatusService.emptyCheck(reserveVenue.getId(), consDate, timesPM);
-            //晚上场地价格
-            List<String> timesEvening = TimeUtils.getTimeSpacListValue("18:30:00", "00:30:00", 30);
-            List<FieldPrice> venueFieldPriceListEvening = reserveFieldStatusService.emptyCheck(reserveVenue.getId(), consDate, timesEvening);
-
-            List list=new ArrayList<>();
-            Map mapAM=new HashMap<>();
-            mapAM.put("fieldPriceList",venueFieldPriceListAM);
-            mapAM.put("times",timesAM);
-            list.add(mapAM);
-            Map mapPM=new HashMap<>();
-            mapPM.put("fieldPriceList",venueFieldPriceListPM);
-            mapPM.put("times",timesPM);
-            list.add(mapPM);
-            Map mapEvening=new HashMap<>();
-            mapEvening.put("fieldPriceList",venueFieldPriceListEvening);
-            mapEvening.put("times",timesEvening);
-            list.add(mapEvening);
-            model.addAttribute("list", list);
-        }
-        return "reserve/saleField/reserveFieldStatus";
-    }
     //预定表单
     @RequestMapping(value = "reserveForm")
     @Token(save = true)

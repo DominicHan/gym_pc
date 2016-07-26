@@ -190,7 +190,7 @@ public class ReserveFieldPriceService {
             if (fieldPriceSet.getReserveField().getId().equals(item.getReserveField().getId())) {
                 String startTime = item.getStartTime();
                 String endTime = item.getEndTime();
-                List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 30);
+                List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 60);
                 for (String t : times) {
                     if (time.equals(t)) {
                         return item;
@@ -213,7 +213,7 @@ public class ReserveFieldPriceService {
             if (fieldPriceSet.getReserveField().getId().equals(check.getField().getId())) {
                 String startTime = check.getStartTime();
                 String endTime = check.getEndTime();
-                List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 30);
+                List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 60);
                 for (String t : times) {
                     if (time.equals(t)) {
                         return check;
@@ -265,7 +265,6 @@ public class ReserveFieldPriceService {
                 ReserveVenueConsItem item = hasReserve(venueConsList, fieldPriceSet, time);
                 if (item != null) {//已经预定
                     timePrice.setConsItem(item);//设置订单
-                    timePrice.setConsType(item.getConsData().getConsType());//预定人的类型
                     timePrice.setUserName(item.getConsData().getUserName());//预订人
                     timePrice.setStatus(item.getConsData().getReserveType());//订单状态
                 } else {
