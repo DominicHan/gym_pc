@@ -96,7 +96,7 @@ public class OaNotifyController extends BaseController {
 	@RequestMapping(value = "self")
 	public String selfList(OaNotify oaNotify, HttpServletRequest request, HttpServletResponse response, Model model) {
 		oaNotify.setSelf(true);
-		Page<OaNotify> page = oaNotifyService.find(new Page<OaNotify>(request, response), oaNotify); 
+		Page<OaNotify> page = oaNotifyService.find(new Page<OaNotify>(request, response), oaNotify);
 		model.addAttribute("page", page);
 		return "modules/oa/oaNotifyList";
 	}
@@ -120,8 +120,10 @@ public class OaNotifyController extends BaseController {
 		if (StringUtils.isNotBlank(oaNotify.getId())){
 			oaNotifyService.updateReadFlag(oaNotify);
 			oaNotify = oaNotifyService.getRecordList(oaNotify);
+			List<Dict> notifyTypeList=DictUtils.getDictList("oa_notify_type");
+			model.addAttribute("notifyTypeList", notifyTypeList);
 			model.addAttribute("oaNotify", oaNotify);
-			return "modules/oa/oaNotifyForm";
+			return "modules/oa/oaNotifyView";
 		}
 		return "redirect:" + adminPath + "/oa/oaNotify/self?repage";
 	}
