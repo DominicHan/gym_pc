@@ -63,16 +63,9 @@
                                                           class="form-control"/></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">人数：</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control number" name="collectCount"
-                                       id="collectCount"
-                                       value="1"/>
-                            </div>
-                        </div>
-                    </div>
+                    <input type="hidden" class="form-control number" name="collectCount"
+                           id="collectCount"
+                           value="1"/>
                 </div>
                 <div class="col-lg-6">
                     <!--应收金额-->

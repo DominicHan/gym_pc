@@ -2,20 +2,19 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>储值卡会员编辑</title>
+    <title>预储值管理</title>
     <meta name="decorator" content="main"/>
-
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-    <jsp:param name="action" value="storedcardMember"></jsp:param>
+    <jsp:param name="action" value="storedCardMember"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
     <div class="row">
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>储值卡会员编辑</h3>
+                    <h3>预储值管理</h3>
                 </div>
                 <div class="content">
                     <td class="tab-container">

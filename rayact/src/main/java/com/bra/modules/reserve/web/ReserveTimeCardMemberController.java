@@ -91,9 +91,7 @@ public class ReserveTimeCardMemberController extends BaseController {
         if(reserveMember.getRemainder()!=null){
             remain=reserveMember.getRemainder();
         }
-
         residue+=time;//次数添加
-        remain+=rechargeVolume;//余额增加
         reserveMember.setResidue(residue);
         reserveMember.setRemainder(remain);
         reserveMemberService.save(reserveMember);
@@ -107,7 +105,6 @@ public class ReserveTimeCardMemberController extends BaseController {
         statement.setVenue(reserveMember.getReserveVenue());
         statement.setRemarks(remarks);
         reserveCardStatementsService.save(statement);
-        addMessage(redirectAttributes, "保存储值卡会员成功");
         return "redirect:"+ Global.getAdminPath()+"/reserve/timeCardMember/list";
     }
 

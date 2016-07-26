@@ -85,19 +85,27 @@ public class ReserveVenueOrderController extends BaseController {
         member.setCartType("2");
         model.addAttribute("memberList", reserveMemberService.findList(member));
         //获取预定开始时间
-        List<String> times = TimeUtils.getTimeSpacList(venue.getStartTime(), venue.getEndTime(), TimeUtils.BENCHMARK);
+        String startTime=venue.getStartTime();
+        String endTime=venue.getEndTime();
+        if(StringUtils.isBlank(startTime)){
+            startTime="06:00:00";
+        }
+        if(StringUtils.isBlank(endTime)){
+            endTime="24:00:00";
+        }
+        List<String> times = TimeUtils.getTimeSpacList(startTime, endTime, TimeUtils.BENCHMARK);
         model.addAttribute("times", times);
         model.addAttribute("orderDate", new Date());
         return "reserve/visitorsSetOrder/form";
     }
-
+/*
     //确认购买 表单
     @RequestMapping(value = "detail")
     @Token(save = true)
     public String detail(ReserveVenueOrder reserveVenueOrder, Model model) {
         model.addAttribute("venueOrder", reserveVenueOrder);
         return "reserve/visitorsSetOrder/detail";
-    }
+    }*/
 
     //确认购买
     @RequestMapping(value = "checkSave")
@@ -155,7 +163,6 @@ public class ReserveVenueOrderController extends BaseController {
             int residue = member.getResidue();//次卡剩余次数 等于 预付款的次数之和
             int ticketNum = reserveVenueOrder.getCollectCount();//买了几张票
             residue -= ticketNum;//修改该用户的剩余次数
-            double remainder = member.getRemainder();
             /* 预付次数减*/
             ReserveTimeCardPrepayment prepayment = new ReserveTimeCardPrepayment();
             prepayment.setReserveMember(member);
@@ -186,8 +193,6 @@ public class ReserveVenueOrderController extends BaseController {
                 }
             }
             member.setResidue(residue);//保存剩余次数
-            remainder -= collectPrice;//会员余额 减去 应付
-            member.setRemainder(remainder);//会员余额更新
             reserveMemberService.save(member);
             reserveVenueOrder.setMember(member);
             reserveVenueOrder.setCollectPrice(collectPrice);//记录订单金额

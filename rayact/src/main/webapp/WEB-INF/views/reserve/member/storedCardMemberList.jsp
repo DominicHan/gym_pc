@@ -3,18 +3,18 @@
 <html>
 <head>
     <meta name="decorator" content="main"/>
-    <title>储值卡会员管理</title>
+    <title>预储值列表</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-    <jsp:param name="action" value="storedcardMember"></jsp:param>
+    <jsp:param name="action" value="storedCardMember"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
     <div class="row">
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>储值卡会员列表</h3>
+                    <h3>预储值列表</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveMember" action="${ctx}/reserve/storedCardMember/list"
                            method="post">
