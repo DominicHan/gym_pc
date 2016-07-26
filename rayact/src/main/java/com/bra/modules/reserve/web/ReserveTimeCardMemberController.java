@@ -56,7 +56,6 @@ public class ReserveTimeCardMemberController extends BaseController {
 
     @RequestMapping(value = "list")
     public String list(ReserveMember reserveMember, HttpServletRequest request, HttpServletResponse response, Model model){
-        reserveMember.setCartType("2");
         Page<ReserveMember> page = reserveMemberService.findPage(new Page<>(request, response), reserveMember);
         model.addAttribute("page", page);
         return "reserve/member/timeCardMemberList";
@@ -122,7 +121,6 @@ public class ReserveTimeCardMemberController extends BaseController {
     @RequestMapping(value = "save")
     @Token(remove=true)
     public String save(ReserveMember reserveMember, Model model, RedirectAttributes redirectAttributes) {
-        reserveMember.setCartType("2");
         if(reserveMember.getResidue()==null){
             reserveMember.setResidue(0);
         }
