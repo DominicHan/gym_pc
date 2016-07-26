@@ -3,18 +3,26 @@
 <html>
 <head>
 	<meta name="decorator" content="main"/>
-	<title>生日提醒列表</title>
+	<title>站内消息</title>
 </head>
 <body>
+<c:choose>
+	<c:when test="${requestScope.oaNotify.self}">
+		<c:set var="action" value="selfNotify"></c:set>
+	</c:when>
+	<c:otherwise>
+		<c:set var="action" value="oaNotify"></c:set>
+	</c:otherwise>
+</c:choose>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-	<jsp:param name="action" value="birthdayNotify"></jsp:param>
+	<jsp:param name="action" value="${action}"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="block-flat">
 				<div class="header">
-					<h3>生日提醒列表</h3>
+					<h3>站内消息列表</h3>
 				</div>
 				<form:form id="searchForm" modelAttribute="oaNotify" action="${ctx}/oa/oaNotify/list"
 						   method="post">
@@ -60,7 +68,7 @@
 								<c:forEach items="${page.list}" var="oaNotify">
 									<tr>
 										<td>
-											<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">
+											<a href="${ctx}/oa/oaNotify/${requestScope.oaNotify.self?'view':'form'}?id=${oaNotify.id}">
 												${fns:abbr(oaNotify.title,50)}
 											</a>
 										</td>
