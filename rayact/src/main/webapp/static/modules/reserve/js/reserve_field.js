@@ -210,26 +210,6 @@ $(document).ready(function () {
         });
     }
 
-    //空场审核
-    function updateCheckEmpty(t) {
-        var checkId = $(t).attr("data-check");
-        jQuery.postItems({
-            url: ctx + '/reserve/field/checkEmptyUpdate',
-            data: {checkId: checkId},
-            success: function (result) {
-                $("#checkEmptyForm").html(result);
-                $("#checkEmptyDialog").click();
-                $("#checkEmptyForm .select2").select2({
-                    width: '100%'
-                });
-                $('#checkEmptyForm .icheck').iCheck({
-                    checkboxClass: 'icheckbox_square-blue checkbox',
-                    radioClass: 'iradio_square-blue'
-                });
-            }
-        });
-    }
-
 
     //保存赠品
     $("#saveGiftBtn").on('click', function () {

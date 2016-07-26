@@ -233,7 +233,7 @@ public class ReserveController extends BaseController {
         for (ReserveVenueConsItem item : itemList) {
             String startTime = item.getStartTime();
             String endTime = item.getEndTime();
-            List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 30);
+            List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 60);
             for (String time : times) {
                 data = Maps.newConcurrentMap();
                 data.put("fieldId", item.getReserveField().getId());
@@ -318,7 +318,7 @@ public class ReserveController extends BaseController {
             for (ReserveVenueConsItem item : itemList) {
                 String startTime = item.getStartTime();
                 String endTime = item.getEndTime();
-                List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 30);
+                List<String> times = TimeUtils.getTimeSpacListValue(startTime + ":00", endTime + ":00", 60);
                 for (String time : times) {
                     Map<String, String> data = Maps.newConcurrentMap();
                     data.put("fieldId", item.getReserveField().getId());
