@@ -7,8 +7,16 @@
 	<%@include file="/WEB-INF/views/include/upload.jsp" %>
 </head>
 <body>
+<c:choose>
+	<c:when test="${requestScope.oaNotify.self}">
+		<c:set var="action" value="selfNotify"></c:set>
+	</c:when>
+	<c:otherwise>
+		<c:set var="action" value="oaNotify"></c:set>
+	</c:otherwise>
+</c:choose>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-	<jsp:param name="action" value="user"></jsp:param>
+	<jsp:param name="action" value="${action}"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
 	<div class="page-head">
@@ -70,8 +78,10 @@
 				</c:if>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" id="btnSubmit" class="btn btn-primary">保存</button>
-						<button class="btn btn-default" onclick="history.go(-1)">返回</button>
+						<c:if test="${oaNotify.status ne '1'}">
+							<button type="submit" id="btnSubmit" class="btn btn-primary">保存</button>
+						</c:if>
+						<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 					</div>
 				</div>
 			</form:form>
