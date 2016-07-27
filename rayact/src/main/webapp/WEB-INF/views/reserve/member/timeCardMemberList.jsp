@@ -55,6 +55,7 @@
                                 <thead>
                                 <tr>
                                     <th>姓名</th>
+                                    <th>卡号</th>
                                     <th>手机号</th>
                                     <th>性别</th>
                                     <th>场馆</th>
@@ -72,6 +73,9 @@
                                         <td><a href="${ctx}/reserve/timeCardMember/form?id=${reserveMember.id}">
                                                 ${reserveMember.name}
                                         </a></td>
+                                        <td>
+                                                ${reserveMember.cartno}
+                                        </td>
                                         <td>
                                                 ${fns:hidePhone(reserveMember.mobile)}
                                         </td>

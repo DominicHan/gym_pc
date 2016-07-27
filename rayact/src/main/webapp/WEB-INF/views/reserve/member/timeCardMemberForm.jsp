@@ -27,16 +27,19 @@
                                 <sys:message content="${message}"/>
                                 <table id="contentTable" class="table table-bordered">
                                     <tr>
-                                            <%-- <td>卡号:</td>
-                                             <td>
-                                                 <form:input id="cardno" path="cartno" htmlEscape="false" maxlength="20" class="form-control required"/>
-                                                 <span class="help-inline"><font color="red">*</font> </span>
-                                             </td>--%>
+                                        <td>卡号:</td>
+                                        <td>
+                                            <form:input id="cartno" path="cartno" htmlEscape="false" maxlength="20"
+                                                        class="form-control required"/>
+                                            <span class="help-inline"><font color="red">*</font> </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>姓名:</td>
                                         <td>
                                             <div class="input-group">
-                                                    <form:input path="name" htmlEscape="false" maxlength="30"
-                                                        class="form-control required "/>
+                                                <form:input path="name" htmlEscape="false" maxlength="30"
+                                                            class="form-control required "/>
                                                 <span class="input-group-addon"><font color="red">*</font> </span>
                                             </div>
                                         </td>
@@ -68,7 +71,7 @@
                                     <tr>
                                         <td>性别:</td>
                                         <td>
-                                            <form:radiobuttons path="sex" items="${fns:getDictList('sex')}"
+                                            <form:radiobuttons path="sex" items="${fns:getDictList('sex')}" cssClass="icheck"
                                                                itemLabel="label" itemValue="value"
                                                                htmlEscape="false"/>
                                         </td>
@@ -78,19 +81,12 @@
                                                 <form:input id="mobile" path="mobile" htmlEscape="false" maxlength="20"
                                                             class="form-control phone required"/>
                                                 <span class="input-group-addon"><font color="red">*</font> </span>
-                                                </div>
+                                            </div>
                                         </td>
 
                                     </tr>
 
                                     <tr>
-                                            <%-- <td>卡号截止日期:</td>
-                                             <td>
-                                                 <input name="validityend" type="text" readonly="readonly" maxlength="20"
-                                                        class="input-large Wdate "
-                                                        value="<fmt:formatDate value="${reserveMember.validityend}" pattern="yyyy-MM-dd"/>"
-                                                        onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
-                                             </td>--%>
 
 
                                         <td>剩余次数:</td>
@@ -123,7 +119,7 @@
 
                                     <tr>
                                         <td>场馆：</td>
-                                        <td colspan="3">
+                                        <td>
                                             <sys:select cssClass="input-xlarge" name="reserveVenue.id"
                                                         cssStyle="width:40%"
                                                         id="reserveVenue_id"
@@ -135,6 +131,15 @@
                                                         defaultLabel="请选择场馆"
                                             ></sys:select>
                                         </td>
+                                        <td>卡号截止日期:</td>
+                                        <td>
+                                            <input name="validityend" type="text" readonly="readonly" maxlength="20"
+                                                   id="validityend"
+                                                   class="input-large Wdate "
+                                                   value="<fmt:formatDate value="${reserveMember.validityend}" pattern="yyyy-MM-dd"/>"
+                                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                                        </td>
+
                                     </tr>
                                 </table>
 
@@ -152,6 +157,14 @@
         </div>
     </div>
 </div>
-<script src="${ctxStatic}/modules/reserve/js/reserve_member_form.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.icheck').iCheck({
+            checkboxClass: 'icheckbox_square-blue checkbox',
+            radioClass: 'iradio_square-blue'
+        });
+    });
+</script>
+<script src="${ctxStatic}/modules/reserve/js/reserve_timeCard_member_form.js" type="text/javascript"></script>
 </body>
 </html>
