@@ -34,7 +34,7 @@
                             <div class="tab-pane active" id="home">
                                 <div class="form-horizontal group-border-dashed">
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-3 control-label">场地名称</label>
+                                        <label for="name" class="col-sm-3 control-label">场地名称：</label>
 
                                         <div class="col-sm-6">
                                             <form:input path="name" htmlEscape="false" maxlength="30"
@@ -42,9 +42,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">所属场馆</label>
+                                        <label class="col-sm-3 control-label">所属场馆：</label>
                                         <div class="col-sm-6">
                                             <sys:select cssClass="input-medium" name="reserveVenue.id"
+                                                        cssStyle="width:100%"
                                                         value="${reserveField.reserveVenue.id}"
                                                         items="${venues}" itemLabel="name" itemValue="id"
                                                         defaultLabel="----请选择-----"
@@ -52,7 +53,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">是否启用</label>
+                                        <label class="col-sm-3 control-label">是否启用：</label>
                                         <div class="col-sm-6">
                                             <form:radiobuttons path="available" items="${fns:getDictList('yes_no')}"
                                                                itemLabel="label"
@@ -61,13 +62,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">所属项目</label>
+                                        <label class="col-sm-3 control-label">所属项目：</label>
                                         <div class="col-sm-6">
                                             <sys:select cssClass="input-medium" name="reserveProject.id"
+                                                        cssStyle="width:100%"
                                                         value="${reserveField.reserveProject.id}"
                                                         items="${projects}" itemLabel="name" itemValue="id"
                                                         defaultLabel="请选择"
                                                         defaultValue=""></sys:select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">出生日期：</label>
+                                        <div class="col-sm-6">
+                                            <input value="<fmt:formatDate  pattern="yyyy-MM-dd" value="${reserveField.birthday}"/>"
+                                                   name="birthday" id="birthday" type="text"
+                                                   maxlength="20"
+                                                   class="input-medium form-control Wdate "
+                                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                                         </div>
                                     </div>
                                     <j:if test="${reserveField.reserveParentField==''}">
@@ -90,7 +102,7 @@
                                         </div>
                                     </div>--%>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">备注</label>
+                                        <label class="col-sm-3 control-label">备注：</label>
                                         <div class="col-sm-6">
                                             <form:textarea path="remarks" htmlEscape="false" rows="4"
                                                            maxlength="255" class="form-control"/>
@@ -99,8 +111,8 @@
 
 
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">场地图片</label>
-                                        <div class="col-sm-3">
+                                        <label class="col-sm-3 control-label">教练图片：</label>
+                                        <div class="col-sm-6">
                                             <mechanism:upload id="financeSchoolPic" fdKey="fieldPic"
                                                               name="attMains1" exts=""
                                                               btnText="添加"

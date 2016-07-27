@@ -30,10 +30,10 @@
                                 <tr>
                                     <td>场馆：</td>
                                     <td><sys:select cssClass="input-medium" name="reserveVenue.id" cssStyle="width:100%"
-                                                     value="${reserveField.reserveVenue.id}"
-                                                     items="${venues}" itemLabel="name" itemValue="id"
-                                                     defaultLabel="----请选择-----"
-                                                     defaultValue=""></sys:select></td>
+                                                    value="${reserveField.reserveVenue.id}"
+                                                    items="${venues}" itemLabel="name" itemValue="id"
+                                                    defaultLabel="----请选择-----"
+                                                    defaultValue=""></sys:select></td>
                                     <td>教练：</td>
                                     <td><form:input path="name" htmlEscape="false" cssstyle="width:70px;" maxlength="30"
                                                     class="form-control"/></td>
@@ -58,11 +58,11 @@
                             <thead>
                             <tr>
                                 <th>教练名称</th>
-                                <th>所属项目</th>
+                                <th>项目</th>
                                 <th>所属场馆</th>
-                                <th>是否分时令</th>
-                                <th>备注</th>
+                                <th>出生日期</th>
                                 <th>是否启用</th>
+                                <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -74,25 +74,26 @@
                                     </td>
                                     <td>${reserveField.reserveProject.name}</td>
                                     <td>${reserveField.reserveVenue.name}</td>
-                                    <td>${fns:getDictLabel(reserveField.isTimeInterval, 'yes_no', '')}</td>
+                                    <td><fmt:formatDate value="${reserveField.birthday}" type="date"/></td>
+
+                                    <td>
+                                            ${fns:getDictLabel(reserveField.available, 'yes_no', '')}
+                                    </td>
                                     <td>
                                             ${reserveField.remarks}
                                     </td>
                                     <td>
-                                            ${fns:getDictLabel(reserveField.available, 'yes_no', '')}
+                                        <a class="btn btn-primary btn-xs"
+                                           href="${ctx}/reserve/reserveField/priceSetForm?id=${reserveField.id}"><i
+                                                class="fa fa-pencil"></i>价格设置</a>
+                                        <a class="btn btn-primary btn-xs"
+                                           href="${ctx}/reserve/reserveField/form?id=${reserveField.id}"><i
+                                                class="fa fa-pencil"></i>修改</a>
+                                        <a class="btn btn-danger btn-xs"
+                                           href="${ctx}/reserve/reserveField/delete?id=${reserveField.id}"
+                                           onclick="return confirmb('确认要删除该场地吗？', this.href)"><i
+                                                class="fa fa-times"></i>删除</a>
                                     </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-xs"
-                                               href="${ctx}/reserve/reserveField/priceSetForm?id=${reserveField.id}"><i
-                                                    class="fa fa-pencil"></i>价格设置</a>
-                                            <a class="btn btn-primary btn-xs"
-                                               href="${ctx}/reserve/reserveField/form?id=${reserveField.id}"><i
-                                                    class="fa fa-pencil"></i>修改</a>
-                                            <a class="btn btn-danger btn-xs"
-                                               href="${ctx}/reserve/reserveField/delete?id=${reserveField.id}"
-                                               onclick="return confirmb('确认要删除该场地吗？', this.href)"><i
-                                                    class="fa fa-times"></i>删除</a>
-                                        </td>
                                 </tr>
                             </c:forEach>
                             </tbody>

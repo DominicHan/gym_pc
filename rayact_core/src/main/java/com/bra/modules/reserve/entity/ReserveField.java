@@ -6,6 +6,7 @@ package com.bra.modules.reserve.entity;
 import com.bra.common.persistence.SaasEntity;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +24,15 @@ public class ReserveField extends SaasEntity<ReserveField> {
 	private ReserveField reserveParentField;//父场地
 	private List<ReserveFieldRelation> reserveFieldRelationList;//子场地
 	private String isTimeInterval;
+	private Date birthday;
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
 	public String getIsTimeInterval() {
 		return isTimeInterval;
