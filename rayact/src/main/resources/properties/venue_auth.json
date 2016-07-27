@@ -255,7 +255,7 @@
     "name": "站内消息",
     "authorityList": [
       {
-        "code": "oaNotify",
+        "code": "oaNotifyMS",
         "name": "站内消息管理",
         "href":"/oa/oaNotify/list",
         "authorityList": []

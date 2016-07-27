@@ -17,11 +17,14 @@
                 <h3>消息通知</h3>
             </div>
             <div class="col-lg-1 pull-right">
-           <%--     <a href="${ctx}/oa/oaNotify/self"><img style="width:30px;height: 30px"
-                                                                         src="${ctxStatic}/modules/reserve/images/return.png"></a>--%>
-                <div class="form-group">
+				<div class="form-group">
+				   <a href="${ctx}/oa/oaNotify/self">
+					   <img style="width:30px;height: 30px" src="${ctxStatic}/modules/reserve/images/return.png">
+				   </a>
+				</div>
+               <%-- <div class="form-group">
                     <input id="btnCancel" class="btn btn-primary" type="button" value="返 回" onclick="history.go(-1)"/>
-                </div>
+                </div>--%>
             </div>
         </div>
 	</div>

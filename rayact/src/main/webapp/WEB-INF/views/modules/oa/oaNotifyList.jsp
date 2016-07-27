@@ -11,7 +11,7 @@
 		<c:set var="action" value="selfNotify"></c:set>
 	</c:when>
 	<c:otherwise>
-		<c:set var="action" value="oaNotify"></c:set>
+		<c:set var="action" value="oaNotifyMS"></c:set>
 	</c:otherwise>
 </c:choose>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">

@@ -151,5 +151,6 @@
         </div>
     </div>
 </div>
+<script src="${ctxStatic}/modules/reserve/js/oa_notify.js" type="text/javascript"></script>
 </body>
 </html>

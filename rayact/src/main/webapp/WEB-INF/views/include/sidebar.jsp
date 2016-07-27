@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <div class="cl-sidebar" style="padding-bottom: 1000px">
-    <%--<div class="cl-toggle"><i class="fa fa-bars"></i></div>--%>
-
     <div class="cl-navblock">
         <div style="width: 100%;background: #fff;box-sizing:border-box">
             <div class="content">
@@ -19,14 +17,14 @@
                                         <img style="width:28px"
                                              src="${ctxStatic}/cleanzone/images/sidebar/${auth.code}.png"/>
                                     </div>
-                                    <div class="col-lg-6 col-sm-3">${auth.name}</div>
+                                    <div class="col-lg-6 col-sm-3"><span id="${auth.code}">${auth.name}</span></div>
                                 </div>
                             </a>
                             <ul class="sub-menu">
                                 <c:forEach items="${auth.authorityList}" var="a">
                                     <li
                                             <j:if test="${a.code eq param.action}">class="active"</j:if> ><a
-                                            href="${ctx}${a.href}">${a.name}</a></li>
+                                            href="${ctx}${a.href}"><span id="${a.code}">${a.name}</span></a></li>
                                 </c:forEach>
                             </ul>
                         </li>
