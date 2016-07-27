@@ -25,6 +25,24 @@ public class ReserveField extends SaasEntity<ReserveField> {
 	private List<ReserveFieldRelation> reserveFieldRelationList;//子场地
 	private String isTimeInterval;
 	private Date birthday;
+	private String loginName;
+	private String password;
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Date getBirthday() {
 		return birthday;

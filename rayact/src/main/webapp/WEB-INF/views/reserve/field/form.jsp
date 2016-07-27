@@ -42,6 +42,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">登陆名：</label>
+
+                                        <div class="col-sm-6">
+                                            <form:input path="loginName" htmlEscape="false" maxlength="30"
+                                                        class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-3 control-label">密码：</label>
+                                        <div class="col-sm-6">
+                                            <form:input path="password" htmlEscape="false" maxlength="30"
+                                                        class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">所属场馆：</label>
                                         <div class="col-sm-6">
                                             <sys:select cssClass="input-medium" name="reserveVenue.id"
