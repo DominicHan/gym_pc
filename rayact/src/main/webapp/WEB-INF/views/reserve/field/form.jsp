@@ -77,6 +77,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-sm-3 control-label">用户：</label>
+                                        <div class="col-sm-6">
+                                            <sys:select cssClass="input-medium" name="reserveUser.id"
+                                                        cssStyle="width:100%"
+                                                        value="${reserveField.reserveUser.id}"
+                                                        items="${userList}" itemLabel="name" itemValue="id"
+                                                        defaultLabel="请选择"
+                                                        defaultValue=""></sys:select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">所属项目：</label>
                                         <div class="col-sm-6">
                                             <sys:select cssClass="input-medium" name="reserveProject.id"

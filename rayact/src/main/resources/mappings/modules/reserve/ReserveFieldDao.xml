@@ -13,6 +13,7 @@
 		a.birthday AS "birthday",
 		a.login_name AS "loginName",
 		a.password AS "password",
+		a.fk_reserve_user_id AS "reserveUser.id",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -27,6 +28,7 @@
 	<sql id="reserveFieldJoins">
 		LEFT JOIN reserve_project p ON p.id = a.project_id
 		LEFT JOIN reserve_venue v ON v.id = a.venue_id
+		LEFT JOIN reserve_user u ON u.id = a.fk_reserve_user_id
 	</sql>
     
 	<select id="get" resultType="ReserveField">
@@ -106,6 +108,7 @@
 			login_name,
 		    password,
 			is_time_interval,
+			fk_reserve_user_id,
 			create_by,
 			create_date,
 			update_by,
@@ -125,6 +128,7 @@
 			#{loginName},
 			#{password},
 			#{isTimeInterval},
+			#{resreveUser.id},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -147,6 +151,7 @@
 			login_name = #{loginName},
 		    password =#{password},
 			is_time_interval=#{isTimeInterval},
+			fk_reserve_user_id=#{reserveUser.id},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks},

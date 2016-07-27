@@ -11,6 +11,7 @@ import com.bra.modules.reserve.service.*;
 import com.bra.modules.reserve.utils.TimeUtils;
 import com.bra.modules.reserve.web.form.HolidayPrice;
 import com.bra.modules.reserve.web.form.RoutinePrice;
+import com.bra.modules.sys.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,8 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "${adminPath}/reserve/reserveField")
 public class ReserveFieldController extends BaseController {
-
+    @Autowired
+    private ReserveUserService reserveUserService;
     @Autowired
     private ReserveFieldService reserveFieldService;
     @Autowired
@@ -98,6 +100,8 @@ public class ReserveFieldController extends BaseController {
         }
         //场地列表
         List<ReserveField> fields = reserveFieldService.findList(new ReserveField());
+        List<User> userList = reserveUserService.findList(new User());
+        model.addAttribute("userList", userList);
         model.addAttribute("reserveField", reserveField);
         model.addAttribute("fields", fields);
         model.addAttribute("venues", reserveVenueService.findList(new ReserveVenue()));
