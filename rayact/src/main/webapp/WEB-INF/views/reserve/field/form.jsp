@@ -41,7 +41,7 @@
                                                         class="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                   <%-- <div class="form-group">
                                         <label for="name" class="col-sm-3 control-label">登陆名：</label>
 
                                         <div class="col-sm-6">
@@ -55,7 +55,7 @@
                                             <form:input path="password" htmlEscape="false" maxlength="30"
                                                         class="form-control"/>
                                         </div>
-                                    </div>
+                                    </div>--%>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">所属场馆：</label>
                                         <div class="col-sm-6">
@@ -76,8 +76,8 @@
                                                                htmlEscape="false" class="icheck"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">用户：</label>
+                                    <%--<div class="form-group">
+                                        <label class="col-sm-3 control-label">绑定用户：</label>
                                         <div class="col-sm-6">
                                             <sys:select cssClass="input-medium" name="reserveUser.id"
                                                         cssStyle="width:100%"
@@ -86,7 +86,7 @@
                                                         defaultLabel="请选择"
                                                         defaultValue=""></sys:select>
                                         </div>
-                                    </div>
+                                    </div>--%>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">所属项目：</label>
                                         <div class="col-sm-6">
