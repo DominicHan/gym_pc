@@ -265,6 +265,14 @@
     </function>
 
     <function>
+        <description>获取交易类型</description>
+        <name>getUserType</name>
+        <function-class>com.bra.modules.reserve.utils.UserUtils</function-class>
+        <function-signature>java.lang.String getUserType(java.lang.String)</function-signature>
+        <example>${fns:getUserType('userType')}</example>
+    </function>
+
+    <function>
         <description>判断是否是管理员。</description>
         <name>isAdmin</name>
         <function-class>com.bra.modules.reserve.utils.AuthorityUtils</function-class>
