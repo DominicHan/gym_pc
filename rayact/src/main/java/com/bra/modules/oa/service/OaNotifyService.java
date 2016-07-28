@@ -11,6 +11,7 @@ import com.bra.modules.oa.dao.OaNotifyRecordDao;
 import com.bra.modules.reserve.entity.OaNotify;
 import com.bra.modules.reserve.entity.OaNotifyRecord;
 import com.bra.modules.reserve.service.ReserveUserService;
+import com.bra.modules.sys.entity.Office;
 import com.bra.modules.sys.entity.User;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,12 +69,17 @@ public class OaNotifyService extends CrudService<OaNotifyDao, OaNotify> {
 	@Transactional(readOnly = false)
 	public void save(OaNotify oaNotify) {
 		super.save(oaNotify);
-		
 		// 更新发送接受人记录
 		oaNotifyRecordDao.deleteByOaNotifyId(oaNotify.getId());
-
+		oaNotifyAllUser(oaNotify);
+	}
+	@Transactional(readOnly = false)
+	public void oaNotifyAllUser(OaNotify oaNotify) {
+		super.save(oaNotify);
 		List<OaNotifyRecord> oaNotifyRecordList = Lists.newArrayList();
-		List<User> reserveUserList = reserveUserService.findList(new User());
+		User u=new User();
+		u.setCompany(new Office(oaNotify.getTenantId()));
+		List<User> reserveUserList = reserveUserService.findList(u);
 		for(User user:reserveUserList){
 			OaNotifyRecord entity = new OaNotifyRecord();
 			entity.setId(IdGen.uuid());
@@ -86,6 +92,7 @@ public class OaNotifyService extends CrudService<OaNotifyDao, OaNotify> {
 			oaNotifyRecordDao.insertAll(oaNotifyRecordList);
 		}
 	}
+
 	
 	/**
 	 * 更新阅读状态

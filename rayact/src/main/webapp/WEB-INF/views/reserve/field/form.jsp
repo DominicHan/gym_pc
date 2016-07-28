@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场地管理</title>
+    <title>教练管理</title>
     <meta name="decorator" content="main"/>
     <%@include file="/WEB-INF/views/include/upload.jsp" %>
 </head>
@@ -15,7 +15,7 @@
         <div class="col-md-12" style="padding-right: 0px">
             <div class="block-flat">
                 <div class="header">
-                    <h3>场地管理</h3>
+                    <h3>教练管理</h3>
                 </div>
                 <div class="content">
                     <form:form id="inputForm" modelAttribute="reserveField" action="${ctx}/reserve/reserveField/save"
