@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+
 <form id="formBean">
     <input type="hidden" name="token" value="${token}"/>
     <input type="hidden" name="visitorsSet.id" value="${visitorsSet.id}"/>
@@ -13,8 +14,9 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="memberType" class="col-lg-2 control-label">顾客类型：</label>
-                            <div class="radio-inline"  id="memberType">
-                                <input type="radio" id="isMember" class="icheck" value="2" checked="checked" name="orderType"/>会员
+                            <div class="radio-inline" id="memberType">
+                                <input type="radio" id="isMember" class="icheck" value="2" checked="checked"
+                                       name="orderType"/>会员
                             </div>
                             <div class="radio-inline">
                                 <input type="radio" id="nMember" class="icheck" value="1" name="orderType"/>散客
@@ -88,7 +90,8 @@
                                 </div>
                                 <label class="col-lg-2 control-label">小时：</label>
                                 <div class="col-lg-4">
-                                    <input type="text" class="form-control number" name="collectCount" readonly="readonly"
+                                    <input type="text" class="form-control number" name="collectCount"
+                                           readonly="readonly"
                                            id="collectCount"
                                            value=""/>
                                 </div>
@@ -108,7 +111,7 @@
                                 </div>
                                 <label for="endTime" class="col-lg-2 control-label" style="text-align: center">至</label>
                                 <div class="col-sm-4">
-                                    <select id="endTime" class="select2"  name="endTime">
+                                    <select id="endTime" class="select2" name="endTime">
                                         <c:forEach items="${times}" var="t">
                                             <option
                                                     <j:if test="${t eq endTime}">selected="selected"</j:if>
@@ -183,14 +186,4 @@
 </form>
 <script src="${ctxStatic}/cleanzone/js/jquery.select2/select2.min.js" type="text/javascript"></script>
 <script src="${ctxStatic}/modules/reserve/js/time_ticket_sell.js" type="text/javascript"></script>
-<script>
-    $(document).ready(function () {
-        $(".select2").select2({
-            width: '100%'
-        });
-        $('.icheck').iCheck({
-            checkboxClass: 'icheckbox_square-blue checkbox',
-            radioClass: 'iradio_square-blue'
-        });
-    })
-</script>
+

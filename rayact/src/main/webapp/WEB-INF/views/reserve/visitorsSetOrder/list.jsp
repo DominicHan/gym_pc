@@ -50,14 +50,15 @@
     </div>
     <%-- </div>--%>
 </div>
-<%--场次票售卖模态--%>
+<%--无教练课时消费模态--%>
 <button id="timeTicketBtn" style="display: none" class="btn btn-primary btn-large" href="#timeTicketDialogModal" data-toggle="modal">场次票售卖
 </button>
+
 <div class="modal fade" id="timeTicketDialogModal"  style="display: none;" aria-hidden="true">
     <div class="modal-dialog" style="width: 80%">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="settlementModalLabel">场次票售卖</h4>
+                <h4 class="modal-title" id="settlementModalLabel">无教练课时消费</h4>
                 <button type="button" class="close" data-dismiss="modal"><span
                         aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
@@ -66,6 +67,7 @@
 
                 </div>
                 <div class="modal-body form-horizontal" id="reserveForm">
+
                     <!--结账模态-->
                     <!--end 结账模态-->
                 </div>
