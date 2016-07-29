@@ -5,7 +5,7 @@
     "authorityList": [
       {
         "code": "venue",
-        "name": "场馆管理",
+        "name": "健身房管理",
         "href":"/reserve/reserveVenue/list",
         "authorityList": []
       },
@@ -149,7 +149,7 @@
       },
       {
         "code": "allReport",
-        "name": "场馆收益统计",
+        "name": "健身房收益统计",
         "href":"/reserve/reserveSellReport/list",
         "authorityList": []
       },
@@ -167,7 +167,7 @@
       },
       {
         "code": "venueIncomeReport",
-        "name": "场地收入统计",
+        "name": "教练收入统计",
         "href":"/reserve/reserveVenue/fieldReport",
         "authorityList": []
       },
@@ -184,7 +184,7 @@
       },
       {
         "code": "listOpenRate",
-        "name": "场地利用率",
+        "name": "教练利用率",
         "href":"/reserve/saleVenueReport/listOpenRate",
         "authorityList": []
       },
@@ -232,7 +232,7 @@
       },
       {
         "code": "saleVenueLog",
-        "name": "场地售卖记录",
+        "name": "教练授课记录",
         "href":"/reserve/saleVenue/list",
         "authorityList": []
       },

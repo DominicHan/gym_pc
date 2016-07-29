@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场馆管理</title>
+    <title>健身房管理</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>场馆管理</h3>
+                    <h3>健身房管理</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveVenue" action="${ctx}/reserve/reserveVenue/"
                            method="post" class="breadcrumb form-search">
@@ -26,7 +26,7 @@
                         <table class="no-border">
                             <tbody class="no-border-y">
                                 <tr>
-                                    <td>场馆名称:</td>
+                                    <td>名称:</td>
                                     <td>
                                         <form:input path="name" htmlEscape="false" cssstyle="width:50px;" maxlength="30"
                                                     class="form-control"/>
@@ -48,7 +48,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>场馆名称</th>
+                                <th>名称</th>
                                 <th>是否启用</th>
 
                                 <th>经度</th>

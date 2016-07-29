@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>场馆管理</h3>
+                    <h3>健身房管理</h3>
                 </div>
                 <div class="content">
                     <form:form id="inputForm" modelAttribute="reserveVenue" action="${ctx}/reserve/reserveVenue/save"
@@ -26,7 +26,7 @@
                         <div class="tab-container">
                             <ul class="nav nav-tabs" id="myTab">
                                 <li class="active"><a href="#home" data-toggle="tab">基本信息</a></li>
-                                <li><a href="#venueLabel" data-toggle="tab">场馆标签</a></li>
+                                <li><a href="#venueLabel" data-toggle="tab">标签</a></li>
                                 <li><a href="#messages" data-toggle="tab">地图位置</a></li>
                                 <li><a href="#settings" data-toggle="tab">图片</a></li>
                             </ul>
@@ -35,7 +35,7 @@
                                 <div class="tab-pane active" id="home">
                                     <div class="form-horizontal group-border-dashed">
                                         <div class="form-group">
-                                            <label for="name" class="col-sm-3 control-label">场馆名称</label>
+                                            <label for="name" class="col-sm-3 control-label">名称</label>
 
                                             <div class="col-sm-6">
                                                 <form:input id="name" path="name" htmlEscape="false" maxlength="30"

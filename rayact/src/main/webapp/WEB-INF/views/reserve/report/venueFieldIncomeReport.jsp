@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场地收入统计</title>
+    <title>教练收入统计</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>场地收入统计</h3>
+                    <h3>教练收入统计</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveVenue" action="${ctx}/reserve/reserveVenue/fieldReport"
                            method="post" class="breadcrumb form-search">
@@ -28,7 +28,7 @@
                             <table class="no-border">
                                 <tbody class="no-border-y">
                                 <tr>
-                                    <td>场馆：</td>
+                                    <td>健身房：</td>
                                     <td>
                                         <sys:select cssClass="input-large" name="reserveVenue.id"
                                                     cssStyle="width:100%"
@@ -87,7 +87,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>场馆</th>
+                                <th>健身房</th>
                                 <th>项目</th>
                                 <th>储值卡</th>
                                 <th>现金</th>
