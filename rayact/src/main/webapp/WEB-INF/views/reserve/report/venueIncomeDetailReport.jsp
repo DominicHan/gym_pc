@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>教练收入统计</title>
+    <title>健身房收入统计</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>

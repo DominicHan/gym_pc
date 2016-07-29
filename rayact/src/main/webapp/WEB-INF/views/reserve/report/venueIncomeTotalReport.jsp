@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>总收入统计</title>
+    <title>流水收益统计</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>总收入统计</h3>
+                    <h3>流水收益统计</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveVenue" action="${ctx}/reserve/reserveVenue/totalIncomeReport"
                            method="post" class="breadcrumb form-search">
@@ -23,7 +23,7 @@
                             <table class="no-border">
                                 <tbody class="no-border-y">
                                 <tr>
-                                    <td>场馆：</td>
+                                    <td>健身房：</td>
                                     <td>
                                         <sys:select cssClass="input-large" name="reserveVenue.id"
                                                     cssStyle="width:100%"
@@ -73,7 +73,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>场馆</th>
+                                <th>健身房</th>
                                 <th>收入类型</th>
                                 <j:if test="${'1' eq intervalTotalReport.queryType}">
                                     <th>储值卡</th>
