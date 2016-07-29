@@ -22,33 +22,8 @@
                 <button type="button" id="closeTimeCardAddDialogBtn" class="btn btn-default btn-flat md-close" data-dismiss="modal">
                     取消
                 </button>
-                <button type="button" id="saveTimeCardAddDialogBtn" onclick="timeCardRechargeAddTime()" class="btn btn-primary btn-flat">确定</button>
+                <button type="button" id="saveTimeCardAddDialogBtn" onclick="save()" class="btn btn-primary btn-flat">确定</button>
             </div>
-        </div>
-    </div>
-</div>
-
-<button class="btn btn-primary btn-flat md-trigger" id="reserveBtn" style="display: none" data-modal="form-primary">
-    Basic Form
-</button>
-<div class="md-modal colored-header custom-width md-effect-12" id="form-primary">
-    <div class="md-content">
-        <div class="modal-header">
-            <h5>人次票设置</h5>
-            <button type="button" class="close md-close" data-dismiss="modal"
-                    aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body form-horizontal" id="reserveForm">
-            <!--人次票设置-->
-
-
-            <!--end 人次票设置-->
-        </div>
-        <div class="modal-footer">
-            <button type="button" id="closeBtn" class="btn btn-default btn-flat md-close" data-dismiss="modal">
-                取消
-            </button>
-            <button type="button" id="saveBtn" class="btn btn-primary btn-flat">保存</button>
         </div>
     </div>
 </div>

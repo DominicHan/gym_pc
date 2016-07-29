@@ -16,8 +16,6 @@
                 <div class="header">
                     <h3>无教练课时设置</h3>
                 </div>
-
-
                 <form:form id="searchForm" modelAttribute="reserveVenueVisitorsSet"
                            action="${ctx}/reserve/reserveVenueVisitorsSet/list"
                            method="post" class="breadcrumb form-search">
@@ -39,7 +37,7 @@
 
 
                         <div class="pull-right">
-                            <a id="addBtn" class="btn btn-success">
+                            <a id="addBtn" class="btn btn-success" >
                                 <i class="fa fa-plus"></i>添加
                             </a>
                         </div>
@@ -80,7 +78,6 @@
                             </c:forEach>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
@@ -88,75 +85,7 @@
     </div>
 </div>
 <jsp:include page="../include/periodSetModal.jsp"></jsp:include>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#addBtn").on('click', function () {
-            jQuery.postItems({
-                url: '${ctx}/reserve/reserveVenueVisitorsSet/form',
-                data: {},
-                success: function (result) {
-                    if (result) {
-                        $("#periodSetForm").html(result);
-                        $("#periodDialogButton").click();
-                        $("#periodSetForm .select2").select2({
-                            width: '100%'
-                        });
-                        $('#periodSetForm .icheck').iCheck({
-                            checkboxClass: 'icheckbox_square-blue checkbox',
-                            radioClass: 'iradio_square-blue'
-                        });
-                    }
-                }
-            });
-        });
-
-        $(".editBtn").on('click', function () {
-            var id = $(this).attr("data-id");
-            jQuery.postItems({
-                url: '${ctx}/reserve/reserveVenueVisitorsSet/form',
-                data: {id: id},
-                success: function (result) {
-                    if (result) {
-                        $("#periodSetForm").html(result);
-                        $("#periodDialogButton").click();
-                        $("#periodSetForm .select2").select2({
-                            width: '100%'
-                        });
-                        $('#periodSetForm .icheck').iCheck({
-                            checkboxClass: 'icheckbox_square-blue checkbox',
-                            radioClass: 'iradio_square-blue'
-                        });
-                    }
-                }
-            });
-        });
-
-        //保存
-        $("#saveBtn").on('click', function () {
-            var data = $("#pzname").val();
-            if (data == '') {
-                formLoding("请输入票种名称");
-                return;
-            }
-            data = $("#pzprice").val();
-            if (data == '') {
-                formLoding("请输入价格");
-                return;
-            }
-            var formJson = $("#formBean").serializeArray();
-            jQuery.postItems({
-                url: '${ctx}/reserve/reserveVenueVisitorsSet/save',
-                data: formJson,
-                success: function (result) {
-                    if (result == 'success') {
-                        location.reload();
-                    } else {
-                        formLoding('保存出错!');
-                    }
-                }
-            });
-        });
-    });
-</script>
+<script type="text/javascript" src="${ctxStatic}/modules/reserve/js/visitor_set_form.js"></script>
+<script type="text/javascript" src="${ctxStatic}/modules/reserve/js/visitor_set_save.js"></script>
 </body>
 </html>

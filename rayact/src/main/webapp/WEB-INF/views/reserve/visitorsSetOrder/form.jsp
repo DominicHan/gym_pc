@@ -71,7 +71,7 @@
                     <div class="row col-sm-12 col-md-12 col-lg-12" style="margin-left:10px ">
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-lg-2 control-label">票价：</label>
+                                <label class="col-lg-2 control-label">课时价：</label>
                                 <div class="col-lg-10">
                                     <input type="text" id="ticketPrice" readonly="readonly"
                                            value="${visitorsSet.price}"

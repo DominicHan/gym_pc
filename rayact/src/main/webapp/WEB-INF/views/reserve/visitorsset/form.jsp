@@ -9,24 +9,32 @@
             <tr>
                 <td>健身房：</td>
                 <td>
-                    <sys:select cssClass="select2" name="reserveVenue.id"
+                    <sys:select cssClass="select2" name="reserveVenue.id" id="reserveVenueId"
                                 cssStyle="width:80%"
-                                value="${reserveVenueVisitorsSet.reserveVenue.id}" items="${reserveVenues}"
+                                value="${reserveVenueVisitorsSet.reserveVenue.id}"
+                                items="${reserveVenues}"
+                                defaultLabel="请选择"
+                                defaultValue=""
                                 itemLabel="name" itemValue="id"></sys:select>
                 </td>
                 <td>项目：</td>
                 <td>
-                    <sys:select cssClass="select2" name="project.id" value="${reserveVenueVisitorsSet.project.id}"
+                    <sys:select cssClass="select2" name="project.id"
+                                id="projectId"
+                                value="${reserveVenueVisitorsSet.project.id}"
                                 cssStyle="width:80%"
-                                items="${projects}" itemLabel="name" itemValue="id"></sys:select>
+                                items="${projects}"
+                                itemLabel="name"
+                                itemValue="id"
+                                defaultLabel="请选择"
+                                defaultValue=""
+                    ></sys:select>
                 </td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
-                <td>课时：</td>
+                <td>课时名称：</td>
                 <td>
-                    <input type="text" class="form-control required" value="${reserveVenueVisitorsSet.name}" id="pzname"
+                    <input type="text" class="form-control required" value="${reserveVenueVisitorsSet.name}" id="period_name"
                            name="name"/>
                 </td>
                 <td>是否启用：</td>
@@ -39,7 +47,7 @@
             <tr>
                 <td>价格：</td>
                 <td>
-                    <input type="text" class="form-control number" value="${reserveVenueVisitorsSet.price}" id="pzprice"  style="width:80%"
+                    <input type="text" class="form-control number required" value="${reserveVenueVisitorsSet.price}" id="period_price"  style="width:80%"
                            name="price"/>
                 </td>
             </tr>
