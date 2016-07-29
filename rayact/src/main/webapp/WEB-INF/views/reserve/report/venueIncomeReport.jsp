@@ -11,7 +11,7 @@
 <head>
     <meta name="decorator" content="main"/>
     <link type="text/css" rel="stylesheet" href="${ctxStatic}/modules/reserve/css/field.css?id=7862256"/>
-    <title>场馆收益统计</title>
+    <title>健身房收益统计</title>
 </head>
 <body>
 <c:if test="${param.alone != 'true'}">
@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>场馆收益统计</h3>
+                    <h3>健身房收益统计</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveCardStatements"
                            action="${ctx}/reserve/reserveSellReport/list?alone=${alone}"
