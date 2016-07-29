@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>次卡会员添加</title>
+    <title>会员添加</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>次卡会员添加</h3>
+                    <h3>会员添加</h3>
                 </div>
                 <div class="content">
                     <div class="tab-container">
@@ -29,7 +29,7 @@
                                     <tr>
                                         <td>卡号:</td>
                                         <td>
-                                            <form:input id="cartno" path="cartno" htmlEscape="false" maxlength="20"
+                                            <form:input id="cardNo" path="cartno" htmlEscape="false" maxlength="20"
                                                         class="form-control required"/>
                                             <span class="help-inline"><font color="red">*</font> </span>
                                         </td>
@@ -43,16 +43,20 @@
                                                 <span class="input-group-addon"><font color="red">*</font> </span>
                                             </div>
                                         </td>
-                                        <td>次卡类别:</td>
+                                        <td>课时卡标准:</td>
                                         <td>
-                                            <sys:select cssClass="input-xlarge" name="timecardSet.id"
-                                                        items="${timecardSetList}"
-                                                        value="${reserveMember.timecardSet.id}"
-                                                        itemLabel="name" itemValue="id"
-                                                        cssStyle="width:50%"
-                                                        defaultLabel="请选择次卡"
-                                                        defaultValue="">
-                                            </sys:select>
+                                            <div class="input-group">
+                                                <sys:select cssClass="input-xlarge" name="timecardSet.id"
+                                                            id="timeCardSetId"
+                                                            items="${timecardSetList}"
+                                                            value="${reserveMember.timecardSet.id}"
+                                                            itemLabel="name" itemValue="id"
+                                                            cssStyle="width:100%"
+                                                            defaultLabel="请选择课时卡"
+                                                            defaultValue="">
+                                                </sys:select>
+                                                <span class="input-group-addon"><font color="red">*</font> </span>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -118,7 +122,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td>场馆：</td>
+                                        <td>健身房：</td>
                                         <td>
                                             <sys:select cssClass="input-xlarge" name="reserveVenue.id"
                                                         cssStyle="width:40%"
@@ -128,7 +132,7 @@
                                                         itemLabel="name"
                                                         itemValue="id"
                                                         defaultValue=""
-                                                        defaultLabel="请选择场馆"
+                                                        defaultLabel="请选择健身房"
                                             ></sys:select>
                                         </td>
                                         <td>卡号截止日期:</td>

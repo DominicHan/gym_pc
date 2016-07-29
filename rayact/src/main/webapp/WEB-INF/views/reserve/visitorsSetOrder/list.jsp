@@ -26,14 +26,12 @@
         </div>
         <%-- <div class="cl-mcont">--%>
 
-        <div class="row">
+        <div class="row" style="margin-top: 20px">
             <div class="col-md-12">
                 <c:forEach items="${visitorsSets}" var="vs">
                 <div class="col-sm-4 col-md-4 col-lg-2">
-
                     <div class="header">
-                        <h3 class="visible-lg">${vs.reserveVenue.name}</h3>
-                        <h3 class="visible-lg">${vs.name}</h3>
+                        <h3 class="visible-lg">${vs.reserveVenue.name}-${vs.name}</h3>
                     </div>
                     <div class="content">
                         <p><b>${vs.project.name}</b><b>(${vs.price}<i class="fa fa-cny"></i>)</b></p>

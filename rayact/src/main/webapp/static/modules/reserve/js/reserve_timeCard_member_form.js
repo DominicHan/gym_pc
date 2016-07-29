@@ -10,8 +10,14 @@ function checkForm() {
     var name=$("#name").val().trim();
     var venue=$("#reserveVenue_id").val();
     var validityEnd=$("#validityend").val().trim();
+    var timeCardSetId=$("#timeCardSetId").val().trim();
+
     if(cardNo==''|| cardNo==null || cardNo==undefined){
         errorLoding("请输入卡号");
+        return false;
+    }
+    if(!timeCardSetId){
+        errorLoding("请选择课时标准");
         return false;
     }
     if(mobile==''|| mobile==null || mobile==undefined){
@@ -32,7 +38,7 @@ function checkForm() {
     }
 
     if(!venue){
-        errorLoding("场馆不能为空");
+        errorLoding("健身房不能为空");
         return false;
     }
     jQuery.postItems({
