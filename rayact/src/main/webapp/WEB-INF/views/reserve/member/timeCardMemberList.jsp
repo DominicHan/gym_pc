@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="decorator" content="main"/>
-    <title>次卡会员管理</title>
+    <title>预储课时管理</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>次卡会员列表</h3>
+                    <h3>预储课时列表</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveMember" action="${ctx}/reserve/timeCardMember/list/"
                            method="post">

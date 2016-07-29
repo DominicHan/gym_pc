@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场次票设置</title>
+    <title>无教练课时设置</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>场次票设置</h3>
+                    <h3>无教练课时设置</h3>
                 </div>
 
 
@@ -26,7 +26,7 @@
                             <table class="no-border">
                                 <tbody class="no-border-y">
                                 <tr>
-                                    <td>次票名称：</td>
+                                    <td>课时名称：</td>
                                     <td>
                                         <form:input path="name" htmlEscape="false" cssstyle="width:70px;" maxlength="30"
                                                     class="form-control"/>
@@ -50,9 +50,9 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>次票名称</th>
-                                <th>所属项目</th>
-                                <th>所属场馆</th>
+                                <th>课时名称</th>
+                                <th>项目</th>
+                                <th>健身房</th>
                                 <th>是否启用</th>
                                 <th>操作</th>
                             </tr>
@@ -61,7 +61,7 @@
                             <c:forEach items="${page}" var="bean">
                                 <tr>
                                     <td>
-                                        <a href="${ctx}/reserve/reserveVenueVisitorsSet/form?id=${bean.id}">${bean.name}</a>
+                                        ${bean.name}
                                     </td>
                                     <td>${bean.project.name}</td>
                                     <td>${bean.reserveVenue.name}</td>
@@ -87,30 +87,7 @@
         </div>
     </div>
 </div>
-<button class="btn btn-primary btn-flat md-trigger" id="reserveBtn" style="display: none" data-modal="form-primary">
-    Basic Form
-</button>
-<div class="md-modal colored-header custom-width md-effect-12" id="form-primary">
-    <div class="md-content">
-        <div class="modal-header">
-            <h5>人次票设置</h5>
-            <button type="button" class="close md-close" data-dismiss="modal"
-                    aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body form-horizontal" id="reserveForm">
-            <!--人次票设置-->
-
-
-            <!--end 人次票设置-->
-        </div>
-        <div class="modal-footer">
-            <button type="button" id="closeBtn" class="btn btn-default btn-flat md-close" data-dismiss="modal">
-                取消
-            </button>
-            <button type="button" id="saveBtn" class="btn btn-primary btn-flat">保存</button>
-        </div>
-    </div>
-</div>
+<jsp:include page="../include/periodSetModal.jsp"></jsp:include>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#addBtn").on('click', function () {
@@ -119,12 +96,12 @@
                 data: {},
                 success: function (result) {
                     if (result) {
-                        $("#reserveForm").html(result);
-                        $("#reserveBtn").click();
-                        $("#reserveForm .select2").select2({
+                        $("#periodSetForm").html(result);
+                        $("#periodDialogButton").click();
+                        $("#periodSetForm .select2").select2({
                             width: '100%'
                         });
-                        $('#reserveForm .icheck').iCheck({
+                        $('#periodSetForm .icheck').iCheck({
                             checkboxClass: 'icheckbox_square-blue checkbox',
                             radioClass: 'iradio_square-blue'
                         });
@@ -140,12 +117,12 @@
                 data: {id: id},
                 success: function (result) {
                     if (result) {
-                        $("#reserveForm").html(result);
-                        $("#reserveBtn").click();
-                        $("#reserveForm .select2").select2({
+                        $("#periodSetForm").html(result);
+                        $("#periodDialogButton").click();
+                        $("#periodSetForm .select2").select2({
                             width: '100%'
                         });
-                        $('#reserveForm .icheck').iCheck({
+                        $('#periodSetForm .icheck').iCheck({
                             checkboxClass: 'icheckbox_square-blue checkbox',
                             radioClass: 'iradio_square-blue'
                         });

@@ -53,7 +53,7 @@
       },
       {
         "code": "timeCardMember",
-        "name": "次卡会员",
+        "name": "预储课时（无教练）列表",
         "href":"/reserve/timeCardMember/list",
         "authorityList": []
       },
@@ -65,7 +65,7 @@
       },
       {
         "code": "timecardSet",
-        "name": "次卡设置",
+        "name": "课时卡设置",
         "href":"/reserve/reserveTimecardMemberSet/list",
         "authorityList": []
       }
@@ -73,23 +73,23 @@
   },
   {
     "code": "fieldSet",
-    "name": "教练预约",
+    "name": "预约教练",
     "authorityList": [
       {
         "code": "reserveField",
-        "name": "教练预约",
+        "name": "预约教练",
         "href":"/reserve/field/main",
         "authorityList": []
       },
       {
         "code": "vistorsSet",
-        "name": "场次票售卖",
+        "name": "无教练课时消费",
         "href":"/reserve/reserveVenueOrder/list",
         "authorityList": []
       },
       {
         "code": "venueVisitorsSet",
-        "name": "场次票设置",
+        "name": "无教练课时设置",
         "href":"/reserve/reserveVenueVisitorsSet/list",
         "authorityList": []
       },
