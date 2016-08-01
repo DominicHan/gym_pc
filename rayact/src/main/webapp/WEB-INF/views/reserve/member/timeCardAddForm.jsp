@@ -25,7 +25,7 @@
                             <input readonly="readonly" id="reserveVenue" class="form-control"
                                    value="${reserveMember.reserveVenue.name}"/>
                         </div>
-                        <label for="reserveFieldTicket" class="col-sm-2 control-label">场次票:</label>
+                        <label for="reserveFieldTicket" class="col-sm-2 control-label">课时标准:</label>
                         <div class="col-sm-4">
                             <input readonly="readonly" id="reserveFieldTicket" class="form-control"
                                    value="${reserveMember.timecardSet.name}"/>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <label for="remarks" class="col-sm-2 control-label">充值备注:</label>
+                        <label for="remarks" class="col-sm-2 control-label">备注:</label>
                         <div class="col-sm-10">
                             <input id="remarks" name="remarks" htmlEscape="false" maxlength="30" class="form-control"/>
                         </div>
@@ -45,7 +45,7 @@
             <div class="col-lg-6">
                 <div class="row">
                     <div class="form-group">
-                        <label for="residue" class="control-label col-lg-3">剩余次数:</label>
+                        <label for="residue" class="control-label col-lg-3">剩余课时数:</label>
                         <div class="col-lg-4">
                             <input type="text" id="residue" readonly="readonly" value="${reserveMember.residue}"
                                    class="form-control"/>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <label for="rechargeVolume" class="control-label col-lg-3">充值金额:</label>
+                        <label for="rechargeVolume" class="control-label col-lg-3">金额:</label>
                         <div class="col-lg-6"><input id="rechargeVolume" name="userName"
                                                      type="text"
                                                      class="form-control input-sm"/></div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <label for="time" class="control-label col-lg-3">次数:</label>
+                        <label for="time" class="control-label col-lg-3">课时数:</label>
                         <div class="col-lg-6">
                             <input type="text" id="time" name="time"
                                    class="form-control"/>

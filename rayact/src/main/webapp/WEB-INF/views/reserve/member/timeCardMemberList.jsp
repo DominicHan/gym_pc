@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>预储课时列表</h3>
+                    <h3>预储（无教练）课时列表</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveMember" action="${ctx}/reserve/timeCardMember/list/"
                            method="post">
@@ -111,7 +111,7 @@
                                         <td>
                                             <a class="btn btn-primary btn-xs"
                                                onclick="addTime('${reserveMember.id}')"><i
-                                                    class="fa fa-pencil"></i>充值</a>
+                                                    class="fa fa-pencil"></i>课时购买</a>
                                             <a class="btn btn-primary btn-xs"
                                                onclick="prePayment('${reserveMember.id}')"
                                                class="fa fa-pencil">预付款记录</a>

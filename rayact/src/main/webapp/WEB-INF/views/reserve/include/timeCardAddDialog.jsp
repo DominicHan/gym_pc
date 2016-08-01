@@ -5,7 +5,7 @@
     <div class="modal-dialog" style="width: 80%">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">次卡充值</h4>
+                <h4 class="modal-title" id="myModalLabel">（无教练）课时购买</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
