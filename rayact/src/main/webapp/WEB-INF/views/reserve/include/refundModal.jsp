@@ -5,7 +5,7 @@
     <div class="modal-dialog" style="width: 80%">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">大客户退费</h4>
+                <h4 class="modal-title">退费</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
