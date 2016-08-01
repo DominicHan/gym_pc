@@ -141,8 +141,8 @@
         </div>
     </div>
 </div>
-<jsp:include page="../include/timeCardAddDialog.jsp"></jsp:include>
+<jsp:include page="../include/addTutorPeriodDialog.jsp"></jsp:include>
 <jsp:include page="../include/prePaymentListModal.jsp"></jsp:include>
-<script type="text/javascript" src="${ctxStatic}/modules/reserve/js/timecard.js"></script>
+<script type="text/javascript" src="${ctxStatic}/modules/reserve/js/tutor_period.js"></script>
 </body>
 </html>

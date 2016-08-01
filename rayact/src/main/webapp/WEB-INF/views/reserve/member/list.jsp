@@ -72,11 +72,9 @@
                                 <th>卡号</th>
                                 <th>手机号</th>
                                 <th>性别</th>
-                                <th>卡号类型</th>
                                 <th>余额</th>
-                                <th>剩余次数</th>
-                                <th>开始时间</th>
-                                <th>到期时间</th>
+                                <th>剩余（无教练）次数</th>
+                                <th>剩余（教练）次数</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
@@ -100,10 +98,6 @@
                                     <td>
                                             ${fns:getDictLabel(reserveMember.sex, 'sex', '')}
                                     </td>
-
-                                    <td>
-                                            ${fns:getDictLabel(reserveMember.cartType, 'cart_type', '')}
-                                    </td>
                                     <td>
                                             ${reserveMember.remainder}
                                     </td>
@@ -111,11 +105,7 @@
                                             ${reserveMember.residue}
                                     </td>
                                     <td>
-                                        <fmt:formatDate value="${reserveMember.validitystart}" type="date"/>
-                                    </td>
-
-                                    <td>
-                                        <fmt:formatDate value="${reserveMember.validityend}" type="date"/>
+                                            ${reserveMember.tutorPeriodResidue}
                                     </td>
                                     <td>
                                             ${reserveMember.remarks}

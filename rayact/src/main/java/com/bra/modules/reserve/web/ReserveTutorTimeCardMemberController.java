@@ -69,7 +69,7 @@ public class ReserveTutorTimeCardMemberController extends BaseController {
     }
     //次卡充值保存
     @RequestMapping(value = "addTime")
-    public String addTime(String id, Double rechargeVolume,int time,String payType,String remarks,RedirectAttributes redirectAttributes){
+    public String addTime(String id, Double rechargeVolume,int time,String payType,String remarks){
         ReserveMember reserveMember = reserveMemberService.get(id);
         //预付款
         ReserveTimecardMemberSet timecardMemberSet=timecardSetService.get(reserveMember.getTimecardSet());
@@ -85,14 +85,9 @@ public class ReserveTutorTimeCardMemberController extends BaseController {
         reserveTimeCardPrepaymentService.save(prepayment);
         //预付款 结束
         //余额 剩余次数 更新
-        int residue=reserveMember.getResidue();
-        double remain=0.0;
-        if(reserveMember.getRemainder()!=null){
-            remain=reserveMember.getRemainder();
-        }
+        int residue=reserveMember.getTutorPeriodResidue();
         residue+=time;//次数添加
-        reserveMember.setResidue(residue);
-        reserveMember.setRemainder(remain);
+        reserveMember.setTutorPeriodResidue(residue);
         reserveMemberService.save(reserveMember);
         //余额 剩余次数 更新 结束
         //记录次卡充值记录

@@ -40,6 +40,12 @@ public class ReserveMemberService extends CrudService<ReserveMemberDao, ReserveM
 	
 	@Transactional(readOnly = false)
 	public void save(ReserveMember reserveMember) {
+		if(reserveMember.getResidue()==null){
+			reserveMember.setResidue(0);
+		}
+		if(reserveMember.getTutorPeriodResidue()==null){
+			reserveMember.setTutorPeriodResidue(0);
+		}
 		super.save(reserveMember);
 	}
 	

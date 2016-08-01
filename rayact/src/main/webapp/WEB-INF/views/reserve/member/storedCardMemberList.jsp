@@ -76,7 +76,7 @@
                                                 ${fns:hidePhone(reserveMember.mobile)}
                                         </td>
                                         <td>
-                                                ${reserveMember.cartno}
+                                                ${reserveMember.cardno}
                                         </td>
                                         <td>
                                                 ${reserveMember.reserveVenue.name}
