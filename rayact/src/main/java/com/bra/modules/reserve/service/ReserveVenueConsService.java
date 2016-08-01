@@ -8,7 +8,6 @@ import com.bra.modules.reserve.dao.ReserveVenueConsItemDao;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.event.venue.VenueCancelEvent;
 import com.bra.modules.reserve.event.venue.VenueCheckoutEvent;
-import com.bra.modules.reserve.event.venue.VenueReserveEvent;
 import com.bra.modules.reserve.utils.AuthorityUtils;
 import com.bra.modules.reserve.utils.TimeUtils;
 import com.bra.modules.reserve.web.form.SaleVenueLog;
@@ -277,9 +276,6 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
         reserveVenueCons.setOrderPrice(filedSum);//场地应收金额
         reserveVenueCons.setShouldPrice(sum);//订单应收：没有优惠券，应收等于订单金额+教练费用
         dao.update(reserveVenueCons);//订单价格更改
-        //预定教练
-        List<String> timeList = TimeUtils.getTimeSpace(itemList.get(0).getStartTime(), itemList.get(0).getEndTime());
-        applicationContext.publishEvent(new VenueReserveEvent(reserveVenueCons, timeList));//?????
     }
 
     /**
