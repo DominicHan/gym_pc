@@ -89,7 +89,10 @@
             <label class="radio-inline">
                 <input type="radio" class="icheck" id="memberCardRadio"
                        <j:if test="${'1' eq order.consType}">disabled="disabled"</j:if> value="1"
-                       <j:if test="${'2' eq order.consType}">checked="checked"</j:if> name="payType"/>会员卡
+                       <j:if test="${'2' eq order.consType}">checked="checked"</j:if> name="payType"/>储值卡
+            </label>
+            <label class="radio-inline">
+                <input type="radio" class="icheck" value="10" name="payType"/>预储课时
             </label>
             <label class="radio-inline">
                 <input type="radio" class="icheck" value="2"

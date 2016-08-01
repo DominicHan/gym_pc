@@ -43,7 +43,22 @@ public class MemberCheckoutListener{
             }
             reserveMember.setRemainder(reserveMember.getRemainder() - venueCons.getConsPrice());//会员卡扣款
             storedCardMemberService.save(reserveMember);
-
+        }
+        //预储课时
+        if ("10".equals(venueCons.getPayType()) && reserveMember != null) {
+            ReserveVenueConsItem search = new ReserveVenueConsItem();
+            search.setConsData(venueCons);
+            List<ReserveVenueConsItem> itemList = reserveVenueConsItemService.findList(search);
+            int num=0;
+            for(ReserveVenueConsItem i:itemList){
+                String start=i.getStartTime()+":00";
+                String end=i.getEndTime()+":00";
+                num= TimeUtils.getTimeSpac(start,end,30)/2;
+            }
+            Integer residue=reserveMember.getTutorPeriodResidue();
+            residue-=num;
+            reserveMember.setTutorPeriodResidue(residue);//扣教练课时
+            storedCardMemberService.save(reserveMember);
         }
         /*System.out.println("开始记录日志");*/
         //记录日志
