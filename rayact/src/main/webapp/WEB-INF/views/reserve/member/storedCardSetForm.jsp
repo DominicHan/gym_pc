@@ -44,46 +44,6 @@
                 </div>
             </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">场地:</label>
-                    <div class="col-sm-6">
-                        <sys:select cssClass="input-large" name="reserveField.id"
-                                    items="${reserveFieldList}"
-                                    defaultLabel="请选择场地" defaultValue=""
-                                    value="${reserveField}" itemLabel="name" itemValue="id">
-
-                        </sys:select>
-                    </div>
-                </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">起止金额:</label>
-                <div class="col-sm-6">
-                    <form:input path="startPrice" htmlEscape="false"
-                                class="input-xlarge  number "/>&nbsp;至
-                    <form:input path="endPrice" htmlEscape="false"
-                                class="input-xlarge  number "/>&nbsp;元
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">赠送金额:</label>
-                <div class="col-sm-6 ">
-                    <form:input path="givePrice" htmlEscape="false"
-                                class="form-control number"/>
-                </div>
-                <div class="col-sm-1 ">
-                    元
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">备注:</label>
-                <div class="col-sm-6">
-                    <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
-                                   class="form-control"/>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">折扣比率:</label>
                 <div class="col-sm-6">

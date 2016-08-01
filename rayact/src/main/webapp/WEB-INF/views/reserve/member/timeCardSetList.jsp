@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="decorator" content="main"/>
-    <title>次卡设置</title>
+    <title>课时卡设置</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>次卡列表</h3>
+                    <h3>课时卡列表</h3>
                 </div>
                 <form:form id="searchForm" modelAttribute="reserveTimecardMemberSet"
                            action="${ctx}/reserve/reserveTimecardMemberSet/"
@@ -52,9 +52,6 @@
                             <tr>
                                 <th>名称</th>
                                 <th>项目</th>
-                                <th>次数</th>
-                                <th>赠送次数</th>
-                                <th>分钟/次</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
@@ -68,17 +65,6 @@
                                         </a></td>
                                     <td>${reserveTimecardMemberSet.reserveProject.name}</td>
                                     <td>
-                                            ${reserveTimecardMemberSet.startTime}~${reserveTimecardMemberSet.endTime}次
-                                    </td>
-                                    <td>
-                                            ${reserveTimecardMemberSet.giveTime}次
-                                    </td>
-
-                                    <td>
-                                            ${reserveTimecardMemberSet.minutesPerTime}
-                                    </td>
-
-                                    <td>
                                             ${reserveTimecardMemberSet.remarks}
                                     </td>
                                         <td>
@@ -87,7 +73,7 @@
                                                     class="fa fa-pencil"></i>修改</a>
                                             <a class="btn btn-danger btn-xs"
                                                href="${ctx}/reserve/reserveTimecardMemberSet/delete?id=${reserveTimecardMemberSet.id}"
-                                               onclick="return confirmb('确认要删除该次卡设置吗？', this.href)"><i
+                                               onclick="return confirmb('确认要删除该课时卡设置吗？', this.href)"><i
                                                     class="fa fa-times"></i>删除</a>
                                         </td>
                                 </tr>

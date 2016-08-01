@@ -45,36 +45,6 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label">起止次数:</label>
-                <div class="col-sm-6">
-                    <form:input path="startTime" cssstyle="width:20px" htmlEscape="false" maxlength="11"
-                                class="input-xlarge "/>&nbsp;至
-                    <form:input path="endTime" htmlEscape="false" maxlength="11" class="input-xlarge "/>&nbsp;次
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">增送次数:</label>
-                <div class="col-sm-6">
-                    <form:input path="giveTime" htmlEscape="false" maxlength="11" class="form-control "/>
-                </div>
-                <div class="col-sm-1">
-                    次
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">周期：</label>
-                <div class="col-sm-6">
-                    <form:input path="minutesPerTime" htmlEscape="false" maxlength="11" class="form-control "/>
-                </div>
-                <div class="col-sm-1">
-                    分钟/次
-                </div>
-            </div>
-
-
-            <div class="form-group">
                 <label class="col-sm-3 control-label">备注:</label>
                 <div class="col-sm-6">
                     <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"

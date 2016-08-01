@@ -27,12 +27,15 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	private String email;		// 邮箱
 	private String sex;		// 性别 1:男 2：女
 	private Double remainder ; //储值卡余额
-	private Integer residue;//次卡剩余次数
+	private Integer tutorPeriodResidue;//教練剩余課時
+	private Integer residue;//無教練剩余課時
 	private ReserveVenue reserveVenue;//所属场馆
 	private String cardno;		// 卡号
 	private String isOwning; //是否欠款 0：否 1：是
-	private Date validityStart;		// 卡号开始日期
-	private Date validityEnd;		// 卡号结束日期
+	private Date validityStart;		// 課時开始日期
+	private Date validityEnd;		// 課時结束日期
+	private Date tutorPeriodValidityStart;
+	private Date tutorPeriodValidityEnd;
 	private ReserveStoredcardMemberSet storedcardSet;
 
 	public String getCardno() {
@@ -217,5 +220,29 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 
 	public void setReserveVenue(ReserveVenue reserveVenue) {
 		this.reserveVenue = reserveVenue;
+	}
+
+	public Date getTutorPeriodValidityStart() {
+		return tutorPeriodValidityStart;
+	}
+
+	public void setTutorPeriodValidityStart(Date tutorPeriodValidityStart) {
+		this.tutorPeriodValidityStart = tutorPeriodValidityStart;
+	}
+
+	public Date getTutorPeriodValidityEnd() {
+		return tutorPeriodValidityEnd;
+	}
+
+	public void setTutorPeriodValidityEnd(Date tutorPeriodValidityEnd) {
+		this.tutorPeriodValidityEnd = tutorPeriodValidityEnd;
+	}
+
+	public Integer getTutorPeriodResidue() {
+		return tutorPeriodResidue;
+	}
+
+	public void setTutorPeriodResidue(Integer tutorPeriodResidue) {
+		this.tutorPeriodResidue = tutorPeriodResidue;
 	}
 }

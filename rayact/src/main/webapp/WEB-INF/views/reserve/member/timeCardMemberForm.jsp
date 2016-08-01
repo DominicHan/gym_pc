@@ -93,7 +93,7 @@
                                     <tr>
 
 
-                                        <td>剩余次数:</td>
+                                        <td>（无教练）剩余课时:</td>
                                         <td>
                                             <div class="input-group">
                                                 <form:input path="residue" htmlEscape="false" maxlength="11"
@@ -135,7 +135,7 @@
                                                         defaultLabel="请选择健身房"
                                             ></sys:select>
                                         </td>
-                                        <td>卡号截止日期:</td>
+                                        <td>（无教练）剩余课时截止日期:</td>
                                         <td>
                                             <input name="validityEnd" type="text" readonly="readonly" maxlength="20"
                                                    id="validityEnd"

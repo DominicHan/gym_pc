@@ -41,7 +41,7 @@
                                 </table>
                             </div>
                             <div class="pull-right">
-                                <a class="btn btn-success" href="${ctx}/reserve/timeCardMember/form">
+                                <a class="btn btn-success" href="${ctx}/reserve/tutorTimeCardMember/form">
                                     <i class="fa fa-plus"></i>添加
                                 </a>
                             </div>
@@ -89,15 +89,15 @@
                                                 ${reserveMember.timecardSet.name}
                                         </td>
                                         <td>
-                                                ${reserveMember.residue}
+                                                ${reserveMember.tutorPeriodResidue}
                                         </td>
 
                                         <td>
-                                            <fmt:formatDate value="${reserveMember.validityStart}" type="date"/>
+                                            <fmt:formatDate value="${reserveMember.tutorPeriodValidityStart}" type="date"/>
                                         </td>
 
                                         <td>
-                                            <fmt:formatDate value="${reserveMember.validityEnd}" type="date"/>
+                                            <fmt:formatDate value="${reserveMember.tutorPeriodValidityEnd}" type="date"/>
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-xs"

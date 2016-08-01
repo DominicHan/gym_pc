@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>会员添加</title>
+    <title>教练课时会员添加</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
@@ -29,7 +29,7 @@
                                     <tr>
                                         <td>卡号:</td>
                                         <td>
-                                            <form:input id="cardNo" path="cartno" htmlEscape="false" maxlength="20"
+                                            <form:input id="cardNo" path="cardno" htmlEscape="false" maxlength="20"
                                                         class="form-control required"/>
                                             <span class="help-inline"><font color="red">*</font> </span>
                                         </td>
@@ -93,10 +93,10 @@
                                     <tr>
 
 
-                                        <td>剩余次数:</td>
+                                        <td>剩余教练课时:</td>
                                         <td>
                                             <div class="input-group">
-                                                <form:input path="residue" htmlEscape="false" maxlength="11"
+                                                <form:input path="tutorPeriodResidue" htmlEscape="false" maxlength="11"
                                                             readonly="true"
                                                             class="form-control"/>
                                                 <span class="input-group-addon">次</span>
@@ -135,12 +135,12 @@
                                                         defaultLabel="请选择健身房"
                                             ></sys:select>
                                         </td>
-                                        <td>卡号截止日期:</td>
+                                        <td>课时截止日期:</td>
                                         <td>
-                                            <input name="validityend" type="text" readonly="readonly" maxlength="20"
+                                            <input name="tutorPeriodValidityEnd" type="text" readonly="readonly" maxlength="20"
                                                    id="validityend"
                                                    class="input-large Wdate "
-                                                   value="<fmt:formatDate value="${reserveMember.validityend}" pattern="yyyy-MM-dd"/>"
+                                                   value="<fmt:formatDate value="${reserveMember.tutorPeriodValidityEnd}" pattern="yyyy-MM-dd"/>"
                                                    onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                                         </td>
 

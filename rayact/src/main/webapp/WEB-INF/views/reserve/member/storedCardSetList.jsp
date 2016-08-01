@@ -50,9 +50,7 @@
                             <tr>
                                 <th>名称</th>
                                 <th>项目</th>
-                                <th>起止金额</th>
-                                <th>赠送金额</th>
-                                <th>折扣比率</th>
+                                <th>折扣</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
@@ -67,11 +65,6 @@
 
                                     <td>${reserveStoredcardMemberSet.reserveProject.name}</td>
 
-                                    <td>${reserveStoredcardMemberSet.startPrice}
-                                        ~ ${reserveStoredcardMemberSet.endPrice} 元
-                                    </td>
-
-                                    <td>${reserveStoredcardMemberSet.givePrice} 元</td>
 
                                     <td>${reserveStoredcardMemberSet.discountRate}%</td>
 
