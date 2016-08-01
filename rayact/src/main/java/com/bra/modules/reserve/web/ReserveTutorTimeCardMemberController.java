@@ -125,7 +125,7 @@ public class ReserveTutorTimeCardMemberController extends BaseController {
             reserveMember.setResidue(0);
         }
         if(reserveMember.getId().isEmpty()){
-            reserveMember.setValiditystart(new Date());
+            reserveMember.setValidityStart(new Date());
         }
         if (!beanValidator(model, reserveMember)){
             return form(reserveMember, model);

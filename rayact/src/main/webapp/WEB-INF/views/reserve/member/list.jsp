@@ -42,7 +42,7 @@
                                     </td>
 
                                     <td>卡号：</td>
-                                    <td><form:input path="cartno" cssStyle="width:100px;" htmlEscape="false" class="form-control"/>
+                                    <td><form:input path="cardno" cssStyle="width:100px;" htmlEscape="false" class="form-control"/>
                                     </td>
                                     <td>欠费：</td>
                                     <td>
@@ -91,7 +91,7 @@
                                             ${reserveMember.name}
                                     </a></td>
                                     <td>
-                                            ${reserveMember.cartno}
+                                            ${reserveMember.cardno}
                                     </td>
                                     <td>
                                             ${fns:hidePhone(reserveMember.mobile)}

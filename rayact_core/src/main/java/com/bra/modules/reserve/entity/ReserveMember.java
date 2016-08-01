@@ -4,7 +4,6 @@
 package com.bra.modules.reserve.entity;
 
 import com.bra.common.persistence.SaasEntity;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
@@ -30,12 +29,20 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	private Double remainder ; //储值卡余额
 	private Integer residue;//次卡剩余次数
 	private ReserveVenue reserveVenue;//所属场馆
-	private String cartno;		// 卡号
-	private String cartType;		// 卡号类型(会员类型1:储值卡,2:次卡)
+	private String cardno;		// 卡号
 	private String isOwning; //是否欠款 0：否 1：是
-	private Date validitystart;		// 卡号开始日期
-	private Date validityend;		// 卡号结束日期
+	private Date validityStart;		// 卡号开始日期
+	private Date validityEnd;		// 卡号结束日期
 	private ReserveStoredcardMemberSet storedcardSet;
+
+	public String getCardno() {
+		return cardno;
+	}
+
+	public void setCardno(String cardno) {
+		this.cardno = cardno;
+	}
+
 	private ReserveTimecardMemberSet timecardSet;
 
 	public String getIsOwning() {
@@ -161,41 +168,21 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	
-	@Length(min=0, max=20, message="卡号长度必须介于 0 和 20 之间")
-	public String getCartno() {
-		return cartno;
+
+	public Date getValidityStart() {
+		return validityStart;
 	}
 
-	public void setCartno(String cartno) {
-		this.cartno = cartno;
-	}
-	
-	@Length(min=0, max=1, message="卡号类型长度必须介于 0 和 1 之间")
-	public String getCartType() {
-		return cartType;
+	public void setValidityStart(Date validityStart) {
+		this.validityStart = validityStart;
 	}
 
-	public void setCartType(String cartType) {
-		this.cartType = cartType;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getValiditystart() {
-		return validitystart;
+	public Date getValidityEnd() {
+		return validityEnd;
 	}
 
-	public void setValiditystart(Date validitystart) {
-		this.validitystart = validitystart;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getValidityend() {
-		return validityend;
-	}
-
-	public void setValidityend(Date validityend) {
-		this.validityend = validityend;
+	public void setValidityEnd(Date validityEnd) {
+		this.validityEnd = validityEnd;
 	}
 
 	public Double getRemainder() {

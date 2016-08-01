@@ -74,7 +74,7 @@
                                                 ${reserveMember.name}
                                         </a></td>
                                         <td>
-                                                ${reserveMember.cartno}
+                                                ${reserveMember.cardno}
                                         </td>
                                         <td>
                                                 ${fns:hidePhone(reserveMember.mobile)}
@@ -93,11 +93,11 @@
                                         </td>
 
                                         <td>
-                                            <fmt:formatDate value="${reserveMember.validitystart}" type="date"/>
+                                            <fmt:formatDate value="${reserveMember.validityStart}" type="date"/>
                                         </td>
 
                                         <td>
-                                            <fmt:formatDate value="${reserveMember.validityend}" type="date"/>
+                                            <fmt:formatDate value="${reserveMember.validityEnd}" type="date"/>
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-xs"

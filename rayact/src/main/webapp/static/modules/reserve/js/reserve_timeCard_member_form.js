@@ -9,7 +9,7 @@ function checkForm() {
     var sfz = $("#sfz").val().trim();
     var name=$("#name").val().trim();
     var venue=$("#reserveVenue_id").val();
-    var validityEnd=$("#validityend").val().trim();
+    var validityEnd=$("#validityEnd").val().trim();
     var timeCardSetId=$("#timeCardSetId").val().trim();
 
     if(cardNo==''|| cardNo==null || cardNo==undefined){

@@ -34,7 +34,7 @@
                                         </td>
 
                                         <td>卡号：</td>
-                                        <td><form:input path="cartno" htmlEscape="false" maxlength="20"
+                                        <td><form:input path="cardno" htmlEscape="false" maxlength="20"
                                                         class="form-control"/>
                                         </td>
                                         <td><input id="btnSubmit" class="btn btn-primary" type="submit"

@@ -106,7 +106,7 @@ public class ReserveCardStatementsController extends BaseController {
 					o[0] = "";
 				}
 				o[1] = report.getReserveMember().getName();
-				o[2] = report.getReserveMember().getCartno();
+				o[2] = report.getReserveMember().getCardno();
 				o[3] = String.valueOf(report.getTransactionVolume());
 				o[4] = String.valueOf(report.getReserveMember().getMobile());
 				o[5] = String.valueOf(getPayType(report.getPayType()));
@@ -128,7 +128,7 @@ public class ReserveCardStatementsController extends BaseController {
 				String[] o = new String[7];
 				o[0] = report.getVenue().getName();
 				o[1] = report.getReserveMember().getName();
-				o[2] = report.getReserveMember().getCartno();
+				o[2] = report.getReserveMember().getCardno();
 				o[3] = String.valueOf(report.getTransactionVolume());
 				o[4] = String.valueOf(report.getReserveMember().getMobile());
 				o[5] = String.valueOf(report.getCreateBy().getName());
@@ -148,7 +148,7 @@ public class ReserveCardStatementsController extends BaseController {
 				String[] o = new String[9];
 				o[0] = report.getVenue().getName();
 				o[1] = report.getReserveMember().getName();
-				o[2] = report.getReserveMember().getCartno();
+				o[2] = report.getReserveMember().getCardno();
 				o[3] = String.valueOf(report.getTransactionVolume()/0.8);
 				o[4] = String.valueOf(report.getTransactionVolume());
 				o[5] = String.valueOf(report.getTransactionVolume()/4);

@@ -67,7 +67,6 @@ public class ReserveCommoditySellDetailController extends BaseController {
 	@Token(save = true)
 	public  String settlement(ReserveCommoditySellDetailList sellDetailList, Model model) {
 		ReserveMember rm=new ReserveMember();
-		rm.setCartType("1");
 		List<ReserveMember> reserveMemberList=reserveMemberService.findList(rm);
 		model.addAttribute("reserveMemberList",reserveMemberList);
 		model.addAttribute("sellDetailList",sellDetailList.getReserveCommoditySellDetailList());
