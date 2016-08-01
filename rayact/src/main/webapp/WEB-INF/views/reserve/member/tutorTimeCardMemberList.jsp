@@ -4,20 +4,20 @@
 <html>
 <head>
     <meta name="decorator" content="main"/>
-    <title>预储课时管理</title>
+    <title>预储（教练）课时列表</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-    <jsp:param name="action" value="timeCardMember"></jsp:param>
+    <jsp:param name="action" value="tutorTimeCardMember"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
     <div class="row">
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>预储（无教练）课时列表</h3>
+                    <h3>预储（教练）课时列表</h3>
                 </div>
-                <form:form id="searchForm" modelAttribute="reserveMember" action="${ctx}/reserve/timeCardMember/list/"
+                <form:form id="searchForm" modelAttribute="reserveMember" action="${ctx}/reserve/tutorTimeCardMember/list/"
                            method="post">
                     <div class="breadcrumb form-search">
                         <div class="row">
@@ -60,7 +60,7 @@
                                     <th>性别</th>
                                     <th>健身房</th>
                                     <th>课时标准</th>
-                                    <th>剩余（无教练）课时</th>
+                                    <th>剩余（教练）课时</th>
                                     <th>开始时间</th>
                                     <th>到期时间</th>
                                     <th>操作</th>
@@ -70,7 +70,7 @@
                                 <tbody>
                                 <c:forEach items="${page.list}" var="reserveMember">
                                     <tr>
-                                        <td><a href="${ctx}/reserve/timeCardMember/form?id=${reserveMember.id}">
+                                        <td><a href="${ctx}/reserve/tutorTimeCardMember/form?id=${reserveMember.id}">
                                                 ${reserveMember.name}
                                         </a></td>
                                         <td>
@@ -101,10 +101,10 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-xs"
-                                               href="${ctx}/reserve/timeCardMember/form?id=${reserveMember.id}"><i
+                                               href="${ctx}/reserve/tutorTimeCardMember/form?id=${reserveMember.id}"><i
                                                     class="fa fa-pencil"></i>修改</a>
                                             <a class="btn btn-danger btn-xs"
-                                               href="${ctx}/reserve/timeCardMember/delete?id=${reserveMember.id}"
+                                               href="${ctx}/reserve/tutorTimeCardMember/delete?id=${reserveMember.id}"
                                                onclick="return confirmb('确认要删除该会员吗？', this.href)"> <i
                                                     class="fa fa-times"></i>删除</a>
                                         </td>

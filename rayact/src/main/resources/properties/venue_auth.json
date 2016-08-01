@@ -53,8 +53,14 @@
       },
       {
         "code": "timeCardMember",
-        "name": "预储课时（无教练）列表",
+        "name": "预储（无教练）课时列表",
         "href":"/reserve/timeCardMember/list",
+        "authorityList": []
+      },
+      {
+        "code": "tutorTimeCardMember",
+        "name": "预储（教练）课时列表",
+        "href":"/reserve/tutorTimeCardMember/list",
         "authorityList": []
       },
       {
