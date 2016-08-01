@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 public class ReserveTimeCardPrepayment extends SaasEntity<ReserveTimeCardPrepayment> {
 	
 	private static final long serialVersionUID = 1L;
-	private String name;		// name
+	private String type;		// name
 	private ReserveMember reserveMember;		// 会员
 	private ReserveProject reserveProject;		// 项目
 	private Integer remainTime;		// 剩余次数
@@ -22,17 +22,16 @@ public class ReserveTimeCardPrepayment extends SaasEntity<ReserveTimeCardPrepaym
 		super();
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public ReserveTimeCardPrepayment(String id){
 		super(id);
-	}
-
-	@Length(min=0, max=30, message="name长度必须介于 0 和 30 之间")
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public ReserveMember getReserveMember() {

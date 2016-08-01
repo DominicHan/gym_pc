@@ -74,6 +74,7 @@ public class ReserveTimeCardMemberController extends BaseController {
         //预付款
         ReserveTimecardMemberSet timecardMemberSet=timecardSetService.get(reserveMember.getTimecardSet());
         ReserveTimeCardPrepayment prepayment=new ReserveTimeCardPrepayment();
+        prepayment.setType("1");
         prepayment.setRemainder(rechargeVolume);
         prepayment.setRemainTime(time);
         prepayment.setReserveMember(reserveMember);

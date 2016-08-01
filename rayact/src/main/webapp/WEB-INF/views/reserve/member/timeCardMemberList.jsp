@@ -116,7 +116,7 @@
                                                onclick="prePayment('${reserveMember.id}')"
                                                class="fa fa-pencil">预付款记录</a>
                                             <a class="btn btn-primary btn-xs"
-                                               href="${ctx}/reserve/reserveMember/statements?reserveMember.id=${reserveMember.id}">交易明细</a>
+                                               href="${ctx}/reserve/reserveMember/statements?reserveMember.id=${reserveMember.id}&type=1">交易明细</a>
 
                                         </td>
                                     </tr>

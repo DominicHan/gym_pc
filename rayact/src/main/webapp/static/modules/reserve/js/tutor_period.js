@@ -11,7 +11,7 @@ function addTime(id) {
 function prePayment(memberId) {
     jQuery.postItems({
         url: ctx + '/reserve/reserveTimeCardPrepayment/list',
-        data: {memberId: memberId},
+        data: {memberId: memberId,type:2},
         success: function (result) {
             $("#prePaymentDialogButton").click();
             $("#prePaymentDialogForm").html(result);
