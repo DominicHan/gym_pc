@@ -45,7 +45,7 @@ public class MemberCheckoutListener{
             storedCardMemberService.save(reserveMember);
         }
         //预储课时
-        if ("10".equals(venueCons.getPayType()) && reserveMember != null) {
+        if ("11".equals(venueCons.getPayType()) && reserveMember != null) {
             ReserveVenueConsItem search = new ReserveVenueConsItem();
             search.setConsData(venueCons);
             List<ReserveVenueConsItem> itemList = reserveVenueConsItemService.findList(search);
