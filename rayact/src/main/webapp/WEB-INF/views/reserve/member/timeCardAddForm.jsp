@@ -73,10 +73,13 @@
         </div>
         <div class="row">
             <label for="time" class="control-label col-lg-2">支付方式:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div class="btn-group" id="payType">
                     <label class="radio-inline">
                         <input type="radio" class="icheck" id="cash" value="2" checked="checked" name="payType"/>现金
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" class="icheck" id="storedCard" value="1" name="payType"/>预储值
                     </label>
                     <label class="radio-inline">
                         <input type="radio" class="icheck" id="card" value="3" name="payType"/>银行卡

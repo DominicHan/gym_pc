@@ -114,23 +114,6 @@
                                 </td>
                             </tr>
                         </c:forEach>
-                        <tr>
-                            <td colspan="3">
-                            </td>
-                            <td>
-                                    ${consumptionTimeSum}
-                            </td>
-                            <td>
-                                    ${fns:getPayType(statement.payType)}
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                    ${transactionVolumeSum}
-                            </td>
-                            <td colspan="5">
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
 

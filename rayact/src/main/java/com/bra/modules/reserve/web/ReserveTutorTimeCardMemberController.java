@@ -89,6 +89,11 @@ public class ReserveTutorTimeCardMemberController extends BaseController {
         int residue=reserveMember.getTutorPeriodResidue();
         residue+=time;//次数添加
         reserveMember.setTutorPeriodResidue(residue);
+        if("1".equals(payType)){
+            Double remainder=reserveMember.getRemainder();
+            remainder-=rechargeVolume;
+            reserveMember.setRemainder(remainder);
+        }
         reserveMemberService.save(reserveMember);
         //余额 剩余次数 更新 结束
         //记录次卡充值记录
