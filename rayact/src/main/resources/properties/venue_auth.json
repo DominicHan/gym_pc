@@ -98,12 +98,6 @@
         "name": "无教练课时设置",
         "href":"/reserve/reserveVenueVisitorsSet/list",
         "authorityList": []
-      },
-      {
-        "code": "reserveVenueBill",
-        "name": "场馆损益",
-        "href":"/reserve/reserveVenueBill/list",
-        "authorityList": []
       }
     ]
   },
@@ -175,35 +169,6 @@
         "code": "venueIncomeReport",
         "name": "教练收入统计",
         "href":"/reserve/reserveVenue/fieldReport",
-        "authorityList": []
-      },
-      {
-        "code": "projectIncomeReport",
-        "name": "项目收入统计",
-        "href":"/reserve/saleVenueReport/list",
-        "authorityList": []
-      }, {
-        "code": "tutorOrder",
-        "name": "教练收入统计",
-        "href":"/reserve/reserveTutorOrder/orderAll",
-        "authorityList": []
-      },
-      {
-        "code": "listOpenRate",
-        "name": "教练利用率",
-        "href":"/reserve/saleVenueReport/listOpenRate",
-        "authorityList": []
-      },
-      {
-        "code": "dataListener",
-        "name": "数据监控",
-        "href":"/reserve/reserveListener/report",
-        "authorityList": []
-      },
-      {
-        "code": "invoiceList",
-        "name": "发票管理",
-        "href":"/reserve/reserveInvoice/list",
         "authorityList": []
       }
     ]

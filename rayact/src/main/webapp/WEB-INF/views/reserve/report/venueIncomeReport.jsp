@@ -75,7 +75,7 @@
                                 <th>场馆</th>
                                 <th>商品收入</th>
                                 <th>场地收入</th>
-                                <th>违约金收入</th>
+                               <%-- <th>违约金收入</th>--%>
                                 <%--<th>储值卡消费</th>--%>
                                 <%--<th>次卡消费</th>--%>
                                 <th>合计</th>
@@ -96,9 +96,9 @@
                                             ${allReport.field_in}
                                     </td>
 
-                                    <td class="break_in">
+                               <%--     <td class="break_in">
                                             ${allReport.break_in}
-                                    </td>
+                                    </td>--%>
 
                                     <%--<td class="store_in">--%>
                                             <%--${allReport.store_in}--%>
@@ -113,7 +113,7 @@
                                     <%--</td>--%>
 
                                     <td class="all">
-                                            ${allReport.commodity_in + allReport.field_in + allReport.break_in}
+                                            ${allReport.commodity_in + allReport.field_in}
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -129,9 +129,9 @@
                                         ${allReport.field_in}
                                     </td>
 
-                                    <td class="break_in_all">
+                                 <%--   <td class="break_in_all">
                                         ${allReport.break_in}
-                                    </td>
+                                    </td>--%>
 
                                     <%--<td class="store_in_all">--%>
                                         <%--${allReport.store_in}--%>

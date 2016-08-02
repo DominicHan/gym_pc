@@ -20,11 +20,11 @@ public class StatementsUtils {
         } else if ("6".equals(transactionType)) {
             return "销户违约金";
         }else if ("7".equals(transactionType)) {
-            return "预储（无教练）课时";
+            return "（无教练）课时预储";
         }else if ("8".equals(transactionType)) {
-            return "教练费用";
+            return "（教练）课时消费";
         }else if ("9".equals(transactionType)) {
-            return "无教练课时费";
+            return "（无教练）课时消费";
         }
         return "";
     }
