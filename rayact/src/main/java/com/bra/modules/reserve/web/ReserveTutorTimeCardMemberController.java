@@ -100,7 +100,8 @@ public class ReserveTutorTimeCardMemberController extends BaseController {
         ReserveCardStatements statement=new ReserveCardStatements();
         statement.setReserveMember(reserveMember);
         statement.setTransactionVolume(rechargeVolume);
-        statement.setTransactionType("7");
+        statement.setTransactionNum(time);
+        statement.setTransactionType("8");
         statement.setPayType(payType);
         statement.setVenue(reserveMember.getReserveVenue());
         statement.setRemarks(remarks);

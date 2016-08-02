@@ -68,6 +68,16 @@ public class ReserveTimeCardMemberController extends BaseController {
         return "reserve/member/timeCardAddForm";
     }
     //次卡充值保存
+    /**
+     *
+     * @param id
+     * @param rechargeVolume
+     * @param time 次数
+     * @param payType
+     * @param remarks
+     * @param redirectAttributes
+     * @return
+     */
     @RequestMapping(value = "addTime")
     public String addTime(String id, Double rechargeVolume,int time,String payType,String remarks,RedirectAttributes redirectAttributes){
         ReserveMember reserveMember = reserveMemberService.get(id);
@@ -102,6 +112,7 @@ public class ReserveTimeCardMemberController extends BaseController {
         //记录次卡充值记录
         ReserveCardStatements statement=new ReserveCardStatements();
         statement.setReserveMember(reserveMember);
+        statement.setTransactionNum(time);
         statement.setTransactionVolume(rechargeVolume);
         statement.setTransactionType("7");
         statement.setPayType(payType);
