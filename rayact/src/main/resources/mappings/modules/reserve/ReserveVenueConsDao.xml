@@ -178,6 +178,7 @@
         select
         a.id,
         a.venue_id as "venue.id",v.name as "venue.name",
+        i.field_id as "field.id",f.name as "field.name",
         a.user_name as "member.name",a.cons_mobile as "member.mobile",
         a.cons_date as consDate,a.update_date "updateDate",
         a.order_price as orderPrice,
@@ -196,6 +197,7 @@
         from reserve_venue_cons as a
         INNER JOIN  reserve_venue_cons_item as i on (a.id = i.cons_data_id and i.del_flag='0')
         INNER JOIN  reserve_venue as v ON (a.venue_id = v.id and v.del_flag='0')
+        INNER JOIN  reserve_field as f on (f.id = i.field_id)
         LEFT JOIN  reserve_user as crea on (a.create_by = crea.id)
         LEFT JOIN  reserve_user as upda on (a.update_by = upda.id)
         INNER JOIN  reserve_project as p ON (a.project_id = p.id and v.del_flag='0')

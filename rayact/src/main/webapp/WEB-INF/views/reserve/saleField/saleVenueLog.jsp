@@ -42,8 +42,12 @@
                             <label class="control-label" for="payType">支付方式：</label>
                             <select id="payType" name="payType" style="width:50%">
                                 <option value="">全部</option>
-                                <option value="1" <j:if test="${1 eq query.payType}">selected="selected"</j:if> >储值卡</option>
-                                <option value="11" <j:if test="${11 eq query.payType}">selected="selected"</j:if> >预储教练课时</option>
+                                <option value="1"
+                                        <j:if test="${1 eq query.payType}">selected="selected"</j:if> >储值卡
+                                </option>
+                                <option value="11"
+                                        <j:if test="${11 eq query.payType}">selected="selected"</j:if> >预储教练课时
+                                </option>
                             </select>
                         </div>
 
@@ -92,6 +96,7 @@
                                     <%--  <th>订单编号</th>--%>
                                     <th>会员</th>
                                     <th>健身房</th>
+                                    <th>教练</th>
                                     <th>项目</th>
                                     <th>时间区间</th>
                                     <th>教练费</th>
@@ -119,6 +124,7 @@
                                             <%-- <td>${log.id}</td>--%>
                                         <td>${log.member.name}</td>
                                         <td>${log.venue.name}</td>
+                                        <td>${log.field.name}</td>
                                         <td>${log.project.name}</td>
                                         <td>${log.startTime}—${log.endTime}</td>
                                         <td>${log.orderPrice}</td>
@@ -152,12 +158,12 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td>${orderPriceSum}</td>
                                     <td>${shouldPriceSum}</td>
                                     <td>${discountPriceSum}</td>
                                     <td>${consPriceSum}</td>
-                                    <td></td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

@@ -1,6 +1,7 @@
 package com.bra.modules.reserve.web.form;
 
 import com.bra.common.persistence.SaasEntity;
+import com.bra.modules.reserve.entity.ReserveField;
 import com.bra.modules.reserve.entity.ReserveMember;
 import com.bra.modules.reserve.entity.ReserveProject;
 import com.bra.modules.reserve.entity.ReserveVenue;
@@ -37,6 +38,16 @@ public class SaleVenueLog extends SaasEntity<SaleVenueLog> {
     private Date consDate;
 
     private ReserveVenue venue;
+
+    private ReserveField field;
+
+    public ReserveField getField() {
+        return field;
+    }
+
+    public void setField(ReserveField field) {
+        this.field = field;
+    }
 
     private ReserveProject project;
 
