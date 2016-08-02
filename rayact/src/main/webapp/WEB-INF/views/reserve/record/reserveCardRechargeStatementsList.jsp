@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>储值卡充值记录</h3>
+                    <h3>预储值记录</h3>
                 </div>
 
                 <form:form id="searchForm" modelAttribute="reserveCardStatements"
@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group col-lg-3 col-sm-3">
-                                    <label class="control-label" for="venue">场馆：</label>
+                                    <label class="control-label" for="venue">健身房：</label>
                                     <sys:select cssClass="input-large" name="venue.id" id="venue"
                                                 cssStyle="width:50%"
                                                 value="${query.venue.id}"
@@ -67,7 +67,7 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>场馆</th>
+                                    <th>健身房</th>
                                     <th>姓名</th>
                                     <th>卡号</th>
                                     <th>金额</th>
@@ -89,7 +89,7 @@
                                                 ${reserveCardStatements.reserveMember.name}
                                         </td>
                                         <td>
-                                                ${reserveCardStatements.reserveMember.cartno}
+                                                ${reserveCardStatements.reserveMember.cardno}
                                         </td>
                                         <td>
                                                 ${reserveCardStatements.transactionVolume}

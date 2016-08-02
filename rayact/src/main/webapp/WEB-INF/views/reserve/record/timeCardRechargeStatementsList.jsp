@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="decorator" content="main"/>
-    <title>次卡充值记录</title>
+    <title>预储课时记录</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>次卡充值记录</h3>
+                    <h3>预储课时记录</h3>
                 </div>
 
                 <form:form id="searchForm" modelAttribute="reserveCardStatements"
@@ -28,7 +28,7 @@
                                 <tbody class="no-border-y">
                                 <tr>
                                     <td>
-                                        <label class="control-label" for="venue">场馆：</label>
+                                        <label class="control-label" for="venue">健身房：</label>
                                     </td>
                                     <td>
                                         <sys:select cssClass="input-large" name="venue.id" id="venue"
@@ -75,7 +75,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>场馆</th>
+                                <th>健身房</th>
                                 <th>姓名</th>
                                 <th>金额</th>
                                 <th>电话</th>

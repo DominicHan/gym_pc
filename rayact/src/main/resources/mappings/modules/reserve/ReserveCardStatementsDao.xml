@@ -23,7 +23,7 @@
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
-		m.cartno AS "reserveMember.cartno",
+		m.card_no AS "reserveMember.cardno",
 		m.name AS "reserveMember.name",
 	  	m.mobile AS "reserveMember.mobile"
 	</sql>
@@ -193,7 +193,7 @@
 					and a.fk_reserve_member_id=#{reserveMember.id}
 				</if>
 				<if test="reserveMember.name !=null and reserveMember.name !=''">
-					and ( (m.name like concat('%',#{reserveMember.name},'%')) or (m.cartno like
+					and ( (m.name like concat('%',#{reserveMember.name},'%')) or (m.card_no like
 					concat('%',#{reserveMember.name},'%')) or (m.mobile like concat('%',#{reserveMember.name},'%')) )
 				</if>
 			</if>
