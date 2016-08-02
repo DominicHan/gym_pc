@@ -8,28 +8,16 @@
             <thead>
             <th>预定人</th>
             <th>手机号</th>
-            <th>场地</th>
+            <th>教练</th>
             <th>开始时间</th>
             <th>结束时间</th>
-            <th>场地类型</th>
-            <th>场地费用</th>
-            <j:if test="${!empty tutorOrder}">
-                <th>
-                    教练
-                </th>
-                <th>
-                    教练费用
-                </th>
-            </j:if>
+            <th>教练费用</th>
             </thead>
             <tbody>
             <c:forEach items="${itemList}" var="item" varStatus="status">
                 <tr>
                     <td>
-                            ${order.userName}(<j:ifelse
-                            test="${member==null}"><j:then>散客</j:then><j:else>会员</j:else></j:ifelse>)
-
-
+                            ${order.userName}
                     </td>
                     <td>
                             ${order.consMobile}
@@ -43,26 +31,11 @@
                     <td>
                             ${item.endTime}
                     </td>
-                    <td>
-                        <j:ifelse test="${'1' eq item.halfCourt}">
-                            <j:then>半场</j:then>
-                            <j:else>全场</j:else>
-                        </j:ifelse>
-                        <input type="hidden" name="venueConsList[${status.index}].halfCourt"
+                    <input type="hidden" name="venueConsList[${status.index}].halfCourt"
                                value="${item.halfCourt}"/>
-                    </td>
                     <td>
                             ${item.consPrice}
                     </td>
-                    <j:if test="${!empty tutorOrder}">
-                        <td>
-                                ${tutorOrder.tutor.name}
-                        </td>
-                        <td>
-                                ${tutorOrder.totalPrice}
-                        </td>
-                    </j:if>
-
                 </tr>
             </c:forEach>
             </tbody>
@@ -176,10 +149,12 @@
         $("#reservePeriodRadio").on('ifChecked', function () {
             $("#shouldPrice").val("0");
             $("#consPrice").val("0");
+            $("#editOrderPrice").hide();
         });
         $("#memberCardRadio").on('ifChecked', function () {
             $("#shouldPrice").val(${order.shouldPrice});
             $("#consPrice").val(${order.consPrice});
+            $("#editOrderPrice").show();
         });
     })
 </script>
