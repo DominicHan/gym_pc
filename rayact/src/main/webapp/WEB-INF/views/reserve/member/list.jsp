@@ -24,7 +24,7 @@
                             <table class="no-border">
                                 <tbody class="no-border-y">
                                 <tr>
-                                    <td>场馆：</td>
+                                    <td>健身房：</td>
                                     <td> <sys:select cssClass="input-large" name="reserveVenue.id" id="venue"
                                                     cssStyle="width:100%"
                                                     value="${query.reserveVenue.id}"
@@ -67,7 +67,7 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>场馆</th>
+                                <th>健身房</th>
                                 <th>姓名</th>
                                 <th>卡号</th>
                                 <th>手机号</th>

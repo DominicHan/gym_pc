@@ -46,6 +46,9 @@ public class ReserveMemberService extends CrudService<ReserveMemberDao, ReserveM
 		if(reserveMember.getTutorPeriodResidue()==null){
 			reserveMember.setTutorPeriodResidue(0);
 		}
+		if(reserveMember.getRemainder()==null){
+			reserveMember.setRemainder(0.0);
+		}
 		super.save(reserveMember);
 	}
 	

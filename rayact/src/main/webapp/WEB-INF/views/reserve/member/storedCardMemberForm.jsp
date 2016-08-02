@@ -29,7 +29,7 @@
                                 <tr>
                                     <td>卡号:</td>
                                     <td>
-                                        <form:input id="cardNo" path="cartno" htmlEscape="false" maxlength="20" placeholder="卡号请勿包含-"
+                                        <form:input id="cardNo" path="cardno" htmlEscape="false" maxlength="20" placeholder="卡号请勿包含-"
                                                     class="form-control required"/>
                                         <span class="help-inline"><font color="red">*</font> </span>
                                     </td>
@@ -96,7 +96,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>场馆：</td>
+                                    <td>健身房：</td>
                                     <td colspan="3">
                                         <sys:select cssClass="input-xlarge" name="reserveVenue.id" id="reserveVenue_id"
                                                     items="${venueList}"
