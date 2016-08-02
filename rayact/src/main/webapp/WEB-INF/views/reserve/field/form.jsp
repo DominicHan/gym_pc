@@ -34,7 +34,7 @@
                             <div class="tab-pane active" id="home">
                                 <div class="form-horizontal group-border-dashed">
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-3 control-label">场地名称：</label>
+                                        <label for="name" class="col-sm-3 control-label">姓名：</label>
 
                                         <div class="col-sm-6">
                                             <form:input path="name" htmlEscape="false" maxlength="30"
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>--%>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">所属场馆：</label>
+                                        <label class="col-sm-3 control-label">健身房：</label>
                                         <div class="col-sm-6">
                                             <sys:select cssClass="input-medium" name="reserveVenue.id"
                                                         cssStyle="width:100%"

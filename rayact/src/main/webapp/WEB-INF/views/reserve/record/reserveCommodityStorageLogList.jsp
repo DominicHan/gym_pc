@@ -22,7 +22,7 @@
 
                     <div class="row col-lg-12 col-sm-12 breadcrumb form-search" style="margin-left:0px; margin-right:0px;">
                         <div class="form-group col-lg-3 col-sm-5">
-                            <label class="control-label" for="venue">场馆：</label>
+                            <label class="control-label" for="venue">健身房：</label>
                             <sys:select cssClass="input-large" name="reserveVenue.id" id="venue"
                                         value="${query.reserveVenue.id}"
                                         items="${venues}" itemLabel="name" itemValue="id"
@@ -72,7 +72,7 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>场馆</th>
+                                    <th>健身房</th>
                                     <th>商品</th>
                                     <th>入库箱数</th>
                                     <th>入库量</th>
