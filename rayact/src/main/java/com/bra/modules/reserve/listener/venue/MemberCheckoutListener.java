@@ -78,7 +78,7 @@ public class MemberCheckoutListener{
         for(ReserveVenueConsItem i:itemList){
             String start=i.getStartTime()+":00";
             String end=i.getEndTime()+":00";
-            num= TimeUtils.getTimeSpac(start,end,30);
+            num= TimeUtils.getTimeSpac(start,end,60);
         }
         statements.setTransactionNum(num);//预订了几个 半小时
 

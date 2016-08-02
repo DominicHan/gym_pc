@@ -6,7 +6,7 @@ package com.bra.modules.reserve.utils;
 public class StatementsUtils {
     public static String getTransactionType(String transactionType){
         if ("1".equals(transactionType)) {
-            return "储值卡充值";
+            return "预储值";
         } else if ("2".equals(transactionType)) {
             return "退费";
         } else if ("33".equals(transactionType)) {

@@ -55,11 +55,11 @@
                     <table>
                         <thead>
                         <tr>
-                            <th>流水编号</th>
+                            <th>交易编号</th>
                             <th>状态</th>
                             <j:set name="chargeSum" value="0"></j:set>
                             <th>摘要</th>
-                            <th>消费时间/半小时</th>
+                            <th>课时量</th>
                             <j:set name="consumptionTimeSum" value="0"></j:set>
                             <th>支付方式</th>
                             <th>消费日期</th>
@@ -95,11 +95,9 @@
                                                     pattern="yyyy-MM-dd"/>
                                 </td>
                                 <td>
-                                    <j:if test="${statement.transactionType!=1 and statement.transactionType!=7}">
                                         ${statement.transactionVolume}
                                         <j:set name="transactionVolumeSum"
                                                value="${statement.transactionVolume+transactionVolumeSum}"></j:set>
-                                    </j:if>
                                 </td>
 
                                 <td>
