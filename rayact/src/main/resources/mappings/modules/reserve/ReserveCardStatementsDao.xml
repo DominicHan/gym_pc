@@ -12,7 +12,6 @@
 		commodity.name as "reserveCommodity.name",
 		a.transaction_num as "transactionNum",
 		a.transaction_volume AS "transactionVolume",
-		a.member_remainder AS "reserveMember.remainder",
 		a.fk_order_id AS "orderId",
 		a.pay_type AS "payType",
 		a.create_by AS "createBy.id",

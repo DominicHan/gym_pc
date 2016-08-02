@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -294,41 +293,11 @@ public class ReserveCardStatementsController extends BaseController {
 	@RequestMapping(value = "cancellationForm")
 	@Token(save = true)
 	public String refundForm(ReserveMember reserveMember, Model model) {
-		reserveMember=reserveMemberService.get(reserveMember.getId());
+		reserveMember = reserveMemberService.get(reserveMember.getId());
 		model.addAttribute("reserveMember", reserveMember);
 		return "reserve/member/storedCardMemberCancellationForm";
 	}
-	/*销户*/
-	@RequestMapping(value = "cancellation")
-	@ResponseBody
-	@Token(remove = true)
-	public String refund(Double realRefundVolume,String id) {
-		ReserveMember reserveMember=reserveMemberService.get(id);
-		Double remainder= reserveMember.getRemainder();
-		reserveMember.setRemainder(0.0);
-		reserveMemberService.save(reserveMember);//余额清空
-		reserveMemberService.delete(reserveMember);//销户
-		Double difference=remainder-realRefundVolume;//差额
-
-		DecimalFormat df=new DecimalFormat("0.00");
-		difference=new Double(df.format(difference).toString());
-
-		ReserveCardStatements reserveCardStatements=new ReserveCardStatements();
-		reserveCardStatements.setTransactionType("5");//销户退还用户的金额记录
-		reserveCardStatements.setReserveMember(reserveMember);
-		reserveCardStatements.setVenue(reserveMember.getReserveVenue());
-		reserveCardStatements.setTransactionVolume(realRefundVolume);// 退还用户的金额
-		reserveCardStatementsService.save(reserveCardStatements);
-
-		ReserveCardStatements statements=new ReserveCardStatements();
-		statements.setTransactionType("6");//销户违约金
-		statements.setReserveMember(reserveMember);
-		reserveCardStatements.setVenue(reserveMember.getReserveVenue());
-		statements.setTransactionVolume(difference);//销户退还用户余下的差额
-		reserveCardStatementsService.save(statements);
-		return "success";
-	}
-	/*大客户退费表单*/
+	/*退费表单*/
 	@RequestMapping(value = "refundForVIPForm")
 	@Token(save = true)
 	public String refundBtnForVIP(ReserveMember reserveMember, Model model) {
@@ -336,7 +305,7 @@ public class ReserveCardStatementsController extends BaseController {
 		model.addAttribute("reserveMember", reserveMember);
 		return "reserve/member/storedCardMemberRefundForVIPForm";
 	}
-	/*大客户退费*/
+	/*退费*/
 	@RequestMapping(value = "refundForVIP")
 	@ResponseBody
 	@Token(remove = true)
@@ -351,7 +320,7 @@ public class ReserveCardStatementsController extends BaseController {
 		reserveMemberService.save(reserveMember);
 
 		ReserveCardStatements reserveCardStatements=new ReserveCardStatements();
-		reserveCardStatements.setTransactionType("2");//大客户退费
+		reserveCardStatements.setTransactionType("2");//退费
 		reserveCardStatements.setReserveMember(reserveMember);
 		reserveCardStatements.setVenue(reserveMember.getReserveVenue());
 		reserveCardStatements.setTransactionVolume(refundVolume);

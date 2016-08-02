@@ -57,16 +57,14 @@
                         <tr>
                             <th>流水编号</th>
                             <th>状态</th>
-                            <th>充值金额</th>
                             <j:set name="chargeSum" value="0"></j:set>
-                            <th>项目/摘要</th>
+                            <th>摘要</th>
                             <th>消费时间/半小时</th>
                             <j:set name="consumptionTimeSum" value="0"></j:set>
-                            <th>付款方式</th>
+                            <th>支付方式</th>
                             <th>消费日期</th>
-                            <th>消费金额</th>
+                            <th>交易金额</th>
                             <j:set name="transactionVolumeSum" value="0"></j:set>
-                            <th>会员余额</th>
                             <th>操作员</th>
                             <th>备注</th>
                             <th>操作时间</th>
@@ -82,33 +80,26 @@
                                         ${fns:getDictLabel(statement.delFlag,'del_flag',null)}
                                 </td>
                                 <td>
-                                    <j:if test="${statement.transactionType==1 or statement.transactionType==7}">
-                                        ${statement.transactionVolume}
-                                        <j:set name="chargeSum" value="${statement.transactionVolume+chargeSum}"></j:set>
-                                    </j:if>
-                                </td>
-                                <td>
                                         ${fns:getTransactionType(statement.transactionType)}
                                 </td>
                                 <td>
                                         ${statement.transactionNum}
-                                    <j:set name="consumptionTimeSum" value="${consumptionTimeSum+statement.transactionNum}"></j:set>
+                                    <j:set name="consumptionTimeSum"
+                                           value="${consumptionTimeSum+statement.transactionNum}"></j:set>
                                 </td>
                                 <td>
                                         ${fns:getPayType(statement.payType)}
                                 </td>
                                 <td>
-                                        <fmt:formatDate value="${statement.createDate}"
-                                                        pattern="yyyy-MM-dd"/>
+                                    <fmt:formatDate value="${statement.createDate}"
+                                                    pattern="yyyy-MM-dd"/>
                                 </td>
                                 <td>
                                     <j:if test="${statement.transactionType!=1 and statement.transactionType!=7}">
                                         ${statement.transactionVolume}
-                                        <j:set name="transactionVolumeSum" value="${statement.transactionVolume+transactionVolumeSum}"></j:set>
+                                        <j:set name="transactionVolumeSum"
+                                               value="${statement.transactionVolume+transactionVolumeSum}"></j:set>
                                     </j:if>
-                                </td>
-                                <td>
-                                        ${statement.reserveMember.remainder}
                                 </td>
 
                                 <td>
@@ -126,12 +117,7 @@
                             </tr>
                         </c:forEach>
                         <tr>
-                            <td colspan="2">
-                            </td>
-                            <td>
-                                    ${chargeSum}
-                            </td>
-                            <td>
+                            <td colspan="3">
                             </td>
                             <td>
                                     ${consumptionTimeSum}
@@ -144,16 +130,7 @@
                             <td>
                                     ${transactionVolumeSum}
                             </td>
-                            <td>
-
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
+                            <td colspan="5">
                             </td>
                         </tr>
                         </tbody>
