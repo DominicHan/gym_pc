@@ -238,7 +238,7 @@
       },
       {
         "code": "saleVenueLog",
-        "name": "教练授课记录",
+        "name": "会员健身记录",
         "href":"/reserve/saleVenue/list",
         "authorityList": []
       },

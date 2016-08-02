@@ -92,84 +92,11 @@
                        <j:if test="${'2' eq order.consType}">checked="checked"</j:if> name="payType"/>储值卡
             </label>
             <label class="radio-inline">
-                <input type="radio" class="icheck" value="11" name="payType"/>预储课时
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="2"
-                       <j:if test="${'1' eq order.consType}">checked="checked"</j:if> name="payType"/>现金
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="3" name="payType"/>银行卡
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="4" name="payType"/>微信
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="9" name="payType"/>微信（个人）
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="5" name="payType"/>支付宝
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="10" name="payType"/>支付宝（个人）
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="6" name="payType"/>优惠券
-            </label>
-            <label class="radio-inline">
-                <input type="radio" class="icheck" value="8" id="multiplePayRadio" name="payType"/>多方式付款
+                <input type="radio" class="icheck" id="reservePeriodRadio" value="11" name="payType"/>预储课时
             </label>
         </div>
     </div>
 
-    <div class="row" id="multiplePay" style="display: none;">
-        <hr/>
-        <div class="row">
-            <div class="col-lg-1">
-            </div>
-            <label for="memberCardInput" class="col-lg-1">会员卡:</label>
-            <div class="col-lg-1">
-                <input id="memberCardInput" value="0" type="text" class="form-control"/>
-            </div>
-            <label for="cashInput" class="col-lg-1">现金:</label>
-            <div class="col-lg-1">
-                <input id="cashInput" value="0" type="text" class="form-control"/>
-            </div>
-
-            <label for="bankCardInput" class="col-lg-1">银行卡:</label>
-            <div class="col-lg-1">
-                <input id="bankCardInput" value="0" type="text" class="form-control"/>
-            </div>
-            <label for="weiXinInput" class="col-lg-1">微信:</label>
-            <div class="col-lg-1">
-                <input id="weiXinInput" value="0" type="text" class="form-control"/>
-            </div>
-            <label for="weiXinPersonalInput" class="col-lg-1">微信(个人):</label>
-            <div class="col-lg-1">
-                <input id="weiXinPersonalInput" value="0" type="text" class="form-control"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-1">
-            </div>
-            <label for="aliPayInput" class="col-lg-1">支付宝:</label>
-            <div class="col-lg-1">
-                <input id="aliPayInput" type="text" class="form-control" value="0"/>
-            </div>
-            <label for="aliPayPersonalInput" class="col-lg-1">支付宝（个人）:</label>
-            <div class="col-lg-1">
-                <input id="aliPayPersonalInput" type="text" class="form-control" value="0"/>
-            </div>
-            <label for="couponInput" class="col-lg-1">优惠券:</label>
-            <div class="col-lg-1">
-                <input id="couponInput" type="text" class="form-control" value="0"/>
-            </div>
-            <%-- <label for="owningInput" class="col-lg-1">打白条:</label>
-             <div class="col-lg-1">
-                 <input id="owningInput" type="text" class="form-control" value="0"/>
-             </div>--%>
-        </div>
-    </div>
     <j:if test="${!empty giftList}">
         <hr/>
         <div class="row">
@@ -210,9 +137,14 @@
             <input type="text" readonly="readonly" id="consPrice" value="${order.consPrice}"
                    class="form-control required number" name="consPrice"/>
         </div>
-        <label for="shouldPrice" class="col-lg-2">会员当前余额:</label>
+        <label for="remainder" class="col-lg-1">会员余额:</label>
         <div class="col-lg-1 col-sm-2">
-            <input readonly="readonly" value="${member.remainder}" type="text"
+            <input readonly="readonly" value="${member.remainder}" type="text" id="remainder"
+                   class="form-control"/>
+        </div>
+        <label for="tutorPeriodResidue" class="col-lg-2">会员剩余（教练）课时:</label>
+        <div class="col-lg-1 col-sm-2">
+            <input readonly="readonly" value="${member.tutorPeriodResidue}" type="text" id="tutorPeriodResidue"
                    class="form-control"/>
         </div>
     </div>
@@ -241,11 +173,13 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#multiplePayRadio").on('ifChecked', function () {
-            $("#multiplePay").show();
+        $("#reservePeriodRadio").on('ifChecked', function () {
+            $("#shouldPrice").val("0");
+            $("#consPrice").val("0");
         });
-        $("#multiplePayRadio").on('ifUnchecked', function () {
-            $("#multiplePay").hide();
+        $("#memberCardRadio").on('ifChecked', function () {
+            $("#shouldPrice").val(${order.shouldPrice});
+            $("#consPrice").val(${order.consPrice});
         });
     })
 </script>

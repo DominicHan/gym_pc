@@ -16,7 +16,7 @@ public class VenueOrderUtils {
 
     public static String getPayType(String payType){
         if ("1".equals(payType)) {
-            return "会员卡";
+            return "储值卡";
         } else if ("2".equals(payType)) {//现金
             return "现金";
         } else if ("3".equals(payType)) {
