@@ -18,22 +18,9 @@
                                 <input type="radio" id="isMember" class="icheck" value="2" checked="checked"
                                        name="orderType"/>会员
                             </div>
-                            <div class="radio-inline">
+                           <%-- <div class="radio-inline">
                                 <input type="radio" id="nMember" class="icheck" value="1" name="orderType"/>散客
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="fieldId" class="col-lg-2 control-label">场地：</label>
-                            <div class="col-lg-10">
-                                <select style="width: 100%" id="fieldId" class="select2" name="reserveField.id">
-                                    <option value="">--请输入选择--</option>
-                                    <c:forEach items="${fieldList}" var="field">
-                                        <option value="${field.id}">${field.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
                     <div class="row">
@@ -158,7 +145,11 @@
                     <label class="radio-inline">
                         <input type="radio" class="icheck"
                                checked="checked" value="1"
-                               name="payType"/>储值卡
+                               name="payType"/>预储值
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" class="icheck" value="12"
+                               name="payType"/>预储（无教练）课时
                     </label>
                     <label class="radio-inline">
                         <input type="radio" class="icheck" value="2"

@@ -47,6 +47,7 @@ $(document).ready(function () {
         if (startTime == endTime) {
             formLoding('开始时间应小于结束时间');
             checkResult=false;
+            return false;
         }
 
         $.postItems({
@@ -64,15 +65,18 @@ $(document).ready(function () {
         if (userName == '') {
             formLoding('请输入预定人姓名');
             checkResult=false;
+            return false;
         }
         if (checkMobile(consMobile)==false) {
              formLoding('请输入正确的手机');
             checkResult=false;
+            return false;
          }
         if (frequency == '2' || frequency == '3') {
             if (endDate == '') {
                 formLoding('结束时间不能为空');
                 checkResult=false;
+                return false;
             }
         }
         if(checkResult==true){

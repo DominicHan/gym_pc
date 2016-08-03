@@ -1,3 +1,6 @@
+$.ajaxSetup({
+    async : false
+});
 $("#isMember").on('ifChecked', function () {
     $("#memberId").removeAttr("disabled");
     $("#consPrice").attr("readonly", "readonly");
@@ -55,55 +58,57 @@ $("#endTime").on('change', function () {
 });
 
 $("#saveBtn").on('click', function () {
-    var fieldId = $("#fieldId").val();
     var memberType = $("#memberType input:radio:checked").val();
     var startTime = $("#startTime").val();
     var endTime = $("#endTime").val();
-    if (!fieldId) {
-        formLoding('请选择场地');
-        return false;
-    }
+    var checkResult=true;
     if (startTime == endTime) {
         formLoding('开始时间应小于结束时间');
+        checkResult=false;
         return false;
     }
-    $.postItems({
-        url: ctx + '/reserve/field/checkTime',
-        data: {startTime: startTime, endTime: endTime},
-        success: function (values) {
-            if (values == "0") {
-                formLoding('开始时间应小于结束时间');
-                return false;
-            }
-        }
-    });
     if (memberType == '2') {
         var memberId = $("#memberId").val();
         if (!memberId) {
-            errorLoding("请选择次卡会员");
-            return;
+            errorLoding("请选择会员");
+            checkResult=false;
+            return false;
         }
     }
     var collectPrice = $("#collectPrice").val();
     if (isNaN(collectPrice)) {
         errorLoding("支付金额必须为数字");
-        return;
+        checkResult=false;
+        return false;
     }
-    var formJson = $("#formBean").serializeArray();
-    var checkFlag = false;
-    jQuery.postItems({
-        url: ctx + '/reserve/reserveVenueOrder/checkSave?random=' + Math.random(),
-        data: formJson,
+    $.postItems({
+        url: ctx + '/reserve/field/checkTime',
+        data: {startTime: startTime, endTime: endTime},
         success: function (result) {
-            result = $.parseJSON(result);
-            if (result.status == true) {
-                checkFlag = true;
-            } else {
-                formLoding(result.msg);
-                return;
+            var values= eval("("+result+")");
+            if (values.rs!="1") {
+                formLoding(values.msg);
+                checkResult=false;
             }
         }
     });
+    var checkFlag = false;
+    if(checkResult){
+        var formJson = $("#formBean").serializeArray();
+        jQuery.postItems({
+            url: ctx + '/reserve/reserveVenueOrder/checkSave?random=' + Math.random(),
+            data: formJson,
+            success: function (result) {
+                result = $.parseJSON(result);
+                if (result.status == true) {
+                    checkFlag = true;
+                } else {
+                    formLoding(result.msg);
+                    return;
+                }
+            }
+        });
+    }
     if (checkFlag == true) {
         jQuery.postItems({
             url: ctx + '/reserve/reserveVenueOrder/save?random=' + Math.random(),
