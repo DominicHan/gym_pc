@@ -3,18 +3,18 @@
 <html>
 <head>
     <meta name="decorator" content="main"/>
-    <title>预储课时记录</title>
+    <title>预储（教练）课时记录</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-    <jsp:param name="action" value="timeCardRechargeStatements"></jsp:param>
+    <jsp:param name="action" value="tutorPeriodRechargeStatements"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
     <div class="row">
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>预储(无教练)课时记录</h3>
+                    <h3>预储（教练）课时记录</h3>
                 </div>
 
                 <form:form id="searchForm" modelAttribute="reserveCardStatements"

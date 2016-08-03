@@ -80,6 +80,9 @@ public class ReserveCardStatementsController extends BaseController {
 		}else if("7".equals(type)){
 			//次卡充值记录
 			rs= "reserve/record/timeCardRechargeStatementsList";
+		}else if("8".equals(type)){
+			//次卡充值记录
+			rs= "reserve/record/tutorPeriodRechargeStatementsList";
 		}
 		model.addAttribute("query", reserveCardStatements);
 		return rs;

@@ -27,7 +27,7 @@
                                     <tbody class="no-border-y">
                                     <tr>
                                         <td>
-                                            <label class="control-label" for="venue">场馆：</label>
+                                            <label class="control-label" for="venue">健身房：</label>
                                         </td>
                                         <td>
                                             <sys:select cssClass="input-large" name="venue.id" id="venue"
@@ -73,7 +73,7 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>场馆</th>
+                                    <th>健身房</th>
                                     <th>姓名</th>
                                     <th>卡号</th>
                                     <th>金额</th>
