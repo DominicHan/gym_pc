@@ -422,7 +422,6 @@ public class ReserveController extends BaseController {
                               Double aliPayPersonalInput,
                               Double couponInput,
                               String remarks) {
-
         ReserveVenueCons venueCons = reserveVenueConsService.saveSettlement(id, payType, authUserId, discountPrice, consPrice,
                 memberCardInput, cashInput, bankCardInput, weiXinInput, weiXinPersonalInput, aliPayInput, aliPayPersonalInput, couponInput,remarks);
         List<Map<String, String>> mapList = getReserveMap(venueCons.getVenueConsList());

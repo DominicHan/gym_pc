@@ -240,11 +240,10 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
             item.setConsWeek(consWeek);
             item.setHalfCourt(halfCourt);//设置半场
             item.setFrequency(frequency);//设置频率
-            Double price = null;//订单明细的价格
+            Double price;//订单明细的价格
             //会员无打折卡
             if (card == null) {
-                price = reserveFieldPriceService.getPrice(item.getReserveField(), reserveVenueCons.getConsType(),
-                        reserveVenueCons.getConsDate(), item.getStartTime(), item.getEndTime());
+                price = reserveFieldPriceService.getPrice(item.getReserveField(), reserveVenueCons.getConsType(), reserveVenueCons.getConsDate(), item.getStartTime(), item.getEndTime());
             } else {
                 // "1"代表门市价 在门市价的基础上进行打折
                 price = reserveFieldPriceService.getPrice(item.getReserveField(), "1", reserveVenueCons.getConsDate(), item.getStartTime(), item.getEndTime());
@@ -254,21 +253,12 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
                 }
             }
             filedSum+=price;
-            //教练费不打折
-            ReserveTutor tutor = reserveVenueCons.getTutor();
-            tutor = reserveTutorService.get(tutor);
-            int halfHourNum = 0;
-            if (tutor != null) {
-                double hourPrice = tutor.getPrice();
-                String startTime = item.getStartTime() + ":00";
-                String endTime = item.getEndTime() + ":00";
-                List<String> timeIntervalList = TimeUtils.getTimeSpacListValue(startTime, endTime, 30);
-                halfHourNum = timeIntervalList.size();
-                double tutorConsume = halfHourNum * hourPrice / 2;
-                price += tutorConsume;//订单明细价格增加教练费
-            }
+            String startTime = item.getStartTime() + ":00";
+            String endTime = item.getEndTime() + ":00";
+            int periodNum = TimeUtils.getTimeSpac(startTime, endTime, 60);//课时量
+            item.setPeriodNum(periodNum);
             item.setOrderPrice(filedSum);//订单明细的场地费用
-            item.setConsPrice(price);//订单明细 应收金额=场地应收+教练费
+            item.setConsPrice(price);//订单明细应收
             item.preInsert();
             reserveVenueConsItemDao.insert(item);//保存预订信息
             sum += price;

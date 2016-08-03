@@ -28,6 +28,7 @@ public class ReserveVenueConsItem extends SaasEntity<ReserveVenueConsItem> {
 
 	private String startTime;
 	private String endTime;
+	private Integer periodNum;
 
 	public ReserveVenueConsItem() {
 		super();
@@ -153,5 +154,13 @@ public class ReserveVenueConsItem extends SaasEntity<ReserveVenueConsItem> {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Integer getPeriodNum() {
+		return periodNum;
+	}
+
+	public void setPeriodNum(Integer periodNum) {
+		this.periodNum = periodNum;
 	}
 }
