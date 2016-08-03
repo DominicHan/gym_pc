@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
-<div style="text-align: center">四得体育</div>
+<div style="text-align: center">里昂健身</div>
 <table class="no-border">
     <tbody class="no-border-y">
     <tr>
