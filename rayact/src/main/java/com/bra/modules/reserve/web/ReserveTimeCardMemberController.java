@@ -136,12 +136,7 @@ public class ReserveTimeCardMemberController extends BaseController {
     @RequestMapping(value = "save")
     @Token(remove=true)
     public String save(ReserveMember reserveMember, Model model, RedirectAttributes redirectAttributes) {
-        if(reserveMember.getResidue()==null){
-            reserveMember.setResidue(0);
-        }
-        if(reserveMember.getTutorPeriodValidityStart()==null){
-            reserveMember.setValidityStart(new Date());
-        }
+
         if (!beanValidator(model, reserveMember)){
             return form(reserveMember, model);
         }

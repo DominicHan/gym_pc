@@ -157,8 +157,6 @@ public class ReserveMemberController extends BaseController {
 		if (!beanValidator(model, reserveMember)){
 			return form(reserveMember, model);
 		}
-
-
 		addMessage(redirectAttributes, "保存会员成功");
 		return "redirect:"+Global.getAdminPath()+"/reserve/reserveMember/?repage";
 	}

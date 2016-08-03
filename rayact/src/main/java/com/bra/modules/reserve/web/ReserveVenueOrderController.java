@@ -2,6 +2,7 @@ package com.bra.modules.reserve.web;
 
 import com.alibaba.fastjson.JSON;
 import com.bra.common.config.Global;
+import com.bra.common.utils.DateUtils;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.ViewResult;
@@ -84,13 +85,13 @@ public class ReserveVenueOrderController extends BaseController {
         member.setReserveVenue(venue);
         model.addAttribute("memberList", reserveMemberService.findList(member));
         //获取预定开始时间
-        String startTime=venue.getStartTime();
-        String endTime=venue.getEndTime();
-        if(StringUtils.isBlank(startTime)){
-            startTime="06:00:00";
+        String startTime = venue.getStartTime();
+        String endTime = venue.getEndTime();
+        if (StringUtils.isBlank(startTime)) {
+            startTime = "06:00:00";
         }
-        if(StringUtils.isBlank(endTime)){
-            endTime="24:00:00";
+        if (StringUtils.isBlank(endTime)) {
+            endTime = "24:00:00";
         }
         List<String> times = TimeUtils.getTimeSpacList(startTime, endTime, TimeUtils.BENCHMARK);
         model.addAttribute("times", times);
@@ -110,37 +111,30 @@ public class ReserveVenueOrderController extends BaseController {
     @RequestMapping(value = "checkSave")
     @ResponseBody
     public String checkSave(ReserveVenueOrder reserveVenueOrder) {
-        ReserveTimecardMemberSet memberTimecarSet = null;
-        ViewResult rs = null;
-        ReserveVenueVisitorsSet typeSet = reserveVenueOrder.getVisitorsSet();//获得场次票的属性
-        typeSet = reserveVenueVisitorsSetService.get(typeSet);
-        ReserveProject p = typeSet.getProject();
+        ViewResult rs=null;
         //如果是会员预订
         if (reserveVenueOrder.getMember() != null && StringUtils.isNoneEmpty(reserveVenueOrder.getMember().getId())) {
-            ReserveMember member = reserveMemberService.get(reserveVenueOrder.getMember());
-            memberTimecarSet = member.getTimecardSet();//该用户不拥有打折次卡
-
-            if (memberTimecarSet == null) {
-                rs = new ViewResult(false, "该用户没有次卡！");
-            } else {
-                memberTimecarSet = reserveTimecardMemberSetService.get(memberTimecarSet);
-                ReserveProject project = memberTimecarSet.getReserveProject();
-                if (project != null && StringUtils.isNoneEmpty(project.getId())) {
-                    //如果用户 拥有该项目的折扣卡
-                    if (p.getId().equals(project.getId())) {
-                        int residue = member.getResidue();//次卡剩余次数 等于 预付款的次数之和
-                        int ticketNum = reserveVenueOrder.getCollectCount();//买了几张票
+            if("12".equals(reserveVenueOrder.getPayType())) {
+                ReserveMember member = reserveMemberService.get(reserveVenueOrder.getMember());
+                Date start=member.getValidityStart();
+                Date end=member.getValidityEnd();
+                if(start==null||end==null){
+                    rs = new ViewResult(false, "课时有效期为空，请维护后再消费");
+                }else{
+                    if(DateUtils.bettewn(start,end,new Date())){
+                        int residue = member.getResidue();//剩余无教练课时
+                        int ticketNum = reserveVenueOrder.getCollectCount();//买了几个课时
                         if (ticketNum > residue) {
                             rs = new ViewResult(false, "该用户剩余次数不足！剩余次数=" + residue);
                         } else {
                             rs = new ViewResult(true, "检测成功");
                         }
-                    } else {
-                        rs = new ViewResult(false, "该用户的次票不可在该场地使用！");
+                    }else{
+                        rs = new ViewResult(false, "课时已过期");
                     }
-                } else {
-                    rs = new ViewResult(false, "该用户的次卡没有指定项目！");
                 }
+            }else{
+                rs = new ViewResult(true, "检测成功");//预储值金额消费
             }
         } else {
             rs = new ViewResult(true, "检测成功");
@@ -153,50 +147,22 @@ public class ReserveVenueOrderController extends BaseController {
     @ResponseBody
     @Token(remove = true)
     public String save(ReserveVenueOrder reserveVenueOrder) {
+        String payType=reserveVenueOrder.getPayType();
+
         //如果是会员预订
         if (reserveVenueOrder.getMember() != null && StringUtils.isNoneEmpty(reserveVenueOrder.getMember().getId())) {
-            ReserveMember member = reserveMemberService.get(reserveVenueOrder.getMember());
-            ReserveTimecardMemberSet memberTimecarSet = member.getTimecardSet();
-            memberTimecarSet = reserveTimecardMemberSetService.get(memberTimecarSet);
-            ReserveProject project = memberTimecarSet.getReserveProject();
-            int residue = member.getResidue();//次卡剩余次数 等于 预付款的次数之和
-            int ticketNum = reserveVenueOrder.getCollectCount();//买了几张票
-            residue -= ticketNum;//修改该用户的剩余次数
-            /* 预付次数减*/
-            ReserveTimeCardPrepayment prepayment = new ReserveTimeCardPrepayment();
-            prepayment.setReserveMember(member);
-            prepayment.setReserveProject(project);
-            List<ReserveTimeCardPrepayment> list = reserveTimeCardPrepaymentService.findList(prepayment);
-            double collectPrice=0.0;//次卡扣款 如果是次卡会员，与前端传递的金额不一致
-            for (ReserveTimeCardPrepayment i : list) {
-                double remainderPre = i.getRemainder();//预付款余额
-                double singleTimePrice = i.getSingleTimePrice();//单价
-                int remainTime = i.getRemainTime();//预付剩余次数
-
-                //如果剩余次数大于等于购买票数
-                if (remainTime >= ticketNum) {
-                    remainderPre -= singleTimePrice * ticketNum;
-                    collectPrice+=singleTimePrice * ticketNum;
-                    i.setRemainder(remainderPre);//修改预付款余额
-                    remainTime -= ticketNum;
-                    i.setRemainTime(remainTime);//修改预付款次数
-                    reserveTimeCardPrepaymentService.save(i);
-                    break;//本次预付款就可以结清
-                } else {
-                    //如果剩余次数 小于 购买票数
-                    i.setRemainTime(0);//次数减为零
-                    i.setRemainder(0.0);//余额清空
-                    reserveTimeCardPrepaymentService.save(i);
-                    ticketNum -= remainTime;//修改购买票数
-                    continue;//需要 其它的预付款 来结算
-                }
+            //预储（无教练）课时
+            if("12".equals(payType)){
+                ReserveMember member = reserveMemberService.get(reserveVenueOrder.getMember());
+                int residue = member.getResidue();//次卡剩余次数 等于 预付款的次数之和
+                int ticketNum = reserveVenueOrder.getCollectCount();//买了几个课时
+                residue -= ticketNum;//修改该用户的剩余次数
+                member.setResidue(residue);//保存剩余次数
+                reserveMemberService.save(member);
+                reserveVenueOrder.setMember(member);
+                reserveVenueOrderService.save(reserveVenueOrder);//会员结算保存
             }
-            member.setResidue(residue);//保存剩余次数
-            reserveMemberService.save(member);
-            reserveVenueOrder.setMember(member);
-            reserveVenueOrder.setCollectPrice(collectPrice);//记录订单金额
-            reserveVenueOrderService.save(reserveVenueOrder);//会员结算保存
-        }else{
+        } else {
             reserveVenueOrderService.save(reserveVenueOrder);//非会员
         }
         ViewResult rs = new ViewResult(true, "保存成功");

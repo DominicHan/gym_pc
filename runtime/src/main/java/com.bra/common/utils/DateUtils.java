@@ -165,7 +165,20 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         long sss = (timeMillis - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000 - min * 60 * 1000 - s * 1000);
         return (day > 0 ? day + "," : "") + hour + ":" + min + ":" + s + "." + sss;
     }
-
+    /**
+     * 获取两个日期之间的天数
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public static boolean bettewn(Date start, Date end,Date date) {
+        if(getDistanceOfTwoDate(start,date)>=0&&getDistanceOfTwoDate(date,end)>=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /**
      * 获取两个日期之间的天数
      *

@@ -8,6 +8,7 @@ import com.bra.modules.reserve.utils.AuthorityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,14 +41,20 @@ public class ReserveMemberService extends CrudService<ReserveMemberDao, ReserveM
 	
 	@Transactional(readOnly = false)
 	public void save(ReserveMember reserveMember) {
+		if(reserveMember.getTutorPeriodValidityStart()==null){
+			reserveMember.setTutorPeriodValidityStart(new Date());//有教练课时开始时间
+		}
+		if(reserveMember.getValidityStart()==null){
+			reserveMember.setValidityStart(new Date());//无教练课时开始时间
+		}
 		if(reserveMember.getResidue()==null){
-			reserveMember.setResidue(0);
+			reserveMember.setResidue(0);//无教练剩余课时
 		}
 		if(reserveMember.getTutorPeriodResidue()==null){
-			reserveMember.setTutorPeriodResidue(0);
+			reserveMember.setTutorPeriodResidue(0);//教练剩余课时
 		}
 		if(reserveMember.getRemainder()==null){
-			reserveMember.setRemainder(0.0);
+			reserveMember.setRemainder(0.0);//余额
 		}
 		super.save(reserveMember);
 	}
