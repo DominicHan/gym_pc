@@ -1,3 +1,6 @@
+$.ajaxSetup({
+    async : false
+});
 $(document).ready(function () {
 /*    $('.md-trigger').modalEffects();*/
     //-------预定---------
@@ -40,69 +43,71 @@ $(document).ready(function () {
         var endDate = $("#endDate").val();
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
-
+        var checkResult=true;
         if (startTime == endTime) {
             formLoding('开始时间应小于结束时间');
-            return false;
+            checkResult=false;
         }
 
         $.postItems({
             url: ctx + '/reserve/field/checkTime',
             data: {startTime: startTime, endTime: endTime},
-            success: function (values) {
-                if (values == "0") {
-                    formLoding('开始时间应小于结束时间');
-                    return false;
+            success: function (result) {
+                var values= eval("("+result+")");
+                if (values.rs!="1") {
+                    formLoding(values.msg);
+                    checkResult=false;
                 }
             }
         });
 
         if (userName == '') {
             formLoding('请输入预定人姓名');
-            return false;
+            checkResult=false;
         }
         if (checkMobile(consMobile)==false) {
              formLoding('请输入正确的手机');
-             return false;
+            checkResult=false;
          }
         if (frequency == '2' || frequency == '3') {
             if (endDate == '') {
                 formLoding('结束时间不能为空');
-                return false;
+                checkResult=false;
             }
         }
-        var data = $("#reserveFormBean").serializeArray();
-        $.postItems({
-            url: ctx + '/reserve/field/reservation',
-            data: data,
-            success: function (values) {
-                if (values) {
-                    $.each(values, function (index, item) {
-                        if (item.bool == "0") {
-                            formLoding('该时间段不可使用!');
-                        }
-                        else {
-                            formLoding('订单预定成功!');
-                            $(".table-chang tbody td").each(function (index) {
-                                var $this = $(this);
-                                var fieldId = $this.attr("data-field");
-                                var time = $this.attr("data-time");
-                                $.each(values, function (index, item) {
-                                    if (item.fieldId == fieldId && time == item.time) {
-                                        $this.removeClass("access");
-                                        $this.attr("status", "1");
-                                        $this.attr("data-item", item.itemId);
-                                        $this.text(userName);
-                                        /* location.reload(true);*/
-                                    }
+        if(checkResult==true){
+            var data = $("#reserveFormBean").serializeArray();
+            $.postItems({
+                url: ctx + '/reserve/field/reservation',
+                data: data,
+                success: function (values) {
+                    if (values) {
+                        $.each(values, function (index, item) {
+                            if (item.bool == "0") {
+                                formLoding('该时间段不可使用!');
+                            }
+                            else {
+                                formLoding('订单预定成功!');
+                                $(".table-chang tbody td").each(function (index) {
+                                    var $this = $(this);
+                                    var fieldId = $this.attr("data-field");
+                                    var time = $this.attr("data-time");
+                                    $.each(values, function (index, item) {
+                                        if (item.fieldId == fieldId && time == item.time) {
+                                            $this.removeClass("access");
+                                            $this.attr("status", "1");
+                                            $this.attr("data-item", item.itemId);
+                                            $this.text(userName);
+                                        }
+                                    });
                                 });
-                            });
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
-            }
-        });
-        $("#closeBtn").click();
+            });
+            $("#closeBtn").click();
+        }
     });
     //-------取消预定---------
     function cancelReserve(t) {
