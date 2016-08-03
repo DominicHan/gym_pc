@@ -11,6 +11,7 @@
             <th>教练</th>
             <th>开始时间</th>
             <th>结束时间</th>
+            <th>课时</th>
             <th>教练费用</th>
             </thead>
             <tbody>
@@ -30,6 +31,11 @@
                     </td>
                     <td>
                             ${item.endTime}
+                    </td>
+                    <td>
+                            ${item.periodNum}
+
+
                     </td>
                     <input type="hidden" name="venueConsList[${status.index}].halfCourt"
                                value="${item.halfCourt}"/>
@@ -60,13 +66,13 @@
         <label for="memberCardRadio" class="col-lg-2">支付方式:</label>
         <div class="col-lg-10">
             <label class="radio-inline">
-                <input type="radio" class="icheck" id="memberCardRadio"
-                       <j:if test="${'1' eq order.consType}">disabled="disabled"</j:if> value="1"
-                       <j:if test="${'2' eq order.consType}">checked="checked"</j:if> name="payType"/>储值卡
+                <input type="radio" class="icheck" id="reservePeriodRadio" checked="checked" value="11" name="payType"/>预储课时
             </label>
             <label class="radio-inline">
-                <input type="radio" class="icheck" id="reservePeriodRadio" value="11" name="payType"/>预储课时
+                <input type="radio" class="icheck" id="memberCardRadio"
+                       <j:if test="${'1' eq order.consType}">disabled="disabled"</j:if> value="1" name="payType"/>预储值
             </label>
+
         </div>
     </div>
 
@@ -113,6 +119,11 @@
         <label for="remainder" class="col-lg-1">会员余额:</label>
         <div class="col-lg-1 col-sm-2">
             <input readonly="readonly" value="${member.remainder}" type="text" id="remainder"
+                   class="form-control"/>
+        </div>
+        <label for="tutorPeriodResidue" class="col-lg-1">应扣课时:</label>
+        <div class="col-lg-1 col-sm-2">
+            <input readonly="readonly" value="${itemList[0].periodNum}" type="text" id="periodNum"
                    class="form-control"/>
         </div>
         <label for="tutorPeriodResidue" class="col-lg-2">会员剩余（教练）课时:</label>

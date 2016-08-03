@@ -6,7 +6,6 @@ import com.bra.modules.reserve.service.ReserveCardStatementsService;
 import com.bra.modules.reserve.service.ReserveMultiplePaymentService;
 import com.bra.modules.reserve.service.ReserveVenueConsItemService;
 import com.bra.modules.reserve.service.StoredCardMemberService;
-import com.bra.modules.reserve.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -45,18 +44,17 @@ public class MemberCheckoutListener{
             storedCardMemberService.save(reserveMember);
         }
         //预储课时
+        int periodNum=0;
         if ("11".equals(venueCons.getPayType()) && reserveMember != null) {
             ReserveVenueConsItem search = new ReserveVenueConsItem();
             search.setConsData(venueCons);
             List<ReserveVenueConsItem> itemList = reserveVenueConsItemService.findList(search);
-            int num=0;
+
             for(ReserveVenueConsItem i:itemList){
-                String start=i.getStartTime()+":00";
-                String end=i.getEndTime()+":00";
-                num= TimeUtils.getTimeSpac(start,end,30)/2;
+                periodNum+=i.getPeriodNum();
             }
             Integer residue=reserveMember.getTutorPeriodResidue();
-            residue-=num;
+            residue-=periodNum;
             reserveMember.setTutorPeriodResidue(residue);//扣教练课时
             storedCardMemberService.save(reserveMember);
         }
@@ -73,14 +71,7 @@ public class MemberCheckoutListener{
         statements.setRemarks(remarks);
         ReserveVenueConsItem search = new ReserveVenueConsItem();
         search.setConsData(venueCons);
-        List<ReserveVenueConsItem> itemList = reserveVenueConsItemService.findList(search);
-        int num=0;
-        for(ReserveVenueConsItem i:itemList){
-            String start=i.getStartTime()+":00";
-            String end=i.getEndTime()+":00";
-            num= TimeUtils.getTimeSpac(start,end,60);
-        }
-        statements.setTransactionNum(num);//预订了几个 半小时
+        statements.setTransactionNum(periodNum);//预订了几个 半小时
 
         if("8".equals(payType)){//多方式付款
             Double memberCardInput=venueCons.getMemberCardInput();//会员卡

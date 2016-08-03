@@ -353,6 +353,7 @@ $(document).ready(function () {
         var shouldPrice = $("#shouldPrice").val();
         var discountPrice = $("#discountPrice").val();
         var remarks = $("#remarks").val();
+
         var consPrice = shouldPrice;
         if(discountPrice){
             if (isNaN(discountPrice)) {
@@ -388,7 +389,6 @@ $(document).ready(function () {
             errorLoding("请选择支付类型！");
             return;
         }
-        /*  var data = $("#settlementFormBean").serializeArray();*/
         var memberCardInput = 0;
         var cashInput = 0;
         var bankCardInput = 0;
@@ -397,7 +397,6 @@ $(document).ready(function () {
         var aliPayInput = 0;
         var aliPayPersonalInput = 0;
         var couponInput = 0;
-        /*   var owningInput=0;*/
         if (payType == '8') {
             memberCardInput = eval($("#memberCardInput").val());
             cashInput = eval($("#cashInput").val());
@@ -407,10 +406,17 @@ $(document).ready(function () {
             aliPayInput = eval($("#aliPayInput").val());
             aliPayPersonalInput = eval($("#aliPayPersonalInput").val());
             couponInput = eval($("#couponInput").val());
-            /*   owningInput=eval($("#owningInput").val()) ;*/
             var sum = eval(memberCardInput + cashInput + bankCardInput + weiXinInput + weiXinPersonalInput + aliPayInput + aliPayPersonalInput + couponInput);
             if (sum != consPrice) {
                 errorLoding("多方式付款的总和不等于实收");
+                return;
+            }
+        }
+        if (payType == '11') {
+            var periodNum=$("#periodNum").val();
+            var tutorPeriodResidue=$("#tutorPeriodResidue").val();
+            if(eval(periodNum)>eval(tutorPeriodResidue)){
+                errorLoding("课时量不足，请购买课时");
                 return;
             }
         }
