@@ -26,7 +26,7 @@
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <table class="no-border">
                                 <tbody class="no-border-y">
-                                <td>场馆：</td>
+                                <td>健身房：</td>
                                 <td>
 
                                     <sys:select cssClass="input-xlarge" name="reserveVenue.id"
@@ -78,13 +78,13 @@
                             <thead>
                             <tr>
                                 <th>场馆</th>
-                                <th>储值卡收入</th>
-                                <th>现金收入</th>
-                                <th>银行卡收入</th>
-                                <th>微信收入</th>
-                                <th>（个人）微信收入</th>
+                                <th>预储值</th>
+                                <th>现金</th>
+                                <th>银行卡</th>
+                                <th>微信</th>
+                                <th>（个人）微信</th>
                                 <th>支付宝收入</th>
-                                <th>（个人）支付宝收入</th>
+                                <th>（个人）支付宝</th>
                                 <th>欠账</th>
                                 <th>优惠券</th>
                                 <th>合计</th>

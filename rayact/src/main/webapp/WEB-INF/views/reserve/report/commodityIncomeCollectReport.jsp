@@ -27,7 +27,7 @@
                             <table class="no-border">
                                 <tbody class="no-border-y">
                                 <tr>
-                                    <td>场馆：</td>
+                                    <td>健身房：</td>
                                     <td>
 
                                         <sys:select cssClass="input-large" name="reserveVenue.id"
@@ -82,7 +82,7 @@
                             <thead>
                             <tr>
                                 <th>商品类型</th>
-                                <th>储值卡</th>
+                                <th>预储值</th>
                                 <th>现金</th>
                                 <th>银行卡</th>
                                 <th>微信</th>

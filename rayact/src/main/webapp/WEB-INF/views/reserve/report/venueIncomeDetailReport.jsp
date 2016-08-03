@@ -90,8 +90,8 @@
                             <tr>
                                 <th>健身房</th>
                                 <th>项目</th>
-                                <th>场地</th>
-                                <th>储值卡</th>
+                                <th>教练</th>
+                                <th>预储值</th>
                                 <th>现金</th>
                                 <th>银行卡</th>
                                 <th>微信</th>
