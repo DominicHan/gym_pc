@@ -20,8 +20,10 @@
 		a.start_time AS "startTime",
 		a.end_time AS "endTime",
 		a.create_by AS "createBy.id",
+		cre_user.name AS "createBy.name",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
+		upd_user.name AS "updateBy.name",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag"
@@ -30,6 +32,8 @@
     <sql id="reserveVenueOrderJoins">
 		LEFT JOIN reserve_venue_visitors_set p ON a.visitors_set_id = p.id
 		LEFT JOIN reserve_venue v ON a.venue_id = v.id
+		LEFT JOIN reserve_user cre_user on cre_user.id=a.create_by
+		LEFT JOIN reserve_user upd_user on upd_user.id=a.update_by
 	</sql>
 
     <select id="get" resultType="ReserveVenueOrder">
