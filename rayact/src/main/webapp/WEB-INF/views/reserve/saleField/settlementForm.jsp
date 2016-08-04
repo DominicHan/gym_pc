@@ -50,8 +50,16 @@
     <hr/>
     <div class="row">
         <label class="col-lg-2">预订人备注信息:</label>
-        <div class="col-lg-10">
+        <div class="col-lg-4">
             ${member.remarks}
+        </div>
+        <label class="col-lg-2">剩余（教练）课时有效期:</label>
+        <div class="col-lg-4">
+            <fmt:formatDate value="${member.tutorPeriodValidityStart}" type="date"/>
+            <input type="hidden" id="tutorPeriodValidityStart"  value="<fmt:formatDate value="${member.tutorPeriodValidityStart}" type="date"/>"/>
+            至
+            <fmt:formatDate value="${member.tutorPeriodValidityEnd}" type="date"/>
+            <input type="hidden" id="tutorPeriodValidityEnd"  value=" <fmt:formatDate value="${member.tutorPeriodValidityEnd}" type="date"/>"/>
         </div>
     </div>
     <hr/>

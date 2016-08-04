@@ -1,8 +1,8 @@
 $.ajaxSetup({
-    async : false
+    async: false
 });
 $(document).ready(function () {
-/*    $('.md-trigger').modalEffects();*/
+    /*    $('.md-trigger').modalEffects();*/
     //-------预定---------
     $(".table-chang tbody td").on('dblclick', function () {
         if (!$(this).hasClass("access")) {
@@ -18,7 +18,7 @@ $(document).ready(function () {
         }
         var date = consDate;//日期
         jQuery.postItems({
-            url: ctx + '/reserve/field/reserveForm?math='+Math.random(),
+            url: ctx + '/reserve/field/reserveForm?math=' + Math.random(),
             data: {fieldId: fieldId, time: time, date: date, venueId: venueId, isHalfCourt: isHalfCourt},
             success: function (result) {
                 if (result) {
@@ -43,10 +43,10 @@ $(document).ready(function () {
         var endDate = $("#endDate").val();
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
-        var checkResult=true;
+        var checkResult = true;
         if (startTime == endTime) {
             formLoding('开始时间应小于结束时间');
-            checkResult=false;
+            checkResult = false;
             return false;
         }
 
@@ -54,32 +54,32 @@ $(document).ready(function () {
             url: ctx + '/reserve/field/checkTime',
             data: {startTime: startTime, endTime: endTime},
             success: function (result) {
-                var values= eval("("+result+")");
-                if (values.rs!="1") {
+                var values = eval("(" + result + ")");
+                if (values.rs != "1") {
                     formLoding(values.msg);
-                    checkResult=false;
+                    checkResult = false;
                 }
             }
         });
 
         if (userName == '') {
             formLoding('请输入预定人姓名');
-            checkResult=false;
+            checkResult = false;
             return false;
         }
-        if (checkMobile(consMobile)==false) {
-             formLoding('请输入正确的手机');
-            checkResult=false;
+        if (checkMobile(consMobile) == false) {
+            formLoding('请输入正确的手机');
+            checkResult = false;
             return false;
-         }
+        }
         if (frequency == '2' || frequency == '3') {
             if (endDate == '') {
                 formLoding('结束时间不能为空');
-                checkResult=false;
+                checkResult = false;
                 return false;
             }
         }
-        if(checkResult==true){
+        if (checkResult == true) {
             var data = $("#reserveFormBean").serializeArray();
             $.postItems({
                 url: ctx + '/reserve/field/reservation',
@@ -353,9 +353,10 @@ $(document).ready(function () {
         var shouldPrice = $("#shouldPrice").val();
         var discountPrice = $("#discountPrice").val();
         var remarks = $("#remarks").val();
-
+        var tutorPeriodValidityStart = $("#tutorPeriodValidityStart").val();
+        var tutorPeriodValidityEnd = $("#tutorPeriodValidityEnd").val();
         var consPrice = shouldPrice;
-        if(discountPrice){
+        if (discountPrice) {
             if (isNaN(discountPrice)) {
                 errorLoding("优惠金额必须为数字！");
                 return;
@@ -364,8 +365,8 @@ $(document).ready(function () {
                 errorLoding("优惠金额不能大于应收金额！");
                 return;
             }
-            consPrice=shouldPrice-discountPrice;
-            if(eval(shouldPrice)-eval(discountPrice)!=eval(consPrice)){
+            consPrice = shouldPrice - discountPrice;
+            if (eval(shouldPrice) - eval(discountPrice) != eval(consPrice)) {
                 errorLoding("应收减去优惠不等于实收，请点击确认优惠！");
                 return;
             }
@@ -413,55 +414,75 @@ $(document).ready(function () {
             }
         }
         if (payType == '11') {
-            var periodNum=$("#periodNum").val();
-            var tutorPeriodResidue=$("#tutorPeriodResidue").val();
-            if(eval(periodNum)>eval(tutorPeriodResidue)){
+            var periodNum = $("#periodNum").val();
+            var tutorPeriodResidue = $("#tutorPeriodResidue").val();
+            if (eval(periodNum) > eval(tutorPeriodResidue)) {
                 errorLoding("课时量不足，请购买课时");
                 return;
             }
         }
-        $.postItems({
-            url: ctx + '/reserve/field/saveSettlement?random=' + Math.random(),
+        var checkValidate = false;//课时有效期
+        jQuery.postItems({
+            url: ctx + '/reserve/field/checkValidate',
             data: {
-                token: token,
-                id: id,
-                payType: payType,
-                authUserId: authUserId,
-                discountPrice: discountPrice,
-                consPrice: consPrice,
-                memberCardInput: memberCardInput,
-                cashInput: cashInput,
-                bankCardInput: bankCardInput,
-                weiXinInput: weiXinInput,
-                weiXinPersonalInput: weiXinPersonalInput,
-                aliPayInput: aliPayInput,
-                aliPayPersonalInput: aliPayPersonalInput,
-                couponInput: couponInput,
-                remarks:remarks
+                tutorPeriodValidityStart: tutorPeriodValidityStart,
+                tutorPeriodValidityEnd: tutorPeriodValidityEnd
             },
-            success: function (values) {
-                if(values){
-                    var fieldList=values.mapList;
-                    var orderId=values.orderId;
-                    if (fieldList) {
-                        $(".table-chang tbody td").each(function (index) {
-                            var $this = $(this);
-                            var fieldId = $this.attr("data-field");
-                            var time = $this.attr("data-time");
-                            $.each(fieldList, function (index, item) {
-                                if (item.fieldId == fieldId && time == item.time) {
-                                    $this.addClass("red");
-                                    $this.attr("status", "0");
-                                }
-                            });
-                        });
-                    }
-                    settlementResult(orderId);
+            success: function (result) {
+                if (result.rs) {
+                    checkValidate = true;
+                } else {
+                    checkValidate = false;
+                    errorLoding("课时已过期");
                 }
-                $("#closeSettlementBtn").click();
-                formLoding('保存结账单据成功!');
             }
         });
+        if (checkValidate) {
+            $.postItems({
+                url: ctx + '/reserve/field/saveSettlement?random=' + Math.random(),
+                data: {
+                    token: token,
+                    id: id,
+                    tutorPeriodValidityStart: tutorPeriodValidityStart,
+                    tutorPeriodValidityEnd: tutorPeriodValidityEnd,
+                    payType: payType,
+                    authUserId: authUserId,
+                    discountPrice: discountPrice,
+                    consPrice: consPrice,
+                    memberCardInput: memberCardInput,
+                    cashInput: cashInput,
+                    bankCardInput: bankCardInput,
+                    weiXinInput: weiXinInput,
+                    weiXinPersonalInput: weiXinPersonalInput,
+                    aliPayInput: aliPayInput,
+                    aliPayPersonalInput: aliPayPersonalInput,
+                    couponInput: couponInput,
+                    remarks: remarks
+                },
+                success: function (values) {
+                    if (values) {
+                        var fieldList = values.mapList;
+                        var orderId = values.orderId;
+                        if (fieldList) {
+                            $(".table-chang tbody td").each(function (index) {
+                                var $this = $(this);
+                                var fieldId = $this.attr("data-field");
+                                var time = $this.attr("data-time");
+                                $.each(fieldList, function (index, item) {
+                                    if (item.fieldId == fieldId && time == item.time) {
+                                        $this.addClass("red");
+                                        $this.attr("status", "0");
+                                    }
+                                });
+                            });
+                        }
+                        settlementResult(orderId);
+                        $("#closeSettlementBtn").click();
+                        formLoding('保存结账单据成功!');
+                    }
+                }
+            });
+        }
     });
 
 
@@ -541,7 +562,7 @@ function editPrice() {
         errorLoding("优惠金额不能大于应收金额！");
         return;
     }
-    $("#consPrice").attr("value",consPrice);
+    $("#consPrice").attr("value", consPrice);
 }
 function checkAuthorization() {
     var userId = $("#authUser").val();
@@ -571,12 +592,11 @@ function settlementResult(orderId) {
         }
     });
 }
-function checkMobile(s){
+function checkMobile(s) {
     var length = s.length;
-    if(length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(14[0-9]{1})|)+\d{8})$/.test(s) )
-    {
+    if (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(14[0-9]{1})|)+\d{8})$/.test(s)) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
