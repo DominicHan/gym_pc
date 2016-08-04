@@ -68,16 +68,6 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
         return list;
     }
 
-    public List<Map<String, Object>> findPriceGroupProject(ReserveVenueCons venueCons) {
-        List<Map<String, Object>> list = dao.findPriceGroupProject(venueCons);
-        return list;
-    }
-
-    public List<Map<String, Object>> findPriceGroupProjectReport(ReserveVenueCons venueCons) {
-        venueCons.getSqlMap().put("dsf", AuthorityUtils.getDsf("a.venue_id"));
-        return dao.findPriceGroupProjectReport(venueCons);
-    }
-
     /**
      * 结账
      * id:订单编号
