@@ -159,6 +159,8 @@ public class ReserveVenueOrderController extends BaseController {
                 reserveMemberService.save(member);
                 reserveVenueOrder.setMember(member);
                 reserveVenueOrderService.save(reserveVenueOrder);//会员结算保存
+            }else {
+                reserveVenueOrderService.save(reserveVenueOrder);//会员结算保存
             }
         } else {
             reserveVenueOrderService.save(reserveVenueOrder);//非会员

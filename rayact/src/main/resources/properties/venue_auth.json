@@ -191,13 +191,13 @@
       },
       {
         "code": "timeCardRechargeStatements",
-        "name": "预储(无教练)课时记录",
+        "name": "(无教练)课时预储记录",
         "href":"/reserve/reserveCardStatements/list?transactionType=7",
         "authorityList": []
       },
       {
         "code": "tutorPeriodRechargeStatements",
-        "name": "预储(教练)课时记录",
+        "name": "(教练)课时预储记录",
         "href":"/reserve/reserveCardStatements/list?transactionType=8",
         "authorityList": []
       },
