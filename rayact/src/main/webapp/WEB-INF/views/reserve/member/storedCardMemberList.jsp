@@ -57,10 +57,10 @@
                             <table>
                                 <thead>
                                 <tr>
+                                    <th>健身房</th>
                                     <th>姓名</th>
                                     <th>手机号</th>
                                     <th>卡号</th>
-                                    <th>开户场馆</th>
                                     <th>余额</th>
                                     <th>操作</th>
                                     <th>交易</th>
@@ -69,6 +69,9 @@
                                 <tbody>
                                 <c:forEach items="${page.list}" var="reserveMember">
                                     <tr>
+                                        <td>
+                                                ${reserveMember.reserveVenue.name}
+                                        </td>
                                         <td><a href="${ctx}/reserve/storedCardMember/form?id=${reserveMember.id}">
                                                 ${reserveMember.name}
                                         </a></td>
@@ -77,9 +80,6 @@
                                         </td>
                                         <td>
                                                 ${reserveMember.cardno}
-                                        </td>
-                                        <td>
-                                                ${reserveMember.reserveVenue.name}
                                         </td>
                                         <td>
                                             <fmt:formatNumber value="${reserveMember.remainder}"/>

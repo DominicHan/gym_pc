@@ -6,6 +6,7 @@
     <div class="content">
         <table>
             <thead>
+            <th>健身房</th>
             <th>预定人</th>
             <th>手机号</th>
             <th>教练</th>
@@ -18,7 +19,10 @@
             <c:forEach items="${itemList}" var="item" varStatus="status">
                 <tr>
                     <td>
-                            ${order.userName}
+                            ${item.reserveVenue.name}
+                    </td>
+                    <td>
+                            ${member.reserveVenue.name}-${order.userName}
                     </td>
                     <td>
                             ${order.consMobile}
@@ -38,7 +42,7 @@
 
                     </td>
                     <input type="hidden" name="venueConsList[${status.index}].halfCourt"
-                               value="${item.halfCourt}"/>
+                           value="${item.halfCourt}"/>
                     <td>
                             ${item.consPrice}
                     </td>
@@ -56,10 +60,12 @@
         <label class="col-lg-2">剩余（教练）课时有效期:</label>
         <div class="col-lg-4">
             <fmt:formatDate value="${member.tutorPeriodValidityStart}" type="date"/>
-            <input type="hidden" id="tutorPeriodValidityStart"  value="<fmt:formatDate value="${member.tutorPeriodValidityStart}" type="date"/>"/>
+            <input type="hidden" id="tutorPeriodValidityStart"
+                   value="<fmt:formatDate value="${member.tutorPeriodValidityStart}" type="date"/>"/>
             至
             <fmt:formatDate value="${member.tutorPeriodValidityEnd}" type="date"/>
-            <input type="hidden" id="tutorPeriodValidityEnd"  value=" <fmt:formatDate value="${member.tutorPeriodValidityEnd}" type="date"/>"/>
+            <input type="hidden" id="tutorPeriodValidityEnd"
+                   value=" <fmt:formatDate value="${member.tutorPeriodValidityEnd}" type="date"/>"/>
         </div>
     </div>
     <hr/>
@@ -73,14 +79,21 @@
     <div class="row" id="payTypeDIV">
         <label for="memberCardRadio" class="col-lg-2">支付方式:</label>
         <div class="col-lg-10">
+
             <label class="radio-inline">
-                <input type="radio" class="icheck" id="reservePeriodRadio" checked="checked" value="11" name="payType"/>预储课时
+                <input type="radio" class="icheck" id="reservePeriodRadio"
+                        <j:if test="${!(member.reserveVenue.id eq item.reserveVenue.id)}"> disabled="disabled" </j:if>
+                        <j:if test="${member.reserveVenue.id eq item.reserveVenue.id}"> checked="checked" </j:if>
+                       value="11" name="payType"/>预储课时
             </label>
+
             <label class="radio-inline">
                 <input type="radio" class="icheck" id="memberCardRadio"
                        <j:if test="${'1' eq order.consType}">disabled="disabled"</j:if> value="1" name="payType"/>预储值
             </label>
-
+            <label class="radio-inline pull-right">
+                    温馨提示：预储课时不可跨店使用
+            </label>
         </div>
     </div>
 

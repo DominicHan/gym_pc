@@ -404,7 +404,7 @@ public class ReserveController extends BaseController {
     }
 
     /**
-     * 结算订单
+     * 检查课时有效期
      *
      * @param
      * @return
