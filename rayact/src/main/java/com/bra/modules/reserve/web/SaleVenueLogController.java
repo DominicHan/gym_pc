@@ -57,7 +57,7 @@ public class SaleVenueLogController extends BaseController {
         model.addAttribute("page", page);
         String userType=UserUtils.getUser().getUserType();
         model.addAttribute("userType", userType);
-        return "/reserve/saleField/saleVenueLog";
+        return "/reserve/record/saleVenueLog";
     }
 
     @RequestMapping(value = "listExport")

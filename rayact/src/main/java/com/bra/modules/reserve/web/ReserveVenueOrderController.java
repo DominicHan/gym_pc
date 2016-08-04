@@ -2,6 +2,7 @@ package com.bra.modules.reserve.web;
 
 import com.alibaba.fastjson.JSON;
 import com.bra.common.config.Global;
+import com.bra.common.persistence.Page;
 import com.bra.common.utils.DateUtils;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
@@ -10,6 +11,8 @@ import com.bra.common.web.annotation.Token;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.service.*;
 import com.bra.modules.reserve.utils.TimeUtils;
+import com.bra.modules.sys.entity.User;
+import com.bra.modules.sys.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +34,6 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "${adminPath}/reserve/reserveVenueOrder")
 public class ReserveVenueOrderController extends BaseController {
-
-    @Autowired
-    private ReserveTimecardMemberSetService reserveTimecardMemberSetService;
     @Autowired
     private ReserveVenueOrderService reserveVenueOrderService;
     @Autowired
@@ -47,21 +49,22 @@ public class ReserveVenueOrderController extends BaseController {
     @Autowired
     private ReserveProjectService reserveProjectService;
     @Autowired
-    private ReserveTimeCardPrepaymentService reserveTimeCardPrepaymentService;
+    private ReserveUserService reserveUserService;
 
     @RequestMapping(value = "list")
-    public String list(ReserveVenueVisitorsSet visitorsSet, Model model) {
-        List<ReserveVenueVisitorsSet> visitorsSets = reserveVenueVisitorsSetService.findList(visitorsSet);
-        model.addAttribute("visitorsSets", visitorsSets);
+    public String list(ReserveVenueOrder reserveVenueOrder, HttpServletRequest request, HttpServletResponse response,Model model) {
 
-        ReserveProject project = new ReserveProject();
-       /* project.setTicketType("2");*/
-        List<ReserveProject> projects = reserveProjectService.findList(project);
-        if (visitorsSet.getProject() != null && StringUtils.isNotBlank(visitorsSet.getProject().getId())) {
-            model.addAttribute("projectId", visitorsSet.getProject().getId());
-        }
-        model.addAttribute("projects", projects);
-        return "reserve/visitorsSetOrder/list";
+        model.addAttribute("userList",reserveUserService.findList(new User()));
+        ReserveVenue venue = new ReserveVenue();
+        model.addAttribute("venueList",reserveVenueService.findList(venue));
+        List<ReserveProject> projectList = reserveProjectService.findList(new ReserveProject());
+        model.addAttribute("projectList",projectList);
+        model.addAttribute("query",reserveVenueOrder);//参数返回
+        String userType= UserUtils.getUser().getUserType();
+        model.addAttribute("userType", userType);
+        Page<ReserveVenueOrder> page = reserveVenueOrderService.findPage(new Page<ReserveVenueOrder>(request, response),reserveVenueOrder);
+        model.addAttribute("page", page);
+        return "reserve/record/nonTutorOrderList";
     }
 
     //人次票 付款界面

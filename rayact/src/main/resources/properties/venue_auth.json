@@ -173,8 +173,14 @@
     "authorityList": [
       {
         "code": "saleVenueLog",
-        "name": "会员健身记录",
+        "name": "教练授课记录",
         "href":"/reserve/saleVenue/list",
+        "authorityList": []
+      },
+      {
+        "code": "nonTutorOrderList",
+        "name": "会员（无教练）健身记录",
+        "href":"/reserve/reserveVenueOrder/list",
         "authorityList": []
       },
       {
