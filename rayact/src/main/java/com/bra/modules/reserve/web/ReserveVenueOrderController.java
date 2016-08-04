@@ -82,7 +82,6 @@ public class ReserveVenueOrderController extends BaseController {
         model.addAttribute("tutors", reserveTutorService.findList(tutor));
         //会员
         ReserveMember member = new ReserveMember();
-        member.setReserveVenue(venue);
         model.addAttribute("memberList", reserveMemberService.findList(member));
         //获取预定开始时间
         String startTime = venue.getStartTime();
@@ -98,15 +97,6 @@ public class ReserveVenueOrderController extends BaseController {
         model.addAttribute("orderDate", new Date());
         return "reserve/visitorsSetOrder/form";
     }
-/*
-    //确认购买 表单
-    @RequestMapping(value = "detail")
-    @Token(save = true)
-    public String detail(ReserveVenueOrder reserveVenueOrder, Model model) {
-        model.addAttribute("venueOrder", reserveVenueOrder);
-        return "reserve/visitorsSetOrder/detail";
-    }*/
-
     //确认购买
     @RequestMapping(value = "checkSave")
     @ResponseBody
@@ -116,23 +106,28 @@ public class ReserveVenueOrderController extends BaseController {
         if (reserveVenueOrder.getMember() != null && StringUtils.isNoneEmpty(reserveVenueOrder.getMember().getId())) {
             if("12".equals(reserveVenueOrder.getPayType())) {
                 ReserveMember member = reserveMemberService.get(reserveVenueOrder.getMember());
-                Date start=member.getValidityStart();
-                Date end=member.getValidityEnd();
-                if(start==null||end==null){
-                    rs = new ViewResult(false, "课时有效期为空，请维护后再消费");
-                }else{
-                    if(DateUtils.bettewn(start,end,new Date())){
-                        int residue = member.getResidue();//剩余无教练课时
-                        int ticketNum = reserveVenueOrder.getCollectCount();//买了几个课时
-                        if (ticketNum > residue) {
-                            rs = new ViewResult(false, "该用户剩余次数不足！剩余次数=" + residue);
-                        } else {
-                            rs = new ViewResult(true, "检测成功");
-                        }
+                if(member.getReserveVenue().getId().equals(reserveVenueOrder.getReserveVenue().getId())){
+                    Date start=member.getValidityStart();
+                    Date end=member.getValidityEnd();
+                    if(start==null||end==null){
+                        rs = new ViewResult(false, "课时有效期为空，请维护后再消费");
                     }else{
-                        rs = new ViewResult(false, "课时已过期");
+                        if(DateUtils.bettewn(start,end,new Date())){
+                            int residue = member.getResidue();//剩余无教练课时
+                            int ticketNum = reserveVenueOrder.getCollectCount();//买了几个课时
+                            if (ticketNum > residue) {
+                                rs = new ViewResult(false, "该用户剩余次数不足！剩余次数=" + residue);
+                            } else {
+                                rs = new ViewResult(true, "检测成功");
+                            }
+                        }else{
+                            rs = new ViewResult(false, "课时已过期");
+                        }
                     }
+                }else{
+                    rs = new ViewResult(false, "课时不可跨店使用");
                 }
+
             }else{
                 rs = new ViewResult(true, "检测成功");//预储值金额消费
             }

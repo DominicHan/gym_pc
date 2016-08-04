@@ -13,6 +13,14 @@
                     <!--用户信息;商品信息及数量-->
                     <div class="row">
                         <div class="form-group">
+                            <label class="memberSelect col-lg-2 control-label">健身房：</label>
+                            <div class="col-lg-10"><input readonly="readonly" value="${visitorsSet.reserveVenue.name}"
+                                                          type="text"
+                                                          class="form-control"/></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
                             <label for="memberType" class="col-lg-2 control-label">顾客类型：</label>
                             <div class="radio-inline" id="memberType">
                                 <input type="radio" id="isMember" class="icheck" value="2" checked="checked"
