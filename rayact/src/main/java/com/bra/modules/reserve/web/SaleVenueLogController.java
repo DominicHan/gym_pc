@@ -4,10 +4,7 @@ import com.bra.common.config.Global;
 import com.bra.common.persistence.Page;
 import com.bra.common.utils.DateUtils;
 import com.bra.common.web.BaseController;
-import com.bra.modules.reserve.entity.ReserveProject;
-import com.bra.modules.reserve.entity.ReserveVenue;
-import com.bra.modules.reserve.entity.ReserveVenueCons;
-import com.bra.modules.reserve.entity.ReserveVenueOrder;
+import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.service.*;
 import com.bra.modules.reserve.utils.ExcelInfo;
 import com.bra.modules.reserve.web.form.SaleVenueLog;
@@ -37,6 +34,8 @@ public class SaleVenueLogController extends BaseController {
     @Autowired
     private ReserveVenueConsService reserveVenueConsService;
     @Autowired
+    private ReserveFieldService reserveFieldService;
+    @Autowired
     private ReserveUserService reserveUserService;
     @Autowired
     private ReserveVenueService reserveVenueService;
@@ -47,16 +46,18 @@ public class SaleVenueLogController extends BaseController {
 
     @RequestMapping(value = "list")
     public String list(Model model, SaleVenueLog venueLog, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("userList",reserveUserService.findList(new User()));
-        ReserveVenue venue = new ReserveVenue();
-        model.addAttribute("venueList",reserveVenueService.findList(venue));
-        List<ReserveProject> projectList = reserveProjectService.findList(new ReserveProject());
-        model.addAttribute("projectList",projectList);
-        model.addAttribute("query",venueLog);//参数返回
+
         Page<SaleVenueLog> page = reserveVenueConsService.findOrderLog(new Page<>(request, response), venueLog);
         model.addAttribute("page", page);
         String userType=UserUtils.getUser().getUserType();
         model.addAttribute("userType", userType);
+
+        model.addAttribute("fieldList",reserveFieldService.findList(new ReserveField()));
+        model.addAttribute("userList",reserveUserService.findList(new User()));
+        model.addAttribute("venueList",reserveVenueService.findList(new ReserveVenue()));
+        List<ReserveProject> projectList = reserveProjectService.findList(new ReserveProject());
+        model.addAttribute("projectList",projectList);
+        model.addAttribute("query",venueLog);//参数返回
         return "/reserve/record/saleVenueLog";
     }
 

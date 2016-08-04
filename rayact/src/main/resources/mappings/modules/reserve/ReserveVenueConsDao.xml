@@ -220,6 +220,9 @@
         <if test="venue!=null and venue.id!=null and venue.id!=''">
             and a.venue_id = #{venue.id}
         </if>
+        <if test="field!=null and field.id!=null and field.id!=''">
+            and i.field_id = #{field.id}
+        </if>
         <if test="project!=null and project.id!=null and project.id!=''">
             and a.project_id = #{project.id}
         </if>

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场地售卖报表</title>
+    <title>教练授课记录</title>
     <meta name="decorator" content="main"/>
     <link type="text/css" rel="stylesheet" href="${ctxStatic}/modules/reserve/css/field.css?id=7862256"/>
 </head>
@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>会员健身记录</h3>
+                    <h3>教练授课记录</h3>
                 </div>
                 <form id="searchForm" action="${ctx}/reserve/saleVenue/list"
                       method="post">
@@ -24,7 +24,7 @@
                         <div class="form-group col-lg-2 col-sm-2">
                             <label class="control-label" for="venue">健身房：</label>
                             <select id="venue" name="venue.id" class="select2 ">
-                                <option value="">---请选择---</option>
+                                <option value="">请选择</option>
                                 <c:forEach items="${venueList}" var="venue">
                                     <option
                                             <j:if test="${venue.id eq query.venue.id}">selected="selected"</j:if>
@@ -32,12 +32,24 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="form-group col-lg-1 col-sm-1">
-                            <input name="username" htmlEscape="false" style="width: 100%"
-                                   maxlength="30" value="${query.username}"
-                                   placeholder="请输入预订人"
-                                   class="form-control"/>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label class="control-label" for="field">教练：</label>
+                            <select  id="field" name="field.id" class="select2 ">
+                                <option value="">请选择</option>
+                                <c:forEach items="${fieldList}" var="field">
+                                    <option
+                                            <j:if test="${field.id eq query.field.id}">selected="selected"</j:if>
+                                            value="${field.id}">${field.name}</option>
+                                </c:forEach>
+                            </select>
+
                         </div>
+                       <%-- <div class="form-group col-lg-1 col-sm-1">
+                             <input name="username" htmlEscape="false"
+                                                               maxlength="30" value="${query.username}"
+                                                               placeholder="请输入会员"
+                                                               class="form-control"/>
+                        </div>--%>
                         <div class="form-group col-lg-2 col-sm-2">
                             <label class="control-label" for="payType">支付方式：</label>
                             <select id="payType" name="payType" style="width:50%">
@@ -52,7 +64,7 @@
                         </div>
 
                         <div class="form-group col-lg-2 col-sm-2">
-                            <label class="control-label" for="createBy">预订操作人：</label>
+                            <label class="control-label" for="createBy">预订人：</label>
                             <select id="createBy" name="createBy.id" class="select2">
                                 <option value="">请选择</option>
                                 <c:forEach items="${userList}" var="createBy">
