@@ -50,7 +50,22 @@ public class ReserveVenueVisitorsSetController extends BaseController {
 		}
 		return entity;
 	}
-	
+
+	@RequestMapping(value = "periodList")
+	public String list(ReserveVenueVisitorsSet visitorsSet, Model model) {
+		List<ReserveVenueVisitorsSet> visitorsSets = reserveVenueVisitorsSetService.findList(visitorsSet);
+		model.addAttribute("visitorsSets", visitorsSets);
+
+		ReserveProject project = new ReserveProject();
+       /* project.setTicketType("2");*/
+		List<ReserveProject> projects = reserveProjectService.findList(project);
+		if (visitorsSet.getProject() != null && StringUtils.isNotBlank(visitorsSet.getProject().getId())) {
+			model.addAttribute("projectId", visitorsSet.getProject().getId());
+		}
+		model.addAttribute("projects", projects);
+		return "reserve/visitorsSetOrder/list";
+	}
+
 	@RequestMapping(value = {"list", ""})
 	public String list(ReserveVenueVisitorsSet reserveVenueVisitorsSet, HttpServletRequest request, HttpServletResponse response, Model model) {
 		List<ReserveVenueVisitorsSet> page = reserveVenueVisitorsSetService.findList(reserveVenueVisitorsSet);

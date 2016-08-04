@@ -17,7 +17,6 @@ public class ReserveVenueOrder extends SaasEntity<ReserveVenueOrder> {
 	
 	private static final long serialVersionUID = 1L;
 	private ReserveVenue reserveVenue;		// 场馆ID
-	private ReserveField reserveField;		// 场地ID
 	private ReserveVenueVisitorsSet visitorsSet;		// 所属人次票
 	private ReserveMember member;		// 会员ID
 	private String consMobile;		// 订单人手机号
@@ -145,14 +144,6 @@ public class ReserveVenueOrder extends SaasEntity<ReserveVenueOrder> {
 
 	public void setCollectCount(Integer collectCount) {
 		this.collectCount = collectCount;
-	}
-
-	public ReserveField getReserveField() {
-		return reserveField;
-	}
-
-	public void setReserveField(ReserveField reserveField) {
-		this.reserveField = reserveField;
 	}
 
 	//---------------------------------------------------------

@@ -95,7 +95,6 @@
                                 <tr>
                                     <th>会员</th>
                                     <th>健身房</th>
-                                    <th>教练</th>
                                     <th>时间区间</th>
                                     <th>教练费</th>
                                     <th>实收</th>
@@ -111,14 +110,11 @@
                                 </thead>
                                 <tbody>
                                 <c:set var="orderPriceSum" value="0"></c:set>
-                                <c:set var="shouldPriceSum" value="0"></c:set>
-                                <c:set var="discountPriceSum" value="0"></c:set>
                                 <c:set var="consPriceSum" value="0"></c:set>
                                 <c:forEach items="${page.list}" var="log">
                                     <tr style="height: 30px;">
                                         <td>${log.userName}</td>
                                         <td>${log.reserveVenue.name}</td>
-                                        <td>${log.reserveField.name}</td>
                                         <td>${log.startTime}—${log.endTime}</td>
                                         <td>${log.orderPrice}</td>
                                         <c:set var="orderPriceSum" value="${orderPriceSum+log.orderPrice}"></c:set>

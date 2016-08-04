@@ -90,7 +90,7 @@
       {
         "code": "vistorsSet",
         "name": "无教练课时消费",
-        "href":"/reserve/reserveVenueOrder/list",
+        "href":"/reserve/reserveVenueVisitorsSet/periodList",
         "authorityList": []
       },
       {

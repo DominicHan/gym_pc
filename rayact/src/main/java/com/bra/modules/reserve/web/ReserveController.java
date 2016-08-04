@@ -487,7 +487,6 @@ public class ReserveController extends BaseController {
             return "reserve/saleField/details";
         } else {
             ReserveVenueOrder order = new ReserveVenueOrder();
-            order.setReserveField(new ReserveField(fieldId));
             order.setOrderDate(new Date(date));
             String startTime = time.substring(0, 5);
             String endTime = time.substring(6, 11);
