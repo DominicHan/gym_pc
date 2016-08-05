@@ -45,6 +45,7 @@
     <select id="tutorPeriodReport" resultType="TutorPeriodLog">
         select
         v.name as "venue.name",
+        f.id as "field.id",
         f.name as "field.name",
         sum(i.period_num) as "periodNum"
         from reserve_venue_cons as a

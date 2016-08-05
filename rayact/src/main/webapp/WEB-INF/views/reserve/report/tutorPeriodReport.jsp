@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-    <jsp:param name="action" value="saleVenueLog"></jsp:param>
+    <jsp:param name="action" value="tutorPeriodReport"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
     <div class="row">
@@ -78,14 +78,20 @@
                                     <th>健身房</th>
                                     <th>教练</th>
                                     <th>课时量</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${page.list}" var="log">
-                                    <tr style="height: 30px;">
+                                    <tr>
                                         <td>${log.venue.name}</td>
                                         <td>${log.field.name}</td>
                                         <td>${log.periodNum}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs"
+                                               href="${ctx}/reserve/saleVenue/list?field.id=${log.field.id}&startDate=<fmt:formatDate value="${query.startDate}" pattern="yyyy-MM-dd"/>&endDate=<fmt:formatDate value="${query.endDate}" pattern="yyyy-MM-dd"/>"><i
+                                                    class="fa fa-pencil"></i>详情</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
