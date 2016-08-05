@@ -55,12 +55,12 @@
                                             </td>--%>
                                             <td>市场价:</td>
                                             <td>
-                                                <input type="text" id="retail" class="number form-control"
+                                                <input type="text" id="marketPrice" class="number form-control"
                                                        style="width: 40px;height:30px;padding: 0px"/>
                                             </td>
                                             <td>会员价:</td>
                                             <td>
-                                                <input type="text" id="member" class="number form-control"
+                                                <input type="text" id="memberPrice" class="number form-control"
                                                        style="width: 40px;height:30px;padding: 0px"/>
                                             </td>
                                             <td valign="top"><input id="globalPrice" data="all" class="btn btn-primary"
@@ -70,9 +70,7 @@
                                     </table>
                                     <table class="table table-bordered" style="padding:1px">
                                         <tr>
-                                            <td colspan="2"><a style="color: red"
-                                                               title="点击,设计全局数值" href="#" data="all"
-                                                               class="weekPriceTable">时间</a></td>
+                                            <td colspan="2">时间</td>
                                             <c:forEach items="${times}" var="t">
                                                 <th><span style="font-size: 10px">${t}</span></th>
                                             </c:forEach>
@@ -136,78 +134,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function checkEndTime(startTime, endTime, localTime) {
-        //var start = new Date(startTime.replace(":", "/").replace(":", "/"));
-        //var end = new Date(endTime.replace(":", "/").replace(":", "/"));
-        //var local = new Date(localTime.replace(":", "/").replace(":", "/"));
-        /* if (localTime >= startTime && localTime <= endTime) {
-         return true;
-         }*/
-        return true;
-    }
-    $(document).ready(function () {
-        $('.icheck').iCheck({
-            checkboxClass: 'icheckbox_square-blue checkbox',
-            radioClass: 'iradio_square-blue'
-        });
-        jQuery.addWorkPrice = function (type, retail, member, group) {
-            var startTime = $("#startTime").val();
-            var endTime = $("#endTime").val();
-            $.each($("input[data='" + type + "-1']"), function () {
-                var t = $(this);
-                var localTime = t.attr("data-time");
-                console.log("------startTime-" + startTime + "---endTime===" + endTime);
-                if (checkEndTime(startTime, endTime, localTime)) {
-                    console.log("-------" + retail);
-                    t.val(retail);
-                }
-            });
-            $.each($("input[data='" + type + "-2']"), function () {
-                var t = $(this);
-                var localTime = t.attr("data-time");
-                if (checkEndTime(startTime, endTime, localTime)) {
-                    t.val(member);
-                }
-            });
-            $.each($("input[data='" + type + "-3']"), function () {
-                var t = $(this);
-                var localTime = t.attr("data-time");
-                if (checkEndTime(startTime, endTime, localTime)) {
-                    t.val(group);
-                }
-            });
-        };
-
-        $(".weekPriceTable").on('click', function () {
-            var t = $(this);
-            $("#globalPrice").attr("data", t.attr("data"));
-            $("#weekTd").text(t.text());
-        });
-
-        //常规价格设定
-        $("#globalPrice").on('click', function () {
-            //retail member group
-            var startTime = $("#startTime").val();
-            var endTime = $("#endTime").val();
-            var type = $(this).attr("data");
-            var weekTd = $("#weekTd").text();
-            var retail = $("#retail").val();
-            var member = $("#member").val();
-            var group = $('#group').val();
-            if (weekTd == '周一至周五') {
-                $.addWorkPrice(type, retail, member, group);
-            } else if (weekTd == '周六') {
-                $.addWorkPrice(type, retail, member, group);
-            } else if (weekTd == '周日') {
-                $.addWorkPrice(type, retail, member, group);
-            } else {
-                $.addWorkPrice("1", retail, member, group);
-                $.addWorkPrice("2", retail, member, group);
-                $.addWorkPrice("3", retail, member, group);
-            }
-        });
-    });
-</script>
+<script type="text/javascript" src="${ctxStatic}/modules/reserve/js/price_set_form.js"></script>
 </body>
 </html>
