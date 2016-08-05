@@ -164,6 +164,12 @@
         "name": "教练收入统计",
         "href":"/reserve/reserveVenue/fieldReport",
         "authorityList": []
+      },
+      {
+        "code": "tutorPeriodReport",
+        "name": "教练课时量统计",
+        "href":"/reserve/saleVenue/tutorPeriodReport",
+        "authorityList": []
       }
     ]
   },

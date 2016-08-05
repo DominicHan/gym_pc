@@ -42,6 +42,26 @@
         WHERE a.id = #{id}
     </select>
 
+    <select id="tutorPeriodReport" resultType="TutorPeriodLog">
+        select
+        v.name as "venue.name",
+        f.name as "field.name",
+        sum(i.period_num) as "periodNum"
+        from reserve_venue_cons as a
+        INNER JOIN  reserve_venue_cons_item as i on (a.id = i.cons_data_id and i.del_flag='0')
+        INNER JOIN  reserve_venue as v ON (a.venue_id = v.id and v.del_flag='0')
+        INNER JOIN  reserve_field as f on (f.id = i.field_id)
+        where a.del_flag = '0' and a.reserve_type = '4'
+        <if test="startDate != null and endDate != null">
+            and (Date(a.cons_date) BETWEEN DATE (#{startDate}) AND DATE(#{endDate}))
+        </if>
+        <if test="venue!=null and venue.id!=null and venue.id!=''">
+            and a.venue_id = #{venue.id}
+        </if>
+        ${sqlMap.dsf}
+        GROUP BY i.field_id
+    </select>
+
 
     <select id="findOrderLog" resultType="SaleVenueLog">
         select

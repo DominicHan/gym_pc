@@ -11,6 +11,7 @@ import com.bra.modules.reserve.event.venue.VenueCheckoutEvent;
 import com.bra.modules.reserve.utils.AuthorityUtils;
 import com.bra.modules.reserve.utils.TimeUtils;
 import com.bra.modules.reserve.web.form.SaleVenueLog;
+import com.bra.modules.reserve.web.form.TutorPeriodLog;
 import com.bra.modules.sys.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,17 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
         }
         List<SaleVenueLog> list = dao.findOrderLog(venueLog);
         return list;
+    }
+
+    public Page<TutorPeriodLog> tutorPeriodReportPage(Page<TutorPeriodLog> page, TutorPeriodLog log) {
+        if (log != null) {
+            if (log.getSqlMap().get("dsf") == null)
+                log.getSqlMap().put("dsf", AuthorityUtils.getDsf("a.venue_id"));
+        }
+        log.setPage(page);
+        List<TutorPeriodLog> list = dao.tutorPeriodReport(log);
+        page.setList(list);
+        return page;
     }
 
     /**

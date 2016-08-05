@@ -8,6 +8,7 @@ import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.service.*;
 import com.bra.modules.reserve.utils.ExcelInfo;
 import com.bra.modules.reserve.web.form.SaleVenueLog;
+import com.bra.modules.reserve.web.form.TutorPeriodLog;
 import com.bra.modules.sys.entity.User;
 import com.bra.modules.sys.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,16 @@ public class SaleVenueLogController extends BaseController {
         model.addAttribute("projectList",projectList);
         model.addAttribute("query",venueLog);//参数返回
         return "/reserve/record/saleVenueLog";
+    }
+    @RequestMapping(value = "tutorPeriodReport")
+    public String tutorPeriodReport(Model model, TutorPeriodLog log, HttpServletRequest request, HttpServletResponse response) {
+
+        Page<TutorPeriodLog> page = reserveVenueConsService.tutorPeriodReportPage(new Page<>(request, response), log);
+        model.addAttribute("page", page);
+        model.addAttribute("fieldList",reserveFieldService.findList(new ReserveField()));
+        model.addAttribute("venueList",reserveVenueService.findList(new ReserveVenue()));
+        model.addAttribute("query",log);//参数返回
+        return "/reserve/report/tutorPeriodReport";
     }
 
     @RequestMapping(value = "listExport")
