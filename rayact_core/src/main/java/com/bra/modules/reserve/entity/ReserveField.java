@@ -27,15 +27,6 @@ public class ReserveField extends SaasEntity<ReserveField> {
 	private Date birthday;
 	private String loginName;
 	private String password;
-	private ReserveUser reserveUser;
-
-	public ReserveUser getReserveUser() {
-		return reserveUser;
-	}
-
-	public void setReserveUser(ReserveUser reserveUser) {
-		this.reserveUser = reserveUser;
-	}
 
 	public String getLoginName() {
 		return loginName;

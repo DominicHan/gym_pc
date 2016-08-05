@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场地管理</title>
+    <title>教练价格管理</title>
     <meta name="decorator" content="main"/>
     <%@include file="/WEB-INF/views/include/upload.jsp" %>
 </head>
