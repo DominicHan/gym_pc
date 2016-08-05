@@ -61,6 +61,14 @@ public class SaleVenueLogController extends BaseController {
         model.addAttribute("query",venueLog);//参数返回
         return "/reserve/record/saleVenueLog";
     }
+    @RequestMapping(value = "tutorPeriodDetail")
+    public String tutorPeriodDetail(Model model, SaleVenueLog venueLog, HttpServletRequest request, HttpServletResponse response) {
+
+        Page<SaleVenueLog> page = reserveVenueConsService.findOrderLog(new Page<>(request, response), venueLog);
+        model.addAttribute("page", page);
+        model.addAttribute("query",venueLog);//参数返回
+        return "/reserve/report/tutorPeriodDetail";
+    }
     @RequestMapping(value = "tutorPeriodReport")
     public String tutorPeriodReport(Model model, TutorPeriodLog log, HttpServletRequest request, HttpServletResponse response) {
 

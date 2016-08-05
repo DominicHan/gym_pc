@@ -68,6 +68,7 @@
                         <div class="form-group col-lg-2 col-sm-3">
                             <input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
                             <input id="btnExport" class="btn btn-primary" type="button" value="导出"/>
+
                         </div>
                     </div>
                     <div class="content">
@@ -89,7 +90,7 @@
                                         <td>${log.periodNum}</td>
                                         <td>
                                             <a class="btn btn-primary btn-xs"
-                                               href="${ctx}/reserve/saleVenue/list?field.id=${log.field.id}&startDate=<fmt:formatDate value="${query.startDate}" pattern="yyyy-MM-dd"/>&endDate=<fmt:formatDate value="${query.endDate}" pattern="yyyy-MM-dd"/>"><i
+                                               href="${ctx}/reserve/saleVenue/tutorPeriodDetail?field.id=${log.field.id}&startDate=<fmt:formatDate value="${query.startDate}" pattern="yyyy-MM-dd"/>&endDate=<fmt:formatDate value="${query.endDate}" pattern="yyyy-MM-dd"/>"><i
                                                     class="fa fa-pencil"></i>详情</a>
                                         </td>
                                     </tr>
