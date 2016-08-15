@@ -93,5 +93,6 @@ label.error {
     font-weight: normal;
     font-size: 18px;
     color: red;
+    padding-left: 0;
     margin: 0;
 }
