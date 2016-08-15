@@ -18,7 +18,7 @@ html, body, table {
     position: relative;
     text-align: left;
     width: 598px;
-    height: 500px;
+    height: auto;
     padding: 40px 86px;
     margin-top:10%;
     margin-left:auto;
@@ -90,8 +90,8 @@ html, body, table {
 
 label.error {
     background: none;
-    width: 270px;
     font-weight: normal;
-    color: inherit;
+    font-size: 18px;
+    color: red;
     margin: 0;
 }

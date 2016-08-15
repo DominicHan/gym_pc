@@ -51,7 +51,9 @@
 				<label for="rememberMe" title="下次不需要再登录"><input type="checkbox" id="rememberMe" name="rememberMe" ${rememberMe ? 'checked' : ''}/>下次自动登录</label>
 			</div>
 			<div class="col-lg-6">
-				<div style="color: red">${message}</div>
+				<div id="messageBox">
+					<div id="loginError" style="color: red">${message}</div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
