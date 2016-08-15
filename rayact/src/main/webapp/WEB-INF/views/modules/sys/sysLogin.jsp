@@ -42,19 +42,20 @@
 			<input type="password" id="password" name="password" class="input-block-level required" placeholder="密码" />
 		</div>
 		<c:if test="${isValidateCodeLogin}">
-			<div class="row validateCode">
-				<sys:validateCode name="validateCode" inputCssStyle="width:100px;margin-left:10px;"/>
+			<div class="row validateCode" style="margin-bottom: 10px">
+				<sys:validateCode name="validateCode"/>
 			</div>
 		</c:if>
-		<div class="row">
-			<label for="rememberMe" title="下次不需要再登录"><input type="checkbox" id="rememberMe" name="rememberMe" ${rememberMe ? 'checked' : ''}/>下次自动登录</label>
+		<div class="row" style="margin-bottom: 20px">
+			<div class="col-lg-6" style="padding-left:0px ">
+				<label for="rememberMe" title="下次不需要再登录"><input type="checkbox" id="rememberMe" name="rememberMe" ${rememberMe ? 'checked' : ''}/>下次自动登录</label>
+			</div>
+			<div class="col-lg-6">
+				<div style="color: red">${message}</div>
+			</div>
 		</div>
 		<div class="row">
-			<input class="btn btn-large btn-primary" style="width: 100%;height: 56px" type="submit" value="登 录"/>
-		</div>
-
-		<div id="messageBox" class="alert alert-error ${empty message ? 'hide' : ''}"><button data-dismiss="alert" class="close">×</button>
-			<label id="loginError" class="error">${message}</label>
+			<input class="btn btn-large btn-primary" style="width: 100%;height: 56px; border-radius: 5px;" type="submit" value="登 录"/>
 		</div>
 	</form>
 
