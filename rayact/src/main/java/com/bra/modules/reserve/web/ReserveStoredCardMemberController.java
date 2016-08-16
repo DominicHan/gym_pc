@@ -5,6 +5,7 @@ import com.bra.common.persistence.Page;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.annotation.Token;
+import com.bra.modules.mechanism.web.bean.AttMainForm;
 import com.bra.modules.reserve.entity.ReserveCardStatements;
 import com.bra.modules.reserve.entity.ReserveMember;
 import com.bra.modules.reserve.entity.ReserveStoredcardMemberSet;
@@ -80,7 +81,7 @@ public class ReserveStoredCardMemberController extends BaseController {
 
     @RequestMapping(value = "save")
     @Token(remove = true)
-    public String save(ReserveMember reserveMember, Model model, RedirectAttributes redirectAttributes) {
+    public String save(ReserveMember reserveMember,AttMainForm attMainForm, Model model, RedirectAttributes redirectAttributes) {
         if (!beanValidator(model, reserveMember)) {
             return form(reserveMember, model);
         }
@@ -90,9 +91,9 @@ public class ReserveStoredCardMemberController extends BaseController {
 
         if (remainder == null) {
             reserveMember.setRemainder(0.0);//设置默认余额
-            reserveMemberService.save(reserveMember);
+            reserveMemberService.save(reserveMember,attMainForm);
         } else if (reserveMember.getId()!=null&&!StringUtils.isEmpty(reserveMember.getId())) {//修改用户
-            reserveMemberService.save(reserveMember);
+            reserveMemberService.save(reserveMember,attMainForm);
             ReserveMember reserveMemberOld = reserveMemberService.get(reserveMember);
             Double remainderOld = reserveMemberOld.getRemainder();
             Double transactionVolume = remainder - remainderOld;
@@ -103,7 +104,7 @@ public class ReserveStoredCardMemberController extends BaseController {
             reserveCardStatements.setVenue(reserveMember.getReserveVenue());
             reserveCardStatementsService.save(reserveCardStatements);
         } else {//新增用户
-            reserveMemberService.save(reserveMember);
+            reserveMemberService.save(reserveMember,attMainForm);
             reserveCardStatements.setTransactionVolume(reserveMember.getRemainder());
             reserveCardStatements.setRemarks("储值卡会员注册");
             reserveCardStatements.setTransactionType("1");//交易类型

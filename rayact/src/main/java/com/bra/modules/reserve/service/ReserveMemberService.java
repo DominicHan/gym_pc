@@ -2,6 +2,7 @@ package com.bra.modules.reserve.service;
 
 import com.bra.common.persistence.Page;
 import com.bra.common.service.CrudService;
+import com.bra.modules.mechanism.web.bean.AttMainForm;
 import com.bra.modules.reserve.dao.ReserveMemberDao;
 import com.bra.modules.reserve.entity.ReserveMember;
 import com.bra.modules.reserve.utils.AuthorityUtils;
@@ -40,7 +41,7 @@ public class ReserveMemberService extends CrudService<ReserveMemberDao, ReserveM
 	}
 	
 	@Transactional(readOnly = false)
-	public void save(ReserveMember reserveMember) {
+	public void save(ReserveMember reserveMember,AttMainForm attMainForm) {
 		if(reserveMember.getTutorPeriodValidityStart()==null){
 			reserveMember.setTutorPeriodValidityStart(new Date());//有教练课时开始时间
 		}
@@ -57,6 +58,7 @@ public class ReserveMemberService extends CrudService<ReserveMemberDao, ReserveM
 			reserveMember.setRemainder(0.0);//余额
 		}
 		super.save(reserveMember);
+		updateAttMain(reserveMember, attMainForm);
 	}
 	
 	@Transactional(readOnly = false)

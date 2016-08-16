@@ -125,7 +125,7 @@
                                                               showImg="true" resizeImg="true" resizeWidth="454"
                                                               resizeHeight="247"
                                                               imgWidth="120" imgHeight="80"
-                                                              modelName="reserveField" multi="true"/>
+                                                              modelName="ReserveField" multi="true"/>
                                         </div>
                                     </div>
                                 </div>

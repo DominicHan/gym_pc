@@ -4,6 +4,7 @@
 <head>
     <title>预储值管理</title>
     <meta name="decorator" content="main"/>
+    <%@include file="/WEB-INF/views/include/upload.jsp" %>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
@@ -29,7 +30,8 @@
                                 <tr>
                                     <td>卡号:</td>
                                     <td>
-                                        <form:input id="cardNo" path="cardno" htmlEscape="false" maxlength="20" placeholder="卡号请勿包含-"
+                                        <form:input id="cardNo" path="cardno" htmlEscape="false" maxlength="20"
+                                                    placeholder="卡号请勿包含-"
                                                     class="form-control required"/>
                                         <span class="help-inline"><font color="red">*</font> </span>
                                     </td>
@@ -71,7 +73,9 @@
                                 <tr>
                                     <td>余额:</td>
                                     <td>
-                                        <input type="text" value="<fmt:formatNumber value="${reserveMember.remainder}" groupingUsed="false" />" name="remainder"
+                                        <input type="text"
+                                               value="<fmt:formatNumber value="${reserveMember.remainder}" groupingUsed="false" />"
+                                               name="remainder"
                                                class="form-control " maxlength="20"
                                                <j:if test="${!fns:isAdmin()}">readonly="readonly"</j:if>/>
                                     </td>
@@ -88,13 +92,8 @@
                                                     itemValue="id"></sys:select>
                                     </td>
                                 </tr>
-
                                 <tr>
-                                    <td>备注:</td>
-                                    <td colspan="3">
-                                        <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
-                                                       class="form-control"/>
-                                    </td>
+
                                 </tr>
                                 <tr>
                                     <td>健身房：</td>
@@ -110,7 +109,27 @@
                                         ></sys:select>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>备注:</td>
+                                    <td colspan="3">
+                                        <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
+                                                       class="form-control"/>
+                                    </td>
+                                </tr>
                             </table>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">会员图片：</label>
+                                <div class="col-sm-6">
+                                    <mechanism:upload id="financeSchoolPic" fdKey="memberPic"
+                                                      name="attMains1" exts=""
+                                                      btnText="添加"
+                                                      modelId="${reserveMember.id}"
+                                                      showImg="true" resizeImg="true" resizeWidth="454"
+                                                      resizeHeight="247"
+                                                      imgWidth="120" imgHeight="80"
+                                                      modelName="com.bra.modules.reserve.entity.ReserveMember" multi="true"/>
+                                </div>
+                            </div>
                             <div>
                                 <input id="btnSubmit"
                                        class="btn btn-primary"

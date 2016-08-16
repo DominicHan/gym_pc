@@ -3,9 +3,10 @@
  */
 package com.bra.common.service;
 
-import java.util.List;
-
 import com.bra.common.persistence.BaseEntity;
+import com.bra.common.persistence.CrudDao;
+import com.bra.common.persistence.DataEntity;
+import com.bra.common.persistence.Page;
 import com.bra.common.utils.SpringContextHolder;
 import com.bra.common.utils.StringUtils;
 import com.bra.modules.mechanism.service.AttMainService;
@@ -13,9 +14,7 @@ import com.bra.modules.mechanism.web.bean.AttMainForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bra.common.persistence.CrudDao;
-import com.bra.common.persistence.DataEntity;
-import com.bra.common.persistence.Page;
+import java.util.List;
 
 /**
  * Service基类
@@ -31,7 +30,8 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 		if(StringUtils.isNotBlank(model.getModelName())){
 			attMainService.updateAttMainForm(attMainForm, model.getId(), model.getModelName());
 		}else{
-			attMainService.updateAttMainForm(attMainForm, model.getId(), model.getClass().getName());
+			Class<? extends BaseEntity> mc = model.getClass();
+			attMainService.updateAttMainForm(attMainForm, model.getId(),mc.getName());
 		}
 	}
 
