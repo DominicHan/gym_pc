@@ -212,13 +212,13 @@ public class FileController {
         if (!file.exists()) {
             return;//服务器不存在该文件
         }
-        OutputStream out;
+        OutputStream out;//输出对象
         try {
             out = response.getOutputStream();
-            InputStream is = new FileInputStream(attMain.getFdFilePath());
+            InputStream is = new FileInputStream(attMain.getFdFilePath());//从指定文件路径读取文件
             byte buffer[] = new byte[1024];
             while (is.read(buffer, 0, 1024) != -1) {
-                out.write(buffer);
+                out.write(buffer);//将文件流加入输出对象
             }
             out.flush();
             StreamUtil.close(is);

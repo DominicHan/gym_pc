@@ -148,7 +148,7 @@ public class StreamController {
                 /** fix the `renameTo` bug */
                 File dst = fileRepository.getFile(token, fileName);
                 dst.delete();
-                f.renameTo(dst);
+                f.renameTo(dst);//完成上传
 
                 if (StringUtils.isNotBlank(imgCheck)) {
                     if (!ImageUtils.getFormatName(dst, imgCheck)) {
