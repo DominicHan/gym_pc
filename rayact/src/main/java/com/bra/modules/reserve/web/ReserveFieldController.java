@@ -72,12 +72,12 @@ public class ReserveFieldController extends BaseController {
     //场地基本信息保存
     @RequestMapping(value = "save")
     @Token(remove = true)
-    public String save(ReserveField reserveField,
+    public String save(ReserveField reserveField,AttMainForm attMainForm,
                        Model model, RedirectAttributes redirectAttributes) throws ParseException {
         if (!beanValidator(model, reserveField)) {
             return form(reserveField, model);
         }
-        reserveFieldService.save(reserveField);
+        reserveFieldService.save(reserveField,attMainForm);
         addMessage(redirectAttributes, "保存场地基本信息成功");
         redirectAttributes.addAttribute("reserveVenue.id",reserveField.getReserveVenue().getId());
         return "redirect:" + Global.getAdminPath() + "/reserve/reserveField/list";
