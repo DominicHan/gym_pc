@@ -72,13 +72,11 @@ public class ReserveTutorTimeCardMemberController extends BaseController {
     public String addTime(String id, Double rechargeVolume,int time,String payType,String remarks){
         ReserveMember reserveMember = reserveMemberService.get(id);
         //预付款
-        ReserveTimecardMemberSet timecardMemberSet=timecardSetService.get(reserveMember.getTimecardSet());
         ReserveTimeCardPrepayment prepayment=new ReserveTimeCardPrepayment();
         prepayment.setType("2");
         prepayment.setRemainder(rechargeVolume);
         prepayment.setRemainTime(time);
         prepayment.setReserveMember(reserveMember);
-        prepayment.setReserveProject(timecardMemberSet.getReserveProject());
         double singlePrice=rechargeVolume/time;
         DecimalFormat df=new DecimalFormat("0.00");
         singlePrice=new Double(df.format(singlePrice).toString());

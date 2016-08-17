@@ -28,7 +28,7 @@
                         <label for="reserveFieldTicket" class="col-sm-2 control-label">课时标准:</label>
                         <div class="col-sm-4">
                             <input readonly="readonly" id="reserveFieldTicket" class="form-control"
-                                   value="${reserveMember.timecardSet.name}"/>
+                                   value="${periodPrice}"/>
                         </div>
                     </div>
                 </div>

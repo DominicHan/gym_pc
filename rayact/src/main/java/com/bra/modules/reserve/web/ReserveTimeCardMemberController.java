@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,9 +61,10 @@ public class ReserveTimeCardMemberController extends BaseController {
     }
     //储值冲次数
     @RequestMapping(value = "addTimeForm")
-    public String addTimeForm(ReserveMember reserveMember, HttpServletRequest request, HttpServletResponse response, Model model){
-        reserveMember = reserveMemberService.get(reserveMember);
+    public String addTimeForm(String id,String periodPrice,Model model){
+        ReserveMember reserveMember = reserveMemberService.get(id);
         model.addAttribute("reserveMember", reserveMember);
+        model.addAttribute("periodPrice", periodPrice);
         return "reserve/member/timeCardAddForm";
     }
     //次卡充值保存
@@ -82,13 +82,11 @@ public class ReserveTimeCardMemberController extends BaseController {
     public String addTime(String id, Double rechargeVolume,int time,String payType,String remarks,RedirectAttributes redirectAttributes){
         ReserveMember reserveMember = reserveMemberService.get(id);
         //预付款记录
-        ReserveTimecardMemberSet timecardMemberSet=timecardSetService.get(reserveMember.getTimecardSet());
         ReserveTimeCardPrepayment prepayment=new ReserveTimeCardPrepayment();
         prepayment.setType("1");
         prepayment.setRemainder(rechargeVolume);
         prepayment.setRemainTime(time);
         prepayment.setReserveMember(reserveMember);
-        prepayment.setReserveProject(timecardMemberSet.getReserveProject());
         double singlePrice=rechargeVolume/time;
         DecimalFormat df=new DecimalFormat("0.00");
         singlePrice=new Double(df.format(singlePrice).toString());

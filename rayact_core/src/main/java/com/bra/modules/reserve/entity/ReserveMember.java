@@ -46,8 +46,6 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 		this.cardno = cardno;
 	}
 
-	private ReserveTimecardMemberSet timecardSet;
-
 	public String getIsOwning() {
 		return isOwning;
 	}
@@ -63,15 +61,6 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	public void setStoredcardSet(ReserveStoredcardMemberSet storedcardSet) {
 		this.storedcardSet = storedcardSet;
 	}
-
-	public ReserveTimecardMemberSet getTimecardSet() {
-		return timecardSet;
-	}
-
-	public void setTimecardSet(ReserveTimecardMemberSet timecardSet) {
-		this.timecardSet = timecardSet;
-	}
-
 
 	
 	public ReserveMember() {

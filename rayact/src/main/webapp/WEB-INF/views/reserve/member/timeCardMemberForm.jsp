@@ -27,14 +27,6 @@
                                 <sys:message content="${message}"/>
                                 <table id="contentTable" class="table table-bordered">
                                     <tr>
-                                        <td>卡号:</td>
-                                        <td>
-                                            <form:input id="cardNo" path="cardno" htmlEscape="false" maxlength="20"
-                                                        class="form-control required"/>
-                                            <span class="help-inline"><font color="red">*</font> </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td>姓名:</td>
                                         <td>
                                             <div class="input-group">
@@ -43,20 +35,11 @@
                                                 <span class="input-group-addon"><font color="red">*</font> </span>
                                             </div>
                                         </td>
-                                        <td>课时卡标准:</td>
+                                        <td>卡号:</td>
                                         <td>
-                                            <div class="input-group">
-                                                <sys:select cssClass="input-xlarge" name="timecardSet.id"
-                                                            id="timeCardSetId"
-                                                            items="${timecardSetList}"
-                                                            value="${reserveMember.timecardSet.id}"
-                                                            itemLabel="name" itemValue="id"
-                                                            cssStyle="width:100%"
-                                                            defaultLabel="请选择课时卡"
-                                                            defaultValue="">
-                                                </sys:select>
-                                                <span class="input-group-addon"><font color="red">*</font> </span>
-                                            </div>
+                                            <form:input id="cardNo" path="cardno" htmlEscape="false" maxlength="20"
+                                                        class="form-control required"/>
+                                            <span class="help-inline"><font color="red">*</font> </span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -91,8 +74,6 @@
                                     </tr>
 
                                     <tr>
-
-
                                         <td>（无教练）剩余课时:</td>
                                         <td>
                                             <div class="input-group">
@@ -111,16 +92,6 @@
                                             </div>
                                         </td>
                                     </tr>
-
-
-                                    <tr>
-                                        <td>备注:</td>
-                                        <td colspan="3">
-                                            <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
-                                                           class="form-control "/>
-                                        </td>
-                                    </tr>
-
                                     <tr>
                                         <td>健身房：</td>
                                         <td>
@@ -144,6 +115,13 @@
                                                    onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                                         </td>
 
+                                    </tr>
+                                    <tr>
+                                        <td>备注:</td>
+                                        <td colspan="3">
+                                            <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
+                                                           class="form-control "/>
+                                        </td>
                                     </tr>
                                 </table>
 

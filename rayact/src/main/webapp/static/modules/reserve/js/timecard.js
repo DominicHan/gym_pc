@@ -1,7 +1,7 @@
-function addTime(id) {
+function addTime(id,periodPrice) {
     jQuery.postItems({
         url: ctx + '/reserve/timeCardMember/addTimeForm',
-        data: {id: id},
+        data: {id: id,periodPrice:periodPrice},
         success: function (result) {
             $("#timeCardAddDialogButton").click();
             $("#timeCardAddForm").html(result);

@@ -59,7 +59,6 @@
                                     <th>手机号</th>
                                     <th>性别</th>
                                     <th>健身房</th>
-                                    <th>课时标准</th>
                                     <th>剩余（教练）课时</th>
                                     <th>开始时间</th>
                                     <th>到期时间</th>
@@ -86,9 +85,6 @@
                                                 ${reserveMember.reserveVenue.name}
                                         </td>
                                         <td>
-                                                ${reserveMember.timecardSet.name}
-                                        </td>
-                                        <td>
                                                 ${reserveMember.tutorPeriodResidue}
                                         </td>
 
@@ -110,7 +106,7 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-xs"
-                                               onclick="addTime('${reserveMember.id}')"><i
+                                               onclick="addTime('${reserveMember.id}','398')"><i
                                                     class="fa fa-pencil"></i>课时购买</a>
                                             <a class="btn btn-primary btn-xs"
                                                onclick="prePayment('${reserveMember.id}')"

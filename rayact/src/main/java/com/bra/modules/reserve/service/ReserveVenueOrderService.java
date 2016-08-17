@@ -89,12 +89,8 @@ public class ReserveVenueOrderService extends CrudService<ReserveVenueOrderDao, 
                 double collectPrice=reserveVenueOrder.getCollectPrice();
                 ReserveMember member=reserveVenueOrder.getMember();
                 member=reserveMemberService.get(member);
-                ReserveTimecardMemberSet memberTimecarSet = member.getTimecardSet();
-                memberTimecarSet = reserveTimecardMemberSetService.get(memberTimecarSet);
-                ReserveProject project = memberTimecarSet.getReserveProject();
                 ReserveTimeCardPrepayment prepayment = new ReserveTimeCardPrepayment();
                 prepayment.setReserveMember(member);
-                prepayment.setReserveProject(project);
                 prepayment.setRemainder(collectPrice);
                 prepayment.setRemainTime(ticketNum);
                 prepayment.setSingleTimePrice(collectPrice/ticketNum);
