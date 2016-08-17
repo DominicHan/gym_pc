@@ -41,7 +41,8 @@
         <div class="login_form">
             <h1 class="form-signin-heading">${fns:getConfig('productName')}</h1>
             <div class="row">
-                <input type="text" id="username" name="username" class="input-block-level required" value="${username}"
+                <input type="text" id="username" name="username" class="input-block-level required"
+                       value="${username}"
                        placeholder="请输入用户名"/>
             </div>
             <div class="row">
