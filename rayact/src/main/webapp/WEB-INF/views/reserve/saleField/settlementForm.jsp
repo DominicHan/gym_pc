@@ -111,7 +111,7 @@
         <hr/>
         <label for="shouldPrice" class="col-lg-1 col-sm-2">应收:</label>
         <div class="col-lg-1 col-sm-2">
-            <input readonly="readonly" value="${order.shouldPrice}" type="text"
+            <input readonly="readonly" value="0" type="text"
                    id="shouldPrice" class="form-control"
                    name="shouldPrice"/>
         </div>
@@ -119,7 +119,7 @@
             <div class="row">
                 <label class="col-lg-3 col-sm-3" for="discountPrice">优惠:</label>
                 <div class="col-lg-6 col-sm-6">
-                    <input type="text" id="discountPrice" placeholder="请输入优惠金额后，点击确认优惠" value="${order.discountPrice}"
+                    <input type="text" id="discountPrice" placeholder="请输入优惠金额后，点击确认优惠" value="0"
                            onblur="editPrice()"
                            onafterpaste="editPrice()"
                            class="form-control " name="discountPrice"/>
@@ -133,7 +133,7 @@
             <li class="fa fa-edit" onclick="changePrice()"></li>
         </a></label>
         <div class="col-lg-1 col-sm-2">
-            <input type="text" readonly="readonly" id="consPrice" value="${order.consPrice}"
+            <input type="text" readonly="readonly" id="consPrice" value="0"
                    class="form-control required number" name="consPrice"/>
         </div>
         <label for="remainder" class="col-lg-1">会员余额:</label>
@@ -185,6 +185,7 @@
         $("#memberCardRadio").on('ifChecked', function () {
             $("#shouldPrice").val(${order.shouldPrice});
             $("#consPrice").val(${order.consPrice});
+            $("#periodNum").val("0");
             $("#editOrderPrice").show();
         });
     })
