@@ -43,21 +43,6 @@
                                                 <span class="input-group-addon"><font color="red">*</font> </span>
                                             </div>
                                         </td>
-                                        <td>课时卡标准:</td>
-                                        <td>
-                                            <div class="input-group">
-                                                <sys:select cssClass="input-xlarge" name="timecardSet.id"
-                                                            id="timeCardSetId"
-                                                            items="${timecardSetList}"
-                                                            value="${reserveMember.timecardSet.id}"
-                                                            itemLabel="name" itemValue="id"
-                                                            cssStyle="width:100%"
-                                                            defaultLabel="请选择课时卡"
-                                                            defaultValue="">
-                                                </sys:select>
-                                                <span class="input-group-addon"><font color="red">*</font> </span>
-                                            </div>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>身份证:</td>
