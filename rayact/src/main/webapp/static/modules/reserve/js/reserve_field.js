@@ -176,26 +176,6 @@ $(document).ready(function () {
         });
     }
 
-    //申请优惠
-    function applycut(t) {
-        var itemId = t.attr("data-item");
-        jQuery.postItems({
-            url: ctx + '/reserve/field/applyCut',
-            data: {itemId: itemId},
-            success: function (result) {
-                $("#applyCutForm").html(result);
-                $("#applyCutBtn").click();
-                $("#applyCutForm .select2").select2({
-                    width: '100%'
-                });
-                $('#applyCutForm .icheck').iCheck({
-                    checkboxClass: 'icheckbox_square-blue checkbox',
-                    radioClass: 'iradio_square-blue'
-                });
-            }
-        });
-    }
-
     //空场审核
     function checkEmpty(t) {
         var fieldId = $(t).attr("data-field");
@@ -496,11 +476,6 @@ $(document).ready(function () {
         text: "取消订单",
         func: function () {
             cancelReserve($(this));
-        }
-    }], [{
-        text: "申请优惠",
-        func: function () {
-            applycut($(this));
         }
     }], [{
         text: "预定详情",
