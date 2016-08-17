@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label for="residue" class="control-label col-lg-3">剩余课时数:</label>
                         <div class="col-lg-4">
-                            <input type="text" id="residue" readonly="readonly" value="${reserveMember.residue}"
+                            <input type="text" id="residue" readonly="readonly" value="${reserveMember.tutorPeriodResidue}"
                                    class="form-control"/>
                         </div>
                     </div>

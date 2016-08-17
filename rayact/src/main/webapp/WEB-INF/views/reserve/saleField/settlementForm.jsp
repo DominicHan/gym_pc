@@ -79,11 +79,10 @@
     <div class="row" id="payTypeDIV">
         <label for="memberCardRadio" class="col-lg-2">支付方式:</label>
         <div class="col-lg-10">
-
             <label class="radio-inline">
                 <input type="radio" class="icheck" id="reservePeriodRadio"
-                        <j:if test="${!(member.reserveVenue.id eq item.reserveVenue.id)}"> disabled="disabled" </j:if>
-                        <j:if test="${member.reserveVenue.id eq item.reserveVenue.id}"> checked="checked" </j:if>
+                        <j:if test="${!(member.reserveVenue.id eq itemList[0].reserveVenue.id)}"> disabled="disabled" </j:if>
+                        <j:if test="${member.reserveVenue.id eq itemList[0].reserveVenue.id}"> checked="checked" </j:if>
                        value="11" name="payType"/>预储课时
             </label>
 
