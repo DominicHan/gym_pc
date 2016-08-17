@@ -118,7 +118,7 @@
                                 </tr>
                             </table>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">会员图片：</label>
+                                <label class="col-sm-1 control-label">会员图片：</label>
                                 <div class="col-sm-6">
                                     <mechanism:upload id="financeSchoolPic" fdKey="memberPic"
                                                       name="attMains1" exts=""

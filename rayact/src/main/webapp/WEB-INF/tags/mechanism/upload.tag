@@ -89,7 +89,7 @@
     </div>
 </div>
 <%}%>
-<table class="tablesorter">
+<table class="table">
     <tbody id="bootstrap-stream-container_${id}">
     <%
         int index = 1;
@@ -115,7 +115,7 @@
             <span style="cursor: pointer;" class="glyphicon glyphicon-remove"
                   onclick="javascript:deleteAttMain('<%=attMain.getId()%>')">移除</span>|
             <%}%>
-            <a style="cursor: pointer;" class="glyphicon glyphicon-remove" target="_blank" href="${ctx}/mechanism/file/view/<%=attMain.getId()%>">查看</a>
+            <a style="cursor: pointer;" class="glyphicon glyphicon-remove" target="_blank" href="${ctx}/mechanism/file/image/<%=attMain.getId()%>">查看</a>
         </td>
     </tr>
     <%index++;%>
