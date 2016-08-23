@@ -413,12 +413,17 @@ public class ReserveController extends BaseController {
     @ResponseBody
     public Map checkValidate(Date tutorPeriodValidityStart, Date tutorPeriodValidityEnd) {
         Map map = new HashMap<>();
-        if (DateUtils.bettewn(tutorPeriodValidityStart, tutorPeriodValidityEnd, new Date())) {
-            map.put("rs", true);
-            map.put("msg", "课时有效");
-        } else {
+        if(tutorPeriodValidityStart==null||tutorPeriodValidityEnd==null){
             map.put("rs", false);
-            map.put("msg", "课时已过期");
+            map.put("msg", "请完善课时截止日期");
+        }else{
+            if (DateUtils.bettewn(tutorPeriodValidityStart, tutorPeriodValidityEnd, new Date())) {
+                map.put("rs", true);
+                map.put("msg", "课时有效");
+            } else {
+                map.put("rs", false);
+                map.put("msg", "课时已过期");
+            }
         }
         return map;
     }

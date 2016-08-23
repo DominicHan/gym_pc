@@ -17,16 +17,9 @@
     </tr>
     <c:forEach items="${venueCons.venueConsList}" var="item">
         <tr>
-            <td class="no-border-bottom">场地：${item.reserveField.name}</td>
+            <td class="no-border-bottom">教练：${item.reserveField.name}</td>
             <td class="no-border">预订时间：${item.startTime}-${item.endTime}</td>
             <td class="no-border">费用：${item.orderPrice}</td>
-        </tr>
-    </c:forEach>
-    <c:forEach items="${venueCons.tutorOrderList}" var="item">
-        <tr>
-            <td class="no-border">教练：${item.tutor.name}</td>
-            <td class="no-border">价格：${item.orderPrice*2} 元/小时</td>
-            <td class="no-border">费用：${item.totalPrice}</td>
         </tr>
     </c:forEach>
     <tr>
@@ -35,7 +28,9 @@
         <td class="no-border">实收：${venueCons.consPrice}</td>
     </tr>
     <tr>
-        <td class="no-border">会员余额：${venueCons.member.remainder}</td>
+        <td class="no-border">余额：${venueCons.member.remainder}</td>
+        <td class="no-border">剩余教练课时：${venueCons.member.tutorPeriodResidue}</td>
+        <td class="no-border">剩余无教练课时：${venueCons.member.residue}</td>
     </tr>
     </tbody>
 </table>

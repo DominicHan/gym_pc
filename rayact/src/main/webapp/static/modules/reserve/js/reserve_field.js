@@ -393,30 +393,31 @@ $(document).ready(function () {
                 return;
             }
         }
+        var checkValidate = true;
         if (payType == '11') {
             var periodNum = $("#periodNum").val();
             var tutorPeriodResidue = $("#tutorPeriodResidue").val();
             if (eval(periodNum) > eval(tutorPeriodResidue)) {
+                checkValidate = false;
                 errorLoding("课时量不足，请购买课时");
                 return;
             }
-        }
-        var checkValidate = false;//课时有效期
-        jQuery.postItems({
-            url: ctx + '/reserve/field/checkValidate',
-            data: {
-                tutorPeriodValidityStart: tutorPeriodValidityStart,
-                tutorPeriodValidityEnd: tutorPeriodValidityEnd
-            },
-            success: function (result) {
-                if (result.rs) {
-                    checkValidate = true;
-                } else {
-                    checkValidate = false;
-                    errorLoding("课时已过期");
+            jQuery.postItems({
+                url: ctx + '/reserve/field/checkValidate',
+                data: {
+                    tutorPeriodValidityStart: tutorPeriodValidityStart,
+                    tutorPeriodValidityEnd: tutorPeriodValidityEnd
+                },
+                success: function (result) {
+                    if (result.rs) {
+                        checkValidate = true;
+                    } else {
+                        checkValidate = false;
+                        errorLoding("课时已过期");
+                    }
                 }
-            }
-        });
+            });
+        }
         if (checkValidate) {
             $.postItems({
                 url: ctx + '/reserve/field/saveSettlement?random=' + Math.random(),
