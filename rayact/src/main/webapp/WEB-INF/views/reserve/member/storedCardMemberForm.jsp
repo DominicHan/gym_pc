@@ -97,7 +97,7 @@
                                 </tr>
                                 <tr>
                                     <td>健身房：</td>
-                                    <td colspan="3">
+                                    <td>
                                         <sys:select cssClass="input-xlarge" name="reserveVenue.id" id="reserveVenue_id"
                                                     cssStyle="width:100%"
                                                     items="${venueList}"
@@ -107,6 +107,14 @@
                                                     itemLabel="name"
                                                     itemValue="id"
                                         ></sys:select>
+                                    </td>
+                                    <td>健康状况:</td>
+                                    <td>
+                                        <input type="text"
+                                               value="${reserveMember.healthCondition}"
+                                               name="healthCondition"
+                                               class="form-control " maxlength="20"
+                                        />
                                     </td>
                                 </tr>
                                 <tr>

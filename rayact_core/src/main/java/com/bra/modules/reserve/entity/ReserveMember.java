@@ -26,11 +26,12 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	private String address;		// 地址
 	private String email;		// 邮箱
 	private String sex;		// 性别 1:男 2：女
+	private String healthCondition;//健康状况
 	private Double remainder ; //储值卡余额
+	private String cardno;		// 卡号
 	private Integer tutorPeriodResidue;//教練剩余課時
 	private Integer residue;//無教練剩余課時
 	private ReserveVenue reserveVenue;//所属场馆
-	private String cardno;		// 卡号
 	private String isOwning; //是否欠款 0：否 1：是
 	private Date validityStart;		// 課時开始日期
 	private Date validityEnd;		// 課時结束日期
@@ -234,4 +235,13 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	public void setTutorPeriodResidue(Integer tutorPeriodResidue) {
 		this.tutorPeriodResidue = tutorPeriodResidue;
 	}
+
+	public String getHealthCondition() {
+		return healthCondition;
+	}
+
+	public void setHealthCondition(String healthCondition) {
+		this.healthCondition = healthCondition;
+	}
+
 }

@@ -1,0 +1,2 @@
+20160823:会员增加
+alter table reserve_user add health_condition varchar(20) DEFAULT NULL;
