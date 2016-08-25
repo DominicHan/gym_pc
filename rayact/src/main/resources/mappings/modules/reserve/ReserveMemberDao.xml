@@ -48,6 +48,15 @@
 		WHERE a.id = #{id}
 	</select>
 
+	<select id="getMemberByLoginName" parameterType="String" resultType="ReserveMember">
+		SELECT
+		<include refid="reserveMemberColumns"/>
+		FROM reserve_member a
+		<include refid="reserveMemberJoins"/>
+		WHERE a.mobile = #{mobile}
+	</select>
+
+
 	<select id="memberRegisterOfMonth" resultType="integer">
 		SELECT
 		count(a.id)

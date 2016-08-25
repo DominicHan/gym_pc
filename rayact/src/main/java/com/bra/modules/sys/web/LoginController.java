@@ -125,21 +125,23 @@ public class LoginController extends BaseController {
         // 验证失败清空验证码
         request.getSession().setAttribute(ValidateCodeServlet.VALIDATE_CODE, IdGen.uuid());
 
-        // 如果是手机登录，则返回JSON字符串
-        if (mobile) {
-            return renderString(response, model);
-        }
+
         model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, username);
         model.addAttribute(FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM, rememberMe);
         model.addAttribute(FormAuthenticationFilter.DEFAULT_MOBILE_PARAM, mobile);
         model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, exception);
         model.addAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM, message);
+        // 如果是手机登录，则返回JSON字符串
+        if (mobile) {
+            return "modules/sys/appLogin";
+        }
         return "modules/sys/sysLogin";
     }
 
     /**
      * 登录成功，进入管理首页
      */
+    /*@RequiresPermissions(value={"user","reserveMember"},logical= Logical.OR)*/
     @RequiresPermissions("user")
     @RequestMapping(value = "${adminPath}")
     public String index(HttpServletRequest request, HttpServletResponse response) {
@@ -200,7 +202,7 @@ public class LoginController extends BaseController {
             }
             return "redirect:" + adminPath + "/reserve/main";
         }else{
-            return "app/index";
+            return"redirect:" + adminPath + "/app/main";
         }
     }
 

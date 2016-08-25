@@ -24,6 +24,11 @@ public class ReserveMemberService extends CrudService<ReserveMemberDao, ReserveM
 	public ReserveMember get(String id) {
 		return super.get(id);
 	}
+
+	public ReserveMember getMemberByLoginName(String loginName) {
+		ReserveMember member= dao.getMemberByLoginName(loginName);
+		return member;
+	}
 	
 	public List<ReserveMember> findList(ReserveMember reserveMember) {
 		if (reserveMember != null) {

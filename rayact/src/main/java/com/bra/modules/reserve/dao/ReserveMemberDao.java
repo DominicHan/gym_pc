@@ -19,4 +19,5 @@ public interface ReserveMemberDao extends CrudDao<ReserveMember> {
 	List<ReserveMember> findExactList(ReserveMember reserveMember);
 	Integer memberRegisterOfMonth(ReserveMember reserveMember);
 	Integer memberRegisterOfAll(ReserveMember reserveMember);
+	ReserveMember getMemberByLoginName(String loginName);
 }

@@ -6,6 +6,8 @@ import com.bra.common.security.Principal;
 import com.bra.common.servlet.ValidateCodeServlet;
 import com.bra.common.utils.SpringContextHolder;
 import com.bra.common.web.Servlets;
+import com.bra.modules.reserve.entity.ReserveMember;
+import com.bra.modules.reserve.service.ReserveMemberService;
 import com.bra.modules.sys.entity.User;
 import com.bra.modules.sys.service.SystemService;
 import com.bra.modules.sys.utils.LogUtils;
@@ -23,6 +25,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -38,7 +41,8 @@ import java.util.List;
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
-
+    @Autowired
+    private ReserveMemberService reserveMemberService;
     private SystemService systemService;
 
     /**
@@ -59,11 +63,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
                 throw new AuthenticationException("msg:验证码错误, 请重试.");
             }
         }
-        if(token.isMobileLogin()==true){
-          /*  User user = getSystemService().getMemberByLoginName(token.getUsername());*/
-            return new SimpleAuthenticationInfo(new Principal("123","admin","admin","1",true), "123", "124");
+        if (token.isMobileLogin() == true) {
+            ReserveMember member = reserveMemberService.getMemberByLoginName(token.getUsername());
+            return new SimpleAuthenticationInfo(new Principal(member.getId(), member.getMobile(), member.getName(), member.getTenantId(), true), member.getPassword(), getName());
         }
-
         // 校验用户名密码
         User user = getSystemService().getUserByLoginName(token.getUsername());
         if (user != null) {
@@ -72,7 +75,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             }
             return new SimpleAuthenticationInfo(new Principal(user.getId(), user.getLoginName(),
                     user.getName(), user.getCompany().getId(), token.isMobileLogin()),
-                     user.getPassword(), getName());
+                    user.getPassword(), getName());
         } else {
             return null;
         }
@@ -85,20 +88,18 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         Principal principal = (Principal) getAvailablePrincipal(principals);
         // 获取当前已登录的用户
-        if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))) {
-            Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
-            if (sessions.size() > 0) {
-                // 如果是登录进来的，则踢出已在线用户
-                if (UserUtils.getSubject().isAuthenticated()) {
-                    for (Session session : sessions) {
-                        getSystemService().getSessionDao().delete(session);
-                    }
+        Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
+        if (sessions.size() > 0) {
+            // 如果是登录进来的，则踢出已在线用户
+            if (UserUtils.getSubject().isAuthenticated()) {
+                for (Session session : sessions) {
+                    getSystemService().getSessionDao().delete(session);
                 }
-                // 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
-                else {
-                    UserUtils.getSubject().logout();
-                    throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
-                }
+            }
+            // 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
+            else {
+                UserUtils.getSubject().logout();
+                throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
             }
         }
         User user = getSystemService().getUserByLoginName(principal.getLoginName());
@@ -111,9 +112,17 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             // 记录登录日志
             LogUtils.saveLog(Servlets.getRequest(), "系统登录");
             return info;
-        } else {
-            return null;
         }
+        ReserveMember member = reserveMemberService.getMemberByLoginName(principal.getLoginName());
+        if(member!=null){
+            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+            // 添加用户权限
+            info.addStringPermission("user");
+            // 记录登录日志
+            LogUtils.saveLog(Servlets.getRequest(), "系统登录");
+            return info;
+        }
+        return null;
     }
 
     @Override

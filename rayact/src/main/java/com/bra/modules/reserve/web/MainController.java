@@ -1,7 +1,5 @@
 package com.bra.modules.reserve.web;
 
-import com.bra.common.security.Principal;
-import com.bra.common.security.SecurityUtil;
 import com.bra.modules.reserve.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +21,6 @@ public class MainController {
 
     @RequestMapping(value = "main")
     public String main(Model model) {
-        Principal principal = SecurityUtil.getPrincipal();
-        if (principal.isMobileLogin()) {
-            return "modules/sys/main";
-        }
         Map<String, Object> data = mainService.controle();
         model.addAllAttributes(data);
         return "reserve/main";
@@ -40,7 +34,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "salesMain")
-    public String salesMain(Model model) {
+    public String salesMain() {
         return "reserve/salesMain";
     }
 }
