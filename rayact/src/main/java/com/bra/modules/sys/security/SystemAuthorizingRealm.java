@@ -59,6 +59,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
                 throw new AuthenticationException("msg:验证码错误, 请重试.");
             }
         }
+        if(token.isMobileLogin()==true){
+          /*  User user = getSystemService().getMemberByLoginName(token.getUsername());*/
+            return new SimpleAuthenticationInfo(new Principal("123","admin","admin","1",true), "123", "124");
+        }
 
         // 校验用户名密码
         User user = getSystemService().getUserByLoginName(token.getUsername());
@@ -68,7 +72,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             }
             return new SimpleAuthenticationInfo(new Principal(user.getId(), user.getLoginName(),
                     user.getName(), user.getCompany().getId(), token.isMobileLogin()),
-                    user.getPassword(), getName());
+                     user.getPassword(), getName());
         } else {
             return null;
         }

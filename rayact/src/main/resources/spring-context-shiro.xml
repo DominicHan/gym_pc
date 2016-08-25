@@ -34,6 +34,7 @@
 				/userfiles/** = anon
 				${adminPath}/cas = cas
 				${adminPath}/login = authc
+				${adminPath}/appLogin = anon
 				${adminPath}/logout = logout
 				${adminPath}/** = user
 				/act/rest/service/editor/** = perms[act:model:edit]
@@ -46,8 +47,7 @@
 
 	<!-- 安全认证过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" /><!-- 
-		<property name="loginUrl" value="${cas.server.url}?service=${cas.project.url}${adminPath}/cas" /> -->
+		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="${adminPath}/login" />
 		<property name="successUrl" value="${adminPath}?login" />
 		<property name="filters">
@@ -102,10 +102,6 @@
 
 
 	<!-- 自定义Session存储容器 -->
-	<!-- 	<bean id="sessionDAO" class="com.bra.common.security.shiro.session.JedisSessionDAO"> -->
-	<!-- 		<property name="sessionIdGenerator" ref="idGen" /> -->
-	<!-- 		<property name="sessionKeyPrefix" value="${redis.keyPrefix}_session_" /> -->
-	<!-- 	</bean> -->
 	<bean id="sessionDAO" class="com.bra.common.security.shiro.session.CacheSessionDAO">
 		<property name="sessionIdGenerator" ref="idGen" />
 		<property name="activeSessionsCacheName" value="activeSessionsCache" />

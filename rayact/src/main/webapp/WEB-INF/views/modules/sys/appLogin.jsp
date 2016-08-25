@@ -38,13 +38,13 @@
         Chrome、Firefox、Safari 等。</p></div><![endif]-->
 <div class="form-signin">
     <form id="loginForm" action="${ctx}/login" method="post">
-        <input type="hidden"  name="mobileLogin" value="false"/>
+        <input type="hidden"  name="mobileLogin" value="true"/>
         <div class="login_form">
             <h1 class="form-signin-heading">${fns:getConfig('productName')}</h1>
             <div class="row">
                 <input type="text" id="username" name="username" class="input-block-level required"
                        value="${username}"
-                       placeholder="请输入用户名"/>
+                       placeholder="请输入手机号"/>
             </div>
             <div class="row">
                 <input type="password" id="password" name="password" class="input-block-level required"
