@@ -6,5 +6,6 @@
 </head>
 <body>
 微信公共平台
+<a href="${ctx}/logout">退出</a>
 </body>
 </html>

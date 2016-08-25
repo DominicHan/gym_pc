@@ -87,8 +87,8 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         Principal principal = (Principal) getAvailablePrincipal(principals);
-        // 获取当前已登录的用户
-        Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
+
+       /* Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
         if (sessions.size() > 0) {
             // 如果是登录进来的，则踢出已在线用户
             if (UserUtils.getSubject().isAuthenticated()) {
@@ -101,7 +101,8 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
                 UserUtils.getSubject().logout();
                 throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
             }
-        }
+        }*/
+        // 获取当前已登录的用户
         User user = getSystemService().getUserByLoginName(principal.getLoginName());
         if (user != null) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
