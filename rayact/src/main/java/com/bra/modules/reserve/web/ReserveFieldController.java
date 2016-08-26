@@ -39,8 +39,6 @@ public class ReserveFieldController extends BaseController {
     @Autowired
     private ReserveFieldService reserveFieldService;
     @Autowired
-    private ReserveFieldRelationService reserveFieldRalationService;
-    @Autowired
     private ReserveProjectService reserveProjectService;
     @Autowired
     private ReserveVenueService reserveVenueService;

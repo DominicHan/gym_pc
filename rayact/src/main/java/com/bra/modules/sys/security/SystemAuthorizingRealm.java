@@ -65,7 +65,11 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
         }
         if (token.isMobileLogin() == true) {
             ReserveMember member = reserveMemberService.getMemberByLoginName(token.getUsername());
-            return new SimpleAuthenticationInfo(new Principal(member.getId(), member.getMobile(), member.getName(), member.getTenantId(), true), member.getPassword(), getName());
+            if(member!=null){
+                return new SimpleAuthenticationInfo(new Principal(member.getId(), member.getMobile(), member.getName(), member.getTenantId(), true), member.getPassword(), getName());
+            }else{
+                return null;
+            }
         }
         // 校验用户名密码
         User user = getSystemService().getUserByLoginName(token.getUsername());
