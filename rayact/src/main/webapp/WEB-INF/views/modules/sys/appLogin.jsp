@@ -61,7 +61,9 @@
 
         <div style="margin:20px auto 20px auto; width:300px;">
             <div style="margin-bottom:10px;">
-                <button type="submit">登录</button>
+                <button type="submit">
+                    <span style="color: white;font-size: 20px;">登录</span>
+                </button>
             </div>
         </div>
         <div style="margin:10px;">
