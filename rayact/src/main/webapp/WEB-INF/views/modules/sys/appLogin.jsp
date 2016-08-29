@@ -1,11 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>${fns:getConfig('productName')} 登录</title>
-    <meta name="decorator" content="blank"/>
+    <meta name="referrer" content="always"/>
+    <meta charset='utf-8'/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>里昂健身-登录</title>
     <link rel="stylesheet" type="text/css" href="${ctxStatic}/modules/reserve/css/app_login.css">
-    <script src="${ctxStatic}/flash/zoom.min.js" type="text/javascript"></script>
+    <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css?time=21" rel="stylesheet"/>
+    <script type="text/javascript" src="${ctxStatic}/cleanzone/js/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#loginForm").validate({
@@ -30,39 +35,41 @@
     </script>
 </head>
 <body>
-
-<form id="loginForm" action="${ctx}/login" method="post">
-    <input type="hidden" name="mobileLogin" value="true"/>
-    <div class="login_form">
-        <div class="row">
+<div style="margin:30px auto 30px auto">
+    <img src="${ctxStatic}/images/weixin_login.png" style="max-width: 260px;">
+</div>
+<div>
+    <form accept-charset="UTF-8" action="${ctx}/login" method="post">
+        <input type="hidden" name="mobileLogin" value="true"/>
+        <div style="margin:10px;">
             <input type="text" id="username" name="username" class="input-block-level required"
                    value="${username}"
                    placeholder="请输入手机号"/>
         </div>
-        <div class="row">
+        <div style="margin:10px;">
             <input type="password" id="password" name="password" class="input-block-level required"
                    placeholder="密码"/>
         </div>
         <c:if test="${isValidateCodeLogin}">
-            <div class="row" style="margin-bottom: 10px;width: 690px">
-                <div class="validateCode">
-                    <sys:validateCode name="validateCode"/>
+            <div class="row" style="margin: 10px;">
+                <div class="validateCodeDiv">
+                    <sys:appValidateCode  name="validateCode"/>
                 </div>
 
             </div>
         </c:if>
-        <div class="row" style="margin-bottom: 20px">
+        <div style="margin:10px;">
             <div id="messageBox">
                 <div id="loginError" style="color: red">${message}</div>
             </div>
         </div>
-        <div class="row">
-            <input class="btn btn-large btn-primary"
-                   style="width:690px;height: 80px; border-radius: 5px;background-color:#990707;border-color:#990707"
-                   type="submit"
-                   value="登 录"/>
+        <div style="margin:20px auto 20px auto; width:230px;">
+            <div style="margin-bottom:10px;">
+                <button type="submit" style="">登录
+                </button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 </body>
 </html>
