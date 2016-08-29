@@ -7,6 +7,7 @@
     <title><sitemesh:title/> - Powered By 博云睿动</title>
     <!-- Bootstrap core CSS -->
     <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css?time=21" rel="stylesheet"/>
+    <link href="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="${ctxStatic}/cleanzone/fonts/font-awesome-4/css/font-awesome.min.css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -50,7 +51,7 @@
     <script type="text/javascript"
             src="${ctxStatic}/cleanzone/js/jquery.niftymodals/js/jquery.modalEffects.js"></script>
     <script type="text/javascript" src="${ctxStatic}/cleanzone/js/jquery.icheck/icheck.min.js"></script>
-    <link href="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.css" type="text/css" rel="stylesheet"/>
+
     <script src="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.js" type="text/javascript"></script>
     <script src="${ctxStatic}/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
     <script src="${ctxStatic}/cleanzone/js/echart/echarts.common.min.js" type="text/javascript"></script>

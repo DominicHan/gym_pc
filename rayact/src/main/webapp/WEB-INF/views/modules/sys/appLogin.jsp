@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="${ctxStatic}/modules/reserve/css/app_login.css">
     <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css?time=21" rel="stylesheet"/>
     <script type="text/javascript" src="${ctxStatic}/cleanzone/js/jquery.js"></script>
+    <script src="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#loginForm").validate({
@@ -36,10 +37,10 @@
 </head>
 <body>
 <div style="margin:30px auto 30px auto">
-    <img src="${ctxStatic}/images/weixin_login.png" style="max-width: 260px;">
+    <img src="${ctxStatic}/images/weixin_login.png" style="max-width: 260px;max-height: 140px;">
 </div>
 <div>
-    <form accept-charset="UTF-8" action="${ctx}/login" method="post">
+    <form id="loginForm" accept-charset="UTF-8" action="${ctx}/login" method="post">
         <input type="hidden" name="mobileLogin" value="true"/>
         <div style="margin:10px;">
             <input type="text" id="username" name="username" class="input-block-level required"
@@ -51,22 +52,21 @@
                    placeholder="密码"/>
         </div>
         <c:if test="${isValidateCodeLogin}">
-            <div class="row" style="margin: 10px;">
+            <div style="margin: 10px;">
                 <div class="validateCodeDiv">
-                    <sys:appValidateCode  name="validateCode"/>
+                    <sys:appValidateCode name="validateCode"/>
                 </div>
-
             </div>
         </c:if>
-        <div style="margin:10px;">
-            <div id="messageBox">
-                <div id="loginError" style="color: red">${message}</div>
+
+        <div style="margin:20px auto 20px auto; width:300px;">
+            <div style="margin-bottom:10px;">
+                <button type="submit">登录</button>
             </div>
         </div>
-        <div style="margin:20px auto 20px auto; width:230px;">
-            <div style="margin-bottom:10px;">
-                <button type="submit" style="">登录
-                </button>
+        <div style="margin:10px;">
+            <div class="row" id="messageBox">
+                <div id="loginError" style="color: red">${message}</div>
             </div>
         </div>
     </form>
