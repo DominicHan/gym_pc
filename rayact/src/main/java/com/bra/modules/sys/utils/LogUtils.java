@@ -3,19 +3,17 @@
  */
 package com.bra.modules.sys.utils;
 
-import java.lang.reflect.Method;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.bra.modules.sys.dao.LogDao;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.web.method.HandlerMethod;
-
 import com.bra.common.utils.Exceptions;
 import com.bra.common.utils.SpringContextHolder;
 import com.bra.common.utils.StringUtils;
+import com.bra.modules.sys.dao.LogDao;
 import com.bra.modules.sys.entity.Log;
 import com.bra.modules.sys.entity.User;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.web.method.HandlerMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
 
 /**
  * 字典工具类
@@ -38,18 +36,20 @@ public class LogUtils {
 	 * 保存日志
 	 */
 	public static void saveLog(HttpServletRequest request, Object handler, Exception ex, String title){
-		User user = UserUtils.getUser();
-		if (user != null && user.getId() != null){
-			Log log = new Log();
-			log.setTitle(title);
-			log.setType(ex == null ? Log.TYPE_ACCESS : Log.TYPE_EXCEPTION);
-			log.setRemoteAddr(StringUtils.getRemoteAddr(request));
-			log.setUserAgent(request.getHeader("user-agent"));
-			log.setRequestUri(request.getRequestURI());
-			log.setParams(request.getParameterMap());
-			log.setMethod(request.getMethod());
-			// 异步保存日志
-			new SaveLogThread(log, handler, ex).start();
+		if(AuthUtils.isMobileLogin()==false){
+			User user=UserUtils.getUser();
+			if (user != null && user.getId() != null){
+				Log log = new Log();
+				log.setTitle(title);
+				log.setType(ex == null ? Log.TYPE_ACCESS : Log.TYPE_EXCEPTION);
+				log.setRemoteAddr(StringUtils.getRemoteAddr(request));
+				log.setUserAgent(request.getHeader("user-agent"));
+				log.setRequestUri(request.getRequestURI());
+				log.setParams(request.getParameterMap());
+				log.setMethod(request.getMethod());
+				// 异步保存日志
+				new SaveLogThread(log, handler, ex).start();
+			}
 		}
 	}
 

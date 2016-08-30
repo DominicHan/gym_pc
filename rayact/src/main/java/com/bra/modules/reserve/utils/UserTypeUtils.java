@@ -3,7 +3,7 @@ package com.bra.modules.reserve.utils;
 /**
  * Created by jiangxingqi on 16/1/20.
  */
-public class UserUtils {
+public class UserTypeUtils {
     public static String getUserType(String userType){
         if ("1".equals(userType)) {
             return "超级管理员";

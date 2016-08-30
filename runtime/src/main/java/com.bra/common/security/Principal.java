@@ -78,4 +78,9 @@ public class Principal implements Serializable {
         return id;
     }
 
+
+    public void setMobileLogin(boolean mobileLogin) {
+        this.mobileLogin = mobileLogin;
+    }
+
 }

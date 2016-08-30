@@ -66,7 +66,7 @@ public class LoginController extends BaseController {
         if (principal != null && !principal.isMobileLogin()) {
             return "redirect:" + adminPath;
         }
-        return "modules/sys/appLogin";
+        return "app/appLogin";
     }
 
     /**
@@ -133,7 +133,7 @@ public class LoginController extends BaseController {
         model.addAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM, message);
         // 如果是手机登录，则返回JSON字符串
         if (mobile) {
-            return "modules/sys/appLogin";
+            return "app/appLogin";
         }
         return "modules/sys/sysLogin";
     }
@@ -141,7 +141,6 @@ public class LoginController extends BaseController {
     /**
      * 登录成功，进入管理首页
      */
-    /*@RequiresPermissions(value={"user","reserveMember"},logical= Logical.OR)*/
     @RequiresPermissions("user")
     @RequestMapping(value = "${adminPath}")
     public String index(HttpServletRequest request, HttpServletResponse response) {

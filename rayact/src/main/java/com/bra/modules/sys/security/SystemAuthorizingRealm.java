@@ -107,25 +107,28 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             }
         }*/
         // 获取当前已登录的用户
-        User user = getSystemService().getUserByLoginName(principal.getLoginName());
-        if (user != null) {
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            // 添加用户权限
-            info.addStringPermission("user");
-            // 更新登录IP和时间
-            getSystemService().updateUserLoginInfo(user);
-            // 记录登录日志
-            LogUtils.saveLog(Servlets.getRequest(), "系统登录");
-            return info;
-        }
-        ReserveMember member = reserveMemberService.getMemberByLoginName(principal.getLoginName());
-        if(member!=null){
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            // 添加用户权限
-            info.addStringPermission("user");
-            // 记录登录日志
-            LogUtils.saveLog(Servlets.getRequest(), "系统登录");
-            return info;
+        if(principal.isMobileLogin()){
+            ReserveMember member = reserveMemberService.getMemberByLoginName(principal.getLoginName());
+            if(member!=null){
+                SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+                // 添加用户权限
+                info.addStringPermission("user");
+                // 记录登录日志
+                LogUtils.saveLog(Servlets.getRequest(), "系统登录");
+                return info;
+            }
+        }else{
+            User user = getSystemService().getUserByLoginName(principal.getLoginName());
+            if (user != null) {
+                SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+                // 添加用户权限
+                info.addStringPermission("user");
+                // 更新登录IP和时间
+                getSystemService().updateUserLoginInfo(user);
+                // 记录登录日志
+                LogUtils.saveLog(Servlets.getRequest(), "系统登录");
+                return info;
+            }
         }
         return null;
     }
