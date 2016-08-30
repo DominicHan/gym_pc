@@ -158,14 +158,14 @@ public class ReserveMemberController extends BaseController {
 			return form(reserveMember, model);
 		}
 		addMessage(redirectAttributes, "保存会员成功");
-		return "redirect:"+Global.getAdminPath()+"/reserve/reserveMember/?repage";
+		return "redirect:"+Global.getAdminPath()+"/reserve/reserveMember/list";
 	}
 	
 	@RequestMapping(value = "delete")
 	public String delete(ReserveMember reserveMember, RedirectAttributes redirectAttributes) {
 		reserveMemberService.delete(reserveMember);
 		addMessage(redirectAttributes, "删除会员成功");
-		return "redirect:"+Global.getAdminPath()+"/reserve/reserveMember/?repage";
+		return "redirect:"+Global.getAdminPath()+"/reserve/reserveMember/list";
 	}
 
 	@RequestMapping(value = "loadMember")

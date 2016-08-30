@@ -62,20 +62,11 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">卡号：</label>
                                         <div class="col-sm-6">
-                                            <form:input path="cartno" htmlEscape="false" maxlength="20"
+                                            <form:input path="cardno" htmlEscape="false" maxlength="20"
                                                         class="form-control required"/>
                                             <span class="help-inline"><font color="red">*</font> </span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">卡号类型：</label>
-                                        <div class="col-sm-6">
-                                            <form:radiobuttons path="cartType" items="${fns:getDictList('cart_type')}"
-                                                               itemLabel="label"
-                                                               itemValue="value" htmlEscape="false" class="icheck"/>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">场馆：</label>
                                         <div class="col-sm-6">
