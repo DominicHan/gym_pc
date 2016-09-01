@@ -73,6 +73,9 @@
 			<if test="reserveVenue != null and reserveVenue.id != null and reserveVenue.id !=''">
 				and a.venue_id = #{reserveVenue.id}
 			</if>
+			<if test="reserveField != null and reserveField.id != null and reserveField.id !=''">
+				and a.field_id = #{reserveField.id}
+			</if>
 			<if test="consData != null and consData.id != null and consData.id !=''">
 				and a.cons_data_id = #{consData.id}
 			</if>

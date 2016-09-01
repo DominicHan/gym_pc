@@ -1,9 +1,12 @@
 package com.bra.modules.reserve.service;
 
-import com.bra.common.utils.StringUtils;
+import com.bra.common.persistence.ConstantEntity;
 import com.bra.modules.reserve.dao.ReserveFieldPriceSetDao;
 import com.bra.modules.reserve.dao.ReserveVenueConsItemDao;
-import com.bra.modules.reserve.entity.*;
+import com.bra.modules.reserve.entity.ReserveField;
+import com.bra.modules.reserve.entity.ReserveFieldPriceSet;
+import com.bra.modules.reserve.entity.ReserveFieldRelation;
+import com.bra.modules.reserve.entity.ReserveVenueConsItem;
 import com.bra.modules.reserve.entity.form.FieldPrice;
 import com.bra.modules.reserve.entity.form.TimePrice;
 import com.bra.modules.reserve.utils.TimeUtils;
@@ -13,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -51,53 +53,29 @@ public class ReserveAppFieldPriceService {
 
     /**
      * 根据场馆Id和时间获取场地不同时间段的价格,并查询当前时间是否预定,并标记位已定
-     *
-     * @param venueId 场馆Id
-     * @param date    时间
-     * @param consType 会员类型(1:散客,2:会员)
-     * @return
      */
-    public List<FieldPrice> findByDate(String venueId,String projectId, String consType, Date date, List<String> times) {
-        List<FieldPrice> fieldPriceList = Lists.newLinkedList();
-        //查询场馆中所有场地
+    public List<FieldPrice> findByDate(Date date, String filedId, List<String> times) {
         ReserveField field = new ReserveField();
-        ReserveVenue venue = new ReserveVenue();
-        venue.setId(venueId);
-        ReserveProject project = new ReserveProject();
-        project.setId(projectId);
-        field.setReserveProject(project);
-        field.setReserveVenue(venue);
-        List<ReserveField> fieldList = reserveFieldService.findList(field);
-
+        field.setId(filedId);
+        List<FieldPrice> fieldPriceList = Lists.newLinkedList();
         //查询已预定的信息
         ReserveVenueConsItem reserveVenueConsItem = new ReserveVenueConsItem();
-        reserveVenueConsItem.setReserveVenue(venue);
+        reserveVenueConsItem.setReserveField(field);
         reserveVenueConsItem.setConsDate(date);
 
         //查询价格
         ReserveFieldPriceSet reserveFieldPriceSet = new ReserveFieldPriceSet();
-        reserveFieldPriceSet.setReserveVenue(new ReserveVenue(venueId));
+        reserveFieldPriceSet.setReserveField(field);
         //会员类型(1:散客,2:会员)
-        if (StringUtils.isNotBlank(consType)) {
-            reserveFieldPriceSet.setConsType(consType);
-        }
+        reserveFieldPriceSet.setConsType(ConstantEntity.YES);
         String weekType = TimeUtils.getWeekType(date);//获得当天属于周几
         reserveFieldPriceSet.setWeek(weekType);
+
         List<ReserveFieldPriceSet> reserveFieldPriceSetList = new ArrayList<ReserveFieldPriceSet>();
-        //设置场地的时令
-        for (ReserveField i : fieldList) {
-            reserveFieldPriceSet.setReserveField(i);
-            if ("1".equals(i.getIsTimeInterval())) {//该场地分时令
-                Calendar cal = Calendar.getInstance();
-                int day = cal.get(Calendar.DATE);
-                int month = cal.get(Calendar.MONTH) + 1;
-                ReserveTimeInterval reserveTimeInterval = reserveTimeIntervalService.findTimeInterval(month, day);//查询系统时间属于哪个时令
-                reserveFieldPriceSet.setReserveTimeInterval(reserveTimeInterval);
-            }
-            List<ReserveFieldPriceSet> list = reserveFieldPriceSetDao.findList(reserveFieldPriceSet);
-            reserveFieldPriceSet.setReserveTimeInterval(null);//将时令制空
-            reserveFieldPriceSetList.addAll(list);
-        }
+        reserveFieldPriceSet.setReserveField(field);
+        List<ReserveFieldPriceSet> list = reserveFieldPriceSetDao.findList(reserveFieldPriceSet);
+        reserveFieldPriceSetList.addAll(list);
+
         //查询所有预定的信息(作为本场地的预定标记)
         reserveVenueConsItem.setTenantId(null);//APP 预订的没有集团标识
         List<ReserveVenueConsItem> venueConsList = reserveVenueConsItemDao.findListByDate(reserveVenueConsItem);
@@ -105,6 +83,7 @@ public class ReserveAppFieldPriceService {
 
         return fieldPriceList;
     }
+
     /**
      * @param items
      * @param time  网格时间
@@ -146,7 +125,7 @@ public class ReserveAppFieldPriceService {
             fieldPrice.setFieldName(fieldPriceSet.getReserveField().getName());//设置场地名称
             List<TimePrice> timePriceList = fieldPriceSet.getTimePriceList();//获取一个场地 时间和价格 组成的Jason
 
-            List<TimePrice> priceStatusList=fieldPrice.getTimePriceList();
+            List<TimePrice> priceStatusList = fieldPrice.getTimePriceList();
             //遍历所有时间
             for (String time : times) {
                 TimePrice timePrice = new TimePrice();
@@ -154,7 +133,7 @@ public class ReserveAppFieldPriceService {
                 //遍历时间价格组成的Jason
                 for (TimePrice tp : timePriceList) {
                     String t = tp.getTime();//获取时间
-                    Double price = tp.getPrice()/2;//获取后端是按照一小时设定的价格，前端是半个小时
+                    Double price = tp.getPrice() / 2;//获取后端是按照一小时设定的价格，前端是半个小时
                     String hour = time.substring(0, 2);
                     t = t.substring(0, 2);
                     if (hour.equals(t)) {//时间一致
@@ -237,6 +216,7 @@ public class ReserveAppFieldPriceService {
             fieldPriceList.add(fieldPrice);//添加某个场地的所有价格和状态列表
         }
     }
+
     /*
     查询半场的 时间 价格 状态
      */

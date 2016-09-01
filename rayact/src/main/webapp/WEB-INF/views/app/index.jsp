@@ -12,7 +12,7 @@
     <c:forEach items="${list}" var="reserveField">
         <tr>
             <td>
-                <a class="btn btn-primary btn-lg" href="${ctx}/reserve/reserveField/form?id=${reserveField.id}">${reserveField.name}</a>
+                <a class="btn btn-primary btn-lg" href="${ctx}/app/reserve/field?filedId=${reserveField.id}">${reserveField.name}</a>
             </td>
         </tr>
     </c:forEach>
