@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
     <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <script src="${ctxStatic}/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
     <style type="text/css">
         body {
             font-family: -apple-system, Helvetica, sans-serif;
@@ -17,6 +18,7 @@
             text-align: center;
             background: #F5F5F5;
         }
+
         .table-chang {
             margin-left: 0px;
             overflow: hidden;
@@ -110,6 +112,23 @@
         </tbody>
     </table>
 </div>
+<form:form id="searchForm"
+           action="${ctx}/app/reserve/field"
+           method="post">
+    <input name="filedId" value="${filedId}" type="hidden">
+<div class="row">
+    <div class="col-xs-1">
+        <input value="${consDate}"
+               id="consDate" name="consDate" type="text"
+               class="input-small form-control Wdate"
+               onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+    </div>
+    <div class="col-xs-1">
+        <input id="btnSubmit" class="btn btn-primary" type="submit"
+               value="查询"/>
+    </div>
+</div>
+</form:form>
 <table class="table-chang">
     <%-- 遍历所有场地开始--%>
     <c:forEach items="${times}" var="t" varStatus="varStatus">
