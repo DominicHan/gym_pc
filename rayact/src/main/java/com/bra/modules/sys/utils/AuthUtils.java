@@ -13,7 +13,11 @@ import com.bra.common.security.SecurityUtil;
  */
 public class AuthUtils {
     public static boolean isMobileLogin() {
+        boolean isMobileLogin=false;
         Principal principal = SecurityUtil.getPrincipal();
-        return principal.isMobileLogin();
+        if(principal!=null){
+            isMobileLogin=principal.isMobileLogin();
+        }
+        return isMobileLogin;
     }
 }

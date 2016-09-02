@@ -48,6 +48,6 @@ public class AppFieldController extends BaseController {
         model.addAttribute("times", times);
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         model.addAttribute("consDate", fmt.format(consDate));
-        return "reserve/saleField/reserveAppField";
+        return "app/reserveAppField";
     }
 }
