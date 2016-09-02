@@ -1,5 +1,6 @@
 package com.bra.common.persistence;
 
+import com.bra.common.security.Principal;
 import com.bra.common.utils.IdGen;
 import com.bra.modules.sys.entity.User;
 import com.bra.modules.sys.utils.UserUtils;
@@ -25,7 +26,6 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	protected User updateBy;	// 更新者
 	protected Date updateDate;	// 更新日期
 	protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
-	
 	public DataEntity() {
 		super();
 		this.delFlag = DEL_FLAG_NORMAL;
@@ -44,10 +44,13 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		if (!this.isNewRecord){
 			setId(IdGen.uuid());
 		}
-		User user = UserUtils.getUser();
-		if (StringUtils.isNotBlank(user.getId())){
-			this.updateBy = user;
-			this.createBy = user;
+		Principal principal = UserUtils.getPrincipal();
+		if(principal.isMobileLogin()==false){
+			User user = UserUtils.getUser();
+			if (StringUtils.isNotBlank(user.getId())){
+				this.updateBy = user;
+				this.createBy = user;
+			}
 		}
 		if(this.updateDate==null){
 			this.updateDate = new Date();

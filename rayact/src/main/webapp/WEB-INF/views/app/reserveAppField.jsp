@@ -10,6 +10,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
     <script src="${ctxStatic}/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+
     <style type="text/css">
         body {
             font-family: -apple-system, Helvetica, sans-serif;
@@ -112,84 +113,88 @@
         </tbody>
     </table>
 </div>
-<form:form id="searchForm"
-           action="${ctx}/app/reserve/field"
-           method="post">
-    <input name="filedId" value="${filedId}" type="hidden">
 <div class="row">
-    <div class="col-xs-1">
-        <input value="${consDate}"
-               id="consDate" name="consDate" type="text"
-               class="input-small form-control Wdate"
-               onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
-    </div>
-    <div class="col-xs-1">
-        <input id="btnSubmit" class="btn btn-primary" type="submit"
-               value="查询"/>
-    </div>
+    <form:form id="searchForm"
+               action="${ctx}/app/reserve/field"
+               method="post">
+        <input name="filedId" value="${filedId}" type="hidden">
+        <div class="col-xs-1">
+            <input value="${consDate}"
+                   id="consDate" name="consDate" type="text"
+                   class="input-small form-control Wdate"
+                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+        </div>
+        <div class="col-xs-1">
+            <input id="btnSubmit" class="btn btn-primary" type="submit"
+                   value="查询"/>
+        </div>
+    </form:form>
 </div>
-</form:form>
-<table class="table-chang">
-    <%-- 遍历所有场地开始--%>
-    <c:forEach items="${times}" var="t" varStatus="varStatus">
-    <j:if test="${varStatus.index%2==0}">
-    <tr>
-        </j:if>
-            <%-- 横坐标：场地状态--%>
-        <c:forEach items="${venueFieldPriceList}" var="field">
-            <c:set var="status" value="0"/>
-            <%--遍历单个场地的时间、价格组成的Jason 获得状态--%>
-        <c:forEach items="${field.timePriceList}" var="tp">
-            <%--场地jason的时间与横坐标的时间一致 --%>
-        <j:if test="${t eq tp.time}">
-            <%--设置单个场地 时间T 的状态--%>
-            <c:set var="status" value="${tp.status}"/>
-            <c:set var="time" value="${tp.time}"/>
-            <%-- A场地 B时间 的状态 结束--%>
-        </j:if>
-        </c:forEach>
+<div class="row">
+    <table class="table-chang">
+        <%-- 遍历所有场地开始--%>
+        <c:forEach items="${times}" var="t" varStatus="varStatus">
+        <j:if test="${varStatus.index%2==0}">
+        <tr>
+            </j:if>
+                <%-- 横坐标：场地状态--%>
+            <c:forEach items="${venueFieldPriceList}" var="field">
+                <c:set var="status" value="0"/>
+                <%--遍历单个场地的时间、价格组成的Jason 获得状态--%>
+            <c:forEach items="${field.timePriceList}" var="tp">
+                <%--场地jason的时间与横坐标的时间一致 --%>
+            <j:if test="${t eq tp.time}">
+                <%--设置单个场地 时间T 的状态--%>
+                <c:set var="status" value="${tp.status}"/>
+                <c:set var="time" value="${tp.time}"/>
+                <%-- A场地 B时间 的状态 结束--%>
+            </j:if>
+            </c:forEach>
 
 
-            <%--设置td的class--%>
-        <j:if test="${'0' eq status}">
-            <c:set var="tdClass" value="reserveTd access"/>
-        </j:if>
-        <j:if test="${!('0' eq status)}">
-            <c:set var="tdClass" value="reserveTd unavailable"/>
-        </j:if>
-            <%--设置td的class end--%>
-
-            <%-- 场地 B时间 的状态展示--%>
-
-        <td status="${status}"
-            class="${tdClass}"
-            data-field-id="${field.fieldId}"
-            data-field-name="${field.fieldName}"
-            data-time="${t}"
-        >
+                <%--设置td的class--%>
             <j:if test="${'0' eq status}">
-                ${time}
+                <c:set var="tdClass" value="reserveTd access"/>
             </j:if>
             <j:if test="${!('0' eq status)}">
-                <span>已预订</span>
+                <c:set var="tdClass" value="reserveTd unavailable"/>
             </j:if>
-        </td>
-            <%-- A场地 B时间 的状态展示 结束--%>
-        </c:forEach>
-            <%-- 横坐标：时间 结束--%>
-            <%-- 纵坐标：场地 结束--%>
-        </c:forEach>
-        <%-- 遍历所有全场 场地结束--%>
-</table>
-<div class="row" style="display: none">
+                <%--设置td的class end--%>
+
+                <%-- 场地 B时间 的状态展示--%>
+
+            <td status="${status}"
+                class="${tdClass}"
+                data-field-id="${field.fieldId}"
+                data-field-name="${field.fieldName}"
+                data-time="${t}"
+            >
+                <j:if test="${'0' eq status}">
+                    ${time}
+                </j:if>
+                <j:if test="${!('0' eq status)}">
+                    <span>已预订</span>
+                </j:if>
+            </td>
+                <%-- A场地 B时间 的状态展示 结束--%>
+            </c:forEach>
+                <%-- 横坐标：时间 结束--%>
+                <%-- 纵坐标：场地 结束--%>
+            </c:forEach>
+            <%-- 遍历所有全场 场地结束--%>
+    </table>
+</div>
+<div class="row">
     <div id="unPayed" class="row">
     </div>
     <form id="orderForm">
         <input name="consDate" value="${consDate}" type="hidden">
-        <input name="reserveVenueId" value="${venueId}" type="hidden">
+        <span id="reserve_submit"><a class="btn btn-success col-sm-10" style="height: 80px;width:100%;font-size: 50px;line-height: 80px;" onclick="filedSelectJson()">提交</a></span>
     </form>
 </div>
+
 <script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="${ctxStatic}/modules/reserve/js/reserve_app_field.js"></script>
+<script src="${ctxStatic}/common/jeesite.js" type="text/javascript"></script>
 </body>
 </html>

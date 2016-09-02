@@ -1,4 +1,4 @@
-package com.bra.modules.reserve.service;
+package com.bra.modules.app.service;
 
 import com.bra.common.service.CrudService;
 import com.bra.common.utils.StringUtils;
@@ -7,6 +7,10 @@ import com.bra.modules.reserve.dao.ReserveVenueConsItemDao;
 import com.bra.modules.reserve.dao.ReserveVenueDao;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.event.venue.VenueCheckoutEvent;
+import com.bra.modules.reserve.service.ReserveFieldPriceService;
+import com.bra.modules.reserve.service.ReserveMemberService;
+import com.bra.modules.reserve.service.ReserveVenueConsItemService;
+import com.bra.modules.reserve.service.ReserveVenueConsService;
 import com.bra.modules.reserve.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,7 +85,7 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
             String startTime=null;
             for(Map j:itemList){
                 String start=(String) j.get("startTime");
-                start=TimeUtils.earlyMorningFormat(start);
+                start= TimeUtils.earlyMorningFormat(start);
                 if(startTime==null){
                     startTime=start;
                 }else if(start.compareTo(startTime)<0){
@@ -155,14 +159,12 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
             filedSum+=price;
             item.setConsPrice(price);//订单明细 应收金额=场地应收+教练费
             item.preInsert();
-            item.setTenantId(venue.getTenantId());
             reserveVenueConsItemDao.insert(item);//保存预订信息
             sum += price;
         }
         reserveVenueCons.setByPC("0");//通过APP预订的
         reserveVenueCons.setOrderPrice(filedSum);//场地应收金额
         reserveVenueCons.setShouldPrice(sum);//订单应收：没有优惠券，应收等于订单金额+教练费用
-        reserveVenueCons.setTenantId(venue.getTenantId());
         reserveVenueConsDao.insert(reserveVenueCons);//订单价格更改
         Map map=new HashMap<>();
         map.put("orderId",reserveVenueCons.getId());
@@ -186,11 +188,11 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
      */
     @Transactional(readOnly = false)
     public boolean saveSettlement(ReserveVenueCons reserveVenueCons, String payType, Double consPrice,
-                                           Double memberCardInput,
-                                           Double bankCardInput,
-                                           Double weiXinInput,
-                                           Double aliPayInput,
-                                           Double couponInput) {
+                                  Double memberCardInput,
+                                  Double bankCardInput,
+                                  Double weiXinInput,
+                                  Double aliPayInput,
+                                  Double couponInput) {
         reserveVenueCons.setPayType(payType);
         reserveVenueCons.setMemberCardInput(memberCardInput);
         reserveVenueCons.setBankCardInput(bankCardInput);
