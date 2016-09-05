@@ -43,7 +43,7 @@ public class AppFieldController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "field")
+    @RequestMapping(value = "timeList")
     public String main(Date consDate, String filedId, Model model) {
         if (consDate == null) {
             consDate = new Date();
@@ -59,7 +59,7 @@ public class AppFieldController extends BaseController {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         model.addAttribute("consDate", fmt.format(consDate));
         model.addAttribute("filedId",filedId);
-        return "app/reserveAppField";
+        return "app/timeList";
     }
 
     /**

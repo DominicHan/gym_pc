@@ -21,11 +21,10 @@
         }
 
         .table-chang {
-            margin-left: 0px;
             overflow: hidden;
-            float: left;
             border-collapse: separate;
-            border-spacing: 5px
+            border-spacing: 5px;
+            margin: 0 auto;
         }
 
         .table-chang thead th {
@@ -82,18 +81,32 @@
             background: #F0860C;
         }
 
-        .table-chang tbody tr td .time_cell {
-            width: 30px;
-            height: 30px;
-            font-size: 13px;
-            color: #323232;
+        .button_submit {
+            display: inline-block;
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            margin-bottom: 0;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-color: #990707;
             border: 0px;
-            background: transparent;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+            filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
 <body>
-<div style="background-color:#fff;padding:10px;border-bottom:1px solid rgb(178,178,178)">
+<div style="background-color:#fff;padding:10px;border-bottom:1px solid rgb(178,178,178);">
     <table border="0" width="100%">
         <tbody>
         <tr>
@@ -114,21 +127,23 @@
     </table>
 </div>
 <div class="row">
-    <form:form id="searchForm"
-               action="${ctx}/app/reserve/field"
-               method="post">
-        <input name="filedId" value="${filedId}" type="hidden">
-        <div class="col-xs-1">
-            <input value="${consDate}"
-                   id="consDate" name="consDate" type="text"
-                   class="input-small form-control Wdate"
-                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
-        </div>
-        <div class="col-xs-1">
-            <input id="btnSubmit" class="btn btn-primary" type="submit"
-                   value="查询"/>
-        </div>
-    </form:form>
+    <div style="margin: 0 auto;width: 310px">
+        <form:form id="searchForm"
+                   action="${ctx}/app/reserve/timeList"
+                   method="post">
+            <input name="filedId" value="${filedId}" type="hidden">
+            <div style="width: 150px;float: left;">
+                <input value="${consDate}" style="width: 100%"
+                       id="consDate" name="consDate" type="text"
+                       class="input-small form-control Wdate"
+                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+            </div>
+            <div style="width: 150px;float: right;">
+                <input id="btnSubmit" class="btn btn-primary pull-right" type="submit"
+                       value="查询"/>
+            </div>
+        </form:form>
+    </div>
 </div>
 <div class="row">
     <table class="table-chang">
@@ -173,7 +188,7 @@
                     ${time}
                 </j:if>
                 <j:if test="${!('0' eq status)}">
-                    <span>已预订</span>
+                    <span>已预约</span>
                 </j:if>
             </td>
                 <%-- A场地 B时间 的状态展示 结束--%>
@@ -185,16 +200,19 @@
     </table>
 </div>
 <div class="row">
-    <div id="unPayed" class="row">
+    <div id="unPayed" class="row" style="display: none">
     </div>
     <form id="orderForm">
-        <input name="consDate" value="${consDate}" type="hidden">
-        <span id="reserve_submit"><a class="btn btn-success col-sm-10" style="height: 80px;width:100%;font-size: 50px;line-height: 80px;" onclick="filedSelectJson()">提交</a></span>
+        <input name="consDate" value="${consDate}" type="hidden"/>
+        <div style="margin:20px auto 20px auto; width:300px;">
+            <input type="button" class="button_submit" onclick="filedSelectJson()" value="提交">
+            </input>
+        </div>
     </form>
 </div>
 
 <script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="${ctxStatic}/modules/reserve/js/reserve_app_field.js"></script>
-<script src="${ctxStatic}/common/jeesite.js" type="text/javascript"></script>
+<script type="text/javascript" src="${ctxStatic}/common/jeesite.js" ></script>
 </body>
 </html>

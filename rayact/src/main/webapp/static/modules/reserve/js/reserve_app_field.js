@@ -88,8 +88,13 @@ function orderSubmit(reserveJson){
             phone:"123"
         },
         success: function (result) {
-            alert(result.bool);
-            location.reload();
+            if(result.bool){
+                alert("预约成功");
+                location.reload();
+            }else{
+                alert("预约失败");
+            }
+
         }
     });
 }
