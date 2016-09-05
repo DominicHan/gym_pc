@@ -84,12 +84,11 @@ public class SaleVenueLogController extends BaseController {
     public void listExport(SaleVenueLog venueLog,  HttpServletRequest request,HttpServletResponse response)throws Exception {
 
         List<SaleVenueLog> sellLogs = reserveVenueConsService.findOrderLogList(venueLog);
-        String[] titles = {"所属场馆","所属项目","时间区间","订单金额","应收金额","优惠金额","实收金额","支付类型","预定人","操作人","授权人","教练","订单时间","操作时间"};
+        String[] titles = {"所属场馆","时间区间","订单金额","应收金额","优惠金额","实收金额","支付类型","预定人","操作人","授权人","教练","订单时间","操作时间"};
         List<String[]> contentList = new ArrayList<>();
         for(SaleVenueLog log :sellLogs){
             String[] o = new String[14];
             o[0] = log.getVenue().getName();
-            o[1] = log.getProject().getName();
             o[2] = log.getStartTime()+"-"+log.getEndTime();
             o[3] = String.valueOf(log.getOrderPrice());
             o[4] = String.valueOf(log.getShouldPrice());

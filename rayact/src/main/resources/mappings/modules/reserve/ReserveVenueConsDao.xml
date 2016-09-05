@@ -81,7 +81,6 @@
         a.update_by as "updateBy.id",
         upda.name as "updateBy.name",
         checkout.name as checkoutName,
-        p.name as "project.name",
         i.start_time as startTime,
         i.end_time as endTime
         from reserve_venue_cons as a
@@ -90,8 +89,7 @@
         INNER JOIN  reserve_field as f on (f.id = i.field_id)
         LEFT JOIN  reserve_user as crea on (a.create_by = crea.id)
         LEFT JOIN  reserve_user as upda on (a.update_by = upda.id)
-        INNER JOIN  reserve_project as p ON (a.project_id = p.id and v.del_flag='0')
-        LEFT JOIN  reserve_user as checkout on (a.checkout_id = checkout.id and v.del_flag='0')
+        LEFT JOIN  reserve_user as checkout on (a.checkout_id = checkout.id and checkout.del_flag='0')
         where a.del_flag = '0' and a.reserve_type = '4'
         <if test="payType != null and payType != ''">
             and a.pay_type = #{payType}
@@ -110,9 +108,6 @@
         </if>
         <if test="field!=null and field.id!=null and field.id!=''">
             and i.field_id = #{field.id}
-        </if>
-        <if test="project!=null and project.id!=null and project.id!=''">
-            and a.project_id = #{project.id}
         </if>
         ${sqlMap.dsf}
         ORDER BY updateDate DESC

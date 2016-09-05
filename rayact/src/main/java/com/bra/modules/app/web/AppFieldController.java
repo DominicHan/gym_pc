@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.modules.app.service.ReserveAppVenueConsService;
-import com.bra.modules.app.utils.MemberUtils;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.entity.form.FieldPrice;
 import com.bra.modules.reserve.service.ReserveAppFieldPriceService;
@@ -46,7 +45,7 @@ public class AppFieldController extends BaseController {
      * @return
      */
     @RequestMapping(value = "timeList")
-    public String main(Date consDate, String filedId, Model model) {
+    public String main(Date consDate, String filedId,String venueId, Model model) {
         if (consDate == null) {
             consDate = new Date();
         }
@@ -64,6 +63,7 @@ public class AppFieldController extends BaseController {
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
             model.addAttribute("consDate", fmt.format(consDate));
             model.addAttribute("filedId",filedId);
+            model.addAttribute("venueId",venueId);
         }
         return "app/timeList";
     }
@@ -119,18 +119,14 @@ public class AppFieldController extends BaseController {
         map.put("bool", String.valueOf(bool));
         if (bool == true) {
             ReserveVenueCons reserveVenueCons = new ReserveVenueCons();
-            ReserveMember member=MemberUtils.getMember();
-            reserveVenueCons.setUserName(member.getName());
-            reserveVenueCons.setConsMobile(member.getMobile());
             reserveVenueCons.setProject(new ReserveProject(projectId));//该字段用于PC统计项目收入
-            String reserveVenueId = (String) object.get("reserveVenueId");
+            String reserveVenueId = (String) object.get("venueId");
             ReserveVenue venue = new ReserveVenue(reserveVenueId);
             reserveVenueCons.setReserveVenue(venue);
             reserveVenueCons.setReserveType(ReserveVenueCons.RESERVATION);//已预定
             reserveVenueCons.setConsDate(consDate);
             reserveVenueCons.setVenueConsList(items);
-            map.putAll(reserveAppVenueConsService.saveOrder(reserveVenueCons));//保存预订信息
-
+            reserveAppVenueConsService.saveOrder(reserveVenueCons);//保存预订信息
         }
         return map;
     }

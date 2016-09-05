@@ -192,6 +192,7 @@
 <div id="unPayed" class="row" style="display: none">
 </div>
 <form id="orderForm">
+    <input name="venueId" value="${venueId}" type="hidden"/>
     <input name="consDate" value="${consDate}" type="hidden"/>
     <div style="margin:20px auto 20px auto; width:300px;">
         <input type="button" class="button_submit" onclick="filedSelectJson()" value="提交">

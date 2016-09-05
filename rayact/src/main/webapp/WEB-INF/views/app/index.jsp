@@ -155,7 +155,7 @@
     <a href="javascript:void(0);" class="head head_act" data-tag="activity">教练列表<span id="navigat"></span></a>
     <ul class="list list_act">
         <c:forEach items="${list}" var="reserveField">
-            <li><a href="${ctx}/app/reserve/timeList?filedId=${reserveField.id}"> ${reserveField.name}</a></li>
+            <li><a href="${ctx}/app/reserve/timeList?filedId=${reserveField.id}&venueId=${reserveVenueId}"> ${reserveField.name}</a></li>
         </c:forEach>
     </ul>
 </section>

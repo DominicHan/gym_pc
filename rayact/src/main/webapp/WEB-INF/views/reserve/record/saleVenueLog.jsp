@@ -109,7 +109,6 @@
                                     <th>会员</th>
                                     <th>健身房</th>
                                     <th>教练</th>
-                                    <th>项目</th>
                                     <th>时间区间</th>
                                     <th>教练费</th>
                                     <th>应收</th>
@@ -137,7 +136,6 @@
                                         <td>${log.member.name}</td>
                                         <td>${log.venue.name}</td>
                                         <td>${log.field.name}</td>
-                                        <td>${log.project.name}</td>
                                         <td>${log.startTime}—${log.endTime}</td>
                                         <td>${log.orderPrice}</td>
                                         <c:set var="orderPriceSum" value="${orderPriceSum+log.orderPrice}"></c:set>

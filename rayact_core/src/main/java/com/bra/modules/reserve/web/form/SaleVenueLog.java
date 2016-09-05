@@ -3,7 +3,6 @@ package com.bra.modules.reserve.web.form;
 import com.bra.common.persistence.SaasEntity;
 import com.bra.modules.reserve.entity.ReserveField;
 import com.bra.modules.reserve.entity.ReserveMember;
-import com.bra.modules.reserve.entity.ReserveProject;
 import com.bra.modules.reserve.entity.ReserveVenue;
 
 import java.util.Date;
@@ -49,8 +48,6 @@ public class SaleVenueLog extends SaasEntity<SaleVenueLog> {
         this.field = field;
     }
 
-    private ReserveProject project;
-
     private String isTicket;
 
     public String getIsTicket() {
@@ -59,14 +56,6 @@ public class SaleVenueLog extends SaasEntity<SaleVenueLog> {
 
     public void setIsTicket(String isTicket) {
         this.isTicket = isTicket;
-    }
-
-    public ReserveProject getProject() {
-        return project;
-    }
-
-    public void setProject(ReserveProject project) {
-        this.project = project;
     }
 
     private ReserveMember member;
