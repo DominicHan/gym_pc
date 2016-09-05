@@ -288,9 +288,7 @@
         jQuery.postItems({
             url: ctx + '/app/reserve/reservation',
             data: {
-                reserveJson: reserveJson,
-                username: "jiangson",
-                phone: "123"
+                reserveJson: reserveJson
             },
             success: function (result) {
                 if (result.bool) {

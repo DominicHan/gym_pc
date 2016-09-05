@@ -2,8 +2,10 @@ package com.bra.modules.app.web;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.modules.app.service.ReserveAppVenueConsService;
+import com.bra.modules.app.utils.MemberUtils;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.entity.form.FieldPrice;
 import com.bra.modules.reserve.service.ReserveAppFieldPriceService;
@@ -48,17 +50,21 @@ public class AppFieldController extends BaseController {
         if (consDate == null) {
             consDate = new Date();
         }
-        List<String> times = new ArrayList<>();
-        String startTime = "06:00:00";
-        String endTime = "00:00:00";
-        times.addAll(TimeUtils.getTimeSpacListValue(startTime, endTime, 30));
-        //场地价格
-        List<FieldPrice> venueFieldPriceList = reserveAppFieldPriceService.findByDate(consDate, filedId,times);
-        model.addAttribute("venueFieldPriceList", venueFieldPriceList);
-        model.addAttribute("times", times);
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        model.addAttribute("consDate", fmt.format(consDate));
-        model.addAttribute("filedId",filedId);
+        if(StringUtils.isEmpty(filedId)){
+
+        }else {
+            List<String> times = new ArrayList<>();
+            String startTime = "06:00:00";
+            String endTime = "00:00:00";
+            times.addAll(TimeUtils.getTimeSpacListValue(startTime, endTime, 30));
+            //场地价格
+            List<FieldPrice> venueFieldPriceList = reserveAppFieldPriceService.findByDate(consDate, filedId,times);
+            model.addAttribute("venueFieldPriceList", venueFieldPriceList);
+            model.addAttribute("times", times);
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            model.addAttribute("consDate", fmt.format(consDate));
+            model.addAttribute("filedId",filedId);
+        }
         return "app/timeList";
     }
 
@@ -67,13 +73,11 @@ public class AppFieldController extends BaseController {
      *
      * @param reserveJson
      * @param projectId
-     * @param username
-     * @param phone
      * @return
      */
     @RequestMapping(value = "reservation")
     @ResponseBody
-    public Map reservation(String reserveJson, String projectId, String username, String phone) {
+    public Map reservation(String reserveJson, String projectId) {
         String reserve = reserveJson.replaceAll("&quot;", "\"");
         JSONObject object = JSON.parseObject(reserve);
         String date = (String) object.get("consDate");
@@ -115,8 +119,9 @@ public class AppFieldController extends BaseController {
         map.put("bool", String.valueOf(bool));
         if (bool == true) {
             ReserveVenueCons reserveVenueCons = new ReserveVenueCons();
-            reserveVenueCons.setUserName(username);
-            reserveVenueCons.setConsMobile(phone);
+            ReserveMember member=MemberUtils.getMember();
+            reserveVenueCons.setUserName(member.getName());
+            reserveVenueCons.setConsMobile(member.getMobile());
             reserveVenueCons.setProject(new ReserveProject(projectId));//该字段用于PC统计项目收入
             String reserveVenueId = (String) object.get("reserveVenueId");
             ReserveVenue venue = new ReserveVenue(reserveVenueId);
