@@ -8,7 +8,6 @@
 		a.available AS "available",
 		a.original_price AS "originalPrice",
 		a.actual_price AS "actualPrice",
-		a.project_id AS "reserveProject.id",
 		a.venue_id AS "reserveVenue.id",
 		a.birthday AS "birthday",
 		a.login_name AS "loginName",
@@ -20,12 +19,10 @@
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
 		a.is_time_interval AS "isTimeInterval",
-		p.name AS "reserveProject.name",
 		v.name AS "reserveVenue.name"
 	</sql>
 	
 	<sql id="reserveFieldJoins">
-		LEFT JOIN reserve_project p ON p.id = a.project_id
 		LEFT JOIN reserve_venue v ON v.id = a.venue_id
 		LEFT JOIN reserve_user u ON u.id = a.fk_reserve_user_id
 	</sql>
@@ -57,11 +54,6 @@
 			<if test="reserveVenue != null">
 				<if test="reserveVenue.id !=null and reserveVenue.id != ''">
 					AND venue_id = #{reserveVenue.id}
-				</if>
-			</if>
-			<if test="reserveProject != null">
-				<if test="reserveProject.id !=null and reserveProject.id != ''">
-					AND project_id = #{reserveProject.id}
 				</if>
 			</if>
 			${sqlMap.dsf}
@@ -99,7 +91,6 @@
 			id,
 			name,
 			available,
-			project_id,
 			venue_id,
 			original_price,
 			actual_price,
@@ -118,7 +109,6 @@
 			#{id},
 			#{name},
 			#{available},
-			#{reserveProject.id},
 			#{reserveVenue.id},
 			#{originalPrice},
 			#{actualPrice},
@@ -142,7 +132,6 @@
 			available = #{available},
 			original_price = #{originalPrice},
 			actual_price = #{actualPrice},
-			project_id = #{reserveProject.id},
 			venue_id = #{reserveVenue.id},
 			birthday = #{birthday},
 			login_name = #{loginName},

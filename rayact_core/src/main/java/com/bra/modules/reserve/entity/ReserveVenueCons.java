@@ -24,7 +24,6 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
 
     private ReserveMember member;        // 会员ID
     private ReserveVenue reserveVenue;//所属场馆
-    private ReserveProject project;   //所属项目
     private String consMobile;        // 预定人手机号
     private String userName;        // 预定人姓名
     private String consType;        // 预订的类型1：散客 2：会员
@@ -148,15 +147,6 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
 
     public void setVenueConsList(List<ReserveVenueConsItem> venueConsList) {
         this.venueConsList = venueConsList;
-    }
-
-    //所属项目
-    public ReserveProject getProject() {
-        return project;
-    }
-
-    public void setProject(ReserveProject project) {
-        this.project = project;
     }
 
     public Double getCosOrderPrice() {

@@ -197,13 +197,6 @@ public class ReserveController extends BaseController {
         ReserveMember reserveMember = new ReserveMember();
         reserveMember.setReserveVenue(new ReserveVenue(venueId));
         model.addAttribute("memberList", reserveMemberService.findList(reserveMember));
-
-        //查询场地所对应项目的教练
-        ReserveTutor tutor = new ReserveTutor();
-        ReserveProject project = reserveField.getReserveProject();
-        tutor.setProject(project);
-        model.addAttribute("tutors", reserveTutorService.findList(tutor));
-
         if (StringUtils.isNotBlank(time)) {
             String[] timeStr = time.split("-");
             model.addAttribute("startTime", timeStr[0]);
@@ -382,11 +375,6 @@ public class ReserveController extends BaseController {
             order.setDiscountPrice(applycut.getCutPrice());
         }
         order.setConsPrice(order.getShouldPrice() - applycut.getCutPrice());
-        //教练订单
-        List<ReserveTutorOrder> tutorOrderList = reserveTutorOrderService.findNotCancel(order.getId(), ReserveVenueCons.MODEL_KEY);
-        if (!Collections3.isEmpty(tutorOrderList)) {
-            model.addAttribute("tutorOrder", tutorOrderList.get(0));
-        }
         ReserveVenueConsItem search = new ReserveVenueConsItem();
         search.setConsData(consItem.getConsData());
         List<ReserveVenueConsItem> itemList = reserveVenueConsItemService.findList(search);

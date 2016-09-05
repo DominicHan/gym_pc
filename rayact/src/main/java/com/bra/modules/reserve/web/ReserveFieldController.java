@@ -93,7 +93,6 @@ public class ReserveFieldController extends BaseController {
         model.addAttribute("reserveField", reserveField);
         model.addAttribute("fields", fields);
         model.addAttribute("venues", reserveVenueService.findList(new ReserveVenue()));
-        model.addAttribute("projects", reserveProjectService.findList(new ReserveProject()));
         return "reserve/field/form";
     }
     //场地价格设置表单

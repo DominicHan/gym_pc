@@ -59,7 +59,6 @@
                             <tr>
                                 <th>教练名称</th>
                                <%-- <th>登录名</th>--%>
-                                <th>项目</th>
                                 <th>所属场馆</th>
                                 <th>出生日期</th>
                                 <th>是否启用</th>
@@ -74,7 +73,6 @@
                                         <a href="${ctx}/reserve/reserveField/form?id=${reserveField.id}">${reserveField.name}</a>
                                     </td>
                                     <%--<td>${reserveField.loginName}</td>--%>
-                                    <td>${reserveField.reserveProject.name}</td>
                                     <td>${reserveField.reserveVenue.name}</td>
                                     <td><fmt:formatDate value="${reserveField.birthday}" type="date"/></td>
 

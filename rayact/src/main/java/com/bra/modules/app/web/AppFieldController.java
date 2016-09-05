@@ -119,7 +119,6 @@ public class AppFieldController extends BaseController {
         map.put("bool", String.valueOf(bool));
         if (bool == true) {
             ReserveVenueCons reserveVenueCons = new ReserveVenueCons();
-            reserveVenueCons.setProject(new ReserveProject(projectId));//该字段用于PC统计项目收入
             String reserveVenueId = (String) object.get("venueId");
             ReserveVenue venue = new ReserveVenue(reserveVenueId);
             reserveVenueCons.setReserveVenue(venue);

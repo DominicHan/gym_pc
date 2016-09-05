@@ -77,17 +77,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">所属项目：</label>
-                                        <div class="col-sm-6">
-                                            <sys:select cssClass="input-medium" name="reserveProject.id"
-                                                        cssStyle="width:100%"
-                                                        value="${reserveField.reserveProject.id}"
-                                                        items="${projects}" itemLabel="name" itemValue="id"
-                                                        defaultLabel="请选择"
-                                                        defaultValue=""></sys:select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">出生日期：</label>
                                         <div class="col-sm-6">
                                             <input value="<fmt:formatDate  pattern="yyyy-MM-dd" value="${reserveField.birthday}"/>"

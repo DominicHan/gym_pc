@@ -19,7 +19,6 @@ public class ReserveField extends SaasEntity<ReserveField> {
 	private static final long serialVersionUID = 1L;
 	private String name;		// 场地名称
 	private String available;		// 是否启用
-	private ReserveProject reserveProject;		// 所属项目
 	private ReserveVenue reserveVenue;//所属场馆
 	private ReserveField reserveParentField;//父场地
 	private List<ReserveFieldRelation> reserveFieldRelationList;//子场地
@@ -100,14 +99,6 @@ public class ReserveField extends SaasEntity<ReserveField> {
 
 	public void setAvailable(String available) {
 		this.available = available;
-	}
-
-	public ReserveProject getReserveProject() {
-		return reserveProject;
-	}
-
-	public void setReserveProject(ReserveProject reserveProject) {
-		this.reserveProject = reserveProject;
 	}
 
 	public ReserveVenue getReserveVenue() {

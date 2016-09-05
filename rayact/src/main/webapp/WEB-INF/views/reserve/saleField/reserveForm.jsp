@@ -2,7 +2,6 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <form id="reserveFormBean" class="form-horizontal">
     <input type="hidden" name="token" value="${token}"/>
-    <input type="hidden" name="project.id" value="${reserveField.reserveProject.id}"/>
     <input type="hidden" name="halfCourt" value="${isHalfCourt}"/>
 
     <div class="content text-justify" style="text-align: center;vertical-align: middle;">
@@ -16,7 +15,6 @@
                                    value="${reserveField.name}"/>
                             <input type="hidden" id="consDate" name="consDate"
                                    value="${consDate}"/>
-                            <input type="hidden" name="projectId" value="${reserveField.reserveProject.id}"/>
                             <input type="hidden" name="reserveVenue.id" value="${venueId}"/>
                             <input type="hidden" id="fieldId" name="venueConsList[0].reserveField.id"
                                    value="${reserveField.id}"/>
