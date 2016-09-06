@@ -177,12 +177,6 @@
         <c:forEach items="${list}" var="reserveField">
             <li><a href="${ctx}/app/reserve/timeList?filedId=${reserveField.id}&venueId=${reserveVenueId}"> ${reserveField.name}</a></li>
         </c:forEach>
-        <li style="display: none">
-            <a>asd</a>
-        </li>
-        <li style="display: none">
-            <a>asd</a>
-        </li>
     </ul>
 </section>
 <section class="my_section" style="width: 100%;margin:0px;position: fixed;bottom: 0px;">
