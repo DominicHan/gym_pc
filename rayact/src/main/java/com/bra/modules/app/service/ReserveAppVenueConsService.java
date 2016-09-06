@@ -110,6 +110,7 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
     public void saveOrder(ReserveVenueCons reserveVenueCons) {
         //获取会员
         ReserveMember member = MemberUtils.getMember();
+        reserveVenueCons.setMember(member);
         reserveVenueCons.setUserName(member.getName());
         reserveVenueCons.setConsMobile(member.getMobile());
         reserveVenueCons.setConsType("2");//会员
