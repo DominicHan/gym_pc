@@ -144,7 +144,7 @@
                         src="${ctxStatic}/images/weiXin_logo.png"
                         style="display:block" height="16px"></div>
             </td>
-            <td width="30px">&nbsp;<a href="${ctx}/logout"><img
+            <td width="30px">&nbsp;<a href="${ctx}/app/logout"><img
                     src="${ctxStatic}/images/weiXin_logout.png" style="margin-bottom:-2px;"
                     height="22px"></a></td>
         </tr>

@@ -5,6 +5,8 @@ import com.bra.modules.app.utils.MemberUtils;
 import com.bra.modules.reserve.entity.ReserveField;
 import com.bra.modules.reserve.entity.ReserveMember;
 import com.bra.modules.reserve.entity.ReserveVenue;
+import com.bra.modules.sys.utils.UserUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,5 +32,12 @@ public class AppMainController {
         model.addAttribute("list", list);
         model.addAttribute("reserveVenueId", venue.getId());
         return "app/index";
+    }
+
+    @RequestMapping(value = "logout")
+    public String logout() {
+        Subject subject=UserUtils.getSubject();
+        subject.logout();
+        return "app/appLogin";
     }
 }
