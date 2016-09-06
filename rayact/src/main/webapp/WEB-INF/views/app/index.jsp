@@ -32,7 +32,16 @@
             margin: 15px 0;
             background: #fff;
         }
-
+        .my_section::before{
+            content: '';
+            height: 0;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
         .my_section .head {
             position: relative;
             display: block;
@@ -83,7 +92,7 @@
             border-color: #ddd;
         }
 
-        .my_section::after, .list_act li::before {
+        .my_section .list::before{
             content: '';
             height: 0;
             display: block;
@@ -92,6 +101,17 @@
             left: 0;
             right: 0;
             top: 0;
+        }
+
+        .my_section::after, .list_act li::before {
+            content: '';
+            height: 0;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
 
         #myActivity *::after {
@@ -152,12 +172,21 @@
     </table>
 </div>
 <section class="my_section" id="myActivity">
-    <a href="javascript:void(0);" class="head head_act" data-tag="activity">教练列表<span id="navigat"></span></a>
+    <div  class="head head_act">教练列表</div>
     <ul class="list list_act">
         <c:forEach items="${list}" var="reserveField">
             <li><a href="${ctx}/app/reserve/timeList?filedId=${reserveField.id}&venueId=${reserveVenueId}"> ${reserveField.name}</a></li>
         </c:forEach>
+        <li style="display: none">
+            <a>asd</a>
+        </li>
+        <li style="display: none">
+            <a>asd</a>
+        </li>
     </ul>
+</section>
+<section class="my_section" style="width: 100%;margin:0px;position: fixed;bottom: 0px;">
+    <div  class="head head_act"> 客服电话：137-2003-1362</div>
 </section>
 </body>
 </html>
