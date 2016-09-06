@@ -125,6 +125,7 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
             item.setConsData(reserveVenueCons);//订单
             item.setConsWeek(consWeek);//设置周次
             item.setFrequency("1");//设置频率
+            item.setPeriodNum(0.5);//微信一个单元是半个小时
             // "1"代表门市价 在门市价的基础上进行打折
             Double price = reserveFieldPriceService.getPrice(item.getReserveField(), "1", reserveVenueCons.getConsDate(), item.getStartTime(), item.getEndTime());
             //获取折扣比率
@@ -139,6 +140,7 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
             reserveVenueConsItemDao.insert(item);//保存预订信息
         }
         reserveVenueCons.setByPC("0");//通过APP预订的
+        reserveVenueCons.setPeriodCnt(itemList.size()*0.5);//微信一个单元是半个小时
         reserveVenueCons.setOrderPrice(filedSum);//场地应收金额
         reserveVenueCons.setShouldPrice(filedSum);//订单应收
         reserveVenueConsDao.insert(reserveVenueCons);//订单价格更改

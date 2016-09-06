@@ -228,7 +228,6 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
         }
         String frequency = reserveVenueCons.getFrequency();//频率
         reserveVenueCons.preInsert();
-        reserveVenueCons.setByPC("1");
         dao.insert(reserveVenueCons);//保存订单
         List<ReserveVenueConsItem> itemList = reserveVenueCons.getVenueConsList();//订单的所有明细
         Double sum = 0D;//订单价格
@@ -265,6 +264,7 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
             reserveVenueConsItemDao.insert(item);//保存预订信息
             sum += price;
         }
+        reserveVenueCons.setByPC("1");
         reserveVenueCons.setPeriodCnt(periodCnt);
         reserveVenueCons.setOrderPrice(filedSum);//场地应收金额
         reserveVenueCons.setShouldPrice(sum);//订单应收：没有优惠券，应收等于订单金额+教练费用
