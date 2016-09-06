@@ -141,7 +141,7 @@
         </div>
         <label for="tutorPeriodResidue" class="col-lg-1">应扣课时:</label>
         <div class="col-lg-1 col-sm-2">
-            <input readonly="readonly" value="${itemList[0].periodNum}" type="text" id="periodNum"
+            <input readonly="readonly" value="${order.periodCnt}" type="text" id="periodNum"
                    class="form-control"/>
         </div>
         <label for="tutorPeriodResidue" class="col-lg-2">会员剩余（教练）课时:</label>

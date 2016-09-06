@@ -226,7 +226,6 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
                 card = consumer.getStoredcardSet();
             }
         }
-        String halfCourt = reserveVenueCons.getHalfCourt();//半场
         String frequency = reserveVenueCons.getFrequency();//频率
         reserveVenueCons.preInsert();
         reserveVenueCons.setByPC("1");
@@ -236,6 +235,7 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
         Double filedSum = 0D;//场地应收
         Date consDate = reserveVenueCons.getConsDate();//预订日期
         String consWeek = TimeUtils.getWeekOfDate(consDate);//周次
+        Double periodCnt=0.0;
         for (ReserveVenueConsItem item : itemList) {
             item.setConsDate(consDate);//预订时间
             item.setConsData(reserveVenueCons);//订单
@@ -257,13 +257,15 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
             String startTime = item.getStartTime() + ":00";
             String endTime = item.getEndTime() + ":00";
             int periodNum = TimeUtils.getTimeSpac(startTime, endTime, 60);//课时量
-            item.setPeriodNum(periodNum);
+            periodCnt+=periodNum;
+            item.setPeriodNum(1.0*periodNum);
             item.setOrderPrice(filedSum);//订单明细的场地费用
             item.setConsPrice(price);//订单明细应收
             item.preInsert();
             reserveVenueConsItemDao.insert(item);//保存预订信息
             sum += price;
         }
+        reserveVenueCons.setPeriodCnt(periodCnt);
         reserveVenueCons.setOrderPrice(filedSum);//场地应收金额
         reserveVenueCons.setShouldPrice(sum);//订单应收：没有优惠券，应收等于订单金额+教练费用
         dao.update(reserveVenueCons);//订单价格更改

@@ -124,7 +124,7 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
             item.setReserveVenue(reserveVenueCons.getReserveVenue());//订单详情保存场馆
             item.setConsData(reserveVenueCons);//订单
             item.setConsWeek(consWeek);//设置周次
-            item.setFrequency("");//设置频率
+            item.setFrequency("1");//设置频率
             // "1"代表门市价 在门市价的基础上进行打折
             Double price = reserveFieldPriceService.getPrice(item.getReserveField(), "1", reserveVenueCons.getConsDate(), item.getStartTime(), item.getEndTime());
             //获取折扣比率

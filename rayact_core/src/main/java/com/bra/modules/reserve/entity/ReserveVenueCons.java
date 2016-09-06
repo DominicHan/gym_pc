@@ -36,8 +36,7 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
     private Double orderPrice;//订单金额
     private Double shouldPrice;//场地应缴费金额
     private Double consPrice;//实收金额
-
-    private String halfCourt;//是否半场(1:是)
+    private Double periodCnt;//课时量
     private User checkOutUser;
     private String payType;////支付类型(1:储值卡，2:现金,3:银行卡,4:微信,5:支付宝,6:优惠券，7：打白条;8:多方式付款;9:预储（无教练）课时;10:预储教练课时)
     private String byPC;
@@ -75,14 +74,6 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
 
     public ReserveVenueCons() {
         super();
-    }
-
-    public String getHalfCourt() {
-        return halfCourt;
-    }
-
-    public void setHalfCourt(String halfCourt) {
-        this.halfCourt = halfCourt;
     }
 
     public ReserveVenueCons(String id) {
@@ -287,15 +278,6 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
         this.aliPayPersonalInput = aliPayPersonalInput;
     }
 
-   /* public Double getOwningInput() {
-        return owningInput;
-
-    }
-
-    public void setOwningInput(Double owningInput) {
-        this.owningInput = owningInput;
-    }*/
-
     //-------------以下和数据库无关字段-----------------
 
     private ReserveTutor tutor;
@@ -342,5 +324,13 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    public Double getPeriodCnt() {
+        return periodCnt;
+    }
+
+    public void setPeriodCnt(Double periodCnt) {
+        this.periodCnt = periodCnt;
     }
 }
