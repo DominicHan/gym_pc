@@ -280,10 +280,28 @@
                 }
             });
             var rtn = JSON.stringify(a);
-            orderSubmit(rtn);
+            var checkResult=checkStatus(rtn);
+            if(checkResult){
+                orderSubmit(rtn);
+            }else{
+                alert("该时间段已被占用");
+            }
         } else {
             alert("请选择时间");
         }
+    }
+    function checkStatus(reserveJson) {
+        var checkResult=null;
+        jQuery.postItems({
+            url: ctx + '/app/reserve/checkStatus',
+            data: {
+                reserveJson: reserveJson,
+            },
+            success: function (result) {
+                checkResult=result;
+            }
+        });
+        return checkResult;
     }
     function orderSubmit(reserveJson) {
         jQuery.postItems({

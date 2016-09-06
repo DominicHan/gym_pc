@@ -42,35 +42,81 @@ public class AppFieldController extends BaseController {
     private ReserveVenueConsItemService reserveVenueConsItemService;
 
     /**
-     *
      * @param consDate 日期
-     * @param filedId 教练编号
+     * @param filedId  教练编号
      * @param model
      * @return
      */
     @Token(save = true)
     @RequestMapping(value = "timeList")
-    public String main(Date consDate, String filedId,String venueId, Model model) {
+    public String main(Date consDate, String filedId, String venueId, Model model) {
         if (consDate == null) {
             consDate = new Date();
         }
-        if(StringUtils.isEmpty(filedId)){
+        if (StringUtils.isEmpty(filedId)) {
 
-        }else {
+        } else {
             List<String> times = new ArrayList<>();
             String startTime = "06:00:00";
             String endTime = "00:00:00";
             times.addAll(TimeUtils.getTimeSpacListValue(startTime, endTime, 30));
             //场地价格
-            List<FieldPrice> venueFieldPriceList = reserveAppFieldPriceService.findByDate(consDate, filedId,times);
+            List<FieldPrice> venueFieldPriceList = reserveAppFieldPriceService.findByDate(consDate, filedId, times);
             model.addAttribute("venueFieldPriceList", venueFieldPriceList);
             model.addAttribute("times", times);
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
             model.addAttribute("consDate", fmt.format(consDate));
-            model.addAttribute("filedId",filedId);
-            model.addAttribute("venueId",venueId);
+            model.addAttribute("filedId", filedId);
+            model.addAttribute("venueId", venueId);
         }
         return "app/timeList";
+    }
+
+    /**
+     * 订单检测
+     *
+     * @param reserveJson
+     * @return
+     */
+    @RequestMapping(value = "checkStatus")
+    @ResponseBody
+    public boolean checkStatus(String reserveJson) {
+        String reserve = reserveJson.replaceAll("&quot;", "\"");
+        JSONObject object = JSON.parseObject(reserve);
+        String date = (String) object.get("consDate");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date consDate = null;
+        try {
+            consDate = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        List<Map> list = (List<Map>) object.get("venueConsList");
+        List<ReserveVenueConsItem> items = new ArrayList<>();
+        for (Map i : list) {
+            ReserveVenueConsItem item = new ReserveVenueConsItem();
+            ReserveField field = new ReserveField();
+            String filedId = (String) i.get("reserveFieldId");
+            field.setId(filedId);
+            item.setReserveField(field);
+            String startTime = (String) i.get("startTime");
+            item.setStartTime(startTime);
+            String endTime = (String) i.get("endTime");
+            item.setEndTime(endTime);
+            items.add(item);
+        }
+        boolean bool = true;//时间段是否可用
+        for (ReserveVenueConsItem i : items) {//订单详情
+            String startTime = i.getStartTime();
+            String endTime = i.getEndTime();
+            ReserveField field = i.getReserveField();//场地
+            //遍历该日期区间 的场地是否有预订
+            bool = reserveVenueConsItemService.checkReserveTime(consDate, field, startTime, endTime);
+            if (bool == false) {
+                break;
+            }
+        }
+        return bool;
     }
 
     /**
@@ -109,29 +155,16 @@ public class AppFieldController extends BaseController {
             item.setEndTime(endTime);
             items.add(item);
         }
-        boolean bool = true;//时间段是否可用
-        for (ReserveVenueConsItem i : items) {//订单详情
-            String startTime = i.getStartTime();
-            String endTime = i.getEndTime();
-            ReserveField field = i.getReserveField();//场地
-            //遍历该日期区间 的场地是否有预订
-            bool = reserveVenueConsItemService.checkReserveTime(consDate, field, startTime, endTime);
-            if (bool == false) {
-                break;//该时间段不能使用，跳出循环
-            }
-        }
         Map map = new HashMap<>();
-        map.put("bool", String.valueOf(bool));
-        if (bool == true) {
-            ReserveVenueCons reserveVenueCons = new ReserveVenueCons();
-            String reserveVenueId = (String) object.get("venueId");
-            ReserveVenue venue = new ReserveVenue(reserveVenueId);
-            reserveVenueCons.setReserveVenue(venue);
-            reserveVenueCons.setReserveType(ReserveVenueCons.RESERVATION);//已预定
-            reserveVenueCons.setConsDate(consDate);
-            reserveVenueCons.setVenueConsList(items);
-            reserveAppVenueConsService.saveOrder(reserveVenueCons);//保存预订信息
-        }
+        map.put("bool", true);
+        ReserveVenueCons reserveVenueCons = new ReserveVenueCons();
+        String reserveVenueId = (String) object.get("venueId");
+        ReserveVenue venue = new ReserveVenue(reserveVenueId);
+        reserveVenueCons.setReserveVenue(venue);
+        reserveVenueCons.setReserveType(ReserveVenueCons.RESERVATION);//已预定
+        reserveVenueCons.setConsDate(consDate);
+        reserveVenueCons.setVenueConsList(items);
+        reserveAppVenueConsService.saveOrder(reserveVenueCons);//保存预订信息
         return map;
     }
 }
