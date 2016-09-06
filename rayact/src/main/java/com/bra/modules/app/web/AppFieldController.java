@@ -4,8 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
+import com.bra.common.web.annotation.Token;
 import com.bra.modules.app.service.ReserveAppVenueConsService;
-import com.bra.modules.reserve.entity.*;
+import com.bra.modules.reserve.entity.ReserveField;
+import com.bra.modules.reserve.entity.ReserveVenue;
+import com.bra.modules.reserve.entity.ReserveVenueCons;
+import com.bra.modules.reserve.entity.ReserveVenueConsItem;
 import com.bra.modules.reserve.entity.form.FieldPrice;
 import com.bra.modules.reserve.service.ReserveAppFieldPriceService;
 import com.bra.modules.reserve.service.ReserveVenueConsItemService;
@@ -44,6 +48,7 @@ public class AppFieldController extends BaseController {
      * @param model
      * @return
      */
+    @Token(save = true)
     @RequestMapping(value = "timeList")
     public String main(Date consDate, String filedId,String venueId, Model model) {
         if (consDate == null) {
@@ -72,12 +77,12 @@ public class AppFieldController extends BaseController {
      * 订单保存
      *
      * @param reserveJson
-     * @param projectId
      * @return
      */
     @RequestMapping(value = "reservation")
     @ResponseBody
-    public Map reservation(String reserveJson, String projectId) {
+    @Token(remove = true)
+    public Map reservation(String reserveJson) {
         String reserve = reserveJson.replaceAll("&quot;", "\"");
         JSONObject object = JSON.parseObject(reserve);
         String date = (String) object.get("consDate");

@@ -289,7 +289,8 @@
         jQuery.postItems({
             url: ctx + '/app/reserve/reservation',
             data: {
-                reserveJson: reserveJson
+                reserveJson: reserveJson,
+                token:'${token}'
             },
             success: function (result) {
                 if (result.bool) {
