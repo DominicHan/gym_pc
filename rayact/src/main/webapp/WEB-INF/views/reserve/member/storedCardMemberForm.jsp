@@ -118,8 +118,15 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>生日:</td>
+                                    <td>
+                                        <input value="<fmt:formatDate  pattern="yyyy-MM-dd" value="${reserveMember.birthday}"/>"
+                                               name="birthday" type="text"
+                                               class="input-small form-control Wdate col-lg-1"
+                                               onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                                    </td>
                                     <td>备注:</td>
-                                    <td colspan="3">
+                                    <td>
                                         <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
                                                        class="form-control"/>
                                     </td>
@@ -135,7 +142,8 @@
                                                       showImg="true" resizeImg="true" resizeWidth="454"
                                                       resizeHeight="247"
                                                       imgWidth="120" imgHeight="80"
-                                                      modelName="com.bra.modules.reserve.entity.ReserveMember" multi="true"/>
+                                                      modelName="com.bra.modules.reserve.entity.ReserveMember"
+                                                      multi="true"/>
                                 </div>
                             </div>
                             <div>

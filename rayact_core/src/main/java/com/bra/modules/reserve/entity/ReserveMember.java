@@ -19,9 +19,10 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	private String name;		// 姓名
 	private String mobile;		// 手机号
 	private String password;		// 密码
+	private Date birthday;
 	private String sfz;		// 身份证
-	private String province;		// province
-	private String city;		// city
+	private String province;		// 省份
+	private String city;		// 城市
 	private String area;		// area
 	private String address;		// 地址
 	private String email;		// 邮箱
@@ -35,8 +36,8 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	private String isOwning; //是否欠款 0：否 1：是
 	private Date validityStart;		// 課時开始日期
 	private Date validityEnd;		// 課時结束日期
-	private Date tutorPeriodValidityStart;
-	private Date tutorPeriodValidityEnd;
+	private Date tutorPeriodValidityStart;// 教练課時开始日期
+	private Date tutorPeriodValidityEnd;// 教练課時结束日期
 	private ReserveStoredcardMemberSet storedcardSet;
 
 	public String getCardno() {
@@ -242,6 +243,14 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 
 	public void setHealthCondition(String healthCondition) {
 		this.healthCondition = healthCondition;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 }
