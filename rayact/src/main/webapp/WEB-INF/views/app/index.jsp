@@ -158,7 +158,6 @@
             <td onclick="javascript:history.back(-1)" width="30px"><img
                     src="${ctxStatic}/images/weiXin_return.png"
                     style="margin-bottom:-2px;" height="22px"></td>
-            <td width="30px">&nbsp;</td>
             <td align="center" valign="middle">
                 <div style="padding:5px 0"><img
                         src="${ctxStatic}/images/weiXin_logo.png"
