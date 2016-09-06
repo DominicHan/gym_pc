@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>场地预定</title>
+    <title>教练预约</title>
     <meta name="decorator" content="main"/>
     <link type="text/css" rel="stylesheet" href="${ctxStatic}/modules/reserve/css/field.css?id=7862256"/>
     <link type="text/css" rel="stylesheet" href="${ctxStatic}/jquery/smartMenu.css"/>

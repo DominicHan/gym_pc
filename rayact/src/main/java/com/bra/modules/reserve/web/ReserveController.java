@@ -47,14 +47,9 @@ public class ReserveController extends BaseController {
     @Autowired
     private ReserveFieldPriceService reserveFieldPriceService;
     @Autowired
-    private ReserveMobileFieldPriceService reserveMobileFieldPriceService;
-    @Autowired
     private ReserveVenueConsService reserveVenueConsService;
     @Autowired
     private ReserveVenueConsItemService reserveVenueConsItemService;
-    //教练
-    @Autowired
-    private ReserveTutorService reserveTutorService;
     @Autowired
     private ReserveTutorOrderService reserveTutorOrderService;
     @Autowired
@@ -69,8 +64,6 @@ public class ReserveController extends BaseController {
     private ReserveUserService userService;
     @Autowired
     private ReserveVenueApplyCutService reserveVenueApplyCutService;
-    @Autowired
-    private ReserveProjectService reserveProjectService;
     @Autowired
     private ReserveVenueEmptyCheckService reserveVenueEmptyCheckService;
 

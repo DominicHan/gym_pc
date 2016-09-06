@@ -58,19 +58,6 @@
                                 <option value="3">每周</option>
                             </select>
                         </div>
-                        <div class="col-lg-2">
-                            <label for="isHalfCourt" class="control-label">类型:</label>
-                        </div>
-                        <div class="col-lg-4">
-                            <j:if test="${'1' eq isHalfCourt}">
-                                <input readonly="readonly" id="isHalfCourt" class="form-control"
-                                       value="半场"/>
-                            </j:if>
-                            <j:if test="${'0' eq isHalfCourt}">
-                                <input readonly="readonly" id="isHalfCourt" class="form-control"
-                                       value="全场"/>
-                            </j:if>
-                        </div>
                     </div>
                 </div>
                 <div class="row" id="date_div" style="display: none">

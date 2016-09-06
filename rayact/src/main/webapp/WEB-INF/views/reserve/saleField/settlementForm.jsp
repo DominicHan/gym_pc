@@ -41,8 +41,6 @@
 
 
                     </td>
-                    <input type="hidden" name="venueConsList[${status.index}].halfCourt"
-                           value="${item.halfCourt}"/>
                     <td>
                             ${item.consPrice}
                     </td>

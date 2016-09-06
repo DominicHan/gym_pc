@@ -30,8 +30,7 @@
             <th>场地</th>
             <th>开始时间</th>
             <th>结束时间</th>
-            <th>场地类型</th>
-            <th>场地费用</th>
+            <th>费用</th>
             </thead>
             <tbody>
             <c:forEach items="${itemList}" var="item" varStatus="status">
@@ -46,17 +45,8 @@
                             ${item.endTime}
                     </td>
                     <td>
-                        <j:ifelse test="${'1' eq item.halfCourt}">
-                            <j:then>半场</j:then>
-                            <j:else>全场</j:else>
-                        </j:ifelse>
-                        <input type="hidden" name="venueConsList[${status.index}].halfCourt"
-                               value="${item.halfCourt}"/>
-                    </td>
-                    <td>
                             ${item.consPrice}
                     </td>
-
                 </tr>
             </c:forEach>
             </tbody>
