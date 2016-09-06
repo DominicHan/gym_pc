@@ -240,7 +240,6 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
             item.setConsDate(consDate);//预订时间
             item.setConsData(reserveVenueCons);//订单
             item.setConsWeek(consWeek);
-            item.setHalfCourt(halfCourt);//设置半场
             item.setFrequency(frequency);//设置频率
             Double price;//订单明细的价格
             //会员无打折卡

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -24,7 +22,7 @@ public class AppMainController {
     private AppFieldService fieldService;
 
     @RequestMapping(value = "main")
-    public String main(ReserveField reserveField, HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String main(ReserveField reserveField, Model model) {
         ReserveMember member = MemberUtils.getMember();
         ReserveVenue venue=member.getReserveVenue();
         reserveField.setReserveVenue(venue);

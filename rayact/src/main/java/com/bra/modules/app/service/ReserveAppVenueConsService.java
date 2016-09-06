@@ -1,7 +1,6 @@
 package com.bra.modules.app.service;
 
 import com.bra.common.service.CrudService;
-import com.bra.common.utils.StringUtils;
 import com.bra.modules.app.utils.MemberUtils;
 import com.bra.modules.reserve.dao.ReserveVenueConsDao;
 import com.bra.modules.reserve.dao.ReserveVenueConsItemDao;
@@ -9,7 +8,6 @@ import com.bra.modules.reserve.dao.ReserveVenueDao;
 import com.bra.modules.reserve.entity.ReserveMember;
 import com.bra.modules.reserve.entity.ReserveVenueCons;
 import com.bra.modules.reserve.entity.ReserveVenueConsItem;
-import com.bra.modules.reserve.event.venue.VenueCheckoutEvent;
 import com.bra.modules.reserve.service.ReserveFieldPriceService;
 import com.bra.modules.reserve.service.ReserveMemberService;
 import com.bra.modules.reserve.service.ReserveVenueConsItemService;
@@ -115,9 +113,6 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
         reserveVenueCons.setUserName(member.getName());
         reserveVenueCons.setConsMobile(member.getMobile());
         reserveVenueCons.setConsType("2");//会员
-        String halfCourt = reserveVenueCons.getHalfCourt();//半场
-        String frequency = reserveVenueCons.getFrequency();//频率
-
         reserveVenueCons.preInsert();//生成主键
         List<ReserveVenueConsItem> itemList = reserveVenueCons.getVenueConsList();//订单的所有明细
         Double filedSum = 0D;//场地应收
@@ -128,8 +123,7 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
             item.setReserveVenue(reserveVenueCons.getReserveVenue());//订单详情保存场馆
             item.setConsData(reserveVenueCons);//订单
             item.setConsWeek(consWeek);//设置周次
-            item.setHalfCourt(halfCourt);//设置半场
-            item.setFrequency(frequency);//设置频率
+            item.setFrequency("");//设置频率
             // "1"代表门市价 在门市价的基础上进行打折
             Double price = reserveFieldPriceService.getPrice(item.getReserveField(), "1", reserveVenueCons.getConsDate(), item.getStartTime(), item.getEndTime());
             //获取折扣比率
@@ -153,59 +147,6 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
     public void delete(ReserveVenueCons reserveVenueCons) {
         super.delete(reserveVenueCons);
     }
-
-    /**
-     * 结账
-     * id:订单编号
-     * payType:支付类型
-     * consPrice：实收金额
-     *
-     * @param
-     */
-    @Transactional(readOnly = false)
-    public boolean saveSettlement(ReserveVenueCons reserveVenueCons, String payType, Double consPrice,
-                                  Double memberCardInput,
-                                  Double bankCardInput,
-                                  Double weiXinInput,
-                                  Double aliPayInput,
-                                  Double couponInput) {
-        reserveVenueCons.setPayType(payType);
-        reserveVenueCons.setMemberCardInput(memberCardInput);
-        reserveVenueCons.setBankCardInput(bankCardInput);
-        reserveVenueCons.setWeiXinInput(weiXinInput);
-        reserveVenueCons.setAliPayInput(aliPayInput);
-        reserveVenueCons.setCouponInput(couponInput);
-        reserveVenueCons.setConsPrice(consPrice);//结算价格
-        /*System.out.println("订单状态："+reserveVenueCons.getReserveType());*/
-        //reserveType:1:已预定,未付款
-        if ("1".equals(reserveVenueCons.getReserveType())) {
-            reserveVenueCons.setReserveType("4");//已结账
-            int cnt = dao.update(reserveVenueCons);
-            if (cnt != 0) {
-                //System.out.println("更新："+cnt+" 状态改变成功");
-                //会员扣款;结算教练(事件通知)
-                String phone = reserveVenueCons.getConsMobile();
-                if (StringUtils.isNoneEmpty(phone)) {
-                    ReserveMember member = new ReserveMember();
-                    member.setMobile(phone);
-                    List<ReserveMember> list = reserveMemberService.findExactList(member);
-                    for (ReserveMember i : list) {
-                        member = i;
-                    }
-                    reserveVenueCons.setMember(member);//通过手机号，找到场馆的会员，最后在监听器中处理余额
-                }
-
-                VenueCheckoutEvent venueCheckoutEvent = new VenueCheckoutEvent(reserveVenueCons);
-                applicationContext.publishEvent(venueCheckoutEvent);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;//已结算，不可重复结算
-        }
-    }
-
     /**
      * 取消预定
      *

@@ -21,7 +21,6 @@ public class ReserveVenueConsItem extends SaasEntity<ReserveVenueConsItem> {
 	private Date consDate;//预订时间
 	private String frequency;//频率(1:单次;2:每天;3:每周)
 	private String consWeek;//周几?
-	private String halfCourt;//是否半场(1:是)
 	private ReserveVenueCons consData;
 	private Date startDate;
 	private Date endDate;
@@ -128,14 +127,6 @@ public class ReserveVenueConsItem extends SaasEntity<ReserveVenueConsItem> {
 
 	public void setConsWeek(String consWeek) {
 		this.consWeek = consWeek;
-	}
-
-	public String getHalfCourt() {
-		return halfCourt;
-	}
-
-	public void setHalfCourt(String halfCourt) {
-		this.halfCourt = halfCourt;
 	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
