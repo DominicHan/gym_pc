@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bra.modules.reserve.dao.ReserveVenueConsItemDao">
+<mapper namespace="com.bra.modules.app.dao.AppVenueConsItemDao">
 
 	<sql id="reserveVenueConsColumns">
 		a.id AS "id",
@@ -42,6 +42,18 @@
 		FROM reserve_venue_cons_item a
 		<include refid="reserveVenueConsJoins"/>
 		WHERE a.id = #{id}
+	</select>
+
+	<select id="orderItemList" parameterType="Map" resultType="Map">
+		SELECT
+		a.order_price AS "orderPrice",
+		a.start_time AS "startTime",
+		a.end_time AS "endTime",
+		f.name AS "fieldName"
+		FROM reserve_venue_cons_item as a
+		INNER JOIN reserve_venue_cons as b on a.cons_data_id=b.id
+		INNER JOIN reserve_field as f on f.id=a.field_id
+		WHERE b.id = #{orderId}
 	</select>
 
 	<!--根据日期查询预定的场地状态-->
@@ -201,57 +213,4 @@
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	<select id="findListBymobile" parameterType="ReserveVenueConsItem" resultType="ReserveVenueConsItem">
-		select
-		<include refid="reserveVenueConsColumns"/>
-		from reserve_venue_cons_item a
-		where a.del_flag = #{DEL_FLAG_NORMAL} and tenant_id = #{tenantId}
-		<if test="consMobile != null and consMobile != ''">
-			AND a.cons_mobile LIKE
-			<if test="dbName == 'mysql'">concat(#{consMobile},'%')</if>
-		</if>
-
-	</select>
-	<select id="findVenueConsByMoblie" parameterType="ReserveVenueConsItem" resultType="ReserveVenueConsItem">
-		SELECT
-		<include refid="reserveVenueConsColumns"/>
-		FROM reserve_venue_cons_item a
-		<include refid="reserveVenueConsJoins"/>
-		WHERE a.cons_mobile like concat('%',#{consMobile},'%') and tenant_id = #{tenantId}
-	</select>
-	<select id="getUsedVenueNum" parameterType="ReserveVenueConsItem" resultType="int">
-		SELECT COUNT( CASE WHEN tmp2.parent_field_id is NULL THEN tmp2.field_id END)+2*COUNT( CASE WHEN parent_field_id is not NULL  THEN tmp2.field_id END)
-		FROM (
-			SELECT DISTINCT(tmp.field_id),r.parent_field_id FROM
-			(
-				SELECT i.field_id
-				FROM reserve_venue_cons_item i
-				WHERE i.del_flag = #{DEL_FLAG_NORMAL} AND i.tenant_id = #{tenantId}
-				AND STR_TO_DATE(CONCAT_WS(' ',i.cons_date,i.end_time),'%Y-%m-%d %H:%i') &gt;= NOW()
-				AND STR_TO_DATE(CONCAT_WS(' ',i.cons_date,i.start_time),'%Y-%m-%d %H:%i') &lt;= NOW()
-				<if test="reserveVenue != null and reserveVenue.id != null and reserveVenue.id !=''">
-					AND i.venue_id = #{reserveVenue.id}
-				</if>
-				${sqlMap.dsf}
-			) tmp
-			LEFT JOIN reserve_field_relation r on r.parent_field_id = tmp.field_id
-		) tmp2
-	</select>
-	<select id="getUsedVenueNumByProject" parameterType="ReserveVenueConsItem" resultType="Map">
-		SELECT COUNT( CASE WHEN tmp2.parent_field_id is NULL THEN tmp2.field_id END)+2*COUNT( CASE WHEN parent_field_id is not NULL  THEN tmp2.field_id END) AS num,
-				tmp2.project_id AS projectId,
-				tmp2.name AS projectName
-		FROM
-		(
-			SELECT DISTINCT(tmp.field_id),r.parent_field_id,f.project_id,p.name FROM
-			(SELECT i.field_id
-			FROM reserve_venue_cons_item i
-			WHERE
-			i.del_flag = #{DEL_FLAG_NORMAL} AND
-			STR_TO_DATE(CONCAT_WS(' ',i.cons_date,i.end_time),'%Y-%m-%d %H:%i') &gt;= NOW()
-			AND STR_TO_DATE(CONCAT_WS(' ',i.cons_date,i.start_time),'%Y-%m-%d %H:%i') &lt;= NOW()
-			AND i.venue_id = #{reserveVenue.id}
-		) tmp
-		LEFT JOIN reserve_field_relation r on r.parent_field_id = tmp.field_id ,reserve_field f,reserve_project p WHERE tmp.field_id = f.id AND p.id = f.project_id)  tmp2 GROUP BY tmp2.project_id;
-	</select>
 </mapper>

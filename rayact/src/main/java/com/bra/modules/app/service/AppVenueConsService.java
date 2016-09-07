@@ -1,17 +1,13 @@
 package com.bra.modules.app.service;
 
 import com.bra.common.service.CrudService;
+import com.bra.modules.app.dao.AppVenueConsDao;
+import com.bra.modules.app.dao.AppVenueConsItemDao;
 import com.bra.modules.app.utils.MemberUtils;
-import com.bra.modules.reserve.dao.ReserveVenueConsDao;
-import com.bra.modules.reserve.dao.ReserveVenueConsItemDao;
-import com.bra.modules.reserve.dao.ReserveVenueDao;
 import com.bra.modules.reserve.entity.ReserveMember;
 import com.bra.modules.reserve.entity.ReserveVenueCons;
 import com.bra.modules.reserve.entity.ReserveVenueConsItem;
 import com.bra.modules.reserve.service.ReserveFieldPriceService;
-import com.bra.modules.reserve.service.ReserveMemberService;
-import com.bra.modules.reserve.service.ReserveVenueConsItemService;
-import com.bra.modules.reserve.service.ReserveVenueConsService;
 import com.bra.modules.reserve.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,23 +26,15 @@ import java.util.Map;
  */
 @Service
 @Transactional(readOnly = true)
-public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao, ReserveVenueCons> {
+public class AppVenueConsService extends CrudService<AppVenueConsDao, ReserveVenueCons> {
 
 
     @Autowired
-    private ReserveVenueConsItemDao reserveVenueConsItemDao;
+    private AppVenueConsItemDao appVenueConsItemDao;
     @Autowired
-    private ReserveVenueDao reserveVenueDao;
-    @Autowired
-    private ReserveVenueConsService reserveVenueConsService;
-    @Autowired
-    private ReserveVenueConsDao reserveVenueConsDao;
+    private AppVenueConsDao appVenueConsDao;
     @Autowired
     private ReserveFieldPriceService reserveFieldPriceService;
-    @Autowired
-    private ReserveMemberService reserveMemberService;
-    @Autowired
-    private ReserveVenueConsItemService reserveVenueConsItemService;
 
     /**
      * 订单详情
@@ -57,9 +45,9 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
     public Map detail(String orderId) {
         Map map = new HashMap<>();
         map.put("orderId", orderId);
-        Map order = reserveVenueConsDao.detail(map);
+        Map order = appVenueConsDao.detail(map);
         if (order != null) {
-            List<Map> itemList = reserveVenueConsItemDao.orderItemList(map);
+            List<Map> itemList = appVenueConsItemDao.orderItemList(map);
             order.put("itemList", itemList);
         }
         return order;
@@ -75,12 +63,12 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
         Map map = new HashMap<>();
         map.put("reserveType", reserveType);
         map.put("phone", phone);
-        List<Map> orderList = reserveVenueConsDao.orderList(map);
+        List<Map> orderList = appVenueConsDao.orderList(map);
         for (Map i : orderList) {
             String orderId = (String) i.get("orderId");
             Map m = new HashMap<>();
             m.put("orderId", orderId);
-            List<Map> itemList = reserveVenueConsItemDao.orderItemList(m);
+            List<Map> itemList = appVenueConsItemDao.orderItemList(m);
             if (itemList.size() > 0) {
                 String projectName = (String) itemList.get(0).get("projectName");
                 i.put("projectName", projectName);
@@ -137,51 +125,12 @@ public class ReserveAppVenueConsService extends CrudService<ReserveVenueConsDao,
             filedSum += price;
             item.setConsPrice(price);//订单明细 应收金额=场地应收+教练费
             item.preInsert();
-            reserveVenueConsItemDao.insert(item);//保存预订信息
+            appVenueConsItemDao.insert(item);//保存预订信息
         }
         reserveVenueCons.setByPC("0");//通过APP预订的
         reserveVenueCons.setPeriodCnt(itemList.size()*0.5);//微信一个单元是半个小时
         reserveVenueCons.setOrderPrice(filedSum);//场地应收金额
         reserveVenueCons.setShouldPrice(filedSum);//订单应收
-        reserveVenueConsDao.insert(reserveVenueCons);//订单价格更改
-    }
-
-    @Transactional(readOnly = false)
-    public void delete(ReserveVenueCons reserveVenueCons) {
-        super.delete(reserveVenueCons);
-    }
-    /**
-     * 取消预定
-     *
-     * @param venueCons 订单
-     * @return
-     */
-    @Transactional(readOnly = false)
-    public void cancelOrder(ReserveVenueCons venueCons) {
-        dao.delete(venueCons);//删除订单
-        ReserveVenueConsItem item = new ReserveVenueConsItem();
-        item.setConsData(venueCons);
-        List<ReserveVenueConsItem> itemList = reserveVenueConsItemDao.findList(item);
-        for (ReserveVenueConsItem i : itemList) {
-            reserveVenueConsItemDao.delete(i);//删除订单明细
-        }
-    }
-
-    /**
-     * 检测用户是否有未付款的订单
-     *
-     * @param phone app 用户的手机
-     * @return
-     */
-    @Transactional(readOnly = false)
-    public List<Map> checkUserUnpaidOrder(String phone) {
-        Map map = new HashMap<>();
-        map.put("phone", phone);
-        List<Map> orderList = reserveVenueConsDao.checkUserUnpaidOrder(map);
-        for (Map i : orderList) {
-            List<Map> itemList = reserveVenueConsItemDao.orderItemList(i);
-            i.put("itemList", itemList);
-        }
-        return orderList;
+        appVenueConsDao.insert(reserveVenueCons);//订单价格更改
     }
 }

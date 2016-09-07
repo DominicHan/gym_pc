@@ -160,6 +160,12 @@
         </c:forEach>
     </ul>
 </section>
+<section class="my_section" id="myActivity">
+    <div  class="head head_act">我的预订</div>
+    <ul class="list list_act">
+        <li><a href="${ctx}/app/reserve/orderList">全部订单</a></li>
+    </ul>
+</section>
 <section class="my_section" style="width: 100%;margin:0px;position: fixed;bottom: 0px;">
     <div  class="head head_act"> 客服电话：137-2003-1362</div>
 </section>

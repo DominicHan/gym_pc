@@ -5,11 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.annotation.Token;
-import com.bra.modules.app.service.ReserveAppVenueConsService;
-import com.bra.modules.reserve.entity.ReserveField;
-import com.bra.modules.reserve.entity.ReserveVenue;
-import com.bra.modules.reserve.entity.ReserveVenueCons;
-import com.bra.modules.reserve.entity.ReserveVenueConsItem;
+import com.bra.modules.app.service.AppVenueConsService;
+import com.bra.modules.app.utils.MemberUtils;
+import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.entity.form.FieldPrice;
 import com.bra.modules.reserve.service.ReserveAppFieldPriceService;
 import com.bra.modules.reserve.service.ReserveVenueConsItemService;
@@ -37,7 +35,7 @@ public class AppFieldController extends BaseController {
     @Autowired
     private ReserveAppFieldPriceService reserveAppFieldPriceService;
     @Autowired
-    private ReserveAppVenueConsService reserveAppVenueConsService;
+    private AppVenueConsService appVenueConsService;
     @Autowired
     private ReserveVenueConsItemService reserveVenueConsItemService;
 
@@ -53,9 +51,7 @@ public class AppFieldController extends BaseController {
         if (consDate == null) {
             consDate = new Date();
         }
-        if (StringUtils.isEmpty(filedId)) {
-
-        } else {
+        if (StringUtils.isEmpty(filedId)==false) {
             List<String> times = new ArrayList<>();
             String startTime = "06:00:00";
             String endTime = "00:00:00";
@@ -164,7 +160,23 @@ public class AppFieldController extends BaseController {
         reserveVenueCons.setReserveType(ReserveVenueCons.RESERVATION);//已预定
         reserveVenueCons.setConsDate(consDate);
         reserveVenueCons.setVenueConsList(items);
-        reserveAppVenueConsService.saveOrder(reserveVenueCons);//保存预订信息
+        appVenueConsService.saveOrder(reserveVenueCons);//保存预订信息
         return map;
+    }
+    @RequestMapping(value = "orderList")
+    @ResponseBody
+    /**
+     *订单详情
+     * @param orderId
+     * @return
+     */
+    public String orderList() {
+        ReserveMember member = MemberUtils.getMember();
+        String phone=member.getMobile();
+        List<Map> orderList = null;
+        if (StringUtils.isNoneEmpty(phone)) {
+            orderList = appVenueConsService.orderList("1", phone);
+        }
+        return JSON.toJSONString(orderList);
     }
 }
