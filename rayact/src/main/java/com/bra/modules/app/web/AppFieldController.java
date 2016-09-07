@@ -164,19 +164,19 @@ public class AppFieldController extends BaseController {
         return map;
     }
     @RequestMapping(value = "orderList")
-    @ResponseBody
     /**
      *订单详情
      * @param orderId
      * @return
      */
-    public String orderList() {
+    public String orderList(Model model) {
         ReserveMember member = MemberUtils.getMember();
         String phone=member.getMobile();
         List<Map> orderList = null;
         if (StringUtils.isNoneEmpty(phone)) {
             orderList = appVenueConsService.orderList("1", phone);
         }
-        return JSON.toJSONString(orderList);
+        model.addAttribute("orderList",orderList);
+        return "app/orderList";
     }
 }

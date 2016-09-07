@@ -69,22 +69,7 @@ public class AppVenueConsService extends CrudService<AppVenueConsDao, ReserveVen
             Map m = new HashMap<>();
             m.put("orderId", orderId);
             List<Map> itemList = appVenueConsItemDao.orderItemList(m);
-            if (itemList.size() > 0) {
-                String projectName = (String) itemList.get(0).get("projectName");
-                i.put("projectName", projectName);
-            }
-            String startTime = null;
-            for (Map j : itemList) {
-                String start = (String) j.get("startTime");
-                start = TimeUtils.earlyMorningFormat(start);
-                if (startTime == null) {
-                    startTime = start;
-                } else if (start.compareTo(startTime) < 0) {
-                    startTime = start;
-                }
-            }
             i.put("itemList", itemList);
-            i.put("startTime", startTime);
         }
         return orderList;
     }
