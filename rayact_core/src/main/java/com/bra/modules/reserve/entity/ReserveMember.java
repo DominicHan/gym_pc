@@ -5,6 +5,7 @@ package com.bra.modules.reserve.entity;
 
 import com.bra.common.persistence.SaasEntity;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.util.Date;
 
@@ -28,7 +29,8 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	private String email;		// 邮箱
 	private String sex;		// 性别 1:男 2：女
 	private String healthCondition;//健康状况
-	private Double remainder ; //储值卡余额
+	@NumberFormat(pattern = "0.00")
+	private double remainder ; //储值卡余额
 	private String cardno;		// 卡号
 	private Integer tutorPeriodResidue;//教練剩余課時
 	private Integer residue;//無教練剩余課時

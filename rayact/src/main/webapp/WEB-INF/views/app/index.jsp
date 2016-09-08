@@ -177,7 +177,7 @@
        <%-- <li>无教练课时</li>
         <li>${member.residue}</li>--%>
         <li><span>余额</span></li>
-        <li><span>${member.remainder}</span></li>
+        <li><span><fmt:formatNumber value="${member.remainder}" pattern="0.00"/></span></li>
     </ul>
 </section>
 <section class="my_section" style="width: 100%;position: fixed;margin:0 auto;bottom: 0px;">

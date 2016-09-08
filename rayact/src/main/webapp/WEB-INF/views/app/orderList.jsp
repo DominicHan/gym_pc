@@ -141,31 +141,6 @@
             color: #666;
             font-size: 16px;
         }
-
-        .my_section {
-            position: relative;
-            margin: 15px 0;
-            text-align: center;
-            background: #fff;
-        }
-        .my_section::before{
-            content: '';
-            height: 0;
-            display: block;
-            border-bottom: 1px solid #ddd;
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-        .my_section .head {
-            position: relative;
-            display: block;
-            height: 45px;
-            line-height: 45px;
-            font-size: 14px;
-            padding: 0 10px;
-        }
     </style>
 </head>
 <body>
@@ -242,8 +217,5 @@
         </div>
     </div>
 </div>
-<section class="my_section " style="width: 100%;margin:0 auto;position: fixed;bottom: 0px;">
-    <div  class="head head_act "> 客服电话：137-2003-1362</div>
-</section>
 </body>
 </html>
