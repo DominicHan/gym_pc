@@ -12,6 +12,8 @@
     <style type="text/css">
         body {
             font-family: -apple-system, Helvetica, sans-serif;
+            min-width: 320px;
+            max-width: 540px;
             line-height: 1.5;
             font-size: 14px;
             text-align: center;
