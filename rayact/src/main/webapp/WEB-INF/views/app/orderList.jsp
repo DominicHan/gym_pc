@@ -155,9 +155,9 @@
 <div class="wx_wrap">
     <div class="my_nav">
         <ul id="nav">
-            <li no="1" class="cur"><a href="javascript:;">全部订单</a></li>
-            <li class="" no="2"><a href="javascript:;">已预订<span class="num"></span></a></li>
-            <li class="" no="2"><a href="javascript:;">已完成<span class="num"></span></a></li>
+            <li no="1" class="<c:if test="${reserveType == null}">cur</c:if>"><a href="${ctx}/app/reserve/orderList">全部</a></li>
+            <li no="1" class="<c:if test="${reserveType == 1}">cur</c:if>"><a href="${ctx}/app/reserve/orderList?reserveType=1">已预订</a></li>
+            <li no="2" class="<c:if test="${reserveType == 4}">cur</c:if>"><a href="${ctx}/app/reserve/orderList?reserveType=4">已完成<span class="num"></span></a></li>
         </ul>
     </div>
     <div class="my_order_wrap">
@@ -168,6 +168,7 @@
                         <div class="order_head">
                             <span>日期：${order.orderDate}</span>
                             <span>订单编号：${order.orderId}</span>
+                            <span>健身房：${order.venueName}</span>
                         </div>
                         <c:forEach items="${order.itemList}" var="item">
                             <div class="order_item">

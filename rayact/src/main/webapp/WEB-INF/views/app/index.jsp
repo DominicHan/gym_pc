@@ -163,9 +163,11 @@
     </ul>
 </section>
 <section class="my_section" id="myActivity">
-    <div  class="head head_act">我的预订</div>
+    <div  class="head head_act">我的订单</div>
     <ul class="list list_act">
-        <li><a href="${ctx}/app/reserve/orderList">全部订单</a></li>
+        <li><a href="${ctx}/app/reserve/orderList">全部</a></li>
+        <li><a href="${ctx}/app/reserve/orderList?reserveType=1">已预订</a></li>
+        <li><a href="${ctx}/app/reserve/orderList?reserveType=4">已完成</a></li>
     </ul>
 </section>
 <section class="my_section" style="width: 100%;margin:0px;position: fixed;bottom: 0px;">

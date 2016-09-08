@@ -169,14 +169,15 @@ public class AppFieldController extends BaseController {
      * @param orderId
      * @return
      */
-    public String orderList(Model model) {
+    public String orderList(String reserveType, Model model) {
         ReserveMember member = MemberUtils.getMember();
-        String phone=member.getMobile();
+        String memberId=member.getId();
         List<Map> orderList = null;
-        if (StringUtils.isNoneEmpty(phone)) {
-            orderList = appVenueConsService.orderList("1", phone);
+        if (StringUtils.isNoneEmpty(memberId)) {
+            orderList = appVenueConsService.orderList(reserveType, memberId);
         }
         model.addAttribute("orderList",orderList);
+        model.addAttribute("reserveType",reserveType);
         return "app/orderList";
     }
 }

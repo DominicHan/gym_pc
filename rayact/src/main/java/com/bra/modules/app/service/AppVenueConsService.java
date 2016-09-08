@@ -59,10 +59,10 @@ public class AppVenueConsService extends CrudService<AppVenueConsDao, ReserveVen
      * @param reserveType 订单状态 1:已预订 4：已结算
      * @return
      */
-    public List<Map> orderList(String reserveType, String phone) {
+    public List<Map> orderList(String reserveType, String memberId) {
         Map map = new HashMap<>();
         map.put("reserveType", reserveType);
-        map.put("phone", phone);
+        map.put("memberId", memberId);
         List<Map> orderList = appVenueConsDao.orderList(map);
         for (Map i : orderList) {
             String orderId = (String) i.get("orderId");
