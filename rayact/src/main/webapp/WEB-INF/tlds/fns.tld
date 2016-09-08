@@ -83,14 +83,6 @@
     </function>
 
     <function>
-        <description>获取当前用户的菜单对象列表</description>
-        <name>getMenuList</name>
-        <function-class>com.bra.modules.sys.utils.UserUtils</function-class>
-        <function-signature>java.util.List getMenuList()</function-signature>
-        <example>${fns:getMenuList()}</example>
-    </function>
-
-    <function>
         <description>获取当前用户的区域对象列表</description>
         <name>getAreaList</name>
         <function-class>com.bra.modules.sys.utils.UserUtils</function-class>
@@ -262,6 +254,14 @@
         <function-class>com.bra.modules.reserve.utils.StatementsUtils</function-class>
         <function-signature>java.lang.String getTransactionType(java.lang.String)</function-signature>
         <example>${fns:getTransactionType('transactionType')}</example>
+    </function>
+
+    <function>
+        <description>订单状态</description>
+        <name>getOrderStatus</name>
+        <function-class>com.bra.modules.reserve.utils.VenueOrderUtils</function-class>
+        <function-signature>java.lang.String getOrderStatus(java.lang.String)</function-signature>
+        <example>${fns:getOrderStatus('reserveType')}</example>
     </function>
 
     <function>

@@ -31,6 +31,7 @@ public class AppMainController {
         List<ReserveField> list = fieldService.findList(reserveField);
         model.addAttribute("list", list);
         model.addAttribute("reserveVenueId", venue.getId());
+        model.addAttribute("member", member);
         return "app/index";
     }
 

@@ -46,14 +46,13 @@
 
 	<select id="orderItemList" parameterType="Map" resultType="Map">
 		SELECT
-		a.order_price AS "orderPrice",
 		a.start_time AS "startTime",
 		a.end_time AS "endTime",
 		f.name AS "fieldName"
 		FROM reserve_venue_cons_item as a
-		INNER JOIN reserve_venue_cons as b on a.cons_data_id=b.id
 		INNER JOIN reserve_field as f on f.id=a.field_id
-		WHERE b.id = #{orderId}
+		WHERE a.cons_data_id = #{orderId}
+		order by startTime ASC
 	</select>
 
 	<!--根据日期查询预定的场地状态-->

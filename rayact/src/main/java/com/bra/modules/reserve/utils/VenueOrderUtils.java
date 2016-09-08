@@ -14,6 +14,21 @@ import java.util.Map;
  */
 public class VenueOrderUtils {
 
+    public static String  getOrderStatus(String reserveType) {
+        String rs;
+        switch (reserveType){
+            case "1":
+                rs="已预订";
+                break;
+            case "4":
+                rs= "已完成";
+                break;
+            default:
+                rs= "";
+        }
+        return rs;
+    }
+
     public static String getPayType(String payType){
         if ("1".equals(payType)) {
             return "预储值";
@@ -58,6 +73,7 @@ public class VenueOrderUtils {
             order.setOtherCount(order.getOtherCount() + 1);
         }
     }
+
 
     public static List<ReserveVenueConsOrder> getOrderList(List<ReserveVenueCons> venueConsList, List<ReserveVenueOrder> venueOrderList) {
 

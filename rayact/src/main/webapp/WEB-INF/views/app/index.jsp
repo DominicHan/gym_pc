@@ -11,10 +11,8 @@
     <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
     <style type="text/css">
         body {
-            margin: 0 auto;
             font-family: -apple-system, Helvetica, sans-serif;
-            min-width: 320px;
-            max-width: 540px;
+            margin: 0px auto;
             line-height: 1.5;
             font-size: 14px;
             text-align: center;
@@ -80,14 +78,14 @@
             width: 25%;
         }
 
-        .my_section .list li a {
+        .my_section .list li a,span{
             position: relative;
             display: block;
             padding: 10px 0;
             color: #666;
         }
 
-        .list_act a {
+        .list_act a,span{
             font-size: 12px !important;
         }
 
@@ -166,12 +164,23 @@
 <section class="my_section" id="myActivity">
     <div  class="head head_act">我的订单</div>
     <ul class="list list_act">
-        <li><a href="${ctx}/app/reserve/orderList">全部</a></li>
-        <li><a href="${ctx}/app/reserve/orderList?reserveType=1">已预订</a></li>
-        <li><a href="${ctx}/app/reserve/orderList?reserveType=4">已完成</a></li>
+        <li style="width: 33.33%;"><a href="${ctx}/app/reserve/orderList">全部</a></li>
+        <li style="width: 33.33%;"><a href="${ctx}/app/reserve/orderList?reserveType=1">已预订</a></li>
+        <li style="width: 33.33%;"><a href="${ctx}/app/reserve/orderList?reserveType=4">已完成</a></li>
     </ul>
 </section>
-<section class="my_section" style="width: 100%;margin:0px;position: fixed;bottom: 0px;">
+<section class="my_section" id="myActivity">
+    <div  class="head head_act">我的钱包</div>
+    <ul class="list list_act">
+        <li><span>剩余教练课时</span></li>
+        <li><span>${member.tutorPeriodResidue}</span></li>
+       <%-- <li>无教练课时</li>
+        <li>${member.residue}</li>--%>
+        <li><span>余额</span></li>
+        <li><span>${member.remainder}</span></li>
+    </ul>
+</section>
+<section class="my_section" style="width: 100%;position: fixed;margin:0 auto;bottom: 0px;">
     <div  class="head head_act"> 客服电话：137-2003-1362</div>
 </section>
 </body>

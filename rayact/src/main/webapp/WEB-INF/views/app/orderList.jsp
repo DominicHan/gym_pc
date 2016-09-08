@@ -12,8 +12,6 @@
     <style type="text/css">
         body {
             margin: 0 auto;
-            min-width: 320px;
-            max-width: 540px;
             height: auto;
             font-family: -apple-system, Helvetica, sans-serif;
             line-height: 1.5;
@@ -143,10 +141,53 @@
             color: #666;
             font-size: 16px;
         }
+
+        .my_section {
+            position: relative;
+            margin: 15px 0;
+            text-align: center;
+            background: #fff;
+        }
+        .my_section::before{
+            content: '';
+            height: 0;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .my_section .head {
+            position: relative;
+            display: block;
+            height: 45px;
+            line-height: 45px;
+            font-size: 14px;
+            padding: 0 10px;
+        }
     </style>
 </head>
 <body>
-<jsp:include page="appHead.jsp"></jsp:include>
+<div style="background-color:#fff;padding:10px;border-bottom:1px solid rgb(178,178,178);">
+    <table border="0" width="100%">
+        <tbody>
+        <tr>
+            <td onclick="location.href='${ctx}/app/main'" width="30px"><img
+                    src="${ctxStatic}/images/weiXin_return.png"
+                    style="margin-bottom:-2px;" height="22px"></td>
+            <td align="center" valign="middle">
+                <div style="padding:5px 0"><img
+                        src="${ctxStatic}/images/weiXin_logo.png"
+                        style="display:block" height="16px"></div>
+            </td>
+            <td width="30px">&nbsp;<a href="${ctx}/logout"><img
+                    src="${ctxStatic}/images/weiXin_logout.png" style="margin-bottom:-2px;"
+                    height="22px"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <div class="wx_wrap">
     <div class="my_nav">
         <ul id="nav">
@@ -161,14 +202,38 @@
                 <c:forEach items="${orderList}" var="order">
                     <div class="order_box">
                         <div class="order_head">
-                            <span>日期：${order.orderDate}</span>
-                            <span>订单编号：${order.orderId}</span>
-                            <span>健身房：${order.venueName}</span>
+                           <%-- <div class="row">
+                                <div class="col-xs-6">
+                                    <span>订单编号：${order.orderId}</span>
+                                </div>
+                            </div>--%>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <span>日期：${order.orderDate}</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <span>订单状态：${fns:getOrderStatus(order.reserveType)}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <span>健身房：${order.venueName}</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <span>课时量：${order.periodCnt}</span>
+                                </div>
+                            </div>
                         </div>
                         <c:forEach items="${order.itemList}" var="item">
                             <div class="order_item">
-                                <span>${item.fieldName}</span>
-                                <span>${item.startTime}-${item.endTime}</span>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <span>教练：${item.fieldName}</span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span>时间：${item.startTime}-${item.endTime}</span>
+                                    </div>
+                                </div>
                             </div>
                         </c:forEach>
                     </div>
@@ -177,5 +242,8 @@
         </div>
     </div>
 </div>
+<section class="my_section " style="width: 100%;margin:0 auto;position: fixed;bottom: 0px;">
+    <div  class="head head_act "> 客服电话：137-2003-1362</div>
+</section>
 </body>
 </html>
