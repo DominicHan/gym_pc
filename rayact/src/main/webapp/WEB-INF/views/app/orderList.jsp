@@ -11,14 +11,15 @@
     <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
     <style type="text/css">
         body {
+            margin: 0 auto;
             min-width: 320px;
             max-width: 540px;
+            height: auto;
             font-family: -apple-system, Helvetica, sans-serif;
             line-height: 1.5;
             font-size: 14px;
-            -webkit-text-size-adjust: none;
             background: #F5F5F5;
-            overflow-x: hidden
+            overflow: hidden
         }
 
         a {
@@ -28,11 +29,6 @@
         ol, ul {
             list-style: none;
         }
-
-        .my_order_wrap {
-            overflow: hidden;
-        }
-
         .my_order_inner {
             position: relative;
             min-height: 300px;
@@ -151,7 +147,6 @@
 </head>
 <body>
 <jsp:include page="appHead.jsp"></jsp:include>
-
 <div class="wx_wrap">
     <div class="my_nav">
         <ul id="nav">
@@ -161,7 +156,7 @@
         </ul>
     </div>
     <div class="my_order_wrap">
-        <div style="height: 2353px;" class="my_order_inner" id="cont">
+        <div class="my_order_inner" id="cont">
             <div class="my_order">
                 <c:forEach items="${orderList}" var="order">
                     <div class="order_box">

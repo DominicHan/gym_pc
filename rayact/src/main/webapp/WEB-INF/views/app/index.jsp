@@ -11,6 +11,7 @@
     <link href="${ctxStatic}/cleanzone/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
     <style type="text/css">
         body {
+            margin: 0 auto;
             font-family: -apple-system, Helvetica, sans-serif;
             min-width: 320px;
             max-width: 540px;
