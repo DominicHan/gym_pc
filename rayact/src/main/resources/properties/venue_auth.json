@@ -10,12 +10,6 @@
         "authorityList": []
       },
       {
-        "code": "project",
-        "name": "项目管理",
-        "href":"/reserve/reserveProject/list",
-        "authorityList": []
-      },
-      {
         "code": "field",
         "name": "教练管理",
         "href":"/reserve/reserveField/list",

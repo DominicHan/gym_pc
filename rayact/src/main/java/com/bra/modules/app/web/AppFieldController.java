@@ -2,6 +2,7 @@ package com.bra.modules.app.web;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bra.common.utils.DateUtils;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.annotation.Token;
@@ -9,6 +10,7 @@ import com.bra.modules.app.service.AppVenueConsService;
 import com.bra.modules.app.utils.MemberUtils;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.entity.form.FieldPrice;
+import com.bra.modules.reserve.entity.form.TimePrice;
 import com.bra.modules.reserve.service.ReserveAppFieldPriceService;
 import com.bra.modules.reserve.service.ReserveVenueConsItemService;
 import com.bra.modules.reserve.utils.TimeUtils;
@@ -58,10 +60,23 @@ public class AppFieldController extends BaseController {
             times.addAll(TimeUtils.getTimeSpacListValue(startTime, endTime, 30));
             //场地价格
             List<FieldPrice> venueFieldPriceList = reserveAppFieldPriceService.findByDate(consDate, filedId, times);
+            for (FieldPrice i : venueFieldPriceList) {
+                for (TimePrice j : i.getTimePriceList()) {
+                    String date = DateUtils.formatDate(consDate);
+
+                    String sysTime =  DateUtils.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");//系统时间
+                    String time = j.getTime();
+                    String startTimeSub = time.substring(0, 5);//当前场地的时间
+                    startTimeSub = date + " " + startTimeSub;//场地时间
+                    if (startTimeSub.compareTo(sysTime) < 0) {
+                        j.setStatus("1");
+                    }
+                }
+            }
+
             model.addAttribute("venueFieldPriceList", venueFieldPriceList);
             model.addAttribute("times", times);
-            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-            model.addAttribute("consDate", fmt.format(consDate));
+            model.addAttribute("consDate",  DateUtils.formatDate(consDate));
             model.addAttribute("filedId", filedId);
             model.addAttribute("venueId", venueId);
         }
