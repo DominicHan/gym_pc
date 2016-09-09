@@ -40,13 +40,9 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
     @Autowired
     private ReserveFieldPriceService reserveFieldPriceService;
     @Autowired
-    private ReserveTutorService reserveTutorService;
-    @Autowired
     private ReserveVenueConsItemService reserveVenueConsItemService;
     @Autowired
     private ReserveVenueApplyCutService reserveVenueApplyCutService;
-    @Autowired
-    private ReserveTutorOrderService reserveTutorOrderService;
     @Autowired
     private  ReserveCardStatementsService reserveCardStatementsService;
 
@@ -154,9 +150,6 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
         ReserveVenueCons reserveVenueCons=super.get(id);
         ReserveMember member=reserveMemberService.get(reserveVenueCons.getMember());
         reserveVenueCons.setMember(member);//获得会员余额
-        //教练订单
-        List<ReserveTutorOrder> tutorOrderList = reserveTutorOrderService.findNotCancel(reserveVenueCons.getId(), ReserveVenueCons.MODEL_KEY);
-        reserveVenueCons.setTutorOrderList(tutorOrderList);
         //订单详情
         ReserveVenueConsItem item=new ReserveVenueConsItem();
         item.setConsData(reserveVenueCons);
@@ -179,9 +172,6 @@ public class ReserveVenueConsService extends CrudService<ReserveVenueConsDao, Re
     public List<ReserveVenueCons> findList(ReserveVenueCons reserveVenueCons) {
         List<ReserveVenueCons> list=super.findList(reserveVenueCons);
         for(ReserveVenueCons i:list){
-            //教练订单
-            List<ReserveTutorOrder> tutorOrderList = reserveTutorOrderService.findNotCancel(reserveVenueCons.getId(), ReserveVenueCons.MODEL_KEY);
-            i.setTutorOrderList(tutorOrderList);
             //订单详情
             ReserveVenueConsItem item=new ReserveVenueConsItem();
             item.setConsData(reserveVenueCons);

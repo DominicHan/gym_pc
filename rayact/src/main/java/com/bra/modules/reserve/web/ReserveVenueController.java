@@ -7,13 +7,13 @@ import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.annotation.Token;
 import com.bra.modules.mechanism.web.bean.AttMainForm;
-import com.bra.modules.reserve.entity.ReserveProject;
 import com.bra.modules.reserve.entity.ReserveVenue;
 import com.bra.modules.reserve.entity.form.ReserveVenueIncomeIntervalReport;
 import com.bra.modules.reserve.entity.form.ReserveVenueProjectFieldIntervalReport;
 import com.bra.modules.reserve.entity.form.ReserveVenueProjectIntervalReport;
 import com.bra.modules.reserve.entity.form.ReserveVenueTotalIntervalReport;
-import com.bra.modules.reserve.service.*;
+import com.bra.modules.reserve.service.ReserveProjectService;
+import com.bra.modules.reserve.service.ReserveVenueService;
 import com.bra.modules.reserve.utils.CheckUtils;
 import com.bra.modules.reserve.utils.ExcelInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,8 +138,6 @@ public class ReserveVenueController extends BaseController {
         model.addAttribute("venueProjectReport",venueProjectReport);//查询参数回传
         List<ReserveVenue> reserveVenueList=reserveVenueService.findList(new ReserveVenue());//场馆列表
         model.addAttribute("reserveVenueList",reserveVenueList);//场馆列表
-        List<ReserveProject> reserveProjectList=reserveProjectService.findList(new ReserveProject());//项目列表
-        model.addAttribute("reserveProjectList",reserveProjectList);//收入统计
         if("1".equals(queryType)){
             return "reserve/report/venueFieldIncomeReport";
         }else{
@@ -171,12 +169,11 @@ public class ReserveVenueController extends BaseController {
         incomeReport.setStartDate(startDate);
         incomeReport.setEndDate(endDate);
         if("1".equals(queryType)){
-            String[] titles = {"健身房","项目","储值卡","现金收入","银行卡收入","微信收入","支付宝收入","欠账","其它","合计"};
+            String[] titles = {"健身房","储值卡","现金收入","银行卡收入","微信收入","支付宝收入","欠账","其它","合计"};
             List<String[]> contentList = new ArrayList<>();
             for(ReserveVenueProjectIntervalReport report :incomeReport.getProjectIntervalReports()){
                 String[] o = new String[10];
                 o[0] = report.getReserveVenue().getName();
-                o[1] = report.getReserveProject().getName();
                 o[2] = String.valueOf(report.getStoredCardBill());
                 o[3] = String.valueOf(report.getCashBill());
                 o[4] = String.valueOf(report.getBankCardBill());
@@ -203,13 +200,12 @@ public class ReserveVenueController extends BaseController {
             ExcelInfo info = new ExcelInfo(response,"场馆收入汇总"+ DateUtils.formatDate(now),titles,contentList);
             info.export();
         }else{
-            String[] titles = {"健身房","项目","教练","储值卡","现金收入","银行卡收入","微信收入","支付宝收入","欠账","其它","合计"};
+            String[] titles = {"健身房","教练","储值卡","现金收入","银行卡收入","微信收入","支付宝收入","欠账","其它","合计"};
             List<String[]> contentList = new ArrayList<>();
             for(ReserveVenueProjectIntervalReport report :incomeReport.getProjectIntervalReports()){
                 for(ReserveVenueProjectFieldIntervalReport field:report.getFieldIntervalReports()){
                     String[] o = new String[11];
                     o[0] = field.getReserveVenue().getName();
-                    o[1] = field.getReserveProject().getName();
                     o[2] = field.getReserveField().getName();
                     o[3] = String.valueOf(field.getStoredCardBill());
                     o[4] = String.valueOf(field.getCashBill());

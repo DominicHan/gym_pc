@@ -156,22 +156,14 @@
         #{startDate} AS "startDate",
         #{endDate} AS "endDate",
         v.id AS "reserveVenue.id",
-        v.name AS "reserveVenue.name",
-        p.id AS "reserveProject.id",
-        p.name AS "reserveProject.name"
+        v.name AS "reserveVenue.name"
         from reserve_field a
-        LEFT JOIN reserve_project p on a.project_id=p.id
         LEFT JOIN reserve_venue v on a.venue_id=v.id
         <where>
             a.del_flag = #{DEL_FLAG_NORMAL} and a.tenant_id = #{tenantId}
             <if test="reserveVenue !=null ">
                 <if test="reserveVenue.id !=null and reserveVenue.id !=''">
                     and a.venue_id=#{reserveVenue.id}
-                </if>
-            </if>
-            <if test="reserveProject !=null ">
-                <if test="reserveProject.id !=null and reserveProject.id !=''">
-                    and p.id=#{reserveProject.id}
                 </if>
             </if>
             ${sqlMap.dsf}
@@ -186,12 +178,6 @@
             <if test="reserveVenue.id !=null and reserveVenue.id !=''">
                 e.id AS "reserveVenue.id",
                 e.name AS "reserveVenue.name",
-            </if>
-        </if>
-        <if test="reserveProject !=null ">
-            <if test="reserveProject.id !=null and reserveProject.id !=''">
-                d.id AS "reserveProject.id",
-                d.name AS "reserveProject.name",
             </if>
         </if>
         <if test="reserveField !=null ">
@@ -209,20 +195,15 @@
         sum(if(pay_type=5,b.order_price,0)) AS "fieldBillAliPay",
         sum(if(pay_type=6,b.order_price,0)) AS "fieldBillOther",
         sum(if(pay_type=7,b.order_price,0)) AS "fieldBillDue"
-        from reserve_venue_cons_item as a,reserve_venue_cons as b,reserve_field as c,reserve_project as d,reserve_venue
+        from reserve_venue_cons_item as a,reserve_venue_cons as b,reserve_field as c,reserve_venue
         as e
         <where>
-            a.cons_data_id=b.id and a.field_id=c.id and c.project_id=d.id and a.del_flag = #{DEL_FLAG_NORMAL} and
+            a.cons_data_id=b.id and a.field_id=c.id  and a.del_flag = #{DEL_FLAG_NORMAL} and
             a.tenant_id = #{tenantId} and b.reserve_type='4'
             and a.venue_id=e.id
             <if test="reserveVenue !=null ">
                 <if test="reserveVenue.id !=null and reserveVenue.id !=''">
                     and a.venue_id=#{reserveVenue.id}
-                </if>
-            </if>
-            <if test="reserveProject !=null ">
-                <if test="reserveProject.id !=null and reserveProject.id !=''">
-                    and d.id=#{reserveProject.id}
                 </if>
             </if>
             <if test="reserveField !=null ">
@@ -235,11 +216,6 @@
             </if>
         </where>
         group by c.id,b.cons_date
-        <if test="reserveProject !=null ">
-            <if test="reserveProject.id !=null and reserveProject.id !=''">
-                ,d.id
-            </if>
-        </if>
         <if test="reserveVenue !=null ">
             <if test="reserveVenue.id !=null and reserveVenue.id !=''">
                 ,e.id
@@ -306,8 +282,6 @@
         DISTINCT
         v.id AS "reserveVenue.id",
         v.name AS "reserveVenue.name",
-        d.id AS "reserveProject.id",
-        d.name AS "reserveProject.name",
         sum(
         case
         WHEN b.pay_type!=8 then b.cons_price
@@ -382,7 +356,6 @@
         LEFT JOIN reserve_venue_cons as b on a.cons_data_id=b.id
         LEFT JOIN reserve_field as c on a.field_id=c.id
         LEFT JOIN reserve_venue as v on a.venue_id=v.id
-        LEFT JOIN reserve_project as d on c.project_id=d.id
         LEFT JOIN reserve_multiple_payment as p on p.order_id=b.id
         <where>
             a.del_flag = #{DEL_FLAG_NORMAL}
@@ -392,17 +365,12 @@
                     and a.venue_id=#{reserveVenue.id}
                 </if>
             </if>
-            <if test="reserveProject !=null ">
-                <if test="reserveProject.id !=null and reserveProject.id !=''">
-                    AND d.id=#{reserveProject.id}
-                </if>
-            </if>
             <if test="startDate !=null and endDate !=null">
                 and (Date(b.cons_date) BETWEEN DATE (#{startDate}) AND DATE(#{endDate}))
             </if>
             ${sqlMap.dsf}
         </where>
-        GROUP BY d.id,v.id
+        GROUP BY v.id
     </select>
     <!--场次散客收入-->
     <select id="reserveVenueProjectDividedIntervalReport"
@@ -410,8 +378,6 @@
         select
         a.venue_id AS "reserveVenue.id",
         v.name AS "reserveVenue.name",
-        p.id AS "reserveProject.id",
-        p.name AS "reserveProject.name",
         SUM(a.collect_price) AS "bill",
         sum(if(pay_type=1,a.collect_price,0)) AS "storedCardBill",
         sum(if(pay_type=2,a.collect_price,0)) AS "cashBill",
@@ -422,18 +388,12 @@
         sum(if(pay_type=10,a.collect_price,0)) AS "personalAliPayBill",
         sum(if(pay_type=6,a.collect_price,0)) AS "otherBill",
         sum(if(pay_type=7,a.collect_price,0)) AS "dueBill"
-        from reserve_venue_order a,reserve_project p,reserve_venue v,reserve_venue_visitors_set as s
+        from reserve_venue_order a,reserve_venue v,reserve_venue_visitors_set as s
         <where>
-            a.venue_id = v.id and a.visitors_set_id=s.id and s.project_id=p.id
-            and a.del_flag = #{DEL_FLAG_NORMAL} and a.tenant_id = #{tenantId}
+            a.venue_id = v.id and a.visitors_set_id=s.id and a.del_flag = #{DEL_FLAG_NORMAL} and a.tenant_id = #{tenantId}
             <if test="reserveVenue !=null ">
                 <if test="reserveVenue.id !=null and reserveVenue.id !=''">
                     and a.venue_id=#{reserveVenue.id}
-                </if>
-            </if>
-            <if test="reserveProject !=null ">
-                <if test="reserveProject.id !=null and reserveProject.id !=''">
-                    AND p.id=#{reserveProject.id}
                 </if>
             </if>
             <if test="startDate !=null and endDate !=null">
@@ -441,7 +401,7 @@
             </if>
             ${sqlMap.dsf}
         </where>
-        GROUP BY p.id,v.id
+        GROUP BY v.id
     </select>
     <!--场馆 项目 场地 区间收入-->
 
@@ -450,8 +410,6 @@
         SELECT
         e.id AS "reserveVenue.id",
         e.name AS "reserveVenue.name",
-        d.id AS "reserveProject.id",
-        d.name AS "reserveProject.name",
         c.id AS "reserveField.id",
         c.name AS "reserveField.name",
         #{startDate} AS "startDate",
@@ -469,7 +427,7 @@
         sum(if(pay_type=8,b.cons_price,0)) AS "multiplePaymentBill"
         from reserve_venue_cons_item as a,reserve_venue_cons as b,reserve_field as c,reserve_project as d,reserve_venue as e
         <where>
-            a.cons_data_id=b.id and a.field_id=c.id and c.project_id=d.id and a.del_flag = #{DEL_FLAG_NORMAL} and
+            a.cons_data_id=b.id and a.field_id=c.id and a.del_flag = #{DEL_FLAG_NORMAL} and
             a.tenant_id = #{tenantId} and b.reserve_type='4'
             and a.venue_id=e.id
             <if test="reserveVenue !=null ">
@@ -477,21 +435,11 @@
                     and e.id=#{reserveVenue.id}
                 </if>
             </if>
-            <if test="reserveProject !=null ">
-                <if test="reserveProject.id !=null and reserveProject.id !=''">
-                    AND d.id=#{reserveProject.id}
-                </if>
-            </if>
             <if test="startDate !=null and endDate !=null">
                 and (Date(b.cons_date) BETWEEN DATE (#{startDate}) AND DATE(#{endDate}))
             </if>
         </where>
             GROUP BY c.id
-        <if test="reserveProject !=null ">
-            <if test="reserveProject.id !=null and reserveProject.id !=''">
-                ,d.id
-            </if>
-        </if>
         <if test="reserveVenue !=null ">
             <if test="reserveVenue.id !=null and reserveVenue.id !=''">
                 ,e.id

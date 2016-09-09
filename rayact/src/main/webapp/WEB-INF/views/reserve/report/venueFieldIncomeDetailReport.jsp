@@ -38,16 +38,6 @@
                                                     defaultLabel="----请选择-----"
                                                     defaultValue=""></sys:select>
                                     </td>
-                                    <td>项目:</td>
-                                    <td>
-
-                                        <sys:select cssClass="input-large" name="reserveProject.id"
-                                                    cssStyle="width:100%"
-                                                    value="${venueProjectReport.reserveProject.id}"
-                                                    items="${reserveProjectList}" itemLabel="name" itemValue="id"
-                                                    defaultLabel="----请选择-----"
-                                                    defaultValue=""></sys:select>
-                                    </td>
                                     <td>类型：</td>
                                     <td>
                                         <div class="btn-group" id="payType">
@@ -91,7 +81,6 @@
                             <thead>
                             <tr>
                                 <th>健身房</th>
-                                <th>项目</th>
                                 <th>教练</th>
                                 <th>储值卡</th>
                                 <th>现金</th>
@@ -126,9 +115,6 @@
                                     <tr>
                                         <td>
                                                 ${report.reserveVenue.name}
-                                        </td>
-                                        <td>
-                                                ${report.reserveProject.name}
                                         </td>
                                         <td>
                                                 ${report.reserveField.name}
@@ -183,8 +169,8 @@
                             </c:forEach>
                             <tr>
                             <tr>
-                                <td colspan="2"></td>
-                                <td>订场收入合计</td>
+                                <td></td>
+                                <td>教练课时收入合计</td>
                                 <td>${storedCardBill}</td>
                                 <td>${cashBill}</td>
                                 <td>${bankCardBill}</td>
@@ -265,8 +251,8 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <td colspan="2"></td>
-                                <td>场次票收入合计</td>
+                                <td></td>
+                                <td>无教练课时收入合计</td>
                                 <td>${storedCardBill}</td>
                                 <td>${cashBill}</td>
                                 <td>${bankCardBill}</td>
@@ -279,8 +265,8 @@
                                 <td>${bill}</td>
                             </tr>
                             <tr>
-                                <td colspan="2"></td>
-                                <td>总收入合计（包场收入+场次票收入）</td>
+                                <td></td>
+                                <td>总收入合计</td>
                                 <td>${incomeReport.storedCardBill}</td>
                                 <td>${incomeReport.cashBill}</td>
                                 <td>${incomeReport.bankCardBill}</td>

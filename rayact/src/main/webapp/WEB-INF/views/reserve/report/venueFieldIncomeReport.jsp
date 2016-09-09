@@ -37,16 +37,6 @@
                                                     defaultLabel="----请选择-----"
                                                     defaultValue=""></sys:select>
                                     </td>
-                                    <td>项目：</td>
-                                    <td>
-
-                                        <sys:select cssClass="input-large" name="reserveProject.id"
-                                                    cssStyle="width:100%"
-                                                    value="${venueProjectReport.reserveProject.id}"
-                                                    items="${reserveProjectList}" itemLabel="name" itemValue="id"
-                                                    defaultLabel="----请选择-----"
-                                                    defaultValue=""></sys:select>
-                                    </td>
                                     <td>
                                         <div class="btn-group" id="payType">
                                             <label class="radio-inline">
@@ -88,7 +78,6 @@
                             <thead>
                             <tr>
                                 <th>健身房</th>
-                                <th>项目</th>
                                 <th>预储值</th>
                                 <th>现金</th>
                                 <th>银行卡</th>
@@ -108,9 +97,6 @@
                                 <tr>
                                     <td>
                                             ${report.reserveVenue.name}
-                                    </td>
-                                    <td>
-                                            ${report.reserveProject.name}
                                     </td>
                                     <td>
                                             ${report.storedCardBill}
@@ -150,7 +136,7 @@
                             </c:forEach>
                             <%-- 项目月统计 结束 --%>
                             <tr>
-                                <td colspan="2">
+                                <td>
                                    合计
                                 </td>
                                 <td>

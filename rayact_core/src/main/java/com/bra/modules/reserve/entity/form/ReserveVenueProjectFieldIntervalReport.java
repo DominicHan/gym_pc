@@ -3,7 +3,6 @@ package com.bra.modules.reserve.entity.form;
 
 import com.bra.common.persistence.SaasEntity;
 import com.bra.modules.reserve.entity.ReserveField;
-import com.bra.modules.reserve.entity.ReserveProject;
 import com.bra.modules.reserve.entity.ReserveVenue;
 
 import java.util.Date;
@@ -44,8 +43,6 @@ public class ReserveVenueProjectFieldIntervalReport extends SaasEntity<ReserveVe
 
     private ReserveVenue reserveVenue;//场馆
 
-    private ReserveProject reserveProject;//项目
-
     private Date startDate;//开始日期
 
     private Date endDate;//结束日期
@@ -81,15 +78,6 @@ public class ReserveVenueProjectFieldIntervalReport extends SaasEntity<ReserveVe
     public void setReserveVenue(ReserveVenue reserveVenue) {
         this.reserveVenue = reserveVenue;
     }
-
-    public ReserveProject getReserveProject() {
-        return reserveProject;
-    }
-
-    public void setReserveProject(ReserveProject reserveProject) {
-        this.reserveProject = reserveProject;
-    }
-
 
     public Double getBill() {
         return bill;

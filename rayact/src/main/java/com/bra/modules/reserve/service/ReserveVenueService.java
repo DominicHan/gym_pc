@@ -6,7 +6,6 @@ import com.bra.common.utils.StringUtils;
 import com.bra.modules.mechanism.web.bean.AttMainForm;
 import com.bra.modules.reserve.dao.ReserveVenueDao;
 import com.bra.modules.reserve.entity.ReserveField;
-import com.bra.modules.reserve.entity.ReserveProject;
 import com.bra.modules.reserve.entity.ReserveVenue;
 import com.bra.modules.reserve.entity.form.*;
 import com.bra.modules.reserve.utils.AuthorityUtils;
@@ -169,11 +168,9 @@ public class ReserveVenueService extends CrudService<ReserveVenueDao, ReserveVen
 
         ReserveVenue venue = fieldReport.getReserveVenue();
         ReserveField field = fieldReport.getReserveField();
-        ReserveProject project = fieldReport.getReserveProject();
 
         ReserveVenueProjectFieldDayReport dayReport = new ReserveVenueProjectFieldDayReport();
         dayReport.setReserveVenue(venue);
-        dayReport.setReserveProject(project);
         dayReport.setReserveField(field);
 
         Date startDate = fieldReport.getStartDate();
@@ -236,7 +233,6 @@ public class ReserveVenueService extends CrudService<ReserveVenueDao, ReserveVen
         List<ReserveVenueProjectIntervalReport> venueProjectBlockReports = dao.reserveVenueProjectBlockIntervalReport(venueProjectReport);//场馆 项目 包场 收入统计
         List<ReserveVenueProjectIntervalReport> venueProjectDividedReports = dao.reserveVenueProjectDividedIntervalReport(venueProjectReport);//场馆 项目 散客 收入统计
         for (ReserveVenueProjectIntervalReport i : venueProjectList) {// 遍历 场馆和项目 并求和 这次遍历主要是为了求汇总界面的数据
-            ReserveProject project = i.getReserveProject();
             ReserveVenue venue = i.getReserveVenue();
              /*场地项目 收入合计*/
             Double bill = 0.0;
@@ -251,7 +247,7 @@ public class ReserveVenueService extends CrudService<ReserveVenueDao, ReserveVen
             Double due = 0.0;
             //将包场收入加入
             for (ReserveVenueProjectIntervalReport j : venueProjectBlockReports) {
-                if (j.getReserveProject().getId().equals(project.getId()) && j.getReserveVenue().getId().equals(venue.getId())) {
+                if (j.getReserveVenue().getId().equals(venue.getId())) {
                     bill += j.getBill();
                     storedCard += j.getStoredCardBill();
                     cash += j.getCashBill();
@@ -266,7 +262,7 @@ public class ReserveVenueService extends CrudService<ReserveVenueDao, ReserveVen
             }
             //将散客收入加入
             for (ReserveVenueProjectIntervalReport k : venueProjectDividedReports) {
-                if (k.getReserveProject().getId().equals(project.getId()) && k.getReserveVenue().getId().equals(venue.getId())) {
+                if (k.getReserveVenue().getId().equals(venue.getId())) {
                     bill += k.getBill();
                     storedCard += k.getStoredCardBill();
                     cash += k.getCashBill();

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.collect.Lists;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -30,31 +31,43 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
     private String reserveType;    //操作类型(1:已预定,4:已结算)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date consDate;        // 预定日期(yyyy-MM-dd)
+    @NumberFormat(pattern = "0.00")
     private Double cosOrderPrice;//预定时单据金额??????????
-
+    @NumberFormat(pattern = "0.00")
     private Double discountPrice;//通过关系（经理以上领导）优惠价格
+    @NumberFormat(pattern = "0.00")
     private Double orderPrice;//订单金额
+    @NumberFormat(pattern = "0.00")
     private Double shouldPrice;//场地应缴费金额
+    @NumberFormat(pattern = "0.00")
     private Double consPrice;//实收金额
+    @NumberFormat(pattern = "0.00")
     private Double periodCnt;//课时量
     private User checkOutUser;
     private String payType;////支付类型(1:储值卡，2:现金,3:银行卡,4:微信,5:支付宝,6:优惠券，7：打白条;8:多方式付款;9:预储（无教练）课时;10:预储教练课时)
     private String byPC;
 
     /*多方式付款*/
+    @NumberFormat(pattern = "0.00")
     private Double memberCardInput;
+    @NumberFormat(pattern = "0.00")
     private Double cashInput;
+    @NumberFormat(pattern = "0.00")
     private Double bankCardInput;
+    @NumberFormat(pattern = "0.00")
     private Double weiXinInput;
+    @NumberFormat(pattern = "0.00")
     private Double weiXinPersonalInput;
+    @NumberFormat(pattern = "0.00")
     private Double aliPayInput;
+    @NumberFormat(pattern = "0.00")
     private Double aliPayPersonalInput;
+    @NumberFormat(pattern = "0.00")
     private Double couponInput;
     /*private Double owningInput;*/
 
 
     private List<ReserveVenueConsItem> venueConsList = Lists.newArrayList();//预订详情
-    private List<ReserveTutorOrder> tutorOrderList;//教练预订列表
 
     public String getByPC() {
         return byPC;
@@ -64,13 +77,6 @@ public class ReserveVenueCons extends SaasEntity<ReserveVenueCons> {
         this.byPC = byPC;
     }
 
-    public List<ReserveTutorOrder> getTutorOrderList() {
-        return tutorOrderList;
-    }
-
-    public void setTutorOrderList(List<ReserveTutorOrder> tutorOrderList) {
-        this.tutorOrderList = tutorOrderList;
-    }
 
     public ReserveVenueCons() {
         super();

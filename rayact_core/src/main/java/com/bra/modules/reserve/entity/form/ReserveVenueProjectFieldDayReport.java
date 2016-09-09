@@ -1,14 +1,10 @@
 package com.bra.modules.reserve.entity.form;
 
 
-import com.bra.common.persistence.BaseEntity;
-import com.bra.common.persistence.DataEntity;
 import com.bra.common.persistence.SaasEntity;
 import com.bra.modules.reserve.entity.ReserveField;
-import com.bra.modules.reserve.entity.ReserveProject;
 import com.bra.modules.reserve.entity.ReserveVenue;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -40,8 +36,6 @@ public class ReserveVenueProjectFieldDayReport extends SaasEntity<ReserveVenuePr
     private ReserveField reserveField;//场地
 
     private ReserveVenue reserveVenue;//场馆
-
-    private ReserveProject reserveProject;//项目
 
     private Date day;
 
@@ -124,15 +118,6 @@ public class ReserveVenueProjectFieldDayReport extends SaasEntity<ReserveVenuePr
     public void setReserveVenue(ReserveVenue reserveVenue) {
         this.reserveVenue = reserveVenue;
     }
-
-    public ReserveProject getReserveProject() {
-        return reserveProject;
-    }
-
-    public void setReserveProject(ReserveProject reserveProject) {
-        this.reserveProject = reserveProject;
-    }
-
 
     public Double getBill() {
         return bill;
