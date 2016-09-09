@@ -47,7 +47,6 @@
 									<th>角色</th>
 									<th>编号</th>
 									<th>操作</th>
-									<th>第二版本（开发中）</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -66,10 +65,6 @@
 												<a class="btn btn-danger btn-xs"
 												   href="${ctx}/reserve/reserveRoleAuth/delete?id=${reserveRoleAuth.id}"
 												   onclick="return confirmb('确认要删除该角色权限吗？', this.href)">删除</a>
-											</td>
-											<td>
-												<a class="btn btn-primary btn-xs "
-												   href="${ctx}/reserve/reserveRoleAuth/menuForm?id=${reserveRoleAuth.id}">菜单</a>
 											</td>
 									</tr>
 								</c:forEach>
