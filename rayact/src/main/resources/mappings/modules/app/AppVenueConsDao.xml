@@ -102,7 +102,6 @@
 		INSERT INTO reserve_venue_cons(
 			id,
 			member_id,
-			project_id,
 			checkout_id,
 			venue_id,
 			cons_mobile,
@@ -126,7 +125,6 @@
 		) VALUES (
 			#{id},
 			#{member.id},
-			#{project.id},
 			#{checkOutUser.id},
 			#{reserveVenue.id},
 			#{consMobile},
@@ -153,7 +151,6 @@
     <update id="update">
 		UPDATE reserve_venue_cons SET
 			member_id = #{member.id},
-			project_id = #{project.id},
 			checkout_id = #{checkOutUser.id},
 			venue_id = #{reserveVenue.id},
 			cons_mobile = #{consMobile},
