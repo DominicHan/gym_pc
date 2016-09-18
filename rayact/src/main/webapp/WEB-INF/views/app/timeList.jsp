@@ -236,7 +236,7 @@
     function filedSelectJson() {
         var index = $("#orderForm div").length;
         /*有一个div包含提交按钮*/
-        if (index > 1) {
+        if (index > 2) {
             var a = {};
             var reserveVenueCons = $("#orderForm").serializeArray();
             var numreg = /\[[0-9]*\]\./;
@@ -268,7 +268,7 @@
                 alert("该时间段已被占用");
             }
         } else {
-            alert("请选择时间");
+            alert("至少选择一个小时");
         }
     }
     function checkStatus(reserveJson) {
