@@ -73,6 +73,9 @@
                                 <label class="radio-inline">
                                     <input type="radio" class="icheck" value="10" name="payType"/>支付宝（个人）
                                 </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="icheck" value="13" name="payType"/>转账
+                                </label>
                             </div>
                         </td>
                     </tr>
