@@ -17,6 +17,7 @@
 		a.sex AS "sex",
 		a.health_condition AS "healthCondition",
 		a.card_no AS "cardno",
+		a.annual_card_flag AS "annualCardFlag",
 		a.remainder AS "remainder",
 		a.residue AS "residue",
 		a.tutor_period_residue AS "tutorPeriodResidue",
@@ -132,6 +133,9 @@
 					<if test="dbName == 'mssql'">'%'+#{mobile}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{mobile},'%')</if>
 			</if>
+			<if test="annualCardFlag != null and annualCardFlag != ''">
+				AND a.annual_card_flag =#{annualCardFlag}
+			</if>
 			<if test="cardno != null and cardno != ''">
 				AND a.card_no LIKE concat('%',#{cardno},'%')
 			</if>
@@ -191,6 +195,7 @@
 			health_condition,
 			sex,
 			card_no,
+			annual_card_flag,
 			remainder,
 			residue,
 			tutor_period_residue,
@@ -222,6 +227,7 @@
 			#{healthCondition},
 			#{sex},
 			#{cardno},
+			#{annualCardFlag},
 			#{remainder},
 			#{residue},
 			#{tutorPeriodResidue},
@@ -259,6 +265,7 @@
 			tutor_period_residue = #{tutorPeriodResidue},
 			residue = #{residue},
 			card_no = #{cardno},
+			annual_card_flag =#{annualCardFlag},
 			validity_start = #{validityStart},
 			validity_end = #{validityEnd},
 			tutor_period_validity_start=#{tutorPeriodValidityStart},

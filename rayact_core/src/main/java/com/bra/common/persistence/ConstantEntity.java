@@ -20,6 +20,8 @@ public abstract class ConstantEntity {
     public static final String YES = "1";
     public static final String NO = "0";
 
+    public static final String ANNUALCARD= "1";
+
     /*交易类型*/
     public static final String STOREDCARD_RECHARGE = "1";//储值卡充值
     public static final String STOREDCARD_REFUND = "2";//储值卡退费

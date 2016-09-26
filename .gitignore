@@ -1,6 +1,7 @@
 ### Java template
 .mymetadata
 .checkstyle
+/out
 .classpath
 .project
 *.class
@@ -8,7 +9,6 @@
 .zip
 .rar
 .idea
-/out
 *.iml
 .settings/*
 /indexes/*

@@ -32,6 +32,7 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 	@NumberFormat(pattern = "0.00")
 	private double remainder ; //储值卡余额
 	private String cardno;		// 卡号
+	private String annualCardFlag;//年卡标识
 	private Integer tutorPeriodResidue;//教練剩余課時
 	private Integer residue;//無教練剩余課時
 	private ReserveVenue reserveVenue;//所属场馆
@@ -253,6 +254,18 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public void setRemainder(double remainder) {
+		this.remainder = remainder;
+	}
+
+	public String getAnnualCardFlag() {
+		return annualCardFlag;
+	}
+
+	public void setAnnualCardFlag(String annualCardFlag) {
+		this.annualCardFlag = annualCardFlag;
 	}
 
 }

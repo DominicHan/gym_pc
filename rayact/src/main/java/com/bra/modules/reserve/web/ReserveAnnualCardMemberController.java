@@ -1,6 +1,7 @@
 package com.bra.modules.reserve.web;
 
 import com.bra.common.config.Global;
+import com.bra.common.persistence.ConstantEntity;
 import com.bra.common.persistence.Page;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
@@ -50,6 +51,7 @@ public class ReserveAnnualCardMemberController extends BaseController {
 
     @RequestMapping(value = "list")
     public String annualCardList(ReserveMember reserveMember, HttpServletRequest request, HttpServletResponse response, Model model){
+        reserveMember.setAnnualCardFlag(ConstantEntity.YES);
         Page<ReserveMember> page = reserveMemberService.findPage(new Page<>(request, response), reserveMember);
         model.addAttribute("page", page);
         return "reserve/member/annualCardMemberList";
@@ -58,6 +60,7 @@ public class ReserveAnnualCardMemberController extends BaseController {
     @RequestMapping(value = "form")
     @Token(save=true)
     public String form(ReserveMember reserveMember, Model model) {
+
         List<ReserveVenue> venueList=reserveVenueService.findList(new ReserveVenue());
         model.addAttribute("venueList", venueList);
         model.addAttribute("reserveMember", reserveMember);
@@ -67,9 +70,10 @@ public class ReserveAnnualCardMemberController extends BaseController {
     @RequestMapping(value = "save")
     @Token(remove=true)
     public String save(ReserveMember reserveMember, AttMainForm attMainForm, Model model, RedirectAttributes redirectAttributes) {
-        if (!beanValidator(model, reserveMember)){
+        if (!beanValidator(model, reserveMember)) {
             return form(reserveMember, model);
         }
+        reserveMember.setAnnualCardFlag(ConstantEntity.YES);
         reserveMemberService.save(reserveMember,attMainForm);
         addMessage(redirectAttributes, "保存年卡会员成功");
         return "redirect:"+ Global.getAdminPath()+"/reserve/annualCardMember/list";
