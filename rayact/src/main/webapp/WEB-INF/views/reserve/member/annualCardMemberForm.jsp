@@ -2,25 +2,25 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>会员添加</title>
+    <title>年卡会员添加</title>
     <meta name="decorator" content="main"/>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/sidebar.jsp">
-    <jsp:param name="action" value="timeCardMember"></jsp:param>
+    <jsp:param name="action" value="annualCardMember"></jsp:param>
 </jsp:include>
 <div class="container-fluid" id="pcont">
     <div class="row">
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>会员添加</h3>
+                    <h3>年卡会员添加</h3>
                 </div>
                 <div class="content">
                     <div class="tab-container">
                         <div class="form-horizontal group-border-dashed">
                             <form:form id="inputForm" modelAttribute="reserveMember"
-                                       action="${ctx}/reserve/timeCardMember/save" method="post"
+                                       action="${ctx}/reserve/annualCardMember/save" method="post"
                                        onsubmit="return checkForm()" class="form-horizontal">
                                 <form:hidden id="id" path="id"/>
                                 <input type="hidden" name="token" value="${token}"/>
@@ -74,15 +74,6 @@
                                     </tr>
 
                                     <tr>
-                                        <td>（无教练）剩余课时:</td>
-                                        <td>
-                                            <div class="input-group">
-                                                <form:input path="residue" htmlEscape="false" maxlength="11"
-                                                            readonly="true"
-                                                            class="form-control"/>
-                                                <span class="input-group-addon">次</span>
-                                            </div>
-                                        </td>
                                         <td>余额:</td>
                                         <td>
                                             <div class="input-group" cssStyle="width: 30%">
@@ -106,10 +97,9 @@
                                                         defaultLabel="请选择健身房"
                                             ></sys:select>
                                         </td>
-                                        <td>（无教练）剩余课时截止日期:</td>
+                                        <td>截止日期:</td>
                                         <td>
-                                            <input name="validityEnd" type="text" readonly="readonly" maxlength="20"
-                                                   id="validityEnd"
+                                            <input id="validityEnd" name="validityEnd" type="text" readonly="readonly" maxlength="20"
                                                    class="input-large Wdate "
                                                    value="<fmt:formatDate value="${reserveMember.validityEnd}" pattern="yyyy-MM-dd"/>"
                                                    onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>

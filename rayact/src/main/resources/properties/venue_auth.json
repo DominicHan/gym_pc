@@ -52,6 +52,12 @@
         "authorityList": []
       },
       {
+        "code": "annualCardMember",
+        "name": "年卡会员列表",
+        "href":"/reserve/annualCardMember/list",
+        "authorityList": []
+      },
+      {
         "code": "tutorTimeCardMember",
         "name": "预储（教练）课时列表",
         "href":"/reserve/tutorTimeCardMember/list",

@@ -5,6 +5,7 @@ import com.bra.common.persistence.Page;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.annotation.Token;
+import com.bra.modules.mechanism.web.bean.AttMainForm;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,30 +124,28 @@ public class ReserveTimeCardMemberController extends BaseController {
     @RequestMapping(value = "form")
     @Token(save=true)
     public String form(ReserveMember reserveMember, Model model) {
-        List<ReserveTimecardMemberSet> timecardSetList=timecardSetService.findList(new ReserveTimecardMemberSet());
         List<ReserveVenue> venueList=reserveVenueService.findList(new ReserveVenue());
         model.addAttribute("venueList", venueList);
-        model.addAttribute("timecardSetList", timecardSetList);
         model.addAttribute("reserveMember", reserveMember);
         return "reserve/member/timeCardMemberForm";
     }
 
     @RequestMapping(value = "save")
     @Token(remove=true)
-    public String save(ReserveMember reserveMember, Model model, RedirectAttributes redirectAttributes) {
+    public String save(ReserveMember reserveMember, AttMainForm attMainForm, Model model, RedirectAttributes redirectAttributes) {
 
         if (!beanValidator(model, reserveMember)){
             return form(reserveMember, model);
         }
-        reserveMemberService.save(reserveMember);
-        addMessage(redirectAttributes, "保存储值卡会员成功");
+        reserveMemberService.save(reserveMember,attMainForm);
+        addMessage(redirectAttributes, "保存次卡会员成功");
         return "redirect:"+ Global.getAdminPath()+"/reserve/timeCardMember/list";
     }
 
     @RequestMapping(value = "delete")
     public String delete(ReserveMember reserveMember, RedirectAttributes redirectAttributes) {
         reserveMemberService.delete(reserveMember);
-        addMessage(redirectAttributes, "删除储值卡会员成功");
+        addMessage(redirectAttributes, "删除次卡会员成功");
         return "redirect:"+Global.getAdminPath()+"/reserve/timeCardMember/list";
     }
 }
