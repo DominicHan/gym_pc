@@ -62,12 +62,6 @@
         "name": "储值卡设置",
         "href":"/reserve/storedCardMemberSet/list",
         "authorityList": []
-      },
-      {
-        "code": "timecardSet",
-        "name": "课时卡设置",
-        "href":"/reserve/reserveTimecardMemberSet/list",
-        "authorityList": []
       }
     ]
   },

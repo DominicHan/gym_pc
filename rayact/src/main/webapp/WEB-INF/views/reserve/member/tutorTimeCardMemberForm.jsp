@@ -33,8 +33,6 @@
                                                         class="form-control required"/>
                                             <span class="help-inline"><font color="red">*</font> </span>
                                         </td>
-                                    </tr>
-                                    <tr>
                                         <td>姓名:</td>
                                         <td>
                                             <div class="input-group">
