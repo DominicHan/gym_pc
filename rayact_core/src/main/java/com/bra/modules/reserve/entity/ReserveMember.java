@@ -256,10 +256,6 @@ public class ReserveMember extends SaasEntity<ReserveMember> {
 		this.birthday = birthday;
 	}
 
-	public void setRemainder(double remainder) {
-		this.remainder = remainder;
-	}
-
 	public String getAnnualCardFlag() {
 		return annualCardFlag;
 	}
