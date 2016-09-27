@@ -190,6 +190,12 @@
         "authorityList": []
       },
       {
+        "code": "annualCardRechargeStatements",
+        "name": "年卡充值记录",
+        "href":"/reserve/reserveCardStatements/list?transactionType=12",
+        "authorityList": []
+      },
+      {
         "code": "timeCardRechargeStatements",
         "name": "(无教练)课时预储记录",
         "href":"/reserve/reserveCardStatements/list?transactionType=7",

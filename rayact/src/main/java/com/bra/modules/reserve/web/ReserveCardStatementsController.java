@@ -68,21 +68,25 @@ public class ReserveCardStatementsController extends BaseController {
 		model.addAttribute("reserveVenueList", reserveVenueList);
 		String type=reserveCardStatements.getTransactionType();
 		String rs=null;
-		if("1".equals(type)){
-			//储值卡充值
-			rs= "reserve/record/reserveCardRechargeStatementsList";
-		}else if("2".equals(type)){
-			//会员退费
-			rs= "reserve/record/reserveCardRefundStatementsList";
-		}else if("5".equals(type)){
-			//储值卡销户记录
-			rs= "reserve/record/reserveCardCancellationStatementsList";
-		}else if("7".equals(type)){
-			//次卡充值记录
-			rs= "reserve/record/timeCardRechargeStatementsList";
-		}else if("8".equals(type)){
-			//次卡充值记录
-			rs= "reserve/record/tutorPeriodRechargeStatementsList";
+		switch (type){
+			case "1"://储值卡充值
+				rs= "reserve/record/reserveCardRechargeStatementsList";
+				break;
+			case "2"://会员退费
+				rs= "reserve/record/reserveCardRefundStatementsList";
+				break;
+			case "5"://储值卡销户记录
+				rs= "reserve/record/reserveCardCancellationStatementsList";
+				break;
+			case "7"://无教练课时充值记录
+				rs= "reserve/record/timeCardRechargeStatementsList";
+				break;
+			case "8"://教练课时充值记录
+				rs= "reserve/record/tutorPeriodRechargeStatementsList";
+				break;
+			case "12"://年卡充值记录
+				rs= "reserve/record/annualCardRechargeStatementsList";
+				break;
 		}
 		model.addAttribute("query", reserveCardStatements);
 		return rs;
