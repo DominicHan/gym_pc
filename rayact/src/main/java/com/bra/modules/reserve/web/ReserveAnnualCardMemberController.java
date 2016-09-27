@@ -7,8 +7,10 @@ import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.annotation.Token;
 import com.bra.modules.mechanism.web.bean.AttMainForm;
+import com.bra.modules.reserve.entity.ReserveCardStatements;
 import com.bra.modules.reserve.entity.ReserveMember;
 import com.bra.modules.reserve.entity.ReserveVenue;
+import com.bra.modules.reserve.service.ReserveCardStatementsService;
 import com.bra.modules.reserve.service.ReserveMemberService;
 import com.bra.modules.reserve.service.ReserveVenueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class ReserveAnnualCardMemberController extends BaseController {
 
     @Autowired
     private ReserveVenueService reserveVenueService;
+
+    @Autowired
+    private ReserveCardStatementsService reserveCardStatementsService;
 
     @ModelAttribute
     public ReserveMember get(@RequestParam(required=false) String id) {
@@ -65,6 +70,29 @@ public class ReserveAnnualCardMemberController extends BaseController {
         model.addAttribute("venueList", venueList);
         model.addAttribute("reserveMember", reserveMember);
         return "reserve/member/annualCardMemberForm";
+    }
+    //年卡售卖表单
+    @RequestMapping(value = "annualCardSellForm")
+    public String annualCardSellForm(String id,String periodPrice,Model model){
+        ReserveMember reserveMember = reserveMemberService.get(id);
+        model.addAttribute("reserveMember", reserveMember);
+        model.addAttribute("periodPrice", periodPrice);
+        return "reserve/member/annualCardSellForm";
+    }
+
+    //年卡售卖
+    @RequestMapping(value = "annualCardSell")
+    public String addTime(String id, Double rechargeVolume,String payType,String remarks){
+        ReserveMember reserveMember = reserveMemberService.get(id);
+        ReserveCardStatements statement=new ReserveCardStatements();
+        statement.setReserveMember(reserveMember);
+        statement.setTransactionVolume(rechargeVolume);
+        statement.setTransactionType(ConstantEntity.ANNUAL_CARD);
+        statement.setPayType(payType);
+        statement.setVenue(reserveMember.getReserveVenue());
+        statement.setRemarks(remarks);
+        reserveCardStatementsService.save(statement);
+        return "redirect:"+ Global.getAdminPath()+"/reserve/annualCardMember/list";
     }
 
     @RequestMapping(value = "save")

@@ -36,6 +36,7 @@ public abstract class ConstantEntity {
     public static final String TUTOR_CHARGE_ ="10";//教练收入
     public static final String TIMECARD_REFUND="11";//次卡退还
     public static final String TIMECARD_PENALTY="11";//次卡销户违约金
+    public static final String ANNUAL_CARD="12";//年卡充值
 
     /*支付类型*/
     public static final String STOREDCARD="1";//储值卡,次卡（预储值）

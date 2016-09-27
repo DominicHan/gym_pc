@@ -93,6 +93,9 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-xs"
+                                               onclick="annualCardSellForm('${reserveMember.id}','9888')"><i
+                                                    class="fa fa-pencil"></i>年卡续费</a>
+                                            <a class="btn btn-primary btn-xs"
                                                href="${ctx}/reserve/annualCardMember/form?id=${reserveMember.id}"><i
                                                     class="fa fa-pencil"></i>修改</a>
                                             <a class="btn btn-danger btn-xs"
@@ -127,8 +130,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="../include/timeCardAddDialog.jsp"></jsp:include>
-<jsp:include page="../include/prePaymentListModal.jsp"></jsp:include>
-<script type="text/javascript" src="${ctxStatic}/modules/reserve/js/timecard.js"></script>
+<jsp:include page="../include/annualCardSellDialog.jsp"></jsp:include>
+<script type="text/javascript" src="${ctxStatic}/modules/reserve/js/annual_card.js"></script>
 </body>
 </html>
