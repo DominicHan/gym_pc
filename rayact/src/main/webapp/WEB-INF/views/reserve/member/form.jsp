@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
-                    <h3>会员基本信息编辑</h3>
+                    <h3>会员基本信息</h3>
                 </div>
                 <div class="content">
                     <div class="tab-container">
@@ -43,7 +43,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">密码：</label>
+                                        <label class="col-sm-3 control-label">微信公众号登录密码：</label>
                                         <div class="col-sm-6">
                                             <form:input path="password" type="password" htmlEscape="false"
                                                         maxlength="16"

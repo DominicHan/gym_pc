@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">场馆管理:</label>
+                    <label class="col-sm-2 control-label">健身房管理:</label>
 
                     <div class="col-sm-10">
                         <c:forEach items="${venueList}" var="venue" varStatus="status">
