@@ -99,7 +99,7 @@
                                             ${fns:getDictLabel(reserveMember.sex, 'sex', '')}
                                     </td>
                                     <td>
-                                            ${reserveMember.remainder}
+                                            <fmt:formatNumber value="${reserveMember.remainder}" pattern="0.00"/>
                                     </td>
                                     <td>
                                             ${reserveMember.residue}
