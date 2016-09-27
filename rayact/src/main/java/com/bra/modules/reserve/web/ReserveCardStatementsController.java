@@ -15,6 +15,7 @@ import com.bra.modules.reserve.service.ReserveCardStatementsService;
 import com.bra.modules.reserve.service.ReserveMemberService;
 import com.bra.modules.reserve.service.ReserveVenueService;
 import com.bra.modules.reserve.utils.ExcelInfo;
+import com.bra.modules.reserve.utils.VenueOrderUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -113,7 +114,7 @@ public class ReserveCardStatementsController extends BaseController {
 				o[2] = report.getReserveMember().getCardno();
 				o[3] = String.valueOf(report.getTransactionVolume());
 				o[4] = String.valueOf(report.getReserveMember().getMobile());
-				o[5] = String.valueOf(getPayType(report.getPayType()));
+				o[5] = VenueOrderUtils.getPayType(report.getPayType());
 				o[6] = String.valueOf(report.getCreateBy().getName());
 				o[7] = DateUtils.formatDate(report.getCreateDate());
 				contentList.add(o);
@@ -162,25 +163,26 @@ public class ReserveCardStatementsController extends BaseController {
 			ExcelInfo info = new ExcelInfo(response,"储值卡销户记录"+ DateUtils.formatDate(now),titles,contentList);
 			info.export();
 		}
-
-	}
-
-	private String getPayType(String typeCode){
-		if("2".equals(typeCode)){
-			return "现金";
-		}else if("3".equals(typeCode)){
-			return "银行卡";
-		}else if("4".equals(typeCode)){
-			return "微信";
-		}else if("5".equals(typeCode)){
-			return "支付宝";
-		}else if("6".equals(typeCode)){
-			return "优惠券";
-		}else{
-			return "";
+		if("12".equals(type)){
+			String[] titles = {"场馆","姓名","金额","电话","支付方式","操作人","时间"};
+			List<String[]> contentList = new ArrayList<>();
+			for(ReserveCardStatements report :list){
+				String[] o = new String[7];
+				o[0] = report.getVenue().getName();
+				o[1] = report.getReserveMember().getName();
+				o[2] = String.valueOf(report.getTransactionVolume());
+				o[3] = String.valueOf(report.getReserveMember().getMobile());
+				o[4] = VenueOrderUtils.getPayType(report.getPayType());
+				o[5] = report.getCreateBy().getName();
+				o[6] = DateUtils.formatDate(report.getCreateDate());
+				contentList.add(o);
+			}
+			Date now = new Date();
+			ExcelInfo info = new ExcelInfo(response,"年卡充值记录"+ DateUtils.formatDate(now),titles,contentList);
+			info.export();
 		}
-	}
 
+	}
 
 	/*会员收入统计:对应*/
 	@RequestMapping(value = {"memberIncomeReport", ""})
