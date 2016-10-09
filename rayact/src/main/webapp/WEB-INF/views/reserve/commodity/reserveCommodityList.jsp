@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group col-lg-3 col-sm-5">
-                                    <label class="control-label" for="venue">场馆：</label>
+                                    <label class="control-label" for="venue">健身房：</label>
                                     <sys:select cssClass="input-large" name="reserveVenue.id" id="venue"
                                                 cssStyle="width:50%"
                                                 value="${query.reserveVenue.id}"

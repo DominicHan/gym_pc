@@ -34,7 +34,7 @@
                             <table class="no-border">
                                 <tbody class="no-border-y">
                                 <tr>
-                                    <td>场馆：</td>
+                                    <td>健身房：</td>
                                     <td>
                                         <sys:select cssClass="input-large" name="venue.id"
                                                     cssStyle="width:80%"

@@ -28,7 +28,7 @@
                             <table class="no-border">
                                 <tbody class="no-border-y">
                                 <tr>
-                                    <td>场馆：</td>
+                                    <td>健身房：</td>
                                     <td><sys:select cssClass="input-medium" name="reserveVenue.id" cssStyle="width:100%"
                                                     value="${reserveField.reserveVenue.id}"
                                                     items="${venues}" itemLabel="name" itemValue="id"
