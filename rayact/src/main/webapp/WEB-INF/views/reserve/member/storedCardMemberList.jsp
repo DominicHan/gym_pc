@@ -58,6 +58,7 @@
                                 <thead>
                                 <tr>
                                     <th>健身房</th>
+                                    <th>年卡</th>
                                     <th>姓名</th>
                                     <th>手机号</th>
                                     <th>卡号</th>
@@ -71,6 +72,9 @@
                                     <tr>
                                         <td>
                                                 ${reserveMember.reserveVenue.name}
+                                        </td>
+                                        <td>
+                                                ${fns:getDictLabel(reserveMember.annualCardFlag, 'yes_no', '')}
                                         </td>
                                         <td><a href="${ctx}/reserve/storedCardMember/form?id=${reserveMember.id}">
                                                 ${reserveMember.name}

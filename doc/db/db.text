@@ -1,2 +1,10 @@
-20160823:会员增加
-alter table reserve_user add health_condition varchar(20) DEFAULT NULL;
+20160823:会员表增加身体健康状况
+alter table reserve_member add health_condition varchar(20) DEFAULT NULL;
+201601011:会员表修改无教练剩余课时
+alter table reserve_member modify residue int DEFAULT 0;
+201601011:会员表修改教练剩余课时
+alter table reserve_member modify tutor_period_residue int DEFAULT 0;
+201601011:会员表修改余额
+alter table reserve_member modify remainder decimal(18,2) DEFAULT 0;
+201601011:会员表修改年卡标识
+alter table reserve_member modify annual_card_flag char(1)  DEFAULT 0 COMMENT '年卡标识';
