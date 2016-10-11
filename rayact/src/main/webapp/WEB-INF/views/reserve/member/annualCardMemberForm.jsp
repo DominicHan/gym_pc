@@ -82,6 +82,13 @@
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
+                                        <td>生日:</td>
+                                        <td>
+                                            <input value="<fmt:formatDate  pattern="yyyy-MM-dd" value="${reserveMember.birthday}"/>"
+                                                   name="birthday" type="text"
+                                                   class="input-small form-control Wdate col-lg-1"
+                                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>健身房：</td>

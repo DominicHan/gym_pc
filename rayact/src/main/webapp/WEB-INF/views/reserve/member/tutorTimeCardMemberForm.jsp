@@ -94,16 +94,6 @@
                                             </div>
                                         </td>
                                     </tr>
-
-
-                                    <tr>
-                                        <td>备注:</td>
-                                        <td colspan="3">
-                                            <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
-                                                           class="form-control "/>
-                                        </td>
-                                    </tr>
-
                                     <tr>
                                         <td>健身房：</td>
                                         <td>
@@ -127,6 +117,20 @@
                                                    onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                                         </td>
 
+                                    </tr>
+                                    <tr>
+                                        <td>备注:</td>
+                                        <td>
+                                            <form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255"
+                                                           class="form-control "/>
+                                        </td>
+                                        <td>生日:</td>
+                                        <td>
+                                            <input value="<fmt:formatDate  pattern="yyyy-MM-dd" value="${reserveMember.birthday}"/>"
+                                                   name="birthday" type="text"
+                                                   class="input-small form-control Wdate col-lg-1"
+                                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                                        </td>
                                     </tr>
                                 </table>
 
