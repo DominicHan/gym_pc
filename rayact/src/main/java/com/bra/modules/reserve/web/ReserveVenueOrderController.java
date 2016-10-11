@@ -78,11 +78,6 @@ public class ReserveVenueOrderController extends BaseController {
         List<ReserveField> fieldList = reserveFieldService.findList(field);
         model.addAttribute("fieldList", fieldList);
         model.addAttribute("visitorsSet", set);
-        //教练
-        ReserveTutor tutor = new ReserveTutor();
-        ReserveProject project = set.getProject();
-        tutor.setProject(project);
-        model.addAttribute("tutors", reserveTutorService.findList(tutor));
         //会员
         ReserveMember member = new ReserveMember();
         model.addAttribute("memberList", reserveMemberService.findList(member));
