@@ -40,7 +40,7 @@
     <form id="loginForm" action="${ctx}/login" method="post">
         <input type="hidden"  name="mobileLogin" value="false"/>
         <div class="login_form">
-            <h1 class="form-signin-heading">${fns:getConfig('productName')}</h1>
+            <h1 class="form-signin-heading">${fns:getConfig('productName')}管理系统</h1>
             <div class="row">
                 <input type="text" id="username" name="username" class="input-block-level required"
                        value="${username}"

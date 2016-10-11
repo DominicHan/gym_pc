@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">场馆：</label>
+                                        <label class="col-sm-3 control-label">${fns:getConfig('productName')}：</label>
                                         <div class="col-sm-6">
                                             <sys:select cssClass="input-large"
                                                         name="reserveVenue.id"
