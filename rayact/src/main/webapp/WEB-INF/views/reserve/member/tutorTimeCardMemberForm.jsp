@@ -111,7 +111,7 @@
                                         <td>课时截止日期:</td>
                                         <td>
                                             <input name="tutorPeriodValidityEnd" type="text" readonly="readonly" maxlength="20"
-                                                   id="validityend"
+                                                   id="tutorPeriodValidityEnd"
                                                    class="input-large Wdate "
                                                    value="<fmt:formatDate value="${reserveMember.tutorPeriodValidityEnd}" pattern="yyyy-MM-dd"/>"
                                                    onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
@@ -156,6 +156,6 @@
         });
     });
 </script>
-<script src="${ctxStatic}/modules/reserve/js/reserve_timeCard_member_form.js" type="text/javascript"></script>
+<script src="${ctxStatic}/modules/reserve/js/reserve_tutor_period_member_form.js" type="text/javascript"></script>
 </body>
 </html>
