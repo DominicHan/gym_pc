@@ -5,6 +5,7 @@ import com.bra.common.persistence.Page;
 import com.bra.common.utils.StringUtils;
 import com.bra.common.web.BaseController;
 import com.bra.common.web.annotation.Token;
+import com.bra.modules.mechanism.web.bean.AttMainForm;
 import com.bra.modules.reserve.entity.*;
 import com.bra.modules.reserve.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -120,17 +120,11 @@ public class ReserveTutorTimeCardMemberController extends BaseController {
 
     @RequestMapping(value = "save")
     @Token(remove=true)
-    public String save(ReserveMember reserveMember, Model model, RedirectAttributes redirectAttributes) {
-        if(reserveMember.getResidue()==null){
-            reserveMember.setResidue(0);
-        }
-        if(reserveMember.getTutorPeriodValidityStart()==null){
-            reserveMember.setTutorPeriodValidityStart(new Date());
-        }
+    public String save(ReserveMember reserveMember, Model model,AttMainForm attMainForm, RedirectAttributes redirectAttributes) {
         if (!beanValidator(model, reserveMember)){
             return form(reserveMember, model);
         }
-        reserveMemberService.save(reserveMember);
+        reserveMemberService.save(reserveMember,attMainForm);
         addMessage(redirectAttributes, "保存会员成功");
         return "redirect:"+ Global.getAdminPath()+"/reserve/tutorTimeCardMember/list";
     }
