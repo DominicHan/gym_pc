@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bra.modules.reserve.dao.ReserveVenueConsDao">
+
+    <sql id="reserveVenueConsDataColumns">
+		a.id AS "id",
+		a.member_id AS "member.id",
+		a.venue_id AS "reserveVenue.id",
+		v.name AS "reserveVenue.name",
+		a.cons_mobile AS "consMobile",
+		a.user_name AS "userName",
+		a.cons_type AS "consType",
+		a.reserve_type AS "reserveType",
+		a.order_price AS "orderPrice",
+		a.should_price AS "shouldPrice",
+		a.cons_price AS "consPrice",
+		a.period_cnt AS "periodCnt",
+		a.discount_price AS "discountPrice",
+		a.pay_type AS "payType",
+		a.cons_date AS "consDate",
+		a.checkout_id AS "checkOutUser.id",
+		a.by_pc AS "byPC",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		u.name AS "updateBy.name",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="reserveVenueConsDataJoins">
+		LEFT JOIN reserve_venue as v ON v.id = a.venue_id
+		LEFT JOIN reserve_user as u ON u.id = a.update_by
+	</sql>
+
+    <select id="get" resultType="ReserveVenueCons">
+        SELECT
+        <include refid="reserveVenueConsDataColumns"/>
+        FROM reserve_venue_cons as a
+        <include refid="reserveVenueConsDataJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="tutorPeriodReport" resultType="TutorPeriodLog">
+        select
+        v.name as "venue.name",
+        f.id as "field.id",
+        f.name as "field.name",
+        sum(i.period_num) as "periodNum"
+        from reserve_venue_cons as a
+        INNER JOIN  reserve_venue_cons_item as i on (a.id = i.cons_data_id and i.del_flag='0')
+        INNER JOIN  reserve_venue as v ON (a.venue_id = v.id and v.del_flag='0')
+        INNER JOIN  reserve_field as f on (f.id = i.field_id)
+        where a.del_flag = '0' and a.reserve_type = '4'
+        <if test="startDate != null and endDate != null">
+            and (Date(a.cons_date) BETWEEN DATE (#{startDate}) AND DATE(#{endDate}))
+        </if>
+        <if test="venue!=null and venue.id!=null and venue.id!=''">
+            and a.venue_id = #{venue.id}
+        </if>
+        ${sqlMap.dsf}
+        GROUP BY i.field_id
+    </select>
+
+
+    <select id="findOrderLog" resultType="SaleVenueLog">
+        select
+        a.id,
+        a.venue_id as "venue.id",v.name as "venue.name",
+        i.field_id as "field.id",f.name as "field.name",
+        a.user_name as "member.name",a.cons_mobile as "member.mobile",
+        a.cons_date as consDate,a.update_date "updateDate",
+        a.order_price as orderPrice,
+        a.should_price as shouldPrice,
+        a.discount_price as discountPrice,
+        a.cons_price as consPrice,
+        a.pay_type as payType,
+        a.create_by as "createBy.id",
+        crea.name as "createBy.name",
+        a.update_by as "updateBy.id",
+        upda.name as "updateBy.name",
+        checkout.name as checkoutName,
+        i.start_time as startTime,
+        i.end_time as endTime
+        from reserve_venue_cons as a
+        INNER JOIN  reserve_venue_cons_item as i on (a.id = i.cons_data_id and i.del_flag='0')
+        INNER JOIN  reserve_venue as v ON (a.venue_id = v.id and v.del_flag='0')
+        INNER JOIN  reserve_field as f on (f.id = i.field_id)
+        LEFT JOIN  reserve_user as crea on (a.create_by = crea.id)
+        LEFT JOIN  reserve_user as upda on (a.update_by = upda.id)
+        LEFT JOIN  reserve_user as checkout on (a.checkout_id = checkout.id and checkout.del_flag='0')
+        where a.del_flag = '0' and a.reserve_type = '4'
+        <if test="payType != null and payType != ''">
+            and a.pay_type = #{payType}
+        </if>
+        <if test="username != null and username != ''">
+            and a.user_name like concat('%',#{username},'%')
+        </if>
+        <if test="startDate != null and endDate != null">
+            and (Date(a.cons_date) BETWEEN DATE (#{startDate}) AND DATE(#{endDate}))
+        </if>
+        <if test="createBy!=null and createBy.id!=null and createBy.id!=''">
+            and a.create_by = #{createBy.id}
+        </if>
+        <if test="venue!=null and venue.id!=null and venue.id!=''">
+            and a.venue_id = #{venue.id}
+        </if>
+        <if test="field!=null and field.id!=null and field.id!=''">
+            and i.field_id = #{field.id}
+        </if>
+        ${sqlMap.dsf}
+        ORDER BY updateDate DESC
+    </select>
+
+    <select id="sellMonthOfChart" resultType="java.math.BigDecimal">
+        SELECT sum(c.orderPrice) AS orderPrice from(
+            SELECT
+            SUM(a.cons_price) AS "orderPrice"
+            from reserve_venue_cons as a
+            WHERE a.del_flag = '0' and a.reserve_type = '4'
+            and month(a.cons_date)=month(CURDATE()) and a.tenant_id = #{tenantId}
+            ${sqlMap.dsf}
+            GROUP BY
+            date_format(a.cons_date, '%Y-%m-%d')
+            UNION
+            select sum(a.collect_price) as "orderPrice"
+            from reserve_venue_order a
+            WHERE a.del_flag = '0' and a.tenant_id = #{tenantId}
+            and month(a.update_date)=month(CURDATE())
+            ${sqlMap.dsf}
+        ) c
+    </select>
+
+
+    <select id="sellOfChart" resultType="java.util.Map">
+        SELECT sum(c.orderPrice) AS orderPrice,c.updateDate from(
+            SELECT
+            SUM(a.cons_price) AS "orderPrice",date_format(a.cons_date,'%Y-%m-%d') AS "updateDate"
+            from reserve_venue_cons as a
+            WHERE a.del_flag = '0' and a.reserve_type = '4'
+            <if test="tenantId != null and tenantId != ''">
+                and a.tenant_id = #{tenantId}
+            </if>
+            <![CDATA[
+            and Date(a.cons_date)=DATE(CURRENT_DATE())
+            ]]>
+            <if test="reserveVenue!=null and reserveVenue.id!=null and reserveVenue.id!=''">
+                and a.venue_id = #{reserveVenue.id}
+            </if>
+            ${sqlMap.dsf}
+            GROUP BY
+            date_format(a.update_date, '%Y-%m-%d')
+            UNION
+            select sum(a.collect_price) as "orderPrice",date_format(a.update_date,'%Y-%m-%d') AS "updateDate"
+            from reserve_venue_order a
+            WHERE a.del_flag = '0'
+            <if test="tenantId != null and tenantId != ''">
+                and a.tenant_id = #{tenantId}
+            </if>
+            <![CDATA[
+            and Date(a.update_date)=DATE(CURRENT_DATE())
+            ]]>
+            ${sqlMap.dsf}
+            GROUP BY
+            date_format(a.update_date, '%Y-%m-%d')
+        ) c group by c.updateDate order by c.updateDate
+    </select>
+
+    <select id="sellOfHistogram" resultType="java.util.Map">
+        SELECT
+           SUM(transaction_volume) as transactionVolume,MONTH(a.update_date) as month,v.name as venueName,v.id as venueId
+        FROM
+            reserve_card_statements a
+            LEFT JOIN reserve_venue v on v.id=a.venue_id
+        WHERE
+            transaction_type = '8' or transaction_type = '9' or transaction_type = '3' or transaction_type = '6'
+            ${sqlMap.dsf}
+        group by MONTH(a.update_date),venue_id
+    </select>
+
+    <select id="findList" resultType="ReserveVenueCons">
+        SELECT
+        <include refid="reserveVenueConsDataColumns"/>
+        FROM reserve_venue_cons as a
+        <include refid="reserveVenueConsDataJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="tenantId != null and tenantId != ''">
+                and a.tenant_id = #{tenantId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and a.user_name LIKE concat('%',#{userName},'%')
+            </if>
+            <if test="reserveType != null and reserveType != ''">
+                and a.reserve_type = #{reserveType}
+            </if>
+            <if test="byPC != null and byPC != ''">
+                and a.by_pc = #{byPC}
+            </if>
+            ${sqlMap.dsf}
+            <if test="sqlMap.startDate != null and sqlMap.endDate != null">
+                and (Date(a.update_date) BETWEEN DATE (#{sqlMap.startDate}) AND DATE(#{sqlMap.endDate}))
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--场地售卖报表-->
+
+    <select id="findAllList" resultType="ReserveVenueCons">
+        SELECT
+        <include refid="reserveVenueConsDataColumns"/>
+        FROM reserve_venue_cons a
+        <include refid="reserveVenueConsDataJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="tenantId != null and tenantId != ''">
+                and a.tenant_id = #{tenantId}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert">
+		INSERT INTO reserve_venue_cons(
+			id,
+			member_id,
+			checkout_id,
+			venue_id,
+			cons_mobile,
+			user_name,
+			cons_type,
+			reserve_type,
+			order_price,
+			should_price,
+			cons_price,
+			discount_price,
+			period_cnt,
+			pay_type,
+			cons_date,
+			by_pc,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			tenant_id
+		) VALUES (
+			#{id},
+			#{member.id},
+			#{checkOutUser.id},
+			#{reserveVenue.id},
+			#{consMobile},
+			#{userName},
+			#{consType},
+			#{reserveType},
+			#{orderPrice},
+			#{shouldPrice},
+			#{consPrice},
+			#{discountPrice},
+			#{periodCnt},
+			#{payType},
+			#{consDate},
+			#{byPC},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{tenantId}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE reserve_venue_cons SET
+			member_id = #{member.id},
+			checkout_id = #{checkOutUser.id},
+			venue_id = #{reserveVenue.id},
+			cons_mobile = #{consMobile},
+			user_name = #{userName},
+			cons_type = #{consType},
+			reserve_type = #{reserveType},
+			order_price = #{orderPrice},
+			should_price = #{shouldPrice},
+			cons_price = #{consPrice},
+			discount_price = #{discountPrice},
+			period_cnt = #{periodCnt},
+			pay_type = #{payType},
+			cons_date = #{consDate},
+			by_pc=#{byPC},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			tenant_id = #{tenantId}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE reserve_venue_cons SET
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

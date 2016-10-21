@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bra.modules.app.dao.AppVenueConsDao">
+
+    <sql id="reserveVenueConsDataColumns">
+		a.id AS "id",
+		a.member_id AS "member.id",
+		a.venue_id AS "reserveVenue.id",
+		v.name AS "reserveVenue.name",
+		a.cons_mobile AS "consMobile",
+		a.user_name AS "userName",
+		a.cons_type AS "consType",
+		a.reserve_type AS "reserveType",
+		a.order_price AS "orderPrice",
+		a.should_price AS "shouldPrice",
+		a.cons_price AS "consPrice",
+		a.discount_price AS "discountPrice",
+		a.pay_type AS "payType",
+		a.cons_date AS "consDate",
+		a.checkout_id AS "checkOutUser.id",
+		a.project_id AS "project.id",
+		a.by_pc AS "byPC",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		upd.name AS "updateBy.name",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="reserveVenueConsDataJoins">
+		LEFT JOIN reserve_venue as v ON v.id = a.venue_id
+		LEFT JOIN reserve_user as upd ON upd.id = a.update_by
+	</sql>
+
+    <select id="get" resultType="ReserveVenueCons">
+        SELECT
+        <include refid="reserveVenueConsDataColumns"/>
+        FROM reserve_venue_cons as a
+        <include refid="reserveVenueConsDataJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <!--订单列表for 手机端-->
+    <select id="orderList" parameterType="Map" resultType="Map">
+        SELECT
+        a.id AS "orderId",
+        v.name AS "venueName",
+        a.reserve_type AS "reserveType",
+        a.order_price AS "orderPrice",
+        a.period_cnt AS "periodCnt",
+        DATE_FORMAT(cons_date,'%Y-%m-%d') AS "orderDate"
+        FROM reserve_venue_cons as a
+        INNER JOIN reserve_venue as v ON v.id = a.venue_id
+        where a.del_flag = '0'
+        <if test="reserveType != null and reserveType != ''">
+            and a.reserve_type = #{reserveType}
+        </if>
+        <if test="memberId != null and memberId != ''">
+            and a.member_id = #{memberId}
+        </if>
+    </select>
+
+    <select id="findList" resultType="ReserveVenueCons">
+        SELECT
+        <include refid="reserveVenueConsDataColumns"/>
+        FROM reserve_venue_cons as a
+        <include refid="reserveVenueConsDataJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="tenantId != null and tenantId != ''">
+                and a.tenant_id = #{tenantId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and a.user_name LIKE concat('%',#{userName},'%')
+            </if>
+            <if test="reserveType != null and reserveType != ''">
+                and a.reserve_type = #{reserveType}
+            </if>
+            <if test="byPC != null and byPC != ''">
+                and a.by_pc = #{byPC}
+            </if>
+            ${sqlMap.dsf}
+            <if test="sqlMap.startDate != null and sqlMap.endDate != null">
+                and (Date(a.update_date) BETWEEN DATE (#{sqlMap.startDate}) AND DATE(#{sqlMap.endDate}))
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+
+
+    <insert id="insert">
+		INSERT INTO reserve_venue_cons(
+			id,
+			member_id,
+			checkout_id,
+			venue_id,
+			cons_mobile,
+			user_name,
+			cons_type,
+			reserve_type,
+			order_price,
+			should_price,
+			cons_price,
+			discount_price,
+			pay_type,
+			cons_date,
+			by_pc,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			tenant_id
+		) VALUES (
+			#{id},
+			#{member.id},
+			#{checkOutUser.id},
+			#{reserveVenue.id},
+			#{consMobile},
+			#{userName},
+			#{consType},
+			#{reserveType},
+			#{orderPrice},
+			#{shouldPrice},
+			#{consPrice},
+			#{discountPrice},
+			#{payType},
+			#{consDate},
+			#{byPC},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{tenantId}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE reserve_venue_cons SET
+			member_id = #{member.id},
+			checkout_id = #{checkOutUser.id},
+			venue_id = #{reserveVenue.id},
+			cons_mobile = #{consMobile},
+			user_name = #{userName},
+			cons_type = #{consType},
+			reserve_type = #{reserveType},
+			order_price = #{orderPrice},
+			should_price = #{shouldPrice},
+			cons_price = #{consPrice},
+			discount_price = #{discountPrice},
+			pay_type = #{payType},
+			cons_date = #{consDate},
+			by_pc=#{byPC},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			tenant_id = #{tenantId}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE reserve_venue_cons SET
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,248 @@
+[
+  {
+    "code": "baseSet",
+    "name": "基础设置",
+    "authorityList": [
+      {
+        "code": "venue",
+        "name": "健身房管理",
+        "href":"/reserve/reserveVenue/list",
+        "authorityList": []
+      },
+      {
+        "code": "field",
+        "name": "教练管理",
+        "href":"/reserve/reserveField/list",
+        "authorityList": []
+      },
+      {
+        "code": "user",
+        "name": "用户管理",
+        "href":"/reserve/user/list",
+        "authorityList": []
+      },
+      {
+        "code": "roleAuth",
+        "name": "角色权限管理",
+        "href":"/reserve/reserveRoleAuth/list",
+        "authorityList": []
+      }
+    ]
+  },
+  {
+    "code": "memberSet",
+    "name": "会员管理",
+    "authorityList": [
+      {
+        "code": "member",
+        "name": "会员统计列表",
+        "href":"/reserve/reserveMember/list",
+        "authorityList": []
+      },
+      {
+        "code": "storedCardMember",
+        "name": "预储值列表",
+        "href":"/reserve/storedCardMember/list",
+        "authorityList": []
+      },
+      {
+        "code": "timeCardMember",
+        "name": "预储（无教练）课时列表",
+        "href":"/reserve/timeCardMember/list",
+        "authorityList": []
+      },
+      {
+        "code": "annualCardMember",
+        "name": "年卡会员列表",
+        "href":"/reserve/annualCardMember/list",
+        "authorityList": []
+      },
+      {
+        "code": "tutorTimeCardMember",
+        "name": "预储（教练）课时列表",
+        "href":"/reserve/tutorTimeCardMember/list",
+        "authorityList": []
+      },
+      {
+        "code": "storedcardSet",
+        "name": "储值卡设置",
+        "href":"/reserve/storedCardMemberSet/list",
+        "authorityList": []
+      }
+    ]
+  },
+  {
+    "code": "fieldSet",
+    "name": "预约教练",
+    "authorityList": [
+      {
+        "code": "reserveField",
+        "name": "预约教练",
+        "href":"/reserve/field/main",
+        "authorityList": []
+      },
+      {
+        "code": "vistorsSet",
+        "name": "无教练课时消费",
+        "href":"/reserve/reserveVenueVisitorsSet/periodList",
+        "authorityList": []
+      },
+      {
+        "code": "venueVisitorsSet",
+        "name": "无教练课时设置",
+        "href":"/reserve/reserveVenueVisitorsSet/list",
+        "authorityList": []
+      }
+    ]
+  },
+  {
+    "code": "commoditySet",
+    "name": "商品管理",
+    "authorityList": [
+      {
+        "code": "commodityType",
+        "name": "商品类别",
+        "href":"/reserve/commodityType/list",
+        "authorityList": []
+      },
+      {
+        "code": "commodity",
+        "name": "商品管理",
+        "href":"/reserve/commodity/list",
+        "authorityList": []
+      },
+      {
+        "code": "commoditySell",
+        "name": "商品售卖",
+        "href":"/reserve/commodity/onShelfList",
+        "authorityList": []
+      },
+      {
+        "code": "commoditySupplier",
+        "name": "供应商管理",
+        "href":"/reserve/reserveCommoditySupplier/list",
+        "authorityList": []
+      }
+    ]
+  },
+  {
+    "code": "reportManagement",
+    "name": "报表管理",
+    "authorityList": [
+      {
+        "code": "totalIncomeReport",
+        "name": "流水收益统计",
+        "href":"/reserve/reserveVenue/totalIncomeReport",
+        "authorityList": []
+      },
+      {
+        "code": "allReport",
+        "name": "健身房收益统计",
+        "href":"/reserve/reserveSellReport/list",
+        "authorityList": []
+      },
+      {
+        "code": "memberIncomeReport",
+        "name": "会员充值统计",
+        "href":"/reserve/reserveCardStatements/memberIncomeReport",
+        "authorityList": []
+      },
+      {
+        "code": "commodityIncomeRecord",
+        "name": "商品收入统计",
+        "href":"/reserve/reserveCommoditySell/commodityIncomeIntervalReport",
+        "authorityList": []
+      },
+      {
+        "code": "venueIncomeReport",
+        "name": "教练收入统计",
+        "href":"/reserve/reserveVenue/fieldReport",
+        "authorityList": []
+      },
+      {
+        "code": "tutorPeriodReport",
+        "name": "教练课时量统计",
+        "href":"/reserve/saleVenue/tutorPeriodReport",
+        "authorityList": []
+      }
+    ]
+  },
+  {
+    "code": "operationLog",
+    "name": "操作日志",
+    "authorityList": [
+      {
+        "code": "saleVenueLog",
+        "name": "教练授课记录",
+        "href":"/reserve/saleVenue/list",
+        "authorityList": []
+      },
+      {
+        "code": "nonTutorOrderList",
+        "name": "会员（无教练）健身记录",
+        "href":"/reserve/reserveVenueOrder/list",
+        "authorityList": []
+      },
+      {
+        "code": "reserveCardRechargeStatements",
+        "name": "预储值记录",
+        "href":"/reserve/reserveCardStatements/list?transactionType=1",
+        "authorityList": []
+      },
+      {
+        "code": "annualCardRechargeStatements",
+        "name": "年卡充值记录",
+        "href":"/reserve/reserveCardStatements/list?transactionType=12",
+        "authorityList": []
+      },
+      {
+        "code": "timeCardRechargeStatements",
+        "name": "(无教练)课时预储记录",
+        "href":"/reserve/reserveCardStatements/list?transactionType=7",
+        "authorityList": []
+      },
+      {
+        "code": "tutorPeriodRechargeStatements",
+        "name": "(教练)课时预储记录",
+        "href":"/reserve/reserveCardStatements/list?transactionType=8",
+        "authorityList": []
+      },
+      {
+        "code": "reserveCardRefundStatements",
+        "name": "会员退费记录",
+        "href":"/reserve/reserveCardStatements/list?transactionType=2",
+        "authorityList": []
+      },
+      {
+        "code": "reserveCommoditySellDetail",
+        "name": "商品销售记录",
+        "href":"/reserve/reserveCommoditySellDetail/findSellDetailList",
+        "authorityList": []
+      },
+      {
+        "code": "reserveCommodityStorageLog",
+        "name": "商品入库记录",
+        "href":"/reserve/reserveCommodityStorageLog/list",
+        "authorityList": []
+      }
+    ]
+  },
+  {
+    "code": "oaNotify",
+    "name": "站内消息",
+    "authorityList": [
+      {
+        "code": "oaNotifyMS",
+        "name": "站内消息管理",
+        "href":"/oa/oaNotify/list",
+        "authorityList": []
+      },
+      {
+        "code": "selfNotify",
+        "name": "生日提醒",
+        "href":"/oa/oaNotify/self",
+        "authorityList": []
+      }
+    ]
+  }
+]
