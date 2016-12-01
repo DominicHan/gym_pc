@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+
+	<meta charset="utf-8">
+
+	<title>会员卡激活</title>
+
+	
+	<link rel="stylesheet" type="text/css" href="style.css" />
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+</head>
+
+<body>
+	<div id="login">
+		<h2><span class="fontawesome-lock"></span>会员卡激活</h2>
+
+		<form action="javascript:void(0);" method="POST">
+
+			<fieldset>
+				<p>卡号  <input type="email" id="cardno" value="" onBlur="if(this.value=='')this.value=''" onFocus="if(this.value=='')this.value=''"></p> <!-- JS because of IE support; better: placeholder="mail@address.com" -->
+
+				<p>密码  <input type="password" id="password" value="" onBlur="if(this.value=='')this.value=''" onFocus="if(this.value=='')this.value=''"></p> <!-- JS because of IE support; better: placeholder="password" -->
+
+				<p>联系人  <input type="email" id="contact" value="" onBlur="if(this.value=='')this.value=''" onFocus="if(this.value=='')this.value=''"></p>
+
+				<p>性别  <input type="email" id="gender" value="" onBlur="if(this.value=='')this.value=''" onFocus="if(this.value=='')this.value=''"></p>
+
+				<p>电话  <input type="email" id="phone" value="" onBlur="if(this.value=='')this.value=''" onFocus="if(this.value=='')this.value=''"></p>
+
+				<p><input type="submit" value="激活"></p>
+			</fieldset>
+		</form>
+	</div> <!-- end login -->
+</body>	
+
+</html>

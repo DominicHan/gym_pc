@@ -68,6 +68,18 @@
         "name": "储值卡设置",
         "href":"/reserve/storedCardMemberSet/list",
         "authorityList": []
+      },
+      {
+        "code": "cardManage",
+        "name": "会员卡管理",
+        "href":"/reserve/cardManage/list",
+        "authorityList": []
+      },
+      {
+        "code": "cardInterestsManage",
+        "name": "会员卡权益管理",
+        "href":"/reserve/cardInterestsManage/list",
+        "authorityList": []
       }
     ]
   },
